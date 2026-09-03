@@ -1,0 +1,461 @@
+/* =========================================
+   PÁGINA
+========================================= */
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 30px 4.3%;
+
+    background-color: var(--bg-color);
+    color: #555;
+
+    font-family: var(--font-family);
+}
+
+
+/* =========================================
+   GRID PRINCIPAL
+========================================= */
+
+body {
+    display: grid;
+
+    grid-template-columns: 28% 1fr;
+    grid-template-rows: auto auto 135px 135px 152px;
+
+    grid-template-areas:
+        "titulo titulo"
+        "subtitulo subtitulo"
+        "vazao consumo"
+        "status consumo"
+        "previsoes metas";
+
+    column-gap: 14px;
+    row-gap: 8px;
+}
+
+
+/* =========================================
+   TÍTULO
+========================================= */
+
+body > h1 {
+    grid-area: titulo;
+
+    margin: 0;
+    padding-left: 5.3%;
+
+    color: var(--secondary-color);
+
+    font-size: var(--font-size-heading3);
+    font-weight: var(--weight-bold);
+}
+
+
+/* =========================================
+   SUBTÍTULO
+========================================= */
+
+body > h3 {
+    grid-area: subtitulo;
+
+    margin: 0 0 17px;
+    padding-left: 5.3%;
+
+    color: #666;
+
+    font-size: var(--font-size-heading6);
+    font-weight: var(--weight-regular);
+}
+
+
+/* =========================================
+   ESTILO GERAL DOS CARDS
+========================================= */
+
+.area-vazao,
+.area-status,
+.area-consumo-agua,
+.area-previsoes,
+.metas {
+
+    min-width: 0;
+
+    background-color: #FFFFFF;
+
+    border: 1px solid #D0D0D0;
+    border-radius: 10px;
+
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================================
+   VAZÃO
+========================================= */
+
+.area-vazao {
+    grid-area: vazao;
+
+    padding: 13px 16px;
+}
+
+.area-vazao i {
+    color: var(--secondary-color);
+
+    margin-right: 7px;
+
+    font-size: var(--font-size-heading5);
+}
+
+.area-vazao h3 {
+    display: inline;
+
+    margin: 0;
+
+    color: var(--secondary-color);
+
+    font-size: var(--font-size-heading6);
+    font-weight: var(--weight-bold);
+}
+
+.area-vazao h1 {
+    margin: 22px 0 0;
+
+    text-align: center;
+
+    color: var(--secondary-color);
+
+    font-size: var(--font-size-heading4);
+    font-weight: var(--weight-bold);
+}
+
+
+/* =========================================
+   BOTÃO VER DETALHES
+========================================= */
+
+button-ver-detalhes {
+    display: block;
+
+    width: max-content;
+
+    margin: 18px auto 0;
+    padding: 6px 15px;
+
+    background-color: var(--buton-color);
+
+    border: none;
+    border-radius: 8px;
+
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+
+    color: var(--secondary-color);
+
+    font-family: var(--font-family);
+    font-size: var(--font-size-heading7);
+    font-weight: var(--weight-semibold);
+
+    cursor: pointer;
+}
+
+button-ver-detalhes:hover {
+    filter: brightness(0.96);
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+.area-status {
+    grid-area: status;
+
+    padding: 13px 16px;
+}
+
+.area-status i {
+    color: var(--secondary-color);
+
+    margin-right: 7px;
+
+    font-size: var(--font-size-heading6);
+}
+
+.area-status > h3:first-of-type {
+    display: inline;
+
+    color: var(--secondary-color);
+
+    font-size: var(--font-size-heading6);
+    font-weight: var(--weight-bold);
+}
+
+
+/* Texto do status */
+
+.area-status h1 {
+    display: flex;
+    align-items: center;
+
+    margin: 12px 0 0;
+
+    color: #222;
+
+    font-size: var(--font-size-heading6);
+    font-weight: var(--weight-regular);
+}
+
+
+/* Bolinha verde */
+
+.area-status h1::before {
+    content: "✓";
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 28px;
+    height: 28px;
+
+    margin-right: 10px;
+
+    background-color: #59E477;
+
+    border-radius: 50%;
+
+    color: white;
+
+    font-size: 17px;
+    font-weight: var(--weight-bold);
+}
+
+
+/* Descrição do status */
+
+.area-status h1 + h3 {
+    margin: 2px 0 0 38px;
+
+    color: #666;
+
+    font-size: var(--font-size-heading7);
+    font-weight: var(--weight-regular);
+}
+
+
+/* =========================================
+   CONSUMO DE ÁGUA
+========================================= */
+
+.area-consumo-agua {
+    grid-area: consumo;
+
+    padding: 30px 32px;
+}
+
+.area-consumo-agua i {
+    color: var(--secondary-color);
+
+    margin-right: 7px;
+
+    font-size: var(--font-size-heading5);
+}
+
+.area-consumo-agua > h3 {
+    display: inline;
+
+    color: var(--secondary-color);
+
+    font-size: var(--font-size-heading6);
+    font-weight: var(--weight-bold);
+}
+
+.area-consumo-agua h1 {
+    color: var(--secondary-color);
+
+    font-size: var(--font-size-heading4);
+}
+
+
+/* =========================================
+   PREVISÕES
+========================================= */
+
+.area-previsoes {
+    grid-area: previsoes;
+
+    padding: 20px;
+}
+
+.area-previsoes i {
+    color: var(--secondary-color);
+
+    margin-right: 7px;
+
+    font-size: var(--font-size-heading5);
+}
+
+.area-previsoes > h3:first-of-type {
+    display: inline;
+
+    color: var(--secondary-color);
+
+    font-size: var(--font-size-heading6);
+    font-weight: var(--weight-bold);
+}
+
+.area-previsoes > h3:nth-of-type(2) {
+    margin: 12px 0 0 30px;
+
+    color: #666;
+
+    font-size: var(--font-size-heading6);
+    font-weight: var(--weight-regular);
+}
+
+.area-previsoes > h1 {
+    margin: 5px 0 0 30px;
+
+    color: var(--secondary-color);
+
+    font-size: var(--font-size-heading4);
+    font-weight: var(--weight-bold);
+}
+
+
+/* =========================================
+   METAS
+========================================= */
+
+.metas {
+    grid-area: metas;
+
+    position: relative;
+
+    padding: 20px;
+}
+
+.metas > i {
+    color: var(--secondary-color);
+
+    margin-right: 7px;
+
+    font-size: var(--font-size-heading5);
+}
+
+.metas > h3:first-of-type {
+    display: inline;
+
+    color: var(--secondary-color);
+
+    font-size: var(--font-size-heading6);
+    font-weight: var(--weight-bold);
+}
+
+
+/* Organização das informações */
+
+.metas > h3:nth-of-type(2) {
+    position: absolute;
+
+    top: 47px;
+    left: 20px;
+
+    margin: 0;
+
+    color: #666;
+
+    font-size: var(--font-size-heading6);
+    font-weight: var(--weight-regular);
+}
+
+.metas > h1:nth-of-type(1) {
+    position: absolute;
+
+    top: 63px;
+    left: 20px;
+
+    margin: 0;
+
+    color: var(--secondary-color);
+
+    font-size: var(--font-size-heading4);
+    font-weight: var(--weight-bold);
+}
+
+
+/* Segunda informação */
+
+.metas > h3:nth-of-type(3) {
+    position: absolute;
+
+    top: 47px;
+    left: 54%;
+
+    margin: 0;
+
+    color: #666;
+
+    font-size: var(--font-size-heading6);
+    font-weight: var(--weight-regular);
+}
+
+.metas > h1:nth-of-type(2) {
+    position: absolute;
+
+    top: 63px;
+    left: 54%;
+
+    margin: 0;
+
+    color: var(--secondary-color);
+
+    font-size: var(--font-size-heading4);
+    font-weight: var(--weight-bold);
+}
+
+
+/* =========================================
+   BOTÃO RELATÓRIO
+========================================= */
+
+button-ver-relatorio {
+    position: absolute;
+
+    bottom: 15px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: max-content;
+
+    padding: 6px 18px;
+
+    background-color: var(--buton-color);
+
+    border-radius: 8px;
+
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+
+    color: var(--secondary-color);
+
+    font-family: var(--font-family);
+    font-size: var(--font-size-heading7);
+    font-weight: var(--weight-semibold);
+
+    cursor: pointer;
+}
+
+button-ver-relatorio:hover {
+    filter: brightness(0.96);
+}
+
+
+
+
+
+

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Definições</title>
+</head>
+<body>
+    <h1>Definições</h1>
+    <h2>Gerencie metas, relátorios e funcionários</h2>
+
+    <section class="area-metas-financeiras">
+        <h1>Metas financeiras ativas</h1>
+        <h3>Economia mensal</h3>
+        <h1></h1>
+        <h3>Gasto máximo mensal</h3>  
+        <h1></h1>
+        <button-nova-meta>+ Nova Meta </button-nova-meta>
+
+    </section>
+    <section class="status-equipe">
+        <h1>Status da Equipe</h1>
+        <h3>Funcionários ativos</h3>
+        <h1></h1>
+        <h3>Ultimo acesso registrado</h3>
+        <h1></h1>
+        <button-gerenciar-equipe>Gerenciar Equipe</button-gerenciar-equipe>
+    </section>
+
+    <section class="area-relatorios">
+        <h1>Relatórios recentes</h1>
+        <button-ver-relatorio>Ver todos os relatórios</button-ver-relatorio>
+
+
+        <!-- MODELS -->
+
+        <section class="nova-meta">
+            <h1>Nova Meta financeira</h1>
+            <h3>Defina uma nova meta de economia para acompanhar os resultados</h3>
+        
+            <h1>Tipo de meta</h1>
+            <select name="tipo-meta" id="tipo-meta">
+                <option value="economia-mensal">Economia Mensal</option>
+                <option value="gasto-maximo-mensal">Gasto Máximo Mensal</option>
+
+            <h3>Nome da meta</h3>
+            <input type="text" name="nome-meta" id="nome-meta">
+
+            <h3>Valor da meta</h3>
+            <input type="number" name="valor-meta" id="valor-meta">
+
+
+            <h3>Período</h3>
+            <input type="month" name="periodo-meta" id="periodo-meta">
+        
+            <h3>Descrição da meta</h3>
+            <textarea name="descricao-meta" id="descricao-meta" cols="30" rows="10"></textarea>
+        
+            <button-cancelar-meta>Cancelar</button-cancelar-meta>
+            <button-criar-meta>Criar Meta</button-criar-meta>
+        </section>
+
+
+
+    </body>
+</html>
