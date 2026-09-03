@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#E6EFF8" />
+    <title>Cadastro | Hidronomic</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <section class="imagem-fundo"></section>
+    <main class="pagina">
+      <section class="cartao-autenticacao" aria-label="Cadastro Hidronomic">
+
+        <aside class="painel-boas-vindas" aria-label="Acesso à conta">
+          <img
+            class="logo-marca"
+            src="assets/logo_hydranomic.png.png"
+            alt="Logo Hidronomic"
+            data-node-id="18-23"
+          />
+
+          <div class="texto-boas-vindas">
+            <h1>Não tem<br />conta?</h1>
+            <p>Crie uma agora mesmo.</p>
+          </div>
+
+          <button class="botao-secundario-cadastro" type="button">
+            CADASTRAR
+          </button>
+        </aside>
+
+        <section class="painel-formulario" aria-labelledby="titulo-criar-conta">
+          <header class="cabecalho-formulario">
+            <h2 id="titulo-criar-conta">Acesse sua conta</h2>
+            <p>Preencha seus dados</p>
+          </header>
+
+          <form class="formulario-cadastro" action="#" method="post">
+
+            <label class="oculto" for="usuario">Usuário</label>
+            <input
+            class="campo-usuario"
+              id="usuario"
+              name="usuario"
+              type="text"
+              placeholder="Usuário"
+              autocomplete="username"
+              required
+            />
+
+            <label class="oculto" for="senha">Senha</label>
+            <input
+            class="campo-senha"
+              id="senha"
+              name="senha"
+              type="password"
+              placeholder="Senha"
+              autocomplete="new-password"
+              required
+            />
+
+            <button class="botao-principal-cadastro" type="submit">
+              ENTRAR
+            </button>
+
+          </form>
+        </section>
+
+      </section>
+    </main>
+  </body>
+</html>

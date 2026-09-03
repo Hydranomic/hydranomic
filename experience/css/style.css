@@ -87,14 +87,14 @@ button {
     line-height: 1.25;
 }
 
-.botao-secundario,
-.botao-principal {
+.botao-secundario-cadastro,
+.botao-principal-cadastro {
     border: 0;
     font-weight: var(--weight-bold);
     transition: transform 160ms ease, background-color 160ms ease, color 160ms ease;
 }
 
-.botao-secundario {
+.botao-secundario-cadastro {
     width: 184px;
     height: 73px;
     margin-top: auto;
@@ -176,7 +176,7 @@ button {
     box-shadow: 0 0 0 3px rgba(32, 89, 136, 0.28);
 }
 
-.botao-principal {
+.botao-principal-cadastro {
     width: 260px;
     height: 69px;
     margin-top: 73px;
@@ -186,23 +186,23 @@ button {
     font-size: var(--font-size-heading3);
 }
 
-.botao-secundario:hover,
-.botao-principal:hover {
+.botao-secundario-cadastro:hover,
+.botao-principal-cadastro:hover {
     transform: translateY(-1px);
 }
 
-.botao-secundario:active,
-.botao-principal:active {
+.botao-secundario-cadastro:active,
+.botao-principal-cadastro:active {
     transform: scale(0.97);
 }
 
-.botao-secundario:focus-visible,
-.botao-principal:focus-visible {
+.botao-secundario-cadastro:focus-visible,
+.botao-principal-cadastro:focus-visible {
     outline: 3px solid #fff;
     outline-offset: 4px;
 }
 
-.botao-principal:focus-visible {
+.botao-principal-cadastro:focus-visible {
     outline-color: var(--secondary-color);
 }
 
