@@ -1,3 +1,6 @@
+@import url(global.css);
+
+
 /* =========================================
    PÁGINA
 ========================================= */
@@ -52,15 +55,10 @@ body > h1 {
     font-weight: var(--weight-bold);
 }
 
-
-/* =========================================
-   SUBTÍTULO
-========================================= */
-
 body > h3 {
     grid-area: subtitulo;
 
-    margin: 0 0 17px;
+    margin: -5px 0 17px;
     padding-left: 5.3%;
 
     color: #666;
@@ -210,29 +208,7 @@ button-ver-detalhes:hover {
 
 /* Bolinha verde */
 
-.area-status h1::before {
-    content: "✓";
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    width: 28px;
-    height: 28px;
-
-    margin-right: 10px;
-
-    background-color: #59E477;
-
-    border-radius: 50%;
-
-    color: white;
-
-    font-size: 17px;
-    font-weight: var(--weight-bold);
-}
 
 
 /* Descrição do status */
