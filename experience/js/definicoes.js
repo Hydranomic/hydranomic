@@ -1,39 +1,59 @@
-// Modal de nova meta
-const botaoNovaMeta = document.querySelector("button-nova-meta");
-const modalNovaMeta = document.querySelector(".nova-meta");
-const botaoCancelarMeta = document.querySelector("button-cancelar-meta");
+// =========================================
+// MODAL NOVA META
+// =========================================
+
+const botaoNovaMeta = document.getElementById("btn-nova-meta");
+
+const modalNovaMeta = document.getElementById("modal-nova-meta");
+
+const botaoCancelarMeta = document.getElementById("btn-cancelar-meta");
 
 
-// Abrir Nova Meta
+// ABRIR MODAL NOVA META
+
 botaoNovaMeta.addEventListener("click", function () {
+
     modalNovaMeta.style.display = "flex";
+
 });
 
 
-// Fechar Nova Meta
+// FECHAR MODAL NOVA META
+
 botaoCancelarMeta.addEventListener("click", function () {
+
     modalNovaMeta.style.display = "none";
+
 });
 
 
-// Modal de gerenciamento da equipe
+// =========================================
+// MODAL GERENCIAR EQUIPE
+// =========================================
+
 const botaoGerenciarEquipe =
-    document.querySelector("button-gerenciar-equipe");
+    document.getElementById("btn-gerenciar-equipe");
 
 const modalGerenciarEquipe =
-    document.querySelector(".gerenciar-equipe");
+    document.getElementById("modal-gerenciar-equipe");
 
 const botaoFecharEquipe =
-    document.querySelector("button-fechar-gerenciar-equipe");
+    document.getElementById("btn-fechar-equipe");
 
 
-// Abrir Gerenciar Equipe
+// ABRIR MODAL GERENCIAR EQUIPE
+
 botaoGerenciarEquipe.addEventListener("click", function () {
+
     modalGerenciarEquipe.style.display = "flex";
+
 });
 
 
-// Fechar Gerenciar Equipe
+// FECHAR MODAL GERENCIAR EQUIPE
+
 botaoFecharEquipe.addEventListener("click", function () {
+
     modalGerenciarEquipe.style.display = "none";
+
 });

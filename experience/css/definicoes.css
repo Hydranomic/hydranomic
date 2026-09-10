@@ -292,14 +292,71 @@ body > h2 {
    BOTÕES DOS CARDS
 ========================================= */
 
-button-nova-meta,
-button-gerenciar-equipe,
+#btn-nova-meta,
+#btn-gerenciar-equipe {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+
+    bottom: 12px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 148px;
+    height: 30px;
+
+    padding: 0;
+
+    background-color: #e6eff8;
+
+    border: none;
+    border-radius: 7px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+    color: #205988;
+
+    font-family: var(--font-family);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+/* =========================================
+   HOVER DOS BOTÕES DOS CARDS
+========================================= */
+
+#btn-nova-meta:hover,
+#btn-gerenciar-equipe:hover {
+    transform: translateX(-50%) translateY(-1px);
+
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================
+   VER TODOS OS RELATÓRIOS
+   NÃO ALTERAR
+========================================= */
+
 button-ver-relatorio {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
+
+    width: 198px;
+
+    margin: 16px auto 0;
 
     height: 29px;
 
@@ -324,57 +381,6 @@ button-ver-relatorio {
     cursor: pointer;
 
     transition: 0.2s;
-}
-
-button-nova-meta:hover,
-button-gerenciar-equipe:hover,
-button-ver-relatorio:hover {
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 3px 9px rgba(0, 0, 0, 0.18);
-}
-
-
-/* =========================================
-   BOTÃO NOVA META
-========================================= */
-
-button-nova-meta {
-    position: absolute;
-
-    bottom: 12px;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width: 148px;
-}
-
-button-nova-meta:hover {
-    transform: translateX(-50%) translateY(-1px);
-}
-
-
-/* =========================================
-   BOTÃO GERENCIAR EQUIPE
-========================================= */
-
-button-gerenciar-equipe {
-    position: absolute;
-
-    bottom: 12px;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    
-}
-
-button-gerenciar-equipe:hover {
-    transform: translateX(-50%) translateY(-1px);
 }
 
 
@@ -481,72 +487,281 @@ button-ver-relatorio {
     margin: 16px auto 0;
 }
 
-
 /* =========================================
-   MODAIS
-========================================= */
+   MODAL NOVA META
+   ========================================= */
 
-.nova-meta,
-.gerenciar-equipe {
+.nova-meta {
     display: none;
-
     position: fixed;
-
     inset: 0;
 
     align-items: center;
-
     justify-content: center;
 
     background-color: rgba(0, 0, 0, 0.35);
-
     z-index: 1000;
 }
 
-
-/* =========================================
-   CONTEÚDO DOS MODAIS
-========================================= */
-
-.modal-conteudo,
-.modal-conteudo-equipe {
-    width: 500px;
-
+.modal-conteudo {
+    width: 520px;
     max-width: 90%;
-
-    padding: 30px;
+    padding: 28px 34px 24px;
 
     background-color: #fff;
+    border-radius: 10px;
 
-    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.20);
 
-    box-shadow:
-        0 5px 20px rgba(0, 0, 0, 0.25);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 10px;
 }
 
+/* TÍTULO */
+.modal-conteudo h1 {
+    grid-column: 1 / 3;
 
-/* =========================================
-   TÍTULO DOS MODAIS
-========================================= */
-
-.modal-conteudo h1,
-.modal-conteudo-equipe h1 {
     margin: 0;
 
-    color: var(--secondary-color);
+    font-size: 18px;
+    color: #205988;
+}
 
-    font-size: 22px;
+/* SUBTÍTULO */
+.modal-conteudo h3 {
+    font-size: 13px;
+    color: black;
+    margin: 0;
+    font-weight: (var(--weight-extrabold))
+}
+
+/* SUBTÍTULO DA MODAL */
+.modal-conteudo h1 + h3 {
+    grid-column: 1 / 3;
+
+    color: #666;
+    font-weight: 400;
+
+    margin-bottom: 15px;
+}
+
+/* INPUTS E SELECT */
+.modal-conteudo input,
+.modal-conteudo select {
+    width: 100%;
+    height: 35px;
+
+    padding: 0 10px;
+
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+
+    background: white;
+
+    font-family: var(--font-family);
+    font-size: 13px;
+
+    box-sizing: border-box;
+}
+
+/* TEXTAREA */
+.modal-conteudo textarea {
+    grid-column: 1 / 3;
+
+    width: 100%;
+    height: 100px;
+
+    padding: 10px;
+
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+
+    resize: none;
+
+    font-family: var(--font-family);
+    box-sizing: border-box;
+}
+
+/* BOTÕES */
+.botoes-modal {
+    grid-column: 1 / 3;
+
+    display: flex;
+    gap: 25px;
+
+    margin-top: 10px;
+}
+
+.botoes-modal button {
+    width: 50%;
+    height: 30px;
+
+    border-radius: 6px;
+
+    font-size: 13px;
     font-weight: 700;
 }
 
-.modal-conteudo > h3,
-.modal-conteudo-equipe > h3 {
-    margin: 5px 0 20px;
 
-    color: #666;
+/* CANCELAR */
+
+#btn-cancelar-meta {
+    background-color: #ffffff;
+
+    border: 1px solid #cccccc;
+
+    color: #205988;
+}
+
+
+/* CRIAR META */
+
+#btn-criar-meta {
+    background-color: #205988;
+
+    border: 1px solid #205988;
+
+    color: #ffffff;
+}
+
+
+/* EFEITO AO PASSAR O MOUSE */
+
+#btn-cancelar-meta:hover {
+    background-color: #f5f5f5;
+}
+
+#btn-criar-meta:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================================
+   MODAL GERENCIAR EQUIPE
+========================================= */
+
+.acoes-equipe {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+
+button-buscar-funcionario,
+button-adicionar-funcionario {
+    padding: 8px 15px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    font-family: var(--font-family);
 
     font-size: 12px;
-    font-weight: 400;
+
+    cursor: pointer;
+}
+
+
+button-buscar-funcionario {
+    background-color: var(--buton-color);
+
+    color: var(--secondary-color);
+}
+
+
+button-adicionar-funcionario {
+    background-color: var(--secondary-color);
+
+    color: #fff;
+}
+
+
+/* =========================================
+   TABELA
+========================================= */
+
+.modal-conteudo-equipe table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+
+.modal-conteudo-equipe th {
+    padding: 10px;
+
+    background-color: var(--bg-color);
+
+    color: var(--secondary-color);
+
+    text-align: left;
+
+    font-size: 12px;
+}
+
+
+.modal-conteudo-equipe td {
+    padding: 10px;
+
+    border-bottom: 1px solid #ddd;
+
+    color: #555;
+
+    font-size: 12px;
+}
+
+
+.modal-conteudo-equipe .bi-trash-fill {
+    color: var(--red-status-color);
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   BOTÃO FECHAR
+========================================= */
+
+#btn-fechar-equipe {
+    display: block;
+
+    margin: 20px 0 0 auto;
+
+    padding: 8px 18px;
+
+    background-color: #eee;
+
+    border: none;
+
+    border-radius: 7px;
+
+    color: #555;
+
+    font-family: var(--font-family);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+#btn-fechar-equipe:hover,
+#btn-cancelar-meta:hover {
+    background-color: #ddd;
+}
+
+
+#btn-criar-meta:hover {
+    opacity: 0.9;
 }
 
 
@@ -645,46 +860,197 @@ button-criar-meta {
     color: #fff;
 }
 
+/* =========================================
+   MODAL GERENCIAR EQUIPE
+========================================= */
+
+.gerenciar-equipe {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(0, 0, 0, 0.20);
+
+    z-index: 1000;
+}
+
 
 /* =========================================
-   MODAL EQUIPE
+   CONTEÚDO DA MODAL
+========================================= */
+
+.modal-conteudo-equipe {
+    width: 527px;
+    min-height: 470px;
+
+    padding: 24px 20px 16px;
+
+    background-color: #ffffff;
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+
+    position: relative;
+}
+
+
+/* =========================================
+   TÍTULO
+========================================= */
+
+.modal-conteudo-equipe h1 {
+    margin: 0;
+
+    color: var(--secondary-color);
+
+    font-size: 18px;
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+
+/* ÍCONE DE EQUIPE */
+
+.modal-conteudo-equipe h1::before {
+    content: "\F4DA";
+
+    font-family: "bootstrap-icons";
+
+    color: var(--secondary-color);
+
+    font-size: 25px;
+
+    line-height: 1;
+}
+
+
+/* =========================================
+   SUBTÍTULO
+========================================= */
+
+.modal-conteudo-equipe h3 {
+    margin: 7px 0 12px;
+
+    color: #666666;
+
+    font-size: 13px;
+    font-weight: 400;
+
+    line-height: 1.3;
+}
+
+
+/* =========================================
+   ÁREA DE AÇÕES
 ========================================= */
 
 .acoes-equipe {
     display: flex;
 
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+
+    margin-bottom: 16px;
 
     gap: 10px;
-
-    margin-bottom: 20px;
 }
 
-button-buscar-funcionario,
-button-adicionar-funcionario {
-    padding: 8px 15px;
 
-    border: none;
+/* =========================================
+   CAMPO BUSCAR FUNCIONÁRIO
+========================================= */
 
-    border-radius: 7px;
+button-buscar-funcionario {
+    display: flex;
+
+    align-items: center;
+
+    width: 209px;
+    height: 35px;
+
+    padding: 0 10px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #d9d9d9;
+
+    border-radius: 6px;
+
+    color: #c5c5c5;
 
     font-family: var(--font-family);
 
     font-size: 12px;
+    font-weight: 400;
 
-    cursor: pointer;
+    cursor: text;
+
+    box-shadow: none;
 }
 
-button-buscar-funcionario {
-    background-color: var(--buton-color);
 
-    color: var(--secondary-color);
+/* ÍCONE DE LUPA */
+
+button-buscar-funcionario::before {
+    content: "\F52A";
+
+    font-family: "bootstrap-icons";
+
+    margin-right: 8px;
+
+    color: #bdbdbd;
+
+    font-size: 15px;
 }
+
+
+/* =========================================
+   BOTÃO ADICIONAR FUNCIONÁRIO
+========================================= */
 
 button-adicionar-funcionario {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 163px;
+    height: 35px;
+
+    padding: 0;
+
     background-color: var(--secondary-color);
 
-    color: #fff;
+    border: 1px solid var(--secondary-color);
+
+    border-radius: 6px;
+
+    color: #ffffff;
+
+    font-family: var(--font-family);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+button-adicionar-funcionario:hover {
+    opacity: 0.9;
 }
 
 
@@ -692,38 +1058,150 @@ button-adicionar-funcionario {
    TABELA
 ========================================= */
 
-table {
+.modal-conteudo-equipe table {
     width: 100%;
 
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
+
+    border: 1px solid #d5d5d5;
+
+    border-radius: 15px;
+
+    overflow: hidden;
 }
 
-th {
-    padding: 10px;
 
-    background-color: var(--bg-color);
+/* =========================================
+   CABEÇALHO DA TABELA
+========================================= */
 
-    color: var(--secondary-color);
+.modal-conteudo-equipe th {
+    height: 41px;
+
+    padding: 0 15px;
+
+    background-color: #cfe1f4;
+
+    color: #205988;
 
     text-align: left;
 
     font-size: 12px;
+    font-weight: 700;
+
+    border: none;
 }
 
-td {
-    padding: 10px;
 
-    border-bottom: 1px solid #ddd;
+/* POSIÇÃO DAS COLUNAS */
 
-    color: #555;
+.modal-conteudo-equipe th:nth-child(1) {
+    width: 21%;
+}
+
+.modal-conteudo-equipe th:nth-child(2) {
+    width: 15%;
+}
+
+.modal-conteudo-equipe th:nth-child(3) {
+    width: 50%;
+}
+
+.modal-conteudo-equipe th:nth-child(4) {
+    width: 14%;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   LINHAS DA TABELA
+========================================= */
+
+.modal-conteudo-equipe td {
+    height: 39px;
+
+    padding: 0 15px;
+
+    background-color: #ffffff;
+
+    color: #555555;
 
     font-size: 12px;
+
+    border-bottom: 1px solid #d5d5d5;
 }
 
-td .bi-trash-fill {
-    color: var(--red-status-color);
+
+/* última linha sem borda */
+
+.modal-conteudo-equipe tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================================
+   COLUNA AÇÕES
+========================================= */
+
+.modal-conteudo-equipe td:last-child {
+    text-align: center;
+}
+
+
+/* ÍCONE LIXEIRA */
+
+.modal-conteudo-equipe td .bi-trash-fill {
+    color: #999999;
+
+    font-size: 13px;
 
     cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.modal-conteudo-equipe td .bi-trash-fill:hover {
+    color: #777777;
+}
+
+
+/* =========================================
+   BOTÃO FECHAR
+========================================= */
+
+#btn-fechar-equipe {
+    position: absolute;
+
+    right: 20px;
+    bottom: 15px;
+
+    width: 98px;
+    height: 30px;
+
+    padding: 0;
+
+    background-color: #ffffff;
+
+    border: 1px solid #cccccc;
+
+    border-radius: 7px;
+
+    color: #205988;
+
+    font-family: var(--font-family);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#btn-fechar-equipe:hover {
+    background-color: #f5f5f5;
 }
 
 
