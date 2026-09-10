@@ -249,7 +249,7 @@
                     Buscar Funcionário
                 </button-buscar-funcionario>
 
-                <button-adicionar-funcionario>
+                <button-adicionar-funcionario id="btn-adicionar-funcionario">
                     + Adicionar Funcionário
                 </button-adicionar-funcionario>
 
@@ -289,6 +289,57 @@
         </div>
 
     </section>
+
+    <!-- =========================================
+         MODAL ADICIONAR FUNCIONÁRIO
+         ========================================= -->
+
+         <section
+    class="adicionar-funcionario"
+    id="modal-adicionar-funcionario"
+>
+    <div class="modal-conteudo-adicionar-funcionario">
+
+        <button id="btn-fechar-adicionar-funcionario">
+            ×
+        </button>
+
+        <h1>Adicionar Funcionário</h1>
+
+        <h3>
+            Adicione novos membros da equipe
+        </h3>
+
+        <h3>Nome</h3>
+
+        <input
+            type="text"
+            id="nome-funcionario"
+            placeholder="Digite o nome do funcionário"
+        >
+
+        <h3>Email</h3>
+
+        <input
+            type="email"
+            id="email-funcionario"
+            placeholder="Digite o email do funcionário"
+        >
+
+        <h3>Cargo</h3>
+
+        <input
+            type="text"
+            id="cargo-funcionario"
+            placeholder="Digite o cargo do funcionário"
+        >
+
+        <button id="btn-confirmar-adicionar-funcionario">
+            Adicionar membro
+        </button>
+
+    </div>
+</section>
 
 </body>
 
