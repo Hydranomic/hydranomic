@@ -57,3 +57,34 @@ botaoFecharEquipe.addEventListener("click", function () {
     modalGerenciarEquipe.style.display = "none";
 
 });
+
+// =========================================
+// MODAL ADICIONAR FUNCIONÁRIO
+// =========================================
+
+const botaoAdicionarFuncionario =
+    document.getElementById("btn-adicionar-funcionario");
+
+const modalAdicionarFuncionario =
+    document.getElementById("modal-adicionar-funcionario");
+
+const botaoFecharAdicionarFuncionario =
+    document.getElementById("btn-fechar-adicionar-funcionario");
+
+
+// ABRIR MODAL ADICIONAR FUNCIONÁRIO
+
+botaoAdicionarFuncionario.addEventListener("click", function () {
+
+    modalAdicionarFuncionario.style.display = "flex";
+
+});
+
+
+// FECHAR MODAL ADICIONAR FUNCIONÁRIO
+
+botaoFecharAdicionarFuncionario.addEventListener("click", function () {
+
+    modalAdicionarFuncionario.style.display = "none";
+
+});
