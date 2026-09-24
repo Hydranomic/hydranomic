@@ -2,6 +2,9 @@ import json # Biblioteca utilizada para leitura de arquivos JSON.
 import pandas as pd # Transforma o JSON bruto em tabelas organizadas.
 from sklearn.ensemble import RandomForestRegressor # Modelo de ML Regressivo, utilizado para as previsões.
 
+# É definido a tarifa atual do M3 da água.
+tarifa_atual = 59.6
+
 with open("hydranomic/workflows/conta_povoada.json", "r", encoding="utf-8") as info_contas:
     dados = json.load(info_contas) # Função utilizada para leitura do arquivo JSON e armazenamento na váriavel.
 
@@ -56,13 +59,18 @@ ultimo_passo = ultima_linha["tempo_iniciofinal"]
 
 # Definição da lógica de transição entre anos, a partir dos meses.
 
-if ultimo_mes == 12:
+if ultimo_mes == 12:    
     proximo_mes = 1
     proximo_ano = ultimo_ano + 1
 
 else:
     proximo_mes = ultimo_mes + 1
     proximo_ano = ultimo_ano
+
+proximo_passo = ultimo_passo + 1
+
+# O modelo recebe os dados já pré organizados para realizar o treinamento do modelo.
+previsao_m3 = modelo.predict([[proximo_mes, proximo_passo, ultimo_consumo]])[0]
 
 
 
