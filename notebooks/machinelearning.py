@@ -98,6 +98,7 @@ def iniciar_ml():
 
 # Teste para exibição do resultado final no terminal
 resultado = iniciar_ml()
+
 print(f"Previsão para o período: {resultado['ano']}-{resultado['mes']:02d}")
 print(f"Unidade Consumidora: {resultado['unidade_consumidora']}")
 print(f"Consumo previsto: {resultado['previsao_m3']:.2f} m³")
