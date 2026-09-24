@@ -1,14 +1,9 @@
 @import url(global.css);
 
-
-/* =========================================
-   PÁGINA
-========================================= */
-
 body {
     min-height: 100vh;
     margin: 0;
-    padding: 30px 4.3%;
+    padding: 0;
 
     background-color: var(--bg-color);
     color: #555;
@@ -16,13 +11,21 @@ body {
     font-family: var(--font-family);
 }
 
+#navbar-container {
+    position: relative;
+    z-index: 100;
+    width: 100%;
+}
 
-/* =========================================
-   GRID PRINCIPAL
-========================================= */
+main {
+    position: relative;
+    z-index: 1;
 
-body {
     display: grid;
+
+    min-height: calc(100vh - 80px);
+
+    padding: 30px 4.3%;
 
     grid-template-columns: 28% 1fr;
     grid-template-rows: auto auto 135px 135px 152px;
@@ -36,14 +39,11 @@ body {
 
     column-gap: 14px;
     row-gap: 8px;
+
+    box-sizing: border-box;
 }
 
-
-/* =========================================
-   TÍTULO
-========================================= */
-
-body > h1 {
+main > h1 {
     grid-area: titulo;
 
     margin: 0;
@@ -55,7 +55,7 @@ body > h1 {
     font-weight: var(--weight-bold);
 }
 
-body > h3 {
+main > h3 {
     grid-area: subtitulo;
 
     margin: -5px 0 17px;
@@ -67,17 +67,11 @@ body > h3 {
     font-weight: var(--weight-regular);
 }
 
-
-/* =========================================
-   ESTILO GERAL DOS CARDS
-========================================= */
-
 .area-vazao,
 .area-status,
 .area-consumo-agua,
 .area-previsoes,
 .metas {
-
     min-width: 0;
 
     background-color: #FFFFFF;
@@ -87,11 +81,6 @@ body > h3 {
 
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
 }
-
-
-/* =========================================
-   VAZÃO
-========================================= */
 
 .area-vazao {
     grid-area: vazao;
@@ -129,11 +118,6 @@ body > h3 {
     font-weight: var(--weight-bold);
 }
 
-
-/* =========================================
-   BOTÃO VER DETALHES
-========================================= */
-
 button-ver-detalhes {
     display: block;
 
@@ -162,11 +146,6 @@ button-ver-detalhes:hover {
     filter: brightness(0.96);
 }
 
-
-/* =========================================
-   STATUS
-========================================= */
-
 .area-status {
     grid-area: status;
 
@@ -190,9 +169,6 @@ button-ver-detalhes:hover {
     font-weight: var(--weight-bold);
 }
 
-
-/* Texto do status */
-
 .area-status h1 {
     display: flex;
     align-items: center;
@@ -205,14 +181,6 @@ button-ver-detalhes:hover {
     font-weight: var(--weight-regular);
 }
 
-
-/* Bolinha verde */
-
-
-
-
-/* Descrição do status */
-
 .area-status h1 + h3 {
     margin: 2px 0 0 38px;
 
@@ -221,11 +189,6 @@ button-ver-detalhes:hover {
     font-size: var(--font-size-heading7);
     font-weight: var(--weight-regular);
 }
-
-
-/* =========================================
-   CONSUMO DE ÁGUA
-========================================= */
 
 .area-consumo-agua {
     grid-area: consumo;
@@ -255,11 +218,6 @@ button-ver-detalhes:hover {
 
     font-size: var(--font-size-heading4);
 }
-
-
-/* =========================================
-   PREVISÕES
-========================================= */
 
 .area-previsoes {
     grid-area: previsoes;
@@ -302,11 +260,6 @@ button-ver-detalhes:hover {
     font-weight: var(--weight-bold);
 }
 
-
-/* =========================================
-   METAS
-========================================= */
-
 .metas {
     grid-area: metas;
 
@@ -331,9 +284,6 @@ button-ver-detalhes:hover {
     font-size: var(--font-size-heading6);
     font-weight: var(--weight-bold);
 }
-
-
-/* Organização das informações */
 
 .metas > h3:nth-of-type(2) {
     position: absolute;
@@ -363,9 +313,6 @@ button-ver-detalhes:hover {
     font-weight: var(--weight-bold);
 }
 
-
-/* Segunda informação */
-
 .metas > h3:nth-of-type(3) {
     position: absolute;
 
@@ -393,11 +340,6 @@ button-ver-detalhes:hover {
     font-size: var(--font-size-heading4);
     font-weight: var(--weight-bold);
 }
-
-
-/* =========================================
-   BOTÃO RELATÓRIO
-========================================= */
 
 button-ver-relatorio {
     position: absolute;
@@ -429,9 +371,3 @@ button-ver-relatorio {
 button-ver-relatorio:hover {
     filter: brightness(0.96);
 }
-
-
-
-
-
-
