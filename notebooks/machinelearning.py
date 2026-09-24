@@ -54,6 +54,16 @@ ultimo_mes = ultima_linha["mes"]
 ultimo_consumo = ultima_linha["consumo_m3"]
 ultimo_passo = ultima_linha["tempo_iniciofinal"]
 
+# Definição da lógica de transição entre anos, a partir dos meses.
+
+if ultimo_mes == 12:
+    proximo_mes = 1
+    proximo_ano = ultimo_ano + 1
+
+else:
+    proximo_mes = ultimo_mes + 1
+    proximo_ano = ultimo_ano
+
 
 
 
