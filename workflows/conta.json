@@ -1,1 +1,22 @@
-conta
+[
+  {
+    "id": "07-2026",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 17346.86,
+    "valor_agua": 7007.21,
+    "valor_esgoto": 5249.03,
+    "valor_tratamento": 5090.62,
+    "consumo_m3": 291
+  },
+  {
+    "id": "08-2026",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 21815.09,
+    "valor_agua": 8810.18,
+    "valor_esgoto": 6599.08,
+    "valor_tratamento": 6405.83,
+    "consumo_m3": 358
+  }
+]
