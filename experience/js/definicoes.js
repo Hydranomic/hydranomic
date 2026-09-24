@@ -88,3 +88,43 @@ botaoFecharAdicionarFuncionario.addEventListener("click", function () {
     modalAdicionarFuncionario.style.display = "none";
 
 });
+
+
+
+
+
+// =========================================
+// MODAL - HISTÓRICO DE CONTAS
+// =========================================
+
+const btnHistoricoContas = document.querySelector(".historico-contas");
+const modalHistoricoContas = document.querySelector("#modal-historico-contas");
+const btnCancelarMeta = document.querySelector("#btn-cancelar-meta");
+
+
+// =========================================
+// ABRIR MODAL
+// =========================================
+
+btnHistoricoContas.addEventListener("click", function () {
+    modalHistoricoContas.style.display = "flex";
+});
+
+
+// Fechar a modal ao clicar em Cancelar
+btnCancelarMeta.addEventListener("click", function () {
+    modalHistoricoContas.style.display = "none";
+});
+
+
+// =========================================
+// FECHAR CLICANDO FORA DA MODAL
+// =========================================
+
+modalHistoricoContas.addEventListener("click", function (event) {
+
+    if (event.target === modalHistoricoContas) {
+        modalHistoricoContas.style.display = "none";
+    }
+
+});
