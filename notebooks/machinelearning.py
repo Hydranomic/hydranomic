@@ -2,6 +2,9 @@ import json # Biblioteca utilizada para leitura de arquivos JSON.
 import pandas as pd # Transforma o JSON bruto em tabelas organizadas.
 from sklearn.ensemble import RandomForestRegressor # Modelo de ML Regressivo, utilizado para as previsões.
 
+# É definido a tarifa atual do M3 da água.
+tarifa_atual = 59.6
+
 with open("hydranomic/workflows/conta_povoada.json", "r", encoding="utf-8") as info_contas:
     dados = json.load(info_contas) # Função utilizada para leitura do arquivo JSON e armazenamento na váriavel.
 
@@ -38,9 +41,8 @@ dataframe_treino = dataframe.dropna(subset=["memoria_consumo"]).copy()
 entrada = ["mes", "tempo_iniciofinal", "memoria_consumo"]
 saida = "consumo_m3"
 
-x = dataframe_treino["entrada"]
-y = dataframe_treino["saida"]
-
+x = dataframe_treino[entrada]
+y = dataframe_treino[saida]
 
 # Treina o modelo regressivo de FLOREST.
 modelo = RandomForestRegressor(n_estimators=250, random_state=45)
@@ -56,7 +58,7 @@ ultimo_passo = ultima_linha["tempo_iniciofinal"]
 
 # Definição da lógica de transição entre anos, a partir dos meses.
 
-if ultimo_mes == 12:
+if ultimo_mes == 12:    
     proximo_mes = 1
     proximo_ano = ultimo_ano + 1
 
@@ -64,8 +66,25 @@ else:
     proximo_mes = ultimo_mes + 1
     proximo_ano = ultimo_ano
 
+proximo_passo = ultimo_passo + 1
 
+# O modelo recebe os dados já pré organizados para realizar o treinamento do modelo.
+dados_previsao = pd.DataFrame(
+    [[proximo_mes, proximo_passo, ultimo_consumo]],
+    columns=entrada,
+)
 
+previsao_m3 = modelo.predict(dados_previsao)[0]
+
+# Conta básica para calcular o provável valor mensal da tarifa
+valor_conta = previsao_m3 * tarifa_atual
+
+# Teste para exibição do resultado final no terminal
+print(f"Previsão para o período: {proximo_ano}-{proximo_mes:02d}")
+print(f"Unidade Consumidora: {ultima_linha['unidade_consumidora']}")
+print(f"Consumo previsto: {previsao_m3:.2f} m³")
+print(f"Tarifa aplicada: R$ {tarifa_atual:.2f} / m³")
+print(f"Valor total estimado: R$ {valor_conta:,.2f}")
 
 
 
