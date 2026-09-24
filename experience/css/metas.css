@@ -1,0 +1,560 @@
+/* ========================================================
+   Reset básico e Estilos da Página
+======================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: #e6eff8;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1e293b;
+}
+
+/* ========================================================
+   Container Principal
+======================================================== */
+.pagina-metas {
+  max-width: 1280px;
+  margin: 28px auto 40px auto;
+  padding: 0 4%;
+}
+
+/* Cabeçalho */
+.cabecalho-metas {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.titulo-pagina {
+  font-size: 26px;
+  font-weight: 700;
+  color: #164366;
+}
+
+.subtitulo-pagina {
+  font-size: 14px;
+  color: #5b768e;
+  margin-top: 4px;
+}
+
+.botao-mes-atual {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e4566;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* ========================================================
+   Carrossel de Meses
+======================================================== */
+.carrossel-meses {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  margin-bottom: 24px;
+  overflow-x: auto;
+}
+
+.seta-carrossel {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  color: #64748b;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.lista-meses {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.item-mes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 8px;
+  min-width: 95px;
+  border-right: 1px solid #f1f5f9;
+}
+
+.item-mes:last-child {
+  border-right: none;
+}
+
+.nome-mes {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e4566;
+}
+
+.valor-mes {
+  font-size: 12px;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 4px;
+}
+
+.ponto-vermelho {
+  font-size: 7px;
+  color: #dc2626;
+}
+
+.ponto-amarelo {
+  font-size: 7px;
+  color: #f59e0b;
+}
+
+.icone-verde {
+  font-size: 11px;
+  color: #16a34a;
+}
+
+/* Mês Ativo (Azul Escuro como no Figma) */
+.mes-ativo {
+  background: #205988;
+  color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(32, 89, 136, 0.3);
+}
+
+.mes-ativo .nome-mes,
+.mes-ativo .valor-mes {
+  color: #ffffff;
+}
+
+/* ========================================================
+   Grade Principal
+======================================================== */
+.grade-principal-metas {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.cartao-metas {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+}
+
+.cartao-metas:last-child {
+  margin-bottom: 0;
+}
+
+.titulo-cartao-icone {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.icone-titulo {
+  font-size: 20px;
+  color: #205988;
+}
+
+.titulo-cartao-icone h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #164366;
+}
+
+/* Conteúdo das Metas (Lado a Lado com o Arco) */
+.conteudo-meta-consumo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.coluna-dado {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.alinhar-direita {
+  text-align: right;
+}
+
+.rotulo-dado {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.valor-grande {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e4566;
+}
+
+/* Medidor em Arco (78%) */
+.medidor-arco {
+  position: relative;
+  width: 140px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg-arco {
+  width: 100%;
+  height: 100%;
+}
+
+.texto-arco {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.porcentagem-arco {
+  font-size: 22px;
+  font-weight: 800;
+  color: #164366;
+}
+
+.subtexto-arco {
+  font-size: 10px;
+  color: #64748b;
+}
+
+/* Anel Completo (80%) */
+.anel-progresso {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progresso-80 {
+  background: conic-gradient(#205988 80%, #e2e8f0 0);
+}
+
+.miolo-anel {
+  width: 82px;
+  height: 82px;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.porcentagem-anel {
+  font-size: 20px;
+  font-weight: 800;
+  color: #164366;
+}
+
+.subtexto-anel {
+  font-size: 10px;
+  color: #64748b;
+}
+
+/* Faixa Informativa Azul Suave */
+.faixa-destaque-azul {
+  background: #edf5fb;
+  border-radius: 8px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: #334155;
+}
+
+.icone-ondas,
+.icone-cifrao {
+  font-size: 20px;
+  color: #205988;
+}
+
+/* ========================================================
+   Coluna Direita: Gráfico e IA
+======================================================== */
+.cabecalho-grafico {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.legenda-grafico {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+  color: #475569;
+}
+
+.item-legenda {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.traco-real {
+  width: 18px;
+  height: 3px;
+  background: #1e4566;
+  border-radius: 2px;
+}
+
+.traco-meta {
+  width: 18px;
+  height: 2px;
+  border-top: 2px dashed #2563eb;
+}
+
+/* SVG do Gráfico */
+.area-grafico {
+  width: 100%;
+  margin-top: 14px;
+}
+
+.svg-grafico {
+  width: 100%;
+  height: auto;
+}
+
+.texto-eixo,
+.texto-mes-eixo {
+  font-size: 10px;
+  fill: #64748b;
+  text-anchor: middle;
+}
+
+.mes-x-ativo {
+  font-weight: 700;
+  fill: #1e4566;
+}
+
+.rotulo-ponto {
+  font-size: 8px;
+  fill: #1e4566;
+  text-anchor: middle;
+  font-weight: 600;
+}
+
+.ponto-destaque {
+  font-weight: 800;
+  fill: #205988;
+}
+
+/* Previsão de IA */
+.grade-previsao-ia {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 18px;
+  align-items: center;
+}
+
+.caixa-ia-destaque {
+  background: #f1f6fb;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.caixa-ia-destaque p {
+  font-size: 12px;
+  color: #475569;
+  line-height: 1.4;
+}
+
+.valor-queda {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 800;
+  color: #16a34a;
+  margin: 4px 0;
+}
+
+.caixa-ia-destaque small {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.bloco-previsao {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-left: 1px solid #e2e8f0;
+  padding-left: 16px;
+}
+
+.rotulo-ia {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.valor-ia {
+  font-size: 18px;
+  font-weight: 700;
+  color: #164366;
+}
+
+.subtexto-ia {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.barra-previsao-fundo {
+  width: 100%;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.barra-previsao-preenchida {
+  height: 100%;
+  background: #205988;
+  border-radius: 10px;
+}
+
+/* ========================================================
+   Banner Inferior: Recomendações da IA
+======================================================== */
+.banner-recomendacao-ia {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 18px 24px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.lado-recomendacao {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.icone-robo-circulo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #edf5fb;
+  border: 1px solid #d0e3f4;
+  color: #205988;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.textos-recomendacao {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rotulo-recomendacao {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.titulo-recomendacao {
+  font-size: 17px;
+  color: #1e4566;
+}
+
+.descricao-recomendacao {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* Pílula com a Dica */
+.pilula-dica-ia {
+  background: #edf5fb;
+  border-radius: 10px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 420px;
+}
+
+.icone-lampada {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #205988;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.titulo-dica {
+  font-size: 12px;
+  color: #1e4566;
+}
+
+.descricao-dica {
+  font-size: 11px;
+  color: #475569;
+  line-height: 1.3;
+}
+
+/* ========================================================
+   Responsividade
+======================================================== */
+@media (max-width: 992px) {
+  .grade-principal-metas {
+    grid-template-columns: 1fr;
+  }
+
+  .banner-recomendacao-ia {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pilula-dica-ia {
+    max-width: 100%;
+  }
+}
