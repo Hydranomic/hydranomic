@@ -34,13 +34,17 @@ dataframe["memoria_consumo"] = dataframe.groupby("unidade_consumidora")["consumo
 dataframe_treino = dataframe.dropna(subset=["memoria_consumo"]).copy()
 
 
-
 # Define as variáveis de ENTRADA (X) E SAÍDA (Y)
 entrada = ["mes", "tempo_iniciofinal", "memoria_consumo"]
 saida = "consumo_m3"
 
 x = dataframe_treino["entrada"]
 y = dataframe_treino["saida"]
+
+
+# Treina o modelo regressivo de FLOREST
+modelo = RandomForestRegressor(n_estimators=250, random_state=45)
+modelo.fit( x, y )
 
 
 
