@@ -21,7 +21,6 @@ with open(arquivo_saida, "r", encoding="utf-8") as dados:
 consumo_mensal = {}
 
 # Lógica que garante que os dados armazenados serão do ano atual.
-
 for registro in data:
     registro_id = registro.get("id", "")
     separar_partes = registro.split("-")
@@ -38,5 +37,5 @@ for registro in data:
 
         except ValueError:
             continue
-        
+
 
