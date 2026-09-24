@@ -41,8 +41,8 @@ dataframe_treino = dataframe.dropna(subset=["memoria_consumo"]).copy()
 entrada = ["mes", "tempo_iniciofinal", "memoria_consumo"]
 saida = "consumo_m3"
 
-x = dataframe_treino["entrada"]
-y = dataframe_treino["saida"]
+x = dataframe_treino[entrada]
+y = dataframe_treino[saida]
 
 
 # Treina o modelo regressivo de FLOREST.
