@@ -16,3 +16,27 @@ with open(arquivo_entrada, "r", encoding="utf-8") as dados:
 
 with open(arquivo_saida, "r", encoding="utf-8") as dados:
     data_novo = json.load(dados)
+
+# Armazena o consumo de cada mês
+consumo_mensal = {}
+
+# Lógica que garante que os dados armazenados serão do ano atual.
+
+for registro in data:
+    registro_id = registro.get("id", "")
+    separar_partes = registro.split("-")
+
+    if len(separar_partes) == 2:
+
+        try:
+            ano_registro = int(separar_partes[0])
+            mes_registro = int(separar_partes[1])
+
+            if ano_registro == ano_atual and 1 <= mes_registro <= 12:
+
+                consumo_mensal[mes_registro] = registro.get("consumo_m3")
+
+        except ValueError:
+            continue
+        
+
