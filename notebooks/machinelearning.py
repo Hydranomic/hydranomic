@@ -65,7 +65,6 @@ ultimo_consumo = ultima_linha["consumo_m3"]
 ultimo_passo = ultima_linha["tempo_iniciofinal"]
 
 # Definição da lógica de transição entre anos, a partir dos meses.
-
 if ultimo_mes == 12:    
     proximo_mes = 1
     proximo_ano = ultimo_ano + 1
@@ -76,20 +75,26 @@ else:
 
 proximo_passo = ultimo_passo + 1
 
-# O modelo recebe os dados já pré organizados para realizar o treinamento do modelo.
-dados_previsao = pd.DataFrame(
-    [[proximo_mes, proximo_passo, ultimo_consumo]],
-    columns=entrada,
-)
 
-previsao_m3 = modelo.predict(dados_previsao)[0]
 
-# Conta básica para calcular o provável valor mensal da tarifa
-valor_conta = previsao_m3 * tarifa_atual
+# Função de treinamento do modelo, para ser chamada em outro momento.
+def iniciar_ml():
+    # O modelo recebe os dados já pré organizados para realizar o treinamento do modelo.
+    dados_previsao = pd.DataFrame(
+        [[proximo_mes, proximo_passo, ultimo_consumo]],
+        columns=entrada,
+    )
 
-# Teste para exibição do resultado final no terminal
-print(f"Previsão para o período: {proximo_ano}-{proximo_mes:02d}")
-print(f"Unidade Consumidora: {ultima_linha['unidade_consumidora']}")
-print(f"Consumo previsto: {previsao_m3:.2f} m³")
-print(f"Tarifa aplicada: R$ {tarifa_atual:.2f} / m³")
-print(f"Valor total estimado: R$ {valor_conta:,.2f}")
+    previsao_m3 = modelo.predict(dados_previsao)[0]
+
+    # Conta básica para calcular o provável valor mensal da tarifa
+    valor_conta = previsao_m3 * tarifa_atual
+
+    return {
+        "ano": proximo_ano,
+        "mes": proximo_mes,
+        "unidade_consumidora": ultima_linha["unidade_consumidora"],
+        "previsao_m3": previsao_m3,
+        "tarifa": tarifa_atual,
+        "valor_conta": valor_conta,
+    }
