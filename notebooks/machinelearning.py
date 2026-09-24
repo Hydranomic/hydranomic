@@ -30,6 +30,9 @@ dataframe["tempo_iniciofinal"] = (dataframe["ano"] - ano_inicial) * 12 + (datafr
 # Serve para o modelo ter base de comparação.
 dataframe["memoria_consumo"] = dataframe.groupby("unidade_consumidora")["consumo_m3"].shift(1)
 
+# Serve para remove as linhas inicias que não tem conteúdo, evitando erros que possam interromper o serviço.
+dataframe_treino = dataframe.dropna(subset=["memoria_consumo"]).copy()
+
 
 
 
