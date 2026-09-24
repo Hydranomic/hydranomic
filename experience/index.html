@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Página Inicial</title>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/index.css">
-    <title>Página Inicial</title>
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/relatorio.css">
 </head>
-<body>
-    <h1>Olá, </h1>
-    <h3>Aqui está o resumo do sistema</h3>
 
+<body>
+
+<<<<<<< HEAD
     <section class="area-vazao">
         <i class="bi bi-graph-up"></i>
         <h3>Vazão atual da água</h3>
@@ -25,31 +29,108 @@
         <h3></h3>
         <a href="relatorio.html" class="button-ver-detalhes">Ver detalhes</a>
     </search>
+=======
+    <div id="navbar-container"></div>
 
-    <section class="area-consumo-agua">
-        <i class="bi bi-droplet-fill"></i>
-        <h3>Consumo de água</h3>
-        <h1></h1>
-    </section>
+    <main>
+>>>>>>> 93c5ce8eb992a8a5357a2dab3187a1f60cf57cd6
 
-    <section class="area-previsoes">
-        <i class="bi bi-check-all"></i>
-        <h3>Previsões</h3>
-        <h3>Previsão financeira do próximo mês</h3>
-        <h1></h1>
-    </section>
+        <h1>Olá, </h1>
+        <h3>Aqui está o resumo do sistema</h3>
 
-    <section class="metas">
-        <i class="bi bi-cash-coin"></i>
-        <h3>Metas</h3>
-        <h3>Gasto total do mês</h3>
-        <h1></h1>
+        <section class="area-vazao">
+            <i class="bi bi-graph-up"></i>
+            <h3>Vazão atual da água</h3>
+            <h1></h1>
+            <button-ver-detalhes>Ver detalhes</button-ver-detalhes>
+        </section>
 
+        <section class="area-status">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            <h3>Status do sistema</h3>
+            <h1></h1>
+            <h3></h3>
+            <button-ver-detalhes>Ver detalhes</button-ver-detalhes>
+        </section>
+
+        <section class="area-consumo-agua">
+            <i class="bi bi-droplet-fill"></i>
+            <h3>Consumo de água</h3>
+            <h1></h1>
+        </section>
+
+        <section class="area-previsoes">
+            <i class="bi bi-check-all"></i>
+            <h3>Previsões</h3>
+            <h3>Previsão financeira do próximo mês</h3>
+            <h1></h1>
+        </section>
+
+        <section class="metas">
+            <i class="bi bi-cash-coin"></i>
+            <h3>Metas</h3>
+
+            <h3>Gasto total do mês</h3>
+            <h1></h1>
+
+            <h3>Consumo total de água</h3>
+            <h1></h1>
+
+            <button-ver-relatorio>
+                Ver relatório financeiro
+            </button-ver-relatorio>
+        </section>
+
+    </main>
+
+    <script>
+        fetch("navbar.html")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Não foi possível carregar a navbar.");
+                }
+
+                return response.text();
+            })
+            .then(html => {
+                const parser = new DOMParser();
+                const documento = parser.parseFromString(html, "text/html");
+
+                const container = document.getElementById("navbar-container");
+
+                Array.from(documento.body.children).forEach(elemento => {
+                    if (elemento.tagName !== "SCRIPT") {
+                        container.appendChild(
+                            document.importNode(elemento, true)
+                        );
+                    }
+                });
+
+                documento.querySelectorAll("script").forEach(scriptOriginal => {
+                    const novoScript = document.createElement("script");
+
+                    if (scriptOriginal.src) {
+                        novoScript.src = scriptOriginal.src;
+                    } else {
+                        novoScript.textContent = scriptOriginal.textContent;
+                    }
+
+                    document.body.appendChild(novoScript);
+                });
+            })
+            .catch(erro => {
+                console.error(erro);
+            });
+    </script>
+
+<<<<<<< HEAD
         <h3>Consumo total de água</h3>
         <h1></h1>
         <a href="relatorio.html" class="button-ver-detalhes">Ver relatório financeiro</a>
     </section>
 
     
+=======
+>>>>>>> 93c5ce8eb992a8a5357a2dab3187a1f60cf57cd6
 </body>
 </html>

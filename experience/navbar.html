@@ -6,7 +6,6 @@
 
   <title>Navbar Hydranomic</title>
 
-  <!-- Bootstrap Icons -->
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
@@ -21,7 +20,6 @@
 
     <div class="logo-area">
 
-      <!-- Botão das três barras -->
       <button
         class="menu"
         id="abrirSidebar"
@@ -38,7 +36,7 @@
         class="logo-img"
       >
 
-      <a href="#" class="logo">
+      <a href="index.html" class="logo">
         <span class="hydra">HYDRA</span><span class="nomic">NOMIC</span>
       </a>
 
@@ -87,7 +85,6 @@
 
         </div>
 
-        <!-- Informações do usuário -->
         <div class="informacoes">
 
           <p>
@@ -137,17 +134,23 @@
 
         </div>
 
-        <!-- Ações -->
         <div class="acoes">
 
           <hr class="linha-acoes">
 
-          <button type="button">
+          <button
+            type="button"
+            onclick="window.location.href='configuracoes.html'"
+          >
             <i class="bi bi-gear"></i>
             Configurações
           </button>
 
-          <button type="button" class="sair">
+          <button
+            type="button"
+            class="sair"
+            onclick="window.location.href='login.html'"
+          >
             <i class="bi bi-box-arrow-right"></i>
             Sair da conta
           </button>
@@ -160,7 +163,6 @@
 
   </nav>
 
-  <!-- Fundo da sidebar -->
   <button
     class="sidebar-backdrop"
     id="fecharSidebarFundo"
@@ -169,7 +171,6 @@
     hidden
   ></button>
 
-  <!-- Sidebar -->
   <aside
     class="sidebar"
     id="sidebar"
@@ -198,20 +199,20 @@
 
     <nav class="sidebar-menu">
 
-      <a href="#inicio">
+      <a href="index.html">
         Página inicial
       </a>
 
-      <a href="#definicoes">
+      <a href="definições.html">
         Definições
       </a>
 
-      <a href="#metas-consumo">
-        Metas de consumo /financeiro
+      <a href="metas.html">
+        Metas de consumo / financeiro
       </a>
 
-      <a href="#relatorio-consumo">
-        Relatório de conumo
+      <a href="relatorio.html">
+        Relatório de consumo
       </a>
 
     </nav>
@@ -219,6 +220,7 @@
     <button
       class="sidebar-sair"
       type="button"
+      onclick="window.location.href='login.html'"
     >
       Sair
     </button>
@@ -226,8 +228,7 @@
   </aside>
 
   <script>
-    /* Modal do perfil */
-    const botaoPerfil = document.getElementById("abrirPerfil" );
+    const botaoPerfil = document.getElementById("abrirPerfil");
     const perfilCard = document.getElementById("perfilCard");
 
     botaoPerfil.addEventListener("click", function (evento) {
@@ -251,7 +252,6 @@
       }
     });
 
-    /* Sidebar */
     const abrirSidebar = document.getElementById("abrirSidebar");
     const fecharSidebar = document.getElementById("fecharSidebar");
     const fecharSidebarFundo = document.getElementById("fecharSidebarFundo");
@@ -263,7 +263,6 @@
 
       abrirSidebar.setAttribute("aria-expanded", "true");
 
-      // Fecha a modal do perfil ao abrir a sidebar
       botaoPerfil.setAttribute("aria-expanded", "false");
       perfilCard.hidden = true;
     });

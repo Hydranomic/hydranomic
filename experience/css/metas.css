@@ -1,0 +1,617 @@
+/* ========================================================
+   Reset básico e Estilos Gerais
+======================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: #edf3f8;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1e293b;
+}
+
+/* ========================================================
+   Container da Página de Metas
+======================================================== */
+.pagina-metas {
+  max-width: 1300px;
+  margin: 18px auto 30px auto;
+  padding: 0 3%;
+}
+
+/* Cabeçalho */
+.cabecalho-metas {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.titulo-pagina {
+  font-size: 22px;
+  font-weight: 700;
+  color: #184e77;
+}
+
+.subtitulo-pagina {
+  font-size: 13px;
+  color: #5e7a92;
+  margin-top: 2px;
+}
+
+.botao-mes-atual {
+  background: #ffffff;
+  border: 1px solid #d4e2ed;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #184e77;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+/* ========================================================
+   Carrossel de Meses
+======================================================== */
+/* ========================================================
+   Carrossel de Meses (Aumentado e com mais destaque)
+======================================================== */
+.carrossel-meses {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 10px 14px;
+  min-height: 84px;                  /* Altura maior e espaçosa */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  margin-bottom: 22px;
+  overflow-x: auto;
+}
+
+.seta-carrossel {
+  background: transparent;
+  border: none;
+  font-size: 20px;                   /* Setas maiores */
+  color: #64748b;
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.seta-carrossel:hover {
+  background: #f1f5f9;
+  color: #184e77;
+}
+
+.lista-meses {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.item-mes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;                /* Padding interno maior */
+  border-radius: 8px;
+  min-width: 110px;                  /* Mais largo e confortável */
+  border-right: 1px solid #edf2f7;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.item-mes:hover:not(.mes-ativo) {
+  background: #f8fafc;
+}
+
+.item-mes:last-child {
+  border-right: none;
+}
+
+.nome-mes {
+  font-size: 14px;                   /* Texto do mês maior */
+  font-weight: 700;
+  color: #184e77;
+}
+
+.valor-mes {
+  font-size: 13px;                   /* Valor de litros maior */
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;                   /* Mais respiro entre o mês e o valor */
+}
+
+.ponto-vermelho {
+  font-size: 8px;
+  color: #dc2626;
+}
+
+.ponto-amarelo {
+  font-size: 8px;
+  color: #f59e0b;
+}
+
+.icone-verde {
+  font-size: 13px;
+  color: #16a34a;
+}
+
+/* Mês Ativo (Ago 2026 - Bloco azul maior e mais imponente) */
+.mes-ativo {
+  background: #1d5784;
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 14px 24px;
+  box-shadow: 0 6px 18px rgba(29, 87, 132, 0.4);
+  border-right: none;
+}
+
+.mes-ativo .nome-mes {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.mes-ativo .valor-mes {
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.mes-ativo .valor-mes i {
+  font-size: 14px;
+}
+
+/* ========================================================
+   Grade Principal (Colunas Proporcionais)
+======================================================== */
+.grade-principal-metas {
+  display: grid;
+  grid-template-columns: 1fr 1.18fr;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: stretch;
+}
+
+.coluna-esquerda,
+.coluna-direita {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Cartões */
+.cartao-metas {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 16px 22px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.titulo-cartao-icone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.icone-titulo {
+  font-size: 18px;
+  color: #184e77;
+}
+
+.titulo-cartao-icone h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #184e77;
+}
+
+/* Conteúdo Alinhado e Proporcional nos Cards da Esquerda */
+.conteudo-meta-consumo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px 12px 6px;
+}
+
+.coluna-dado {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.alinhar-direita {
+  text-align: right;
+}
+
+.rotulo-dado {
+  font-size: 12px;
+  color: #6b8499;
+}
+
+.valor-grande {
+  font-size: 21px;
+  font-weight: 700;
+  color: #184e77;
+}
+
+/* Medidor em Arco (78%) */
+.medidor-arco {
+  position: relative;
+  width: 130px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg-arco {
+  width: 100%;
+  height: 100%;
+}
+
+.texto-arco {
+  position: absolute;
+  bottom: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.porcentagem-arco {
+  font-size: 22px;
+  font-weight: 800;
+  color: #184e77;
+}
+
+.subtexto-arco {
+  font-size: 10px;
+  color: #6b8499;
+  margin-top: -2px;
+}
+
+/* Medidor Anel Completo (80%) */
+.medidor-anel {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg-anel {
+  width: 100%;
+  height: 100%;
+}
+
+.texto-anel {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.porcentagem-anel {
+  font-size: 21px;
+  font-weight: 800;
+  color: #184e77;
+}
+
+.subtexto-anel {
+  font-size: 10px;
+  color: #6b8499;
+}
+
+/* Faixa Informativa Azul Inferior */
+.faixa-destaque-azul {
+  background: #eaf3fa;
+  border-radius: 9px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: #526e85;
+}
+
+.faixa-destaque-azul strong {
+  color: #184e77;
+  font-weight: 700;
+}
+
+.icone-ondas {
+  font-size: 18px;
+  color: #184e77;
+}
+
+.icone-cifrao-texto {
+  font-size: 16px;
+  font-weight: 700;
+  color: #184e77;
+}
+
+/* ========================================================
+   Coluna Direita: Gráfico e IA
+======================================================== */
+.cabecalho-grafico {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.legenda-grafico {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  color: #475569;
+}
+
+.item-legenda {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.traco-real {
+  width: 18px;
+  height: 3px;
+  background: #184e77;
+  border-radius: 2px;
+}
+
+.traco-meta {
+  width: 18px;
+  height: 2px;
+  border-top: 2px dashed #2563eb;
+}
+
+.area-grafico {
+  width: 100%;
+}
+
+.svg-grafico {
+  width: 100%;
+  max-height: 180px;
+  display: block;
+}
+
+.texto-eixo {
+  font-size: 9.5px;
+  fill: #64748b;
+  text-anchor: end;
+}
+
+.texto-mes-eixo {
+  font-size: 9.5px;
+  fill: #64748b;
+  text-anchor: middle;
+}
+
+.mes-x-ativo {
+  font-weight: 700;
+  fill: #184e77;
+}
+
+.rotulo-ponto {
+  font-size: 7.5px;
+  fill: #184e77;
+  text-anchor: middle;
+  font-weight: 600;
+}
+
+.ponto-destaque {
+  font-weight: 800;
+  fill: #184e77;
+}
+
+/* Previsão de IA */
+.grade-previsao-ia {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.caixa-ia-destaque {
+  background: #f0f6fa;
+  border-radius: 9px;
+  padding: 10px 14px;
+}
+
+.caixa-ia-destaque p {
+  font-size: 11px;
+  color: #4d687d;
+  line-height: 1.35;
+}
+
+.valor-queda {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 800;
+  color: #22c55e;
+  margin: 2px 0;
+}
+
+.valor-queda i {
+  font-size: 22px;
+}
+
+.caixa-ia-destaque small {
+  font-size: 10px;
+  color: #6b8499;
+}
+
+.bloco-previsao {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border-left: 1px solid #e5edf4;
+  padding-left: 16px;
+}
+
+.rotulo-ia {
+  font-size: 11px;
+  color: #6b8499;
+}
+
+.valor-ia {
+  font-size: 18px;
+  font-weight: 700;
+  color: #184e77;
+}
+
+.subtexto-ia {
+  font-size: 10px;
+  color: #6b8499;
+}
+
+.barra-previsao-fundo {
+  width: 100%;
+  height: 5px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.barra-previsao-preenchida {
+  height: 100%;
+  background: #184e77;
+  border-radius: 10px;
+}
+
+/* ========================================================
+   Banner Inferior: Recomendações e Dica da IA
+======================================================== */
+.banner-recomendacao-ia {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 14px 22px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.lado-recomendacao {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.icone-robo-circulo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #184e77;
+  color: #184e77;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.textos-recomendacao {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.rotulo-recomendacao {
+  font-size: 11px;
+  color: #6b8499;
+}
+
+.titulo-recomendacao {
+  font-size: 16px;
+  font-weight: 700;
+  color: #184e77;
+}
+
+.descricao-recomendacao {
+  font-size: 11px;
+  color: #6b8499;
+}
+
+/* Pílula com a Dica */
+.pilula-dica-ia {
+  background: #eef6fc;
+  border-radius: 12px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 420px;
+}
+
+.icone-lampada {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #184e77;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.titulo-dica {
+  font-size: 11px;
+  font-weight: 700;
+  color: #184e77;
+}
+
+.descricao-dica {
+  font-size: 10.5px;
+  color: #526e85;
+  line-height: 1.25;
+}
+
+/* ========================================================
+   Responsividade
+======================================================== */
+@media (max-width: 992px) {
+  .grade-principal-metas {
+    grid-template-columns: 1fr;
+  }
+
+  .banner-recomendacao-ia {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pilula-dica-ia {
+    max-width: 100%;
+  }
+}

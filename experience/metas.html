@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metas de consumo / financeiro - Hydranomic</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+  >
+
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/metas.css">
+</head>
+
+<body>
+
+  <div id="navbar-container"></div>
+
+  <main class="pagina-metas">
+
+    <header class="cabecalho-metas">
+      <div class="titulos-metas">
+        <h1 class="titulo-pagina">Metas de consumo / financeiro</h1>
+        <p class="subtitulo-pagina">Acompanhe suas metas de consumo de água, gastos e as previsões de IA.</p>
+      </div>
+
+      <button class="botao-mes-atual" type="button">
+        <i class="bi bi-calendar"></i>
+        <span>Mês atual</span>
+      </button>
+    </header>
+
+    <section class="carrossel-meses">
+      <button class="seta-carrossel" type="button" aria-label="Mês anterior">
+        <i class="bi bi-chevron-left"></i>
+      </button>
+
+      <div class="lista-meses">
+        <div class="item-mes">
+          <span class="nome-mes">Mar 2026</span>
+          <span class="valor-mes">16.000 L <i class="bi bi-circle-fill ponto-vermelho"></i></span>
+        </div>
+
+        <div class="item-mes">
+          <span class="nome-mes">Abr 2026</span>
+          <span class="valor-mes">16.000 L <i class="bi bi-circle-fill ponto-amarelo"></i></span>
+        </div>
+
+        <div class="item-mes">
+          <span class="nome-mes">Mai 2026</span>
+          <span class="valor-mes">16.000 L <i class="bi bi-check-circle-fill icone-verde"></i></span>
+        </div>
+
+        <div class="item-mes">
+          <span class="nome-mes">Jun 2026</span>
+          <span class="valor-mes">16.000 L <i class="bi bi-check-circle-fill icone-verde"></i></span>
+        </div>
+
+        <div class="item-mes">
+          <span class="nome-mes">Jul 2026</span>
+          <span class="valor-mes">16.000 L <i class="bi bi-check-circle-fill icone-verde"></i></span>
+        </div>
+
+        <div class="item-mes mes-ativo">
+          <span class="nome-mes">Ago 2026</span>
+          <span class="valor-mes">14.050 L <i class="bi bi-activity"></i></span>
+        </div>
+
+        <div class="item-mes">
+          <span class="nome-mes">Set 2026</span>
+          <span class="valor-mes">-</span>
+        </div>
+
+        <div class="item-mes">
+          <span class="nome-mes">Out 2026</span>
+          <span class="valor-mes">-</span>
+        </div>
+      </div>
+
+      <button class="seta-carrossel" type="button" aria-label="Próximo mês">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </section>
+
+    <section class="grade-principal-metas">
+
+      <div class="coluna-esquerda">
+
+        <article class="cartao-metas">
+          <div class="titulo-cartao-icone">
+            <i class="bi bi-bullseye icone-titulo"></i>
+            <h2>Meta de consumo mensal</h2>
+          </div>
+
+          <div class="conteudo-meta-consumo">
+            <div class="coluna-dado">
+              <span class="rotulo-dado">Meta definida</span>
+              <strong class="valor-grande">18.000 L</strong>
+            </div>
+
+            <div class="medidor-arco">
+              <svg viewBox="0 0 140 90" class="svg-arco">
+                <path d="M 15 80 A 55 55 0 0 1 125 80" fill="none" stroke="#e2e8f0" stroke-width="12" stroke-linecap="round"/>
+                <path d="M 15 80 A 55 55 0 0 1 110 35" fill="none" stroke="#205988" stroke-width="12" stroke-linecap="round"/>
+              </svg>
+
+              <div class="texto-arco">
+                <span class="porcentagem-arco">78%</span>
+                <span class="subtexto-arco">da meta utilizada</span>
+              </div>
+            </div>
+
+            <div class="coluna-dado alinhar-direita">
+              <span class="rotulo-dado">Consumo atual</span>
+              <strong class="valor-grande">14.050 L</strong>
+            </div>
+          </div>
+
+          <div class="faixa-destaque-azul">
+            <i class="bi bi-water icone-ondas"></i>
+            <p><strong>3.950 L</strong> Restantes para atingir a meta.</p>
+          </div>
+        </article>
+
+        <article class="cartao-metas">
+          <div class="titulo-cartao-icone">
+            <i class="bi bi-coin icone-titulo"></i>
+            <h2>Meta Financeira</h2>
+          </div>
+
+          <div class="conteudo-meta-consumo">
+            <div class="coluna-dado">
+              <span class="rotulo-dado">Economia estimada</span>
+              <strong class="valor-grande">R$ 2.300,00</strong>
+            </div>
+
+            <div class="anel-progresso progresso-80">
+              <div class="miolo-anel">
+                <span class="porcentagem-anel">80%</span>
+                <span class="subtexto-anel">da meta</span>
+              </div>
+            </div>
+
+            <div class="coluna-dado alinhar-direita">
+              <span class="rotulo-dado">Economia alcançada</span>
+              <strong class="valor-grande">R$ 1.840,00</strong>
+            </div>
+          </div>
+
+          <div class="faixa-destaque-azul">
+            <i class="bi bi-currency-dollar icone-cifrao"></i>
+            <p><strong>R$ 20.080,00</strong> Gastos no mês de setembro.</p>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="coluna-direita">
+
+        <article class="cartao-metas">
+          <div class="cabecalho-grafico">
+            <div class="titulo-cartao-icone">
+              <i class="bi bi-graph-up icone-titulo"></i>
+              <h2>Evolução do consumo x meta</h2>
+            </div>
+
+            <div class="legenda-grafico">
+              <span class="item-legenda"><span class="traco-real"></span> Consumo real (L)</span>
+              <span class="item-legenda"><span class="traco-meta"></span> Meta (L)</span>
+            </div>
+          </div>
+
+          <div class="area-grafico">
+            <svg viewBox="0 0 540 220" class="svg-grafico">
+              <line x1="35" y1="25" x2="520" y2="25" stroke="#f1f5f9" stroke-width="1"/>
+              <line x1="35" y1="60" x2="520" y2="60" stroke="#f1f5f9" stroke-width="1"/>
+              <line x1="35" y1="95" x2="520" y2="95" stroke="#f1f5f9" stroke-width="1"/>
+              <line x1="35" y1="130" x2="520" y2="130" stroke="#f1f5f9" stroke-width="1"/>
+              <line x1="35" y1="165" x2="520" y2="165" stroke="#f1f5f9" stroke-width="1"/>
+              <line x1="35" y1="200" x2="520" y2="200" stroke="#e2e8f0" stroke-width="1"/>
+
+              <text x="25" y="28" class="texto-eixo">25k</text>
+              <text x="25" y="63" class="texto-eixo">20k</text>
+              <text x="25" y="98" class="texto-eixo">15k</text>
+              <text x="25" y="133" class="texto-eixo">10k</text>
+              <text x="25" y="168" class="texto-eixo">5k</text>
+              <text x="25" y="200" class="texto-eixo">0</text>
+
+              <rect x="420" y="25" width="36" height="175" fill="#f0f6fa"/>
+
+              <path d="M 45 155 L 85 145 L 130 135 L 175 145 L 220 135 L 265 125 L 310 115 L 355 105 L 400 95 L 445 88 L 485 75 L 515 70"
+                    fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="4,4"/>
+
+              <path d="M 45 105 L 85 98 L 130 84 L 175 92 L 220 78 L 265 68 L 310 74 L 355 74 L 438 120"
+                    fill="none" stroke="#1e4566" stroke-width="2.5"/>
+
+              <g class="pontos-grafico">
+                <circle cx="45" cy="105" r="3.5" fill="#1e4566"/>
+                <text x="45" y="98" class="rotulo-ponto">14.500</text>
+
+                <circle cx="85" cy="98" r="3.5" fill="#1e4566"/>
+                <text x="85" y="91" class="rotulo-ponto">15.200</text>
+
+                <circle cx="130" cy="84" r="3.5" fill="#1e4566"/>
+                <text x="130" y="77" class="rotulo-ponto">16.800</text>
+
+                <circle cx="175" cy="92" r="3.5" fill="#1e4566"/>
+                <text x="175" y="85" class="rotulo-ponto">15.600</text>
+
+                <circle cx="220" cy="78" r="3.5" fill="#1e4566"/>
+                <text x="220" y="71" class="rotulo-ponto">17.300</text>
+
+                <circle cx="265" cy="68" r="3.5" fill="#1e4566"/>
+                <text x="265" y="61" class="rotulo-ponto">18.100</text>
+
+                <circle cx="310" cy="74" r="3.5" fill="#1e4566"/>
+                <text x="310" y="67" class="rotulo-ponto">17.600</text>
+
+                <circle cx="355" cy="74" r="3.5" fill="#1e4566"/>
+                <text x="355" y="67" class="rotulo-ponto">17.600</text>
+
+                <circle cx="438" cy="120" r="3.5" fill="#1e4566"/>
+                <text x="438" y="135" class="rotulo-ponto ponto-destaque">14.050</text>
+              </g>
+
+              <text x="45" y="215" class="texto-mes-eixo">Jan</text>
+              <text x="85" y="215" class="texto-mes-eixo">Fev</text>
+              <text x="130" y="215" class="texto-mes-eixo">Mar</text>
+              <text x="175" y="215" class="texto-mes-eixo">Abr</text>
+              <text x="220" y="215" class="texto-mes-eixo">Mai</text>
+              <text x="265" y="215" class="texto-mes-eixo">Jun</text>
+              <text x="310" y="215" class="texto-mes-eixo">Jul</text>
+              <text x="355" y="215" class="texto-mes-eixo">Ago</text>
+              <text x="438" y="215" class="texto-mes-eixo mes-x-ativo">Set</text>
+              <text x="468" y="215" class="texto-mes-eixo">Out</text>
+              <text x="495" y="215" class="texto-mes-eixo">Nov</text>
+              <text x="518" y="215" class="texto-mes-eixo">Dez</text>
+            </svg>
+          </div>
+        </article>
+
+        <article class="cartao-metas">
+          <div class="titulo-cartao-icone">
+            <i class="bi bi-stars icone-titulo"></i>
+            <h2>Análise e previsão de IA</h2>
+          </div>
+
+          <div class="grade-previsao-ia">
+            <div class="caixa-ia-destaque">
+              <p>Com base no seu histórico de consumo, a IA prevê que seu consumo mensal ficará cerca de</p>
+
+              <div class="valor-queda">
+                <i class="bi bi-arrow-down-short"></i>
+                <span>4,8%</span>
+              </div>
+
+              <small>Abaixo do mês anterior.</small>
+            </div>
+
+            <div class="bloco-previsao">
+              <span class="rotulo-ia">Previsão para setembro/2026</span>
+              <strong class="valor-ia">17.200 L</strong>
+              <small class="subtexto-ia">Em relação a agosto/2026</small>
+            </div>
+
+            <div class="bloco-previsao">
+              <span class="rotulo-ia">Previsão financeira</span>
+              <strong class="valor-ia">R$ 1.840,00</strong>
+
+              <div class="barra-previsao-fundo">
+                <div class="barra-previsao-preenchida" style="width: 65%;"></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+    </section>
+
+    <section class="banner-recomendacao-ia">
+      <div class="lado-recomendacao">
+        <div class="icone-robo-circulo">
+          <i class="bi bi-robot"></i>
+        </div>
+
+        <div class="textos-recomendacao">
+          <span class="rotulo-recomendacao">Meta recomendada pela IA</span>
+          <strong class="titulo-recomendacao">16.500 L - R$ 16.000</strong>
+          <p class="descricao-recomendacao">Baseada na média dos últimos 3 meses e na tendência atual de consumo.</p>
+        </div>
+      </div>
+
+      <div class="pilula-dica-ia">
+        <div class="icone-lampada">
+          <i class="bi bi-lightbulb"></i>
+        </div>
+
+        <div class="textos-dica">
+          <strong class="titulo-dica">Dica da IA</strong>
+          <p class="descricao-dica">Reduzir o consumo entre 8h e 11h pode gerar uma economia significativa.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    fetch("navbar.html")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Não foi possível carregar a navbar.");
+        }
+
+        return response.text();
+      })
+      .then(html => {
+        const parser = new DOMParser();
+        const documento = parser.parseFromString(html, "text/html");
+        const container = document.getElementById("navbar-container");
+
+        Array.from(documento.body.children).forEach(elemento => {
+          if (elemento.tagName !== "SCRIPT") {
+            container.appendChild(document.importNode(elemento, true));
+          }
+        });
+
+        documento.querySelectorAll("script").forEach(scriptOriginal => {
+          const novoScript = document.createElement("script");
+
+          if (scriptOriginal.src) {
+            novoScript.src = scriptOriginal.src;
+          } else {
+            novoScript.textContent = scriptOriginal.textContent;
+          }
+
+          document.body.appendChild(novoScript);
+        });
+      })
+      .catch(erro => {
+        console.error(erro);
+      });
+  </script>
+
+</body>
+</html>

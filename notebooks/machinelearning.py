@@ -1,6 +1,17 @@
+############################################
+
+# CÓDIGO FINALIZADO 1.0 - 24/09/2026 #
+# FALTANDO INTEGRAÇÃO WEGNOLOGY E FRONT-END #
+
+############################################
+
+
 import json # Biblioteca utilizada para leitura de arquivos JSON.
 import pandas as pd # Transforma o JSON bruto em tabelas organizadas.
 from sklearn.ensemble import RandomForestRegressor # Modelo de ML Regressivo, utilizado para as previsões.
+
+# É definido a tarifa atual do M3 da água.
+tarifa_atual = 59.6
 
 with open("hydranomic/workflows/conta_povoada.json", "r", encoding="utf-8") as info_contas:
     dados = json.load(info_contas) # Função utilizada para leitura do arquivo JSON e armazenamento na váriavel.
@@ -34,7 +45,56 @@ dataframe["memoria_consumo"] = dataframe.groupby("unidade_consumidora")["consumo
 dataframe_treino = dataframe.dropna(subset=["memoria_consumo"]).copy()
 
 
+# Define as variáveis de ENTRADA (X) E SAÍDA (Y).
+entrada = ["mes", "tempo_iniciofinal", "memoria_consumo"]
+saida = "consumo_m3"
+
+x = dataframe_treino[entrada]
+y = dataframe_treino[saida]
+
+# Treina o modelo regressivo de FLOREST.
+modelo = RandomForestRegressor(n_estimators=250, random_state=45)
+modelo.fit( x, y )
+
+# Recuperação de Dados para aprimorar a próxima detecção de ciclo.
+ultima_linha = dataframe.iloc[-1]
+
+ultimo_ano = ultima_linha["ano"]
+ultimo_mes = ultima_linha["mes"]
+ultimo_consumo = ultima_linha["consumo_m3"]
+ultimo_passo = ultima_linha["tempo_iniciofinal"]
+
+# Definição da lógica de transição entre anos, a partir dos meses.
+if ultimo_mes == 12:    
+    proximo_mes = 1
+    proximo_ano = ultimo_ano + 1
+
+else:
+    proximo_mes = ultimo_mes + 1
+    proximo_ano = ultimo_ano
+
+proximo_passo = ultimo_passo + 1
 
 
 
+# Função de treinamento do modelo, para ser chamada em outro momento.
+def iniciar_ml():
+    # O modelo recebe os dados já pré organizados para realizar o treinamento do modelo.
+    dados_previsao = pd.DataFrame(
+        [[proximo_mes, proximo_passo, ultimo_consumo]],
+        columns=entrada,
+    )
 
+    previsao_m3 = modelo.predict(dados_previsao)[0]
+
+    # Conta básica para calcular o provável valor mensal da tarifa
+    valor_conta = previsao_m3 * tarifa_atual
+
+    return {
+        "ano": proximo_ano,
+        "mes": proximo_mes,
+        "unidade_consumidora": ultima_linha["unidade_consumidora"],
+        "previsao_m3": previsao_m3,
+        "tarifa": tarifa_atual,
+        "valor_conta": valor_conta,
+    }

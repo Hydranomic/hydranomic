@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatório de consumo</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+  >
+
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/relatorio.css">
+</head>
+
+<body>
+
+  <div id="navbar-container"></div>
+
+  <main class="pagina-relatorio">
+
+    <section class="cabecalho-relatorio">
+      <h1>Relatório de consumo</h1>
+      <p>Acompanhe o consumo diário de água do mês.</p>
+    </section>
+
+    <section class="acoes-relatorio" aria-label="Ações do relatório">
+
+      <button class="botao acao-exportar" type="button" onclick="imprimirRelatorio()">
+        <span class="icone-exportar" aria-hidden="true"></span>
+        <span>Exportar relatório</span>
+      </button>
+
+      <div class="seletor-mes">
+
+        <button
+          class="botao acao-mes"
+          type="button"
+          aria-expanded="false"
+          onclick="abrirMeses()"
+        >
+          <span class="icone-calendario" aria-hidden="true"></span>
+          <span id="mesSelecionado">Setembro 2026</span>
+        </button>
+
+        <div class="lista-meses" hidden>
+          <button type="button" onclick="selecionarMes('Setembro 2026')">
+            Setembro 2026
+          </button>
+
+          <button type="button" onclick="selecionarMes('Agosto 2026')">
+            Agosto 2026
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="area-tabela" aria-label="Tabela de consumo de água">
+
+      <table class="tabela-consumo">
+
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Consumo (L)</th>
+            <th>Custo (R$)</th>
+            <th>Status</th>
+            <th>Variação (%)</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>01/08/2026</td>
+            <td>14.500</td>
+            <td>20,00</td>
+            <td><span class="ponto ponto-verde"></span>Dentro da meta</td>
+            <td class="variacao-verde">-4,61</td>
+          </tr>
+
+          <tr>
+            <td>02/08/2026</td>
+            <td>14.500</td>
+            <td>20,00</td>
+            <td><span class="ponto ponto-amarelo"></span>Dentro da meta</td>
+            <td class="variacao-verde">-4,61</td>
+          </tr>
+
+          <tr>
+            <td>03/08/2026</td>
+            <td>14.500</td>
+            <td>20,00</td>
+            <td><span class="ponto ponto-verde"></span>Dentro da meta</td>
+            <td class="variacao-verde">-4,61</td>
+          </tr>
+
+          <tr>
+            <td>04/08/2026</td>
+            <td>14.500</td>
+            <td>20,00</td>
+            <td><span class="ponto ponto-vermelho"></span>Dentro da meta</td>
+            <td class="variacao-vermelha">-4,61</td>
+          </tr>
+
+          <tr>
+            <td>05/08/2026</td>
+            <td>14.500</td>
+            <td>20,00</td>
+            <td><span class="ponto ponto-verde"></span>Dentro da meta</td>
+            <td class="variacao-verde">-4,61</td>
+          </tr>
+
+          <tr>
+            <td>06/08/2026</td>
+            <td>14.500</td>
+            <td>20,00</td>
+            <td><span class="ponto ponto-verde"></span>Dentro da meta</td>
+            <td class="variacao-verde">-4,61</td>
+          </tr>
+
+          <tr>
+            <td>07/08/2026</td>
+            <td>14.500</td>
+            <td>20,00</td>
+            <td><span class="ponto ponto-vermelho"></span>Dentro da meta</td>
+            <td class="variacao-vermelha">-4,61</td>
+          </tr>
+
+          <tr>
+            <td>08/08/2026</td>
+            <td>14.500</td>
+            <td>20,00</td>
+            <td><span class="ponto ponto-verde"></span>Dentro da meta</td>
+            <td class="variacao-verde">-4,61</td>
+          </tr>
+
+          <tr>
+            <td>09/08/2026</td>
+            <td>14.500</td>
+            <td>20,00</td>
+            <td><span class="ponto ponto-amarelo"></span>Dentro da meta</td>
+            <td class="variacao-amarela">-4,61</td>
+          </tr>
+
+          <tr>
+            <td>10/08/2026</td>
+            <td>14.500</td>
+            <td>20,00</td>
+            <td><span class="ponto ponto-amarelo"></span>Dentro da meta</td>
+            <td class="variacao-amarela">-4,61</td>
+          </tr>
+
+          <tr>
+            <td>11/08/2026</td>
+            <td>14.500</td>
+            <td>20,00</td>
+            <td><span class="ponto ponto-verde"></span>Dentro da meta</td>
+            <td class="variacao-verde">-4,61</td>
+          </tr>
+
+          <tr>
+            <td>12/08/2026</td>
+            <td>14.500</td>
+            <td>20,00</td>
+            <td><span class="ponto ponto-vermelho"></span>Dentro da meta</td>
+            <td class="variacao-vermelha">-4,61</td>
+          </tr>
+
+        </tbody>
+
+        <tfoot>
+          <tr>
+            <th>Total do mês</th>
+            <th>128.000</th>
+            <th>590,00</th>
+            <th>Dentro da média</th>
+            <th>-3,30</th>
+          </tr>
+        </tfoot>
+
+      </table>
+
+    </section>
+
+  </main>
+
+  <script>
+    fetch("navbar.html")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Não foi possível carregar a navbar.");
+        }
+
+        return response.text();
+      })
+      .then(html => {
+
+        const parser = new DOMParser();
+        const documento = parser.parseFromString(html, "text/html");
+
+        const container = document.getElementById("navbar-container");
+
+        Array.from(documento.body.children).forEach(elemento => {
+          if (elemento.tagName !== "SCRIPT") {
+            container.appendChild(document.importNode(elemento, true));
+          }
+        });
+
+        documento.querySelectorAll("script").forEach(scriptOriginal => {
+
+          const novoScript = document.createElement("script");
+
+          if (scriptOriginal.src) {
+            novoScript.src = scriptOriginal.src;
+          } else {
+            novoScript.textContent = scriptOriginal.textContent;
+          }
+
+          document.body.appendChild(novoScript);
+        });
+
+      })
+      .catch(erro => {
+        console.error(erro);
+      });
+
+    function imprimirRelatorio() {
+      window.print();
+    }
+
+    function abrirMeses() {
+      const lista = document.querySelector(".lista-meses");
+      const botao = document.querySelector(".acao-mes");
+
+      const estaAberta = !lista.hidden;
+
+      lista.hidden = estaAberta;
+
+      botao.setAttribute(
+        "aria-expanded",
+        String(!estaAberta)
+      );
+    }
+
+    function selecionarMes(mes) {
+      document.getElementById("mesSelecionado").textContent = mes;
+
+      document.querySelector(".lista-meses").hidden = true;
+
+      document
+        .querySelector(".acao-mes")
+        .setAttribute("aria-expanded", "false");
+    }
+
+  </script>
+
+</body>
+</html>
