@@ -15,7 +15,6 @@ int id = 1;
 
 // Conexão esp e broker
 
-
 const char* WIFI_SSID = "Nicolle";
 const char* WIFI_PASSWORD = "Nicolle13";
 
@@ -37,13 +36,21 @@ void connectWiFi();
 void connectMQTT();
 void publishData();
 
+void desconnectWifi();
+void desconnectClient();
+
 void setup() {
   pinMode(SENSOR, INPUT);
   Serial.begin(115200);
+  client.setKeepAlive(100);
+  client.setServer(MQTT_SERVER, MQTT_PORT);
 
   connectWiFi();
   connectMQTT();
-
+  // //envio imediato de mensagens pequenas como JSONs de IoT
+  // espClient.setNoDelay(true);
+  desconnectWifi();
+  desconnectClient();
 }
 
 void loop() {
@@ -57,7 +64,14 @@ void loop() {
     Serial.print("Pulso: ");
     Serial.println(count);
 
+    connectWiFi();
+    connectMQTT();
     publishData();
+    desconnectWifi();
+    desconnectClient();
+    //Processa o ping do Keepalive (precisa rodar em todo ciclo)
+    client.loop();
+    delay(100);
 }
 
 estadoAnterior = leituraHidrometro;
@@ -87,13 +101,17 @@ void connectWiFi() {
   }
   Serial.println("Connected to WiFi network");
   Serial.println("-------------"); 
+
+  // Força o rádio a ficar 100% ativo sem dormir
+  //WiFi.setSleep(false);
 }
 
 
 void publishData() {
-  
+
+
   DynamicJsonDocument doc(200);
-  doc["data"]["id"] = id;
+  doc["data"]["ID"] = id;
   doc["data"]["Pulsos"] = count;
 
   String payload;
@@ -101,10 +119,14 @@ void publishData() {
   payload.toCharArray(attributes, 200);
   Serial.println(payload);
 
-  if (client.connected()) {
+  if (client.connected() && count % 10 == 0) {
       client.publish(MQTT_TOPIC, attributes);
+      Serial.println("****PULSO ENVIADA******");
     }
+
+  
 }
+
 
 void call_pub() {
   if (!client.connected()) {
@@ -120,4 +142,13 @@ void call_pub() {
   client.loop();
   publishData();
   Serial.println("-------------");    
+}
+
+
+void desconnectWifi (){
+    WiFi.disconnect();
+}
+
+void desconnectClient(){
+  client.disconnect();
 }
