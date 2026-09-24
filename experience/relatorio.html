@@ -186,15 +186,6 @@
 
     </section>
 
-    <button
-      class="botao-rolagem"
-      type="button"
-      aria-label="Ir para o final do relatório"
-      onclick="irParaOTotal()"
-    >
-      <span class="icone-seta" aria-hidden="true"></span>
-    </button>
-
   </main>
 
   <script>
@@ -265,14 +256,6 @@
         .setAttribute("aria-expanded", "false");
     }
 
-    function irParaOTotal() {
-      document
-        .querySelector(".tabela-consumo tfoot")
-        .scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
-    }
   </script>
 
 </body>
