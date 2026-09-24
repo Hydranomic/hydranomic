@@ -1,3 +1,11 @@
+############################################
+
+# CÓDIGO FINALIZADO 1.0 - 24/09/2026 #
+# FALTANDO INTEGRAÇÃO WEGNOLOGY E FRONT-END #
+
+############################################
+
+
 import json # Biblioteca utilizada para leitura de arquivos JSON.
 import pandas as pd # Transforma o JSON bruto em tabelas organizadas.
 from sklearn.ensemble import RandomForestRegressor # Modelo de ML Regressivo, utilizado para as previsões.
