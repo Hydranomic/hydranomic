@@ -93,11 +93,3 @@ print(f"Unidade Consumidora: {ultima_linha['unidade_consumidora']}")
 print(f"Consumo previsto: {previsao_m3:.2f} m³")
 print(f"Tarifa aplicada: R$ {tarifa_atual:.2f} / m³")
 print(f"Valor total estimado: R$ {valor_conta:,.2f}")
-
-
-
-
-
-
-
-
