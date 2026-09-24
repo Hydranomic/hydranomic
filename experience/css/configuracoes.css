@@ -1,0 +1,162 @@
+
+@import url("global.css");
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: #000;
+    font-family: var(--font-family);
+    -webkit-font-smoothing: antialiased;
+    padding: 35px 50px;
+}
+
+/* TÍTULO DA PÁGINA */
+
+body > h1 {
+    margin: 0;
+    color: var(--secondary-color);
+    font-size: 26px;
+    font-weight: 700;
+}
+
+body > h2 {
+    margin: 8px 0 30px;
+    color: #555;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* ÁREAS DE CONFIGURAÇÃO */
+
+section {
+    width: 100%;
+    max-width: 850px;
+    margin-bottom: 20px;
+    padding: 24px 28px;
+
+    background-color: #fff;
+    border: 1px solid #dce7f0;
+    border-radius: 12px;
+
+    box-shadow: 0 2px 8px rgba(32, 89, 136, 0.08);
+}
+
+/* TÍTULO PRINCIPAL DOS CARDS */
+
+section > h1:first-child {
+    margin: 0 0 22px;
+    color: var(--secondary-color);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+/* SUBTÍTULOS */
+
+section > h1:not(:first-child) {
+    margin: 18px 0 6px;
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+section h3 {
+    margin: 0 0 14px;
+    color: #777;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/* CHECKBOX */
+
+input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    margin: 0 0 8px;
+
+    cursor: pointer;
+    accent-color: var(--secondary-color);
+}
+
+/* RADIO BUTTON */
+
+input[type="radio"] {
+    width: 15px;
+    height: 15px;
+    margin: 5px 6px 8px 0;
+
+    cursor: pointer;
+    accent-color: var(--secondary-color);
+}
+
+label {
+    color: #555;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* SELECT DE IDIOMA */
+
+select {
+    width: 100%;
+    max-width: 300px;
+    height: 38px;
+
+    margin-top: 4px;
+    padding: 0 12px;
+
+    border: 1px solid #c9d9e6;
+    border-radius: 7px;
+
+    background-color: #fff;
+    color: #444;
+
+    font-family: var(--font-family);
+    font-size: 13px;
+
+    outline: none;
+    cursor: pointer;
+}
+
+select:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 2px rgba(32, 89, 136, 0.1);
+}
+
+/* ESPAÇAMENTO ENTRE OPÇÕES */
+
+.area-configuracoes-aparencia label {
+    margin-right: 15px;
+}
+
+.opcao-configuracao { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 16px 0; border-bottom: 1px solid #e1e7ec; } /* REMOVE A LINHA DA ÚLTIMA OPÇÃO */ .opcao-configuracao:last-child { border-bottom: none; } /* TEXTO DA OPÇÃO */ .opcao-configuracao > div { flex: 1; } .opcao-configuracao h1 { margin: 0 0 5px; color: #333; font-size: 14px; font-weight: 600; } .opcao-configuracao h3 { margin: 0; color: #777; font-size: 12px; font-weight: 400; } /* CHECKBOX */ .opcao-configuracao input[type="checkbox"] { flex-shrink: 0; width: 18px; height: 18px; margin: 0; cursor: pointer; accent-color: var(--secondary-color); }
+
+
+/* TÍTULO PRINCIPAL DA SEÇÃO */
+
+section > h1:first-child {
+    margin: 0;
+    padding-bottom: 16px;
+
+    color: var(--secondary-color);
+    font-size: 17px;
+    font-weight: 700;
+
+    border-bottom: 1px solid #e1e7ec;
+}
+
+/* PRIMEIRA OPÇÃO */
+
+section > h1:first-child + .opcao-configuracao {
+    padding-top: 16px;
+}
+
