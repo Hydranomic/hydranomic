@@ -22,3 +22,11 @@ ano_inicial = dataframe["ano"].min()
 mes_inicial = dataframe.loc[dataframe["ano"] == ano_inicial, "mes"].min()
 # Salva o mes mais antigo, dentro do range do ano mais antigo.
 
+# Calcula quantos meses se passaram desde o período inicial
+# É necessário para configuração da lógica do modelo.
+dataframe["tempo_iniciofinal"] = (dataframe["ano"] - ano_inicial) * 12 + (dataframe["mes"] - mes_inicial)
+
+
+
+
+
