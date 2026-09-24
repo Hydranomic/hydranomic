@@ -17,4 +17,10 @@ dataframe["mes"] = dataframe["id"].str.split("-").str[1].astype(int)
 dataframe["ano"] = dataframe["id"].str.split("-").str[0].astype(int)
 # A extração do ano segue a mesma lógica, apenas mudando o vetor.
 
+# Salva o ano mais antigo da base de dados.
+ano_inicial = dataframe["ano"].min()
+mes_inicial = dataframe.loc[dataframe["ano"] == ano_inicial, "mes"].min()
+
+print(ano_inicial)
+print(mes_inicial)
 
