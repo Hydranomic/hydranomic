@@ -1716,3 +1716,151 @@ button-adicionar-funcionario:hover {
 #btn-criar-meta:hover {
     opacity: 0.9;
 }
+
+
+
+
+
+
+
+/* =========================================
+   MODAL - ADICIONAR CONTA
+========================================= */
+
+.adicionar-conta {
+    display: none;
+
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 634px;
+    height: 600px;
+
+    padding: 60px 72px;
+
+    background-color: #fff;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 4px 18px rgba(0, 0, 0, 0.18);
+
+    z-index: 1100;
+
+    font-family: var(--font-family);
+}
+
+
+/* =========================================
+   TÍTULO
+========================================= */
+
+.adicionar-conta > h1 {
+    margin: 0 0 25px;
+
+    color: var(--secondary-color);
+
+    font-family: var(--font-family);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   ÁREA DE UPLOAD
+========================================= */
+
+.adicionar-conta > .area-upload {
+    position: relative;
+
+    width: 100%;
+    height: 343px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #e5f0fa;
+
+    border-radius: 17px;
+
+    color: var(--secondary-color);
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   ÍCONE
+========================================= */
+
+.area-upload > i {
+    margin-bottom: 20px;
+
+    color: var(--secondary-color);
+
+    font-size: 58px;
+}
+
+
+/* =========================================
+   TEXTO
+========================================= */
+
+.area-upload > h3 {
+    margin: 0;
+
+    color: var(--secondary-color);
+
+    font-family: var(--font-family);
+    font-size: 20px;
+    font-weight: 400;
+
+    text-align: center;
+}
+
+
+/* Texto "ou procure arquivos" */
+
+.area-upload > h3::after {
+    content: "ou procure arquivos";
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--secondary-color);
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   INPUT DE ARQUIVO
+========================================= */
+
+.area-upload > input[type="file"] {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+
+    cursor: pointer;
+}
+
+/* Centraliza somente o Cancelar da modal de adicionar conta */
+.adicionar-conta #btn-cancelar-meta {
+    display: block;
+    margin: 38px auto 0;
+}

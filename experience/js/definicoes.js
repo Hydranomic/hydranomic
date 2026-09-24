@@ -91,40 +91,76 @@ botaoFecharAdicionarFuncionario.addEventListener("click", function () {
 
 
 
-
-
 // =========================================
-// MODAL - HISTÓRICO DE CONTAS
+// MODAL HISTÓRICO DE CONTAS
 // =========================================
 
 const btnHistoricoContas = document.querySelector(".historico-contas");
 const modalHistoricoContas = document.querySelector("#modal-historico-contas");
-const btnCancelarMeta = document.querySelector("#btn-cancelar-meta");
+
+
+// Botão Cancelar da modal de histórico
+const btnCancelarHistorico = modalHistoricoContas.querySelector("#btn-cancelar-meta");
+
+
+// Botão Adicionar conta
+const btnAdicionarConta = modalHistoricoContas.querySelector("#btn-criar-meta");
 
 
 // =========================================
-// ABRIR MODAL
+// ABRIR MODAL HISTÓRICO
 // =========================================
 
 btnHistoricoContas.addEventListener("click", function () {
+
     modalHistoricoContas.style.display = "flex";
+
 });
 
 
-// Fechar a modal ao clicar em Cancelar
-btnCancelarMeta.addEventListener("click", function () {
+// =========================================
+// FECHAR MODAL HISTÓRICO
+// =========================================
+
+btnCancelarHistorico.addEventListener("click", function () {
+
     modalHistoricoContas.style.display = "none";
+
 });
 
 
 // =========================================
-// FECHAR CLICANDO FORA DA MODAL
+// MODAL ADICIONAR CONTA
 // =========================================
 
-modalHistoricoContas.addEventListener("click", function (event) {
+const modalAdicionarConta = document.querySelector("#modal-adicionar-conta");
 
-    if (event.target === modalHistoricoContas) {
-        modalHistoricoContas.style.display = "none";
-    }
+
+// Botão Cancelar da modal de adicionar conta
+const btnCancelarAdicionar = modalAdicionarConta.querySelector("#btn-cancelar-meta");
+
+
+// =========================================
+// ABRIR MODAL ADICIONAR CONTA
+// =========================================
+
+btnAdicionarConta.addEventListener("click", function () {
+
+    // Fecha a modal de histórico
+    modalHistoricoContas.style.display = "none";
+
+    // Abre a modal de adicionar conta
+    modalAdicionarConta.style.display = "block";
+
+});
+
+
+// =========================================
+// FECHAR MODAL ADICIONAR CONTA
+// =========================================
+
+btnCancelarAdicionar.addEventListener("click", function () {
+
+    modalAdicionarConta.style.display = "none";
 
 });
