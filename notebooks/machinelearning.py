@@ -13,6 +13,8 @@ dataframe = dataframe.sort_values(by=["unidade_consumidora", "id"]).reset_index(
 
 # De acordo com as limitações matemáticas do modelo, é necessário extrair as datas para evitar o ValueError.
 # Fluxo - Separa o Mês, procura na parte ID, procura o espaço -, pega o item do vetor 1, tranforma o str em INT.
-dataframe["ano"] = dataframe["id"].str.split("-").str[0].astype(int)
 dataframe["mes"] = dataframe["id"].str.split("-").str[1].astype(int)
+dataframe["ano"] = dataframe["id"].str.split("-").str[0].astype(int)
+# A extração do ano segue a mesma lógica, apenas mudando o vetor.
+
 
