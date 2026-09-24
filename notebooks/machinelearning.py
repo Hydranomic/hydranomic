@@ -44,7 +44,6 @@ saida = "consumo_m3"
 x = dataframe_treino[entrada]
 y = dataframe_treino[saida]
 
-
 # Treina o modelo regressivo de FLOREST.
 modelo = RandomForestRegressor(n_estimators=250, random_state=45)
 modelo.fit( x, y )
@@ -70,7 +69,12 @@ else:
 proximo_passo = ultimo_passo + 1
 
 # O modelo recebe os dados já pré organizados para realizar o treinamento do modelo.
-previsao_m3 = modelo.predict([[proximo_mes, proximo_passo, ultimo_consumo]])[0]
+dados_previsao = pd.DataFrame(
+    [[proximo_mes, proximo_passo, ultimo_consumo]],
+    columns=entrada,
+)
+
+previsao_m3 = modelo.predict(dados_previsao)[0]
 
 # Conta básica para calcular o provável valor mensal da tarifa
 valor_conta = previsao_m3 * tarifa_atual
