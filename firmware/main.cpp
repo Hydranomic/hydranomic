@@ -103,7 +103,7 @@ void connectWiFi() {
   Serial.println("-------------"); 
 
   // Força o rádio a ficar 100% ativo sem dormir
-  WiFi.setSleep(false);
+  //WiFi.setSleep(false);
 }
 
 
