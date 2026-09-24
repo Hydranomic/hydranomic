@@ -22,9 +22,14 @@ ano_inicial = dataframe["ano"].min()
 mes_inicial = dataframe.loc[dataframe["ano"] == ano_inicial, "mes"].min()
 # Salva o mes mais antigo, dentro do range do ano mais antigo.
 
-# Calcula quantos meses se passaram desde o período inicial
+# Calcula quantos meses se passaram desde o período inicial.
 # É necessário para configuração da lógica do modelo.
 dataframe["tempo_iniciofinal"] = (dataframe["ano"] - ano_inicial) * 12 + (dataframe["mes"] - mes_inicial)
+
+# Guarda em memória consumo do mês anterior agrupado por unidade consumidora.
+# Serve para o modelo ter base de comparação.
+dataframe["memoria_consumo"] = dataframe.groupby("unidade_consumidora")["consumo_m3"].shift(1)
+
 
 
 
