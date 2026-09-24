@@ -8,3 +8,7 @@ with open("hydranomic/workflows/conta.json", "r", encoding="utf-8") as info_cont
 # Converte o JSON bruto no DataFrame do Pandas.
 dataframe = pd.DataFrame(dados)
 
+# Ordenar cronologicamente e formatar de acordo com a DATA e UNIDADE_CONSUMIDORA.
+dataframe = dataframe.sort_values(by=["unidade_consumidora", "id"]).reset_index(drop=True)
+
+print(dataframe)
