@@ -35,6 +35,17 @@ dataframe_treino = dataframe.dropna(subset=["memoria_consumo"]).copy()
 
 
 
+# Define as variáveis de ENTRADA (X) E SAÍDA (Y)
+entrada = ["mes", "tempo_iniciofinal", "memoria_consumo"]
+saida = "consumo_m3"
+
+x = dataframe_treino["entrada"]
+y = dataframe_treino["saida"]
+
+
+
+
+
 
 
 
