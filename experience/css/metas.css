@@ -1,5 +1,5 @@
 /* ========================================================
-   Reset básico e Estilos da Página
+   Reset básico e Estilos Gerais
 ======================================================== */
 * {
   margin: 0;
@@ -9,18 +9,18 @@
 
 body {
   min-height: 100vh;
-  background: #e6eff8;
+  background: #edf3f8;
   font-family: Arial, Helvetica, sans-serif;
   color: #1e293b;
 }
 
 /* ========================================================
-   Container Principal
+   Container da Página de Metas
 ======================================================== */
 .pagina-metas {
-  max-width: 1280px;
-  margin: 28px auto 40px auto;
-  padding: 0 4%;
+  max-width: 1300px;
+  margin: 18px auto 30px auto;
+  padding: 0 3%;
 }
 
 /* Cabeçalho */
@@ -29,59 +29,70 @@ body {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 22px;
+  gap: 12px;
+  margin-bottom: 14px;
 }
 
 .titulo-pagina {
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 700;
-  color: #164366;
+  color: #184e77;
 }
 
 .subtitulo-pagina {
-  font-size: 14px;
-  color: #5b768e;
-  margin-top: 4px;
+  font-size: 13px;
+  color: #5e7a92;
+  margin-top: 2px;
 }
 
 .botao-mes-atual {
   background: #ffffff;
-  border: 1px solid #cbd5e1;
-  padding: 8px 16px;
+  border: 1px solid #d4e2ed;
+  padding: 7px 16px;
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  color: #1e4566;
+  color: #184e77;
   display: flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
 }
 
 /* ========================================================
    Carrossel de Meses
 ======================================================== */
+/* ========================================================
+   Carrossel de Meses (Aumentado e com mais destaque)
+======================================================== */
 .carrossel-meses {
   background: #ffffff;
-  border-radius: 12px;
-  padding: 6px 10px;
+  border-radius: 14px;
+  padding: 10px 14px;
+  min-height: 84px;                  /* Altura maior e espaçosa */
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-  margin-bottom: 24px;
+  margin-bottom: 22px;
   overflow-x: auto;
 }
 
 .seta-carrossel {
   background: transparent;
   border: none;
-  font-size: 16px;
+  font-size: 20px;                   /* Setas maiores */
   color: #64748b;
   cursor: pointer;
-  padding: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.seta-carrossel:hover {
+  background: #f1f5f9;
+  color: #184e77;
 }
 
 .lista-meses {
@@ -95,10 +106,17 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 14px;
+  justify-content: center;
+  padding: 12px 20px;                /* Padding interno maior */
   border-radius: 8px;
-  min-width: 95px;
-  border-right: 1px solid #f1f5f9;
+  min-width: 110px;                  /* Mais largo e confortável */
+  border-right: 1px solid #edf2f7;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.item-mes:hover:not(.mes-ativo) {
+  background: #f8fafc;
 }
 
 .item-mes:last-child {
@@ -106,94 +124,113 @@ body {
 }
 
 .nome-mes {
-  font-size: 13px;
+  font-size: 14px;                   /* Texto do mês maior */
   font-weight: 700;
-  color: #1e4566;
+  color: #184e77;
 }
 
 .valor-mes {
-  font-size: 12px;
+  font-size: 13px;                   /* Valor de litros maior */
   color: #64748b;
   display: flex;
   align-items: center;
-  gap: 5px;
-  margin-top: 4px;
+  gap: 6px;
+  margin-top: 6px;                   /* Mais respiro entre o mês e o valor */
 }
 
 .ponto-vermelho {
-  font-size: 7px;
+  font-size: 8px;
   color: #dc2626;
 }
 
 .ponto-amarelo {
-  font-size: 7px;
+  font-size: 8px;
   color: #f59e0b;
 }
 
 .icone-verde {
-  font-size: 11px;
+  font-size: 13px;
   color: #16a34a;
 }
 
-/* Mês Ativo (Azul Escuro como no Figma) */
+/* Mês Ativo (Ago 2026 - Bloco azul maior e mais imponente) */
 .mes-ativo {
-  background: #205988;
+  background: #1d5784;
   color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(32, 89, 136, 0.3);
+  border-radius: 10px;
+  padding: 14px 24px;
+  box-shadow: 0 6px 18px rgba(29, 87, 132, 0.4);
+  border-right: none;
 }
 
-.mes-ativo .nome-mes,
+.mes-ativo .nome-mes {
+  color: #ffffff;
+  font-size: 14px;
+}
+
 .mes-ativo .valor-mes {
   color: #ffffff;
+  font-size: 13px;
+}
+
+.mes-ativo .valor-mes i {
+  font-size: 14px;
 }
 
 /* ========================================================
-   Grade Principal
+   Grade Principal (Colunas Proporcionais)
 ======================================================== */
 .grade-principal-metas {
   display: grid;
-  grid-template-columns: 1fr 1.25fr;
-  gap: 24px;
-  margin-bottom: 24px;
+  grid-template-columns: 1fr 1.18fr;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: stretch;
 }
 
+.coluna-esquerda,
+.coluna-direita {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Cartões */
 .cartao-metas {
   background: #ffffff;
   border-radius: 14px;
-  padding: 22px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
-  margin-bottom: 24px;
-}
-
-.cartao-metas:last-child {
-  margin-bottom: 0;
+  padding: 16px 22px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
 }
 
 .titulo-cartao-icone {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
 .icone-titulo {
-  font-size: 20px;
-  color: #205988;
+  font-size: 18px;
+  color: #184e77;
 }
 
 .titulo-cartao-icone h2 {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
-  color: #164366;
+  color: #184e77;
 }
 
-/* Conteúdo das Metas (Lado a Lado com o Arco) */
+/* Conteúdo Alinhado e Proporcional nos Cards da Esquerda */
 .conteudo-meta-consumo {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 18px;
+  padding: 4px 6px 12px 6px;
 }
 
 .coluna-dado {
@@ -208,19 +245,19 @@ body {
 
 .rotulo-dado {
   font-size: 12px;
-  color: #64748b;
+  color: #6b8499;
 }
 
 .valor-grande {
-  font-size: 20px;
+  font-size: 21px;
   font-weight: 700;
-  color: #1e4566;
+  color: #184e77;
 }
 
 /* Medidor em Arco (78%) */
 .medidor-arco {
   position: relative;
-  width: 140px;
+  width: 130px;
   height: 80px;
   display: flex;
   align-items: center;
@@ -234,7 +271,7 @@ body {
 
 .texto-arco {
   position: absolute;
-  bottom: 0;
+  bottom: 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -243,66 +280,74 @@ body {
 .porcentagem-arco {
   font-size: 22px;
   font-weight: 800;
-  color: #164366;
+  color: #184e77;
 }
 
 .subtexto-arco {
   font-size: 10px;
-  color: #64748b;
+  color: #6b8499;
+  margin-top: -2px;
 }
 
-/* Anel Completo (80%) */
-.anel-progresso {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+/* Medidor Anel Completo (80%) */
+.medidor-anel {
+  position: relative;
+  width: 90px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.progresso-80 {
-  background: conic-gradient(#205988 80%, #e2e8f0 0);
+.svg-anel {
+  width: 100%;
+  height: 100%;
 }
 
-.miolo-anel {
-  width: 82px;
-  height: 82px;
-  background: #ffffff;
-  border-radius: 50%;
+.texto-anel {
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 .porcentagem-anel {
-  font-size: 20px;
+  font-size: 21px;
   font-weight: 800;
-  color: #164366;
+  color: #184e77;
 }
 
 .subtexto-anel {
   font-size: 10px;
-  color: #64748b;
+  color: #6b8499;
 }
 
-/* Faixa Informativa Azul Suave */
+/* Faixa Informativa Azul Inferior */
 .faixa-destaque-azul {
-  background: #edf5fb;
-  border-radius: 8px;
-  padding: 12px 18px;
+  background: #eaf3fa;
+  border-radius: 9px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 13px;
-  color: #334155;
+  gap: 10px;
+  font-size: 12px;
+  color: #526e85;
 }
 
-.icone-ondas,
-.icone-cifrao {
-  font-size: 20px;
-  color: #205988;
+.faixa-destaque-azul strong {
+  color: #184e77;
+  font-weight: 700;
+}
+
+.icone-ondas {
+  font-size: 18px;
+  color: #184e77;
+}
+
+.icone-cifrao-texto {
+  font-size: 16px;
+  font-weight: 700;
+  color: #184e77;
 }
 
 /* ========================================================
@@ -313,14 +358,15 @@ body {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 8px;
+  margin-bottom: 4px;
 }
 
 .legenda-grafico {
   display: flex;
   align-items: center;
-  gap: 16px;
-  font-size: 12px;
+  gap: 14px;
+  font-size: 11px;
   color: #475569;
 }
 
@@ -333,7 +379,7 @@ body {
 .traco-real {
   width: 18px;
   height: 3px;
-  background: #1e4566;
+  background: #184e77;
   border-radius: 2px;
 }
 
@@ -343,102 +389,110 @@ body {
   border-top: 2px dashed #2563eb;
 }
 
-/* SVG do Gráfico */
 .area-grafico {
   width: 100%;
-  margin-top: 14px;
 }
 
 .svg-grafico {
   width: 100%;
-  height: auto;
+  max-height: 180px;
+  display: block;
 }
 
-.texto-eixo,
+.texto-eixo {
+  font-size: 9.5px;
+  fill: #64748b;
+  text-anchor: end;
+}
+
 .texto-mes-eixo {
-  font-size: 10px;
+  font-size: 9.5px;
   fill: #64748b;
   text-anchor: middle;
 }
 
 .mes-x-ativo {
   font-weight: 700;
-  fill: #1e4566;
+  fill: #184e77;
 }
 
 .rotulo-ponto {
-  font-size: 8px;
-  fill: #1e4566;
+  font-size: 7.5px;
+  fill: #184e77;
   text-anchor: middle;
   font-weight: 600;
 }
 
 .ponto-destaque {
   font-weight: 800;
-  fill: #205988;
+  fill: #184e77;
 }
 
 /* Previsão de IA */
 .grade-previsao-ia {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr;
-  gap: 18px;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: 16px;
   align-items: center;
 }
 
 .caixa-ia-destaque {
-  background: #f1f6fb;
-  border-radius: 10px;
-  padding: 14px;
+  background: #f0f6fa;
+  border-radius: 9px;
+  padding: 10px 14px;
 }
 
 .caixa-ia-destaque p {
-  font-size: 12px;
-  color: #475569;
-  line-height: 1.4;
+  font-size: 11px;
+  color: #4d687d;
+  line-height: 1.35;
 }
 
 .valor-queda {
   display: flex;
   align-items: center;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
-  color: #16a34a;
-  margin: 4px 0;
+  color: #22c55e;
+  margin: 2px 0;
+}
+
+.valor-queda i {
+  font-size: 22px;
 }
 
 .caixa-ia-destaque small {
-  font-size: 11px;
-  color: #64748b;
+  font-size: 10px;
+  color: #6b8499;
 }
 
 .bloco-previsao {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  border-left: 1px solid #e2e8f0;
+  gap: 3px;
+  border-left: 1px solid #e5edf4;
   padding-left: 16px;
 }
 
 .rotulo-ia {
   font-size: 11px;
-  color: #64748b;
+  color: #6b8499;
 }
 
 .valor-ia {
   font-size: 18px;
   font-weight: 700;
-  color: #164366;
+  color: #184e77;
 }
 
 .subtexto-ia {
-  font-size: 11px;
-  color: #94a3b8;
+  font-size: 10px;
+  color: #6b8499;
 }
 
 .barra-previsao-fundo {
   width: 100%;
-  height: 6px;
+  height: 5px;
   background: #e2e8f0;
   border-radius: 10px;
   margin-top: 6px;
@@ -447,70 +501,72 @@ body {
 
 .barra-previsao-preenchida {
   height: 100%;
-  background: #205988;
+  background: #184e77;
   border-radius: 10px;
 }
 
 /* ========================================================
-   Banner Inferior: Recomendações da IA
+   Banner Inferior: Recomendações e Dica da IA
 ======================================================== */
 .banner-recomendacao-ia {
   background: #ffffff;
   border-radius: 14px;
-  padding: 18px 24px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  padding: 14px 22px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 16px;
 }
 
 .lado-recomendacao {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
 .icone-robo-circulo {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: #edf5fb;
-  border: 1px solid #d0e3f4;
-  color: #205988;
+  background: #ffffff;
+  border: 2px solid #184e77;
+  color: #184e77;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: 20px;
+  flex-shrink: 0;
 }
 
 .textos-recomendacao {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 
 .rotulo-recomendacao {
-  font-size: 12px;
-  color: #64748b;
+  font-size: 11px;
+  color: #6b8499;
 }
 
 .titulo-recomendacao {
-  font-size: 17px;
-  color: #1e4566;
+  font-size: 16px;
+  font-weight: 700;
+  color: #184e77;
 }
 
 .descricao-recomendacao {
-  font-size: 12px;
-  color: #64748b;
+  font-size: 11px;
+  color: #6b8499;
 }
 
 /* Pílula com a Dica */
 .pilula-dica-ia {
-  background: #edf5fb;
-  border-radius: 10px;
-  padding: 12px 18px;
+  background: #eef6fc;
+  border-radius: 12px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -518,27 +574,28 @@ body {
 }
 
 .icone-lampada {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background: #ffffff;
-  color: #205988;
+  color: #184e77;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 15px;
   flex-shrink: 0;
 }
 
 .titulo-dica {
-  font-size: 12px;
-  color: #1e4566;
+  font-size: 11px;
+  font-weight: 700;
+  color: #184e77;
 }
 
 .descricao-dica {
-  font-size: 11px;
-  color: #475569;
-  line-height: 1.3;
+  font-size: 10.5px;
+  color: #526e85;
+  line-height: 1.25;
 }
 
 /* ========================================================
