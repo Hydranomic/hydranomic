@@ -75,6 +75,9 @@ else:
 
 proximo_passo = ultimo_passo + 1
 
+
+
+# Função de treinamento do modelo, para ser chamada em outro momento.
 def iniciar_ml():
     # O modelo recebe os dados já pré organizados para realizar o treinamento do modelo.
     dados_previsao = pd.DataFrame(
@@ -95,12 +98,3 @@ def iniciar_ml():
         "tarifa": tarifa_atual,
         "valor_conta": valor_conta,
     }
-
-# Teste para exibição do resultado final no terminal
-resultado = iniciar_ml()
-
-print(f"Previsão para o período: {resultado['ano']}-{resultado['mes']:02d}")
-print(f"Unidade Consumidora: {resultado['unidade_consumidora']}")
-print(f"Consumo previsto: {resultado['previsao_m3']:.2f} m³")
-print(f"Tarifa aplicada: R$ {resultado['tarifa']:.2f} / m³")
-print(f"Valor total estimado: R$ {resultado['valor_conta']:,.2f}")
