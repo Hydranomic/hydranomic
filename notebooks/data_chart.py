@@ -72,4 +72,8 @@ dados_formatados = {
     ],
 }
 
+# Aqui ele vai salvar todas as alterações no JSON
+
+with open(arquivo_saida, "w", encoding="utf-8") as arquivodesaida:
+    json.dump(dados_formatados, arquivodesaida, ensure_ascii=False, indent=2)
 
