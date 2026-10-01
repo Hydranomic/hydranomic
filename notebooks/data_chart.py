@@ -1,79 +1,49 @@
-# É utilizado para recuperar o ano atual proveniente do servidor.
 from datetime import datetime
 import json
 
-# Guarda o ano atual, para garantir a seleção necessária dos dados.
-verificar_data = datetime.now()
-ano_atual = verificar_data.year
-
-# Define os arquivos de entrada / saída.
 arquivo_entrada = "hydranomic/workflows/conta_povoada.json"
 arquivo_saida = "hydranomic/workflows/grafico_anual.json"
 
-# Abre e Armazena os dados dos JSON's.
-with open(arquivo_entrada, "r", encoding="utf-8") as dados:
-    data = json.load(dados)
+def gerar_dados_grafico(data, ano_referencia=None):
+    
+    if ano_referencia is None:
+        ano_referencia = datetime.now().year
 
-with open(arquivo_saida, "r", encoding="utf-8") as dados:
-    data_novo = json.load(dados)
+    consumo_mensal = {}
+    mes_atual = None
 
-# Armazena o consumo de cada mês
-consumo_mensal = {}
+    for registro in data:
+        registro_id = registro.get("id", "")
+        separar_partes = registro_id.split("-")
 
-# Lógica que garante que os dados armazenados serão do ano atual.
-for registro in data:
-    registro_id = registro.get("id", "")
-    separar_partes = registro.split("-")
-
-    if len(separar_partes) == 2:
+        if len(separar_partes) != 2:
+            continue
 
         try:
             ano_registro = int(separar_partes[0])
             mes_registro = int(separar_partes[1])
-
-            if ano_registro == ano_atual and 1 <= mes_registro <= 12:
-
-                consumo_mensal[mes_registro] = registro.get("consumo_m3")
-
         except ValueError:
             continue
 
-# Construção do JSON
+        if ano_registro == ano_referencia and 1 <= mes_registro <= 12:
+            consumo_mensal[mes_registro] = registro.get("consumo_m3")
+            mes_atual = mes_registro
 
-meses_tags = [
-    "Jan",
-    "Fev",
-    "Mar",
-    "Abr",
-    "Mai",
-    "Jun",
-    "Jul",
-    "Ago",
-    "Set",
-    "Out",
-    "Nov",
-    "Dez",
-]
+    meses_tags = [
+        "Jan", "Fev", "Mar", "Abr", "Mai", "Jun",
+        "Jul", "Ago", "Set", "Out", "Nov", "Dez",
+    ]
 
-# Aqui os dados já são formatados da maneira que idealizamos para nosso JSON.
-
-dados_formatados = {
-    "ano_referencia": ano_atual,
-    "mes_atual": mes_registro,
-    "unidade_medida": "m³",
-    "meses": [
-        {
-            "mes": m,
-            "rotulo": meses_tags[m - 1],
-            # Valor real se existir no ano atual, senão null para não quebrar a escala
-            "consumo_m3": consumo_mensal.get(m, None),
-        }
-        for m in range(1, 13)
-    ],
-}
-
-# Aqui ele vai salvar todas as alterações no JSON
-
-with open(arquivo_saida, "w", encoding="utf-8") as arquivodesaida:
-    json.dump(dados_formatados, arquivodesaida, ensure_ascii=False, indent=2)
-
+    return {
+        "ano_referencia": ano_referencia,
+        "mes_atual": mes_atual,
+        "unidade_medida": "m³",
+        "meses": [
+            {
+                "mes": mes,
+                "rotulo": meses_tags[mes - 1],
+                "consumo_m3": consumo_mensal.get(mes),
+            }
+            for mes in range(1, 13)
+        ],
+    }
