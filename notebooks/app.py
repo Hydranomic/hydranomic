@@ -9,6 +9,10 @@ match estado_atual:
 
         iniciar_ml()
 
+        estado_atual = 0
+
     case 2:
-        
+
         gerar_dados_grafico()
+
+        estado_atual = 0
