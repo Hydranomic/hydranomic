@@ -59,14 +59,14 @@ meses_tags = [
 
 dados_formatados = {
     "ano_referencia": ano_atual,
-    "mes_atual": mes_atual,
+    "mes_atual": mes_registro,
     "unidade_medida": "m³",
     "meses": [
         {
             "mes": m,
-            "rotulo": meses_labels[m - 1],
+            "rotulo": meses_tags[m - 1],
             # Valor real se existir no ano atual, senão null para não quebrar a escala
-            "consumo_m3": consumo_por_mes.get(m, None),
+            "consumo_m3": consumo_mensal.get(m, None),
         }
         for m in range(1, 13)
     ],
