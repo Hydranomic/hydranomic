@@ -38,4 +38,21 @@ for registro in data:
         except ValueError:
             continue
 
+# Construção do JSON
+
+meses_tags = [
+    "Jan",
+    "Fev",
+    "Mar",
+    "Abr",
+    "Mai",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Set",
+    "Out",
+    "Nov",
+    "Dez",
+]
+
 
