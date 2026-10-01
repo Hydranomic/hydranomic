@@ -55,4 +55,21 @@ meses_tags = [
     "Dez",
 ]
 
+# Aqui os dados já são formatados da maneira que idealizamos para nosso JSON.
+
+dados_formatados = {
+    "ano_referencia": ano_atual,
+    "mes_atual": mes_atual,
+    "unidade_medida": "m³",
+    "meses": [
+        {
+            "mes": m,
+            "rotulo": meses_labels[m - 1],
+            # Valor real se existir no ano atual, senão null para não quebrar a escala
+            "consumo_m3": consumo_por_mes.get(m, None),
+        }
+        for m in range(1, 13)
+    ],
+}
+
 
