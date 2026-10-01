@@ -1,3 +1,10 @@
+############################################
+
+# CÓDIGO FINALIZADO 1.0 - 01/10/2026 #
+# FALTANDO INTEGRAÇÃO WEGNOLOGY E FRONT-END #
+
+############################################
+
 from datetime import datetime
 import json
 
