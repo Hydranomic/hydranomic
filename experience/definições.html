@@ -9,7 +9,8 @@
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <link rel="stylesheet" href="css/definicoes.css">
-
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/navbar.css">
     <script src="js/definicoes.js" defer></script>
 
     <title>Definições</title>
@@ -17,10 +18,12 @@
 
 <body>
 
+    <div id="navbar-container"></div>
+
     <!-- =========================================
          TÍTULO DA PÁGINA
          ========================================= -->
-
+<main>
     <h1>Definições</h1>
 
     <h2>Gerencie metas, relatórios e funcionários</h2>
@@ -419,8 +422,46 @@
 </section>
 
 
+<script>
+        fetch("navbar.html")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Não foi possível carregar a navbar.");
+                }
 
+                return response.text();
+            })
+            .then(html => {
+                const parser = new DOMParser();
+                const documento = parser.parseFromString(html, "text/html");
 
+                const container = document.getElementById("navbar-container");
+
+                Array.from(documento.body.children).forEach(elemento => {
+                    if (elemento.tagName !== "SCRIPT") {
+                        container.appendChild(
+                            document.importNode(elemento, true)
+                        );
+                    }
+                });
+
+                documento.querySelectorAll("script").forEach(scriptOriginal => {
+                    const novoScript = document.createElement("script");
+
+                    if (scriptOriginal.src) {
+                        novoScript.src = scriptOriginal.src;
+                    } else {
+                        novoScript.textContent = scriptOriginal.textContent;
+                    }
+
+                    document.body.appendChild(novoScript);
+                });
+            })
+            .catch(erro => {
+                console.error(erro);
+            });
+    </script>
+</main>
 
 </body>
 

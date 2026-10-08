@@ -4,6 +4,10 @@
 
 @media (min-width: 768px) and (max-width: 1199px) {
 
+    /* =====================================================
+  Index
+   ===================================================== */
+
     main {
         display: grid;
         min-height: calc(100vh - 80px);
@@ -91,6 +95,190 @@
     .avatar-nav {
         font-size: 24px;
     }
+
+    /* =====================================================
+   DEFINIÇÕES - TABLET
+   ===================================================== */
+
+main:has(.area-metas-financeiras) {
+
+    display: grid;
+
+    min-height: calc(100vh - 80px);
+
+    padding: 30px 4% 35px;
+
+    grid-template-columns: repeat(12, 1fr);
+
+    grid-template-rows:
+        auto
+        auto
+        260px
+        180px;
+
+    column-gap: 14px;
+    row-gap: 15px;
+
+    align-content: start;
+}
+
+
+/* =====================================================
+   TÍTULO
+   ===================================================== */
+
+main:has(.area-metas-financeiras) > h1 {
+    grid-column: 1 / 13;
+    grid-row: 1;
+
+    font-size: 23px;
+
+    margin: 0;
+}
+
+
+main:has(.area-metas-financeiras) > h2 {
+    grid-column: 1 / 13;
+    grid-row: 2;
+
+    font-size: 14px;
+
+    margin: 2px 0 0;
+}
+
+
+/* =====================================================
+   METAS
+   ===================================================== */
+
+main:has(.area-metas-financeiras) .area-metas-financeiras {
+
+    grid-column: 1 / 6;
+    grid-row: 3;
+
+    width: 100%;
+    height: 260px;
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   STATUS DA EQUIPE
+   ===================================================== */
+
+main:has(.area-metas-financeiras) .status-equipe {
+
+    grid-column: 6 / 13;
+    grid-row: 3;
+
+    width: 100%;
+    height: 260px;
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   CARDS DE BAIXO
+   ===================================================== */
+
+main:has(.area-metas-financeiras) .area-relatorios {
+    grid-column: 1 / 13;
+    grid-row: 4;
+
+    width: 100%;
+    height: 180px;
+    min-height: 180px;
+
+    margin: 0;
+
+    padding: 28px 30px 15px;
+
+    box-sizing: border-box;
+}
+
+button-ver-relatorio {
+    margin-top: 85px;
+}
+
+
+
+main:has(.area-metas-financeiras) .area-gerenciamento {
+    grid-column: 1 / 13;
+    grid-row: 5;
+
+    width: 100%;
+    min-height: 180px;
+
+    margin: 0;
+
+
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   CONTEÚDO DOS CARDS
+   ===================================================== */
+
+main:has(.area-metas-financeiras) 
+.area-metas-financeiras > h1,
+main:has(.area-metas-financeiras) 
+.status-equipe > h1 {
+
+    font-size: 15px;
+}
+
+
+/* =====================================================
+   ÍCONE DO STATUS
+   ===================================================== */
+
+main:has(.area-metas-financeiras)
+.status-equipe > i {
+
+    transform: translateY(-10px);
+}
+
+
+/* =====================================================
+   MODAIS
+   ===================================================== */
+
+main:has(.area-metas-financeiras) .modal-conteudo {
+    max-width: 90%;
+}
+
+main:has(.area-metas-financeiras) .modal-conteudo-equipe {
+    width: 90%;
+    max-width: 527px;
+}
+
+main:has(.area-metas-financeiras) .modal-conteudo-adicionar-funcionario {
+    width: 90%;
+    max-width: 460px;
+}
+
+main:has(.area-metas-financeiras) .modal-conteudo-historico-contas {
+    width: 90%;
+    max-width: 622px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+main:has(.area-metas-financeiras) .adicionar-conta {
+    width: 90%;
+    max-width: 634px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
 }
 
 
@@ -266,6 +454,87 @@
     button-ver-relatorio {
         bottom: 15px;
     }
+
+
+
+
+    /* =================================================
+       CARDS PRINCIPAIS
+       ================================================= */
+
+    .area-metas-financeiras,
+    .status-equipe {
+        display: block;
+        width: 100%;
+        height: 190px;
+
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .status-equipe i {
+    transform: translateY(-40px);
+}
+
+
+    /* =================================================
+       RELATÓRIOS
+       ================================================= */
+
+    .area-relatorios {
+        width: 100%;
+        min-height: 145px;
+
+        margin-top: 0;
+
+        padding: 25px 25px 15px;
+    }
+
+
+    /* =================================================
+       GERENCIAMENTO
+       ================================================= */
+
+    .area-gerenciamento {
+        width: 100%;
+        min-height: 145px;
+
+        margin-top: 5px;
+
+        padding: 30px 25px 15px;
+    }
+
+
+    /* =================================================
+       BOTÕES
+       ================================================= */
+
+    #btn-nova-meta,
+    #btn-gerenciar-equipe {
+        max-width: 100%;
+    }
+
+
+    /* =================================================
+       MODAIS
+       ================================================= */
+
+    .modal-conteudo,
+    .modal-conteudo-equipe,
+    .modal-conteudo-adicionar-funcionario,
+    .modal-conteudo-historico-contas,
+    .adicionar-conta {
+        width: calc(100% - 30px);
+        max-width: calc(100% - 30px);
+    }
+
+    .modal-conteudo-historico-contas,
+    .adicionar-conta {
+        max-height: calc(100vh - 30px);
+        overflow-y: auto;
+    }
+
 }
 
 
@@ -306,5 +575,27 @@
     button-ver-relatorio {
         padding: 5px 11px;
     }
+
+
+
+
+
+    /* CARDS */
+
+    .area-metas-financeiras,
+    .status-equipe {
+        height: 180px;
+    }
+
+    .area-relatorios,
+    .area-gerenciamento {
+        min-height: 135px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+     .status-equipe i {
+    transform: translateY(-40px);
+}
 }
 
