@@ -279,6 +279,126 @@ main:has(.area-metas-financeiras) .adicionar-conta {
     max-height: 90vh;
     overflow-y: auto;
 }
+
+
+  main:has(.area-configuracoes-notificacoes),
+    main:has(.area-configuracoes-aparencia),
+    main:has(.area-configuracoes-backup) {
+
+        display: block !important;
+        width: 100%;
+        min-height: calc(100vh - 80px);
+        padding: 30px 4%;
+    }
+
+
+    /* TÍTULO */
+
+    main:has(.area-configuracoes-notificacoes) > h1 {
+        width: 100%;
+        margin: 0 0 5px;
+        font-size: 23px;
+    }
+
+    main:has(.area-configuracoes-notificacoes) > h2 {
+        width: 100%;
+        margin: 0 0 22px;
+        font-size: 14px;
+    }
+
+
+    /* =================================================
+       TODOS OS CARDS EM UMA COLUNA
+       ================================================= */
+
+    main:has(.area-configuracoes-notificacoes) section {
+        display: block !important;
+
+        width: 100% !important;
+        max-width: none !important;
+
+        margin: 0 0 15px;
+
+        padding: 20px 24px;
+
+        box-sizing: border-box;
+    }
+
+
+    /* =================================================
+       CADA OPÇÃO EM UMA LINHA
+       ================================================= */
+
+    main:has(.area-configuracoes-notificacoes)
+    .opcao-configuracao {
+
+        display: flex !important;
+
+        width: 100% !important;
+
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+
+        padding: 16px 0;
+
+        box-sizing: border-box;
+    }
+
+
+    /* TEXTO */
+
+    main:has(.area-configuracoes-notificacoes)
+    .opcao-configuracao > div {
+
+        display: block;
+
+        flex: 1;
+
+        width: auto;
+        min-width: 0;
+    }
+
+
+    /* CHECKBOX */
+
+    main:has(.area-configuracoes-notificacoes)
+    .opcao-configuracao input[type="checkbox"] {
+
+        display: block;
+
+        flex-shrink: 0;
+
+        width: 18px;
+        height: 18px;
+
+        margin: 0 0 0 20px;
+    }
+
+
+    /* =================================================
+       APARÊNCIA
+       ================================================= */
+
+    main:has(.area-configuracoes-notificacoes)
+    .area-configuracoes-aparencia {
+
+        display: block !important;
+        width: 100% !important;
+    }
+
+
+    /* =================================================
+       SELECT
+       ================================================= */
+
+    main:has(.area-configuracoes-notificacoes)
+    select {
+        width: 100%;
+        max-width: 300px;
+    }
+
+
 }
 
 
@@ -535,6 +655,371 @@ main:has(.area-metas-financeiras) .adicionar-conta {
         overflow-y: auto;
     }
 
+    /* =================================================
+       PÁGINA
+       ================================================= */
+
+    .pagina {
+        min-height: 100vh;
+        padding: 20px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    /* =================================================
+       CARTÃO
+       ================================================= */
+
+    .cartao-autenticacao {
+        width: 100%;
+        max-width: 326px;
+        min-height: 0;
+
+        display: flex;
+        flex-direction: column;
+
+        overflow: hidden;
+
+        border-radius: 20px;
+        background: #fff;
+    }
+
+
+    /* =================================================
+       FORMULÁRIO
+       ================================================= */
+
+    .painel-formulario {
+        order: 1;
+
+        width: 100%;
+        min-height: 367px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        padding: 0;
+
+        border-radius: 20px 20px 0 0;
+        background: #fff;
+    }
+
+
+    /* =================================================
+       CABEÇALHO
+       ================================================= */
+
+    .cabecalho-formulario {
+        margin-top: 40px;
+        text-align: center;
+    }
+
+    .cabecalho-formulario h2 {
+        margin: 0;
+
+        font-size: 21px;
+        line-height: 1.2;
+        font-weight: var(--weight-bold);
+    }
+
+    .cabecalho-formulario p {
+        margin: 10px 0 0;
+
+        font-size: 15px;
+        line-height: 1.2;
+    }
+
+
+    /* =================================================
+       FORMULÁRIO
+       ================================================= */
+
+    .formulario-cadastro {
+        width: 100%;
+
+        margin-top: 24px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    /* =================================================
+       CAMPOS
+       ================================================= */
+
+    .formulario-cadastro input {
+        width: 228px;
+        height: 57px;
+
+        padding: 0 30px;
+
+        border-radius: 50px;
+
+        font-size: 14px;
+    }
+
+    .formulario-cadastro input + input {
+        margin-top: 22px;
+    }
+
+
+    /* =================================================
+       BOTÃO CADASTRAR
+       ================================================= */
+
+    .botao-principal-cadastro {
+    width: 133px;
+    height: 47px;
+    margin-top: 31px;
+
+    font-size: 14px;
+}
+
+
+
+    /* =================================================
+       PAINEL AZUL INFERIOR
+       ================================================= */
+
+    .painel-boas-vindas {
+        order: 2;
+
+        width: 100%;
+        min-height: 77px;
+        height: 77px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        border-radius: 0 0 20px 20px;
+
+        background: var(--secondary-color);
+    }
+
+
+    /* =================================================
+       ESCONDE LOGO
+       ================================================= */
+
+    .logo-marca {
+        display: none;
+    }
+
+
+    /* =================================================
+       TEXTO DE ACESSO
+       ================================================= */
+
+    .texto-boas-vindas {
+        width: auto;
+
+        margin: 8px 0 0;
+
+        align-self: center;
+
+        text-align: center;
+    }
+
+    .texto-boas-vindas h1 {
+        display: none;
+    }
+
+    .texto-boas-vindas p {
+        margin: 0;
+
+        font-size: 15px;
+        line-height: 1.2;
+        font-weight: var(--weight-regular);
+    }
+
+
+    /* =================================================
+       BOTÃO ENTRAR
+       ================================================= */
+
+    /* BOTÃO ENTRAR */
+.botao-secundario-cadastro {
+    width: 96px;
+    height: 39px;
+    margin: 4px 0 0;
+
+    border: 2px solid #fff;
+    border-radius: 50px;
+
+    font-size: 12px;
+}
+
+.campo-email {
+    width: 228px;
+    height: 57px;
+    padding: 0 30px;
+    font-size: 14px;
+}
+
+main:has(.area-configuracoes-notificacoes) {
+        width: 100%;
+        min-height: auto;
+
+        padding: 20px 16px 25px;
+    }
+
+
+    /* =================================================
+       TÍTULO DA PÁGINA
+       ================================================= */
+
+    main:has(.area-configuracoes-notificacoes) > h1 {
+        margin: 0;
+
+        font-size: 21px;
+        line-height: 1.2;
+    }
+
+    main:has(.area-configuracoes-notificacoes) > h2 {
+        margin: 6px 0 20px;
+
+        font-size: 12px;
+        line-height: 1.3;
+    }
+
+
+    /* =================================================
+       CARDS
+       ================================================= */
+
+    main:has(.area-configuracoes-notificacoes) section {
+        width: 100%;
+        max-width: 100%;
+
+        margin-bottom: 12px;
+        padding: 18px 18px;
+
+        border-radius: 10px;
+
+        box-sizing: border-box;
+    }
+
+
+    /* =================================================
+       TÍTULO DOS CARDS
+       ================================================= */
+
+    main:has(.area-configuracoes-notificacoes)
+    section > h1:first-child {
+        margin: 0;
+
+        padding-bottom: 13px;
+
+        font-size: 15px;
+        line-height: 1.2;
+    }
+
+
+    /* =================================================
+       OPÇÕES
+       ================================================= */
+
+    main:has(.area-configuracoes-notificacoes)
+    .opcao-configuracao {
+        min-width: 0;
+
+        gap: 12px;
+
+        padding: 13px 0;
+    }
+
+
+    /* TEXTO */
+
+    main:has(.area-configuracoes-notificacoes)
+    .opcao-configuracao > div {
+        min-width: 0;
+    }
+
+    main:has(.area-configuracoes-notificacoes)
+    .opcao-configuracao h1 {
+        margin: 0 0 4px;
+
+        font-size: 13px;
+        line-height: 1.25;
+    }
+
+    main:has(.area-configuracoes-notificacoes)
+    .opcao-configuracao h3 {
+        margin: 0;
+
+        font-size: 10px;
+        line-height: 1.35;
+    }
+
+
+    /* =================================================
+       CHECKBOX
+       ================================================= */
+
+    main:has(.area-configuracoes-notificacoes)
+    .opcao-configuracao input[type="checkbox"] {
+        flex-shrink: 0;
+
+        width: 17px;
+        height: 17px;
+    }
+
+
+    /* =================================================
+       APARÊNCIA
+       ================================================= */
+
+    main:has(.area-configuracoes-notificacoes)
+    .area-configuracoes-aparencia > h1:not(:first-child) {
+        margin: 15px 0 6px;
+
+        font-size: 13px;
+    }
+
+
+    /* RADIO */
+
+    main:has(.area-configuracoes-notificacoes)
+    .area-configuracoes-aparencia input[type="radio"] {
+        width: 14px;
+        height: 14px;
+
+        margin: 4px 5px 7px 0;
+    }
+
+    main:has(.area-configuracoes-notificacoes)
+    .area-configuracoes-aparencia label {
+        margin-right: 10px;
+
+        font-size: 12px;
+    }
+
+
+    /* =================================================
+       SELECT
+       ================================================= */
+
+    main:has(.area-configuracoes-notificacoes)
+    select {
+        width: 100%;
+        max-width: 100%;
+
+        height: 36px;
+
+        margin-top: 4px;
+
+        font-size: 12px;
+    }
+
+
+
 }
 
 
@@ -597,5 +1082,48 @@ main:has(.area-metas-financeiras) .adicionar-conta {
      .status-equipe i {
     transform: translateY(-40px);
 }
+
+.campo-email {
+        width: 218px;
+        height: 57px;
+        padding: 0 30px;
+        font-size: 14px;
+    }
+
+    main:has(.area-configuracoes-notificacoes) {
+        padding: 16px 12px 25px;
+    }
+
+    main:has(.area-configuracoes-notificacoes) > h1 {
+        font-size: 20px;
+    }
+
+    main:has(.area-configuracoes-notificacoes) > h2 {
+        font-size: 11px;
+    }
+
+    main:has(.area-configuracoes-notificacoes) section {
+        padding: 16px 15px;
+    }
+
+    main:has(.area-configuracoes-notificacoes)
+    section > h1:first-child {
+        font-size: 14px;
+    }
+
+    main:has(.area-configuracoes-notificacoes)
+    .opcao-configuracao h1 {
+        font-size: 12px;
+    }
+
+    main:has(.area-configuracoes-notificacoes)
+    .opcao-configuracao h3 {
+        font-size: 10px;
+    }
+
+    main:has(.area-configuracoes-notificacoes)
+    .area-configuracoes-aparencia label {
+        font-size: 11px;
+    }
 }
 
