@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/relatorio.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
@@ -37,11 +39,18 @@
             <button-ver-detalhes>Ver detalhes</button-ver-detalhes>
         </section>
 
-        <section class="area-consumo-agua">
-            <i class="bi bi-droplet-fill"></i>
-            <h3>Consumo de água</h3>
-            <h1></h1>
-        </section>
+                <section class="area-consumo-agua">
+
+    <div class="titulo-consumo">
+        <i class="bi bi-droplet"></i>
+        <h3>Consumo de água</h3>
+    </div>
+
+    <div class="grafico-consumo">
+        <canvas id="graficoConsumo"></canvas>
+    </div>
+
+</section>
 
         <section class="area-previsoes">
             <i class="bi bi-check-all"></i>
@@ -66,6 +75,98 @@
         </section>
 
     </main>
+
+    <script>
+    const grafico = document.getElementById('graficoConsumo');
+
+    new Chart(grafico, {
+        type: 'line',
+
+        data: {
+            labels: [
+                'Jan',
+                'Fev',
+                'Mar',
+                'Abr',
+                'Mai',
+                'Jun',
+                'Jul',
+                'Ago',
+                'Set',
+                'Out',
+                'Nov',
+                'Dez'
+            ],
+
+            datasets: [{
+                label: 'Consumo de água',
+
+                data: [
+                    435,
+                    515,
+                    560,
+                    475,
+                    590,
+                    625,
+                    680,
+                    620,
+                    570,
+                    520,
+                    490,
+                    430
+                ],
+
+                borderColor: '#205988',
+                backgroundColor: 'rgba(32, 89, 136, 0.10)',
+
+                borderWidth: 2,
+
+                pointRadius: 3,
+                pointBackgroundColor: '#205988',
+
+                tension: 0.3,
+
+                fill: true
+            }]
+        },
+
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+
+            scales: {
+                y: {
+                    min: 300,
+                    max: 700,
+
+                    ticks: {
+                        stepSize: 100,
+
+                        callback: function(valor) {
+                            return valor + 'k';
+                        }
+                    },
+
+                    grid: {
+                        color: '#f1f5f9'
+                    }
+                },
+
+                x: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
+</script>
 
     <script>
         fetch("navbar.html")
