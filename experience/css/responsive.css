@@ -1,0 +1,310 @@
+/* =====================================================
+   TABLET
+   ===================================================== */
+
+@media (min-width: 768px) and (max-width: 1199px) {
+
+    main {
+        display: grid;
+        min-height: calc(100vh - 80px);
+        padding: 30px 4%;
+        
+        grid-template-columns: 28% 1fr;
+
+        grid-template-rows:
+            auto
+            auto
+            135px
+            135px
+            152px;
+
+        grid-template-areas:
+            "titulo titulo"
+            "subtitulo subtitulo"
+            "vazao consumo"
+            "status consumo"
+            "previsoes metas";
+
+        column-gap: 14px;
+        row-gap: 8px;
+
+        align-content: start;
+    }
+
+    /* CARDS */
+
+    .area-vazao,
+    .area-status,
+    .area-consumo-agua,
+    .area-previsoes,
+    .metas {
+        width: 100%;
+        box-sizing: border-box;
+        transform: translateY(-10px);
+        
+    }
+
+    .area-vazao,
+    .area-status {
+        padding: 18px 20px;
+    }
+
+    .area-consumo-agua {
+        padding: 30px;
+    }
+
+    .area-previsoes,
+    .metas {
+        padding: 22px;
+    }
+
+    /* TEXTOS DOS CARDS */
+
+    .area-vazao h1,
+    .area-status h1 {
+        font-size: 28px;
+    }
+
+    .area-vazao h2,
+    .area-status h2 {
+        font-size: 18px;
+    }
+
+    /* NAVBAR */
+
+    .logo-img {
+        width: 38px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .usuario strong {
+        font-size: 15px;
+    }
+
+    .usuario small {
+        font-size: 12px;
+    }
+
+    .avatar-nav {
+        font-size: 24px;
+    }
+}
+
+
+/* =====================================================
+   RESPONSIVIDADE - MOBILE
+   ===================================================== */
+@media (max-width: 767px) {
+
+    main {
+        display: grid;
+        min-height: auto;
+
+        padding: 20px 16px 25px;
+
+        grid-template-columns: 1fr;
+
+        grid-template-rows: auto;
+
+        grid-template-areas:
+            "titulo"
+            "subtitulo"
+            "vazao"
+            "status"
+            "consumo"
+            "previsoes"
+            "metas";
+
+        gap: 10px;
+    }
+
+      .perfil {
+        margin-right: 45px;
+    }
+
+    .usuario {
+        margin-left: -30px;
+    }
+
+    .usuario strong {
+        font-size: 13px;
+    }
+
+    .usuario small {
+        font-size: 10px;
+    }
+
+     .perfil-botao {
+        transform: translateX(30px);
+    }
+
+    /* TÍTULOS */
+
+    main > h1 {
+        padding-left: 0;
+        margin: 0;
+    }
+
+    main > h3 {
+        padding-left: 0;
+        margin: -2px 0 6px;
+    }
+
+
+    /* CARDS */
+
+    .area-vazao,
+    .area-status,
+    .area-consumo-agua,
+    .area-previsoes,
+    .metas {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+
+    /* VAZÃO */
+
+    .area-vazao {
+        height: 105px;
+        padding: 12px 14px;
+        width: 100%;
+    }
+
+    .area-vazao h1 {
+        margin: 8px 0 0;
+    }
+
+    .area-vazao button-ver-detalhes {
+        margin-top: 35px;
+    }
+
+
+    /* STATUS */
+
+    .area-status {
+        height: 105px;
+        padding: 12px 14px;
+        width: 100%;
+    }
+
+    .area-status h1 {
+        margin: 5px 0 0;
+    }
+
+    .area-status h1 + h3 {
+        margin-top: 0;
+    }
+
+    .area-status button-ver-detalhes {
+        margin-top: 30px;
+    }
+
+
+    /* CONSUMO */
+
+    .area-consumo-agua {
+        height: 120px;
+        padding: 12px 14px;
+        width: 100%;
+    }
+
+    .area-consumo-agua h1 {
+        margin: 8px 0 0;
+    }
+
+
+    /* PREVISÕES */
+
+    .area-previsoes {
+        height: 120px;
+        padding: 12px 14px;
+        width: 100%;
+    }
+
+    .area-previsoes > h3:nth-of-type(2) {
+        margin: 8px 0 0 27px;
+    }
+
+    .area-previsoes > h1 {
+        margin: 3px 0 0 27px;
+    }
+
+
+    /* METAS */
+
+    .metas {
+        height: 145px;
+        padding: 12px 14px;
+        width: 100%;
+    }
+
+    .metas > h3:nth-of-type(2) {
+        top: 43px;
+        left: 14px;
+    }
+
+    .metas > h1:nth-of-type(1) {
+        top: 58px;
+        left: 14px;
+    }
+
+    .metas > h3:nth-of-type(3) {
+        top: 43px;
+        left: 52%;
+    }
+
+    .metas > h1:nth-of-type(2) {
+        top: 58px;
+        left: 52%;
+    }
+
+    button-ver-relatorio {
+        bottom: 15px;
+    }
+}
+
+
+/* =====================================================
+   MOBILE PEQUENO
+   ===================================================== */
+
+@media (max-width: 400px) {
+
+    main {
+        padding: 16px 12px 25px;
+    }
+
+    main > h1 {
+        font-size: var(--font-size-heading3);
+    }
+
+    main > h3 {
+        font-size: var(--font-size-heading6);
+    }
+
+    .area-vazao,
+    .area-status,
+    .area-consumo-agua,
+    .area-previsoes {
+        padding: 11px 12px;
+    }
+
+    .metas {
+        padding: 12px;
+    }
+
+    .metas > h3:nth-of-type(3),
+    .metas > h1:nth-of-type(2) {
+        left: 53%;
+    }
+
+    button-ver-relatorio {
+        padding: 5px 11px;
+    }
+}
+
