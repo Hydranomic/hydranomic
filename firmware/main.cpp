@@ -4,7 +4,7 @@
 #include <PubSubClient.h>
 
 // Conexão esp com sensor
-int SENSOR = 15;
+int SENSOR = 13;
 
 int leituraHidrometro;
 int estadoAnterior = HIGH;
@@ -40,10 +40,11 @@ void desconnectWifi();
 void desconnectClient();
 
 void setup() {
-  pinMode(SENSOR, INPUT);
+  pinMode(SENSOR, INPUT_PULLUP);
   Serial.begin(115200);
   client.setKeepAlive(100);
   client.setServer(MQTT_SERVER, MQTT_PORT);
+  estadoAnterior = digitalRead(SENSOR);
 
   connectWiFi();
   connectMQTT();
@@ -69,10 +70,10 @@ void loop() {
     publishData();
     desconnectWifi();
     desconnectClient();
-    //Processa o ping do Keepalive (precisa rodar em todo ciclo)
-    client.loop();
-    delay(100);
 }
+
+//Processa o ping do Keepalive (precisa rodar em todo ciclo)
+    client.loop();
 
 estadoAnterior = leituraHidrometro;
 
@@ -103,7 +104,7 @@ void connectWiFi() {
   Serial.println("-------------"); 
 
   // Força o rádio a ficar 100% ativo sem dormir
-  //WiFi.setSleep(false);
+  WiFi.setSleep(false);
 }
 
 
