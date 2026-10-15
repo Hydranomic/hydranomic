@@ -1,67 +1,67 @@
 {
-  "ano_referencia": 2026,
-  "mes_atual": 12,
+  "ano_referencia": 2027,
+  "mes_atual": null,
   "unidade_medida": "m³",
   "meses": [
     {
       "mes": 1,
       "rotulo": "Jan",
-      "consumo_m3": 150
+      "consumo_m3": null
     },
     {
       "mes": 2,
       "rotulo": "Fev",
-      "consumo_m3": 267
+      "consumo_m3": null
     },
     {
       "mes": 3,
       "rotulo": "Mar",
-      "consumo_m3": 349
+      "consumo_m3": null
     },
     {
       "mes": 4,
       "rotulo": "Abr",
-      "consumo_m3": 361
+      "consumo_m3": null
     },
     {
       "mes": 5,
       "rotulo": "Mai",
-      "consumo_m3": 351
+      "consumo_m3": null
     },
     {
       "mes": 6,
       "rotulo": "Jun",
-      "consumo_m3": 352
+      "consumo_m3": null
     },
     {
       "mes": 7,
       "rotulo": "Jul",
-      "consumo_m3": 291
+      "consumo_m3": null
     },
     {
       "mes": 8,
       "rotulo": "Ago",
-      "consumo_m3": 358
+      "consumo_m3": null
     },
     {
       "mes": 9,
       "rotulo": "Set",
-      "consumo_m3": 334
+      "consumo_m3": null
     },
     {
       "mes": 10,
       "rotulo": "Out",
-      "consumo_m3": 365
+      "consumo_m3": null
     },
     {
       "mes": 11,
       "rotulo": "Nov",
-      "consumo_m3": 342
+      "consumo_m3": null
     },
     {
       "mes": 12,
       "rotulo": "Dez",
-      "consumo_m3": 378
+      "consumo_m3": null
     }
   ]
 }
