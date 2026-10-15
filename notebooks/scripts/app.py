@@ -1,5 +1,5 @@
 from machinelearning import iniciar_ml
-from data_chart import gerar_dados_grafico
+from hydranomic.notebooks.scripts.data_chart import gerar_dados_grafico
 
 estado_atual = 1
 
