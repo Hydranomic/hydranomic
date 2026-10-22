@@ -44,6 +44,7 @@ def executar(estado: Any = None) -> Dict[str, Any]:
                 "status": "sucesso",
                 "previsao_proximo_mes_m3": res_ml.get("previsao_m3"),
                 "fatura_estimada_reais": res_ml.get("valor_estimado_conta"),
+                "data_treinamento_ml": res_ml.get("data_treinamento"),
                 "ano_grafico": res_grafico.get("ano_referencia"),
                 "meta_status": res_meta.get("situacao") if res_meta else "sem_meta_ativa"
             }

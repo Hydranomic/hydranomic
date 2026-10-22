@@ -2,6 +2,7 @@ import os
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+from datetime import datetime
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 
@@ -68,7 +69,9 @@ def prever_proximo_ciclo(modelo: RandomForestRegressor, df_completo: pd.DataFram
         "previsao_m3": round(previsao_m3, 2),
         "tarifa_m3": tarifa,
         "valor_estimado_conta": valor_conta,
-        "modelo": "RandomForestRegressor"
+        "modelo": "RandomForestRegressor",
+        "data_treinamento": datetime.now().isoformat(),
+        "data_treinamento_formatada": datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     }
 
 def executar_pipeline_ml(dados: Optional[List[Dict[str, Any]]] = None, tarifa: Optional[float] = None, salvar: bool = True, nome_arquivo_saida: str = NOME_ARQUIVO_SAIDA) -> Dict[str, Any]:
