@@ -78,10 +78,37 @@ def executar_pipeline_ml(dados: Optional[List[Dict[str, Any]]] = None, tarifa: O
     contexto = carregar_contexto()
     if tarifa is None:
         tarifa = float(contexto.get("tarifa", TARIFA_PADRAO))
-    df_bruto = carregar_dataframe(dados)
-    df_completo, df_treino, features, alvo = preparar_dados(df_bruto)
-    modelo = treinar_modelo(df_treino, features, alvo)
-    resultado = prever_proximo_ciclo(modelo, df_completo, features, tarifa)
+    hoje = datetime.now()
+    data_treinamento = hoje.isoformat()
+    data_formatada = hoje.strftime("%d/%m/%Y %H:%M:%S")
+
+    try:
+        df_bruto = carregar_dataframe(dados)
+        df_completo, df_treino, features, alvo = preparar_dados(df_bruto)
+        modelo = treinar_modelo(df_treino, features, alvo)
+        resultado = prever_proximo_ciclo(modelo, df_completo, features, tarifa)
+    except Exception as e:
+        df_bruto = pd.DataFrame(dados) if dados else pd.DataFrame()
+        media_consumo = float(df_bruto["consumo_m3"].mean()) if not df_bruto.empty and "consumo_m3" in df_bruto.columns else 300.0
+        ultimo_val = float(df_bruto.iloc[-1]["consumo_m3"]) if not df_bruto.empty and "consumo_m3" in df_bruto.columns else media_consumo
+        uc = int(df_bruto.iloc[-1]["unidade_consumidora"]) if not df_bruto.empty and "unidade_consumidora" in df_bruto.columns else 14079
+        mes_prox = (hoje.month % 12) + 1
+        ano_prox = hoje.year if hoje.month < 12 else hoje.year + 1
+        previsao_fallback = round((media_consumo + ultimo_val) / 2.0, 2)
+        resultado = {
+            "ano": ano_prox,
+            "mes": mes_prox,
+            "unidade_consumidora": uc,
+            "ultimo_consumo_registrado_m3": round(ultimo_val, 2),
+            "previsao_m3": previsao_fallback,
+            "tarifa_m3": tarifa,
+            "valor_estimado_conta": round(previsao_fallback * tarifa, 2),
+            "modelo": "Fallback_MediaMovel",
+            "aviso": str(e),
+            "data_treinamento": data_treinamento,
+            "data_treinamento_formatada": data_formatada
+        }
+
     if salvar:
         salvar_json(nome_arquivo_saida, resultado)
     return resultado
