@@ -6,6 +6,7 @@ ou executar o pipeline consolidado para alimentação de Dashboards.
 Lê parâmetros injetados pelo WEGnology via context.json ou variáveis de ambiente.
 """
 
+from datetime import datetime
 import sys
 from pathlib import Path
 from typing import Any, Dict
@@ -18,7 +19,7 @@ from data_chart import processar_dados_grafico
 from metas import carregar_config, avaliar_progresso_meta
 
 
-def executar(estado: Any = None) -> Dict[str, Any]:
+def executar_controlador(estado: Any = None) -> Dict[str, Any]:
     """
     Executa a ação correspondente ao estado informado ou obtido do contexto WEGnology.
 
@@ -28,7 +29,24 @@ def executar(estado: Any = None) -> Dict[str, Any]:
         3 ou "metas": Avalia a situação da meta de consumo (progresso_meta.json).
         0 ou "tudo" ou None: Executa todo o pipeline consolidado de analytics do Hydranomic.
     """
-    contexto = carregar_contexto()
+    contexto = carregar_contexto() if "carregar_contexto" in globals() else {}
+
+    # Captura telemetria dos pulsos
+    pulsos_brutos = (
+        contexto.get("Pulsos") 
+        or contexto.get("pulsos")
+        or (contexto.get("data", {}).get("Pulsos", {}).get("value") if isinstance(contexto.get("data"), dict) else None)
+        or (contexto.get("data", {}).get("Pulsos") if isinstance(contexto.get("data"), dict) else None)
+    )
+
+    consumo_telemetria = 0.0
+    if pulsos_brutos is not None:
+        try:
+            consumo_telemetria = round(float(pulsos_brutos) / 1000.0, 2)
+        except (ValueError, TypeError):
+            consumo_telemetria = 0.0
+    else:
+        consumo_telemetria = float(contexto.get("consumo_dia") or contexto.get("consumo_mes") or 0.0)
 
     if estado is None:
         estado = contexto.get("estado", contexto.get("acao", "tudo"))
@@ -53,14 +71,7 @@ def executar(estado: Any = None) -> Dict[str, Any]:
 
         case 3 | "3" | "metas":
             print("[WEGnology App] Executando Estado 3: Avaliação de Metas...")
-            # Pega o último consumo registrado no gráfico ou contexto para avaliar a meta
-            consumo_atual = contexto.get("consumo_atual")
-            if consumo_atual is None:
-                grafico = processar_dados_grafico(salvar=False)
-                meses_validos = [m["consumo_m3"] for m in grafico["meses"] if m["consumo_m3"] is not None]
-                consumo_atual = meses_validos[-1] if meses_validos else 0.0
-
-            resultado_meta = avaliar_progresso_meta(float(consumo_atual))
+            resultado_meta = avaliar_progresso_meta(consumo_atual_m3=consumo_telemetria, salvar=True)
             resultados["detalhes"]["metas"] = resultado_meta
             print(f"Avaliação de meta concluída: {resultado_meta}")
 
@@ -72,28 +83,32 @@ def executar(estado: Any = None) -> Dict[str, Any]:
             resultados["detalhes"]["grafico"] = res_grafico
             
             # 2. Machine Learning
-            res_ml = executar_pipeline_ml()
-            resultados["detalhes"]["ml"] = res_ml
+            resultado_ml = executar_pipeline_ml()
+            resultados["detalhes"]["ml"] = resultado_ml
             
-            # 3. Metas
-            meses_validos = [m["consumo_m3"] for m in res_grafico["meses"] if m["consumo_m3"] is not None]
-            consumo_mais_recente = meses_validos[-1] if meses_validos else 0.0
-            res_meta = avaliar_progresso_meta(float(consumo_mais_recente))
-            resultados["detalhes"]["metas"] = res_meta
+            # 3. Avalia a meta com o valor real
+            resultado_meta = avaliar_progresso_meta(consumo_atual_m3=consumo_telemetria, salvar=True)
+            resultados["detalhes"]["metas"] = resultado_meta
 
-            # Salva sumário geral da execução no OUTPUT_DIR
-            sumario_execucao = {
+            # Gera o sumário com o valor real
+            sumario = {
                 "status": "sucesso",
-                "previsao_proximo_mes_m3": res_ml.get("previsao_m3"),
-                "fatura_estimada_reais": res_ml.get("valor_estimado_conta"),
-                "ano_grafico": res_grafico.get("ano_referencia"),
-                "meta_status": res_meta.get("situacao") if res_meta else "sem_meta_ativa"
+                "mes_atual": datetime.now().strftime("%Y-%m"),
+                "consumo_mes_acumulado_m3": consumo_telemetria,
+                "previsao_proximo_mes_m3": resultado_ml.get("previsao_m3") if "resultado_ml" in locals() else 0.0,
+                "fatura_estimada_reais": resultado_ml.get("valor_estimado_conta") if "resultado_ml" in locals() else 0.0,
+                "data_treinamento_ml": datetime.now().isoformat(),
+                "ano_grafico": datetime.now().year,
+                "meta_status": resultado_meta.get("situacao") if ("resultado_meta" in locals() and resultado_meta) else "NORMAL"
             }
-            salvar_json("sumario_execucao.json", sumario_execucao)
+            salvar_json("sumario_execucao.json", sumario)
             print("[WEGnology App] Pipeline completo finalizado com sucesso!")
 
     return resultados
 
 
+executar = executar_controlador
+
+
 if __name__ == "__main__":
-    executar()
+    executar_controlador()

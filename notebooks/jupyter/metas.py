@@ -119,7 +119,7 @@ def confirmar_exclusao_meta(salvar: bool = True) -> Dict[str, Any]:
     return config
 
 
-def avaliar_progresso_meta(consumo_atual_m3: float) -> Optional[Dict[str, Any]]:
+def avaliar_progresso_meta(consumo_atual_m3: float, salvar: bool = True) -> Optional[Dict[str, Any]]:
     """
     Compara o consumo atual com a meta ativa e gera métricas de acompanhamento.
     Útil para painéis de monitoramento e alertas automáticos na WEGnology.
@@ -128,7 +128,15 @@ def avaliar_progresso_meta(consumo_atual_m3: float) -> Optional[Dict[str, Any]]:
     meta = config.get("meta_ativa")
 
     if not meta:
-        return None
+        relatorio_meta = {
+            "meta_ativa": False,
+            "mensagem": "Nenhuma meta de consumo ativa configurada no momento.",
+            "consumo_atual_m3": consumo_atual_m3,
+            "situacao": "NORMAL",
+        }
+        if salvar:
+            salvar_json("progresso_meta.json", relatorio_meta)
+        return relatorio_meta
 
     limite = float(meta["valor"])
     porcentagem = round((consumo_atual_m3 / limite) * 100, 2)
@@ -142,6 +150,7 @@ def avaliar_progresso_meta(consumo_atual_m3: float) -> Optional[Dict[str, Any]]:
         situacao = "NORMAL"
 
     relatorio_meta = {
+        "meta_ativa": True,
         "meta_nome": meta["nome"],
         "limite_m3": limite,
         "consumo_atual_m3": consumo_atual_m3,
@@ -151,7 +160,8 @@ def avaliar_progresso_meta(consumo_atual_m3: float) -> Optional[Dict[str, Any]]:
     }
 
     # Salva relatório de progresso para a WEGnology
-    salvar_json("progresso_meta.json", relatorio_meta)
+    if salvar:
+        salvar_json("progresso_meta.json", relatorio_meta)
     return relatorio_meta
 
 
