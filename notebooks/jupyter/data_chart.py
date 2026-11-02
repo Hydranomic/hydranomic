@@ -30,15 +30,7 @@ def processar_dados_grafico(
     """
     Processa os registros de consumo mensal de água e formata o resultado
     no schema esperado pelo front-end / WEGnology Experience Dashboard.
-
-    Parâmetros:
-        dados: Lista de dicts com o histórico de contas (opcional; se None, carrega de conta_povoada.json).
-        ano_referencia: Ano a ser filtrado (opcional; se None, tenta obter do contexto ou do ano mais recente).
-        salvar: Se True, salva o JSON resultante no OUTPUT_DIR configurado.
-        nome_arquivo_saida: Nome do arquivo a ser salvo (padrão: grafico_anual.json).
-
-    Retorna:
-        Dict com a estrutura consolidada para o gráfico anual.
+    Captura telemetria de pulsos em tempo de execução para atualizar o mês vigente.
     """
     # 1. Carregar contexto WEGnology se disponível
     contexto = carregar_contexto()
@@ -52,25 +44,72 @@ def processar_dados_grafico(
             dados = carregar_json("conta.json", padrao=[])
 
     if not dados:
-        print("[Aviso] Lista de registros de consumo está vazia.")
+        dados = []
 
-    # 3. Determinar o ano de referência
+    # 3. Extração segura dos pulsos sem erro de int.get()
+    pulsos_brutos = None
+    if isinstance(contexto, dict):
+        if "Pulsos" in contexto:
+            pulsos_brutos = contexto["Pulsos"]
+        elif "pulsos" in contexto:
+            pulsos_brutos = contexto["pulsos"]
+        elif isinstance(contexto.get("data"), dict):
+            p_data = contexto["data"].get("Pulsos") or contexto["data"].get("pulsos")
+            if isinstance(p_data, dict):
+                pulsos_brutos = p_data.get("value")
+            else:
+                pulsos_brutos = p_data
+
+        if isinstance(pulsos_brutos, dict):
+            pulsos_brutos = pulsos_brutos.get("value")
+
+    consumo_telemetria = None
+    if pulsos_brutos is not None:
+        try:
+            consumo_telemetria = round(float(pulsos_brutos) / 1000.0, 2)
+        except (ValueError, TypeError):
+            consumo_telemetria = None
+    elif isinstance(contexto, dict):
+        consumo_direto = contexto.get("consumo_dia") or contexto.get("novo_consumo_dia") or contexto.get("consumo_hoje")
+        if consumo_direto is not None:
+            try:
+                consumo_telemetria = round(float(consumo_direto), 2)
+            except (ValueError, TypeError):
+                consumo_telemetria = None
+
+    hoje = datetime.now()
+    mes_atual_id = f"{hoje.year}-{hoje.month:02d}"
+
+    # 4. Atualiza ou insere o consumo do mês atual
+    if consumo_telemetria is not None:
+        encontrado = False
+        for reg in dados:
+            if str(reg.get("id")) == mes_atual_id:
+                reg["consumo_m3"] = consumo_telemetria
+                encontrado = True
+                break
+        if not encontrado:
+            dados.append({
+                "id": mes_atual_id,
+                "consumo_m3": consumo_telemetria,
+                "unidade_consumidora": 14079
+            })
+
+    # 5. Determinar o ano de referência
     if ano_referencia is None:
-        # Tenta pegar do contexto do WEGnology
-        if "ano_referencia" in contexto:
+        if isinstance(contexto, dict) and "ano_referencia" in contexto and contexto["ano_referencia"] is not None:
             ano_referencia = int(contexto["ano_referencia"])
         elif dados:
-            # Descobre o ano mais recente presente nos dados
             anos_encontrados = []
             for r in dados:
                 partes = str(r.get("id", "")).split("-")
                 if len(partes) == 2 and partes[0].isdigit():
                     anos_encontrados.append(int(partes[0]))
-            ano_referencia = max(anos_encontrados) if anos_encontrados else datetime.now().year
+            ano_referencia = max(anos_encontrados) if anos_encontrados else hoje.year
         else:
-            ano_referencia = datetime.now().year
+            ano_referencia = hoje.year
 
-    # 4. Processar consumo mensal
+    # 6. Processar consumo mensal
     consumo_mensal: Dict[int, Optional[float]] = {}
     mes_atual: Optional[int] = None
 
@@ -110,7 +149,7 @@ def processar_dados_grafico(
         ],
     }
 
-    # 5. Salvar resultado no OUTPUT_DIR do WEGnology
+    # 7. Salvar resultado no OUTPUT_DIR do WEGnology
     if salvar:
         salvar_json(nome_arquivo_saida, resultado)
 
@@ -119,6 +158,7 @@ def processar_dados_grafico(
 
 # Aliás para compatibilidade reversa com o nome da função antiga
 gerar_dados_grafico = processar_dados_grafico
+modulo_grafico_anual = processar_dados_grafico
 
 
 if __name__ == "__main__":

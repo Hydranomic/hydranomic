@@ -31,13 +31,22 @@ def executar_controlador(estado: Any = None) -> Dict[str, Any]:
     """
     contexto = carregar_contexto() if "carregar_contexto" in globals() else {}
 
-    # Captura telemetria dos pulsos
-    pulsos_brutos = (
-        contexto.get("Pulsos") 
-        or contexto.get("pulsos")
-        or (contexto.get("data", {}).get("Pulsos", {}).get("value") if isinstance(contexto.get("data"), dict) else None)
-        or (contexto.get("data", {}).get("Pulsos") if isinstance(contexto.get("data"), dict) else None)
-    )
+    # Captura telemetria dos pulsos sem erro de int.get()
+    pulsos_brutos = None
+    if isinstance(contexto, dict):
+        if "Pulsos" in contexto:
+            pulsos_brutos = contexto["Pulsos"]
+        elif "pulsos" in contexto:
+            pulsos_brutos = contexto["pulsos"]
+        elif isinstance(contexto.get("data"), dict):
+            p_data = contexto["data"].get("Pulsos") or contexto["data"].get("pulsos")
+            if isinstance(p_data, dict):
+                pulsos_brutos = p_data.get("value")
+            else:
+                pulsos_brutos = p_data
+
+        if isinstance(pulsos_brutos, dict):
+            pulsos_brutos = pulsos_brutos.get("value")
 
     consumo_telemetria = 0.0
     if pulsos_brutos is not None:
