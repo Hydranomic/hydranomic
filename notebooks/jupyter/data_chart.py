@@ -79,19 +79,45 @@ def processar_dados_grafico(
 
     hoje = datetime.now()
     mes_atual_id = f"{hoje.year}-{hoje.month:02d}"
+    dia_num = hoje.day
+    data_registro = hoje.strftime("%Y-%m-%d")
+    consumo_float = consumo_telemetria
 
-    # 4. Atualiza ou insere o consumo do mês atual
+    # 4a. Armazenamento diário acumulativo em consumo_mes.json
+    dados_mes = carregar_json("consumo_mes.json", padrao={"mes": mes_atual_id, "dias": []})
+    if not isinstance(dados_mes, dict):
+        dados_mes = {"mes": mes_atual_id, "dias": []}
+    dias = dados_mes.setdefault("dias", [])
+
+    if consumo_float is not None:
+        encontrado_dia = False
+        for idx, d in enumerate(dias):
+            if d.get("data") == data_registro or d.get("dia") == dia_num:
+                # Acumula somando ao total já existente no dia
+                consumo_anterior = float(d.get("consumo_m3", 0.0) or 0.0)
+                dias[idx]["consumo_m3"] = round(consumo_anterior + consumo_float, 2)
+                dias[idx]["data"] = data_registro
+                dias[idx]["dia"] = dia_num
+                encontrado_dia = True
+                break
+        if not encontrado_dia:
+            dias.append({"dia": dia_num, "data": data_registro, "consumo_m3": round(consumo_float, 2)})
+        if salvar:
+            salvar_json("consumo_mes.json", dados_mes)
+
+    # 4b. Atualiza ou insere o consumo do mês atual (acumulando ao valor existente)
     if consumo_telemetria is not None:
         encontrado = False
         for reg in dados:
             if str(reg.get("id")) == mes_atual_id:
-                reg["consumo_m3"] = consumo_telemetria
+                consumo_anterior = float(reg.get("consumo_m3", 0.0) or 0.0)
+                reg["consumo_m3"] = round(consumo_anterior + consumo_telemetria, 2)
                 encontrado = True
                 break
         if not encontrado:
             dados.append({
                 "id": mes_atual_id,
-                "consumo_m3": consumo_telemetria,
+                "consumo_m3": round(consumo_telemetria, 2),
                 "unidade_consumidora": 14079
             })
 
