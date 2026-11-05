@@ -95,21 +95,21 @@ void connectWiFi() {
   WiFi.setSleep(false);
 }
 
-const int INTERVALO_LITROS = 100;
+const int INTERVALO_LITROS = 500;
 
 void publishData() {
-  DynamicJsonDocument doc(200);
+  DynamicJsonDocument doc(500);
   doc["data"]["ID"] = id;
   doc["data"]["Pulsos"] = count;
 
   String payload;
   serializeJson(doc, payload);
-  payload.toCharArray(attributes, 200);
+  payload.toCharArray(attributes, 500);
   Serial.println(payload);
 
   if (client.connected() && count % INTERVALO_LITROS == 0) {
     client.publish(MQTT_TOPIC, attributes);
-    Serial.println("****PULSO ENVIADA (100L)******");
+    Serial.println("****PULSO ENVIADA (500L)******");
   }
 }
 
