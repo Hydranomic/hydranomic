@@ -52,4 +52,4 @@ def executar(estado: Any = None) -> Dict[str, Any]:
     return resultados
 
 if __name__ == "__main__":
-    executar()
+    executar_controlador()

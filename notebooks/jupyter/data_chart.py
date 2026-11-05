@@ -25,7 +25,7 @@ def processar_dados_grafico(dados: Optional[List[Dict[str, Any]]] = None, ano_re
                 partes = str(r.get("id", "")).split("-")
                 if len(partes) == 2 and partes[0].isdigit():
                     anos_encontrados.append(int(partes[0]))
-            ano_referencia = max(anos_encontrados) if anos_encontrados else datetime.now().year
+            ano_referencia = max(anos_encontrados) if anos_encontrados else hoje.year
         else:
             ano_referencia = datetime.now().year
     consumo_mensal: Dict[int, Optional[float]] = {}
@@ -62,6 +62,7 @@ def processar_dados_grafico(dados: Optional[List[Dict[str, Any]]] = None, ano_re
     return resultado
 
 gerar_dados_grafico = processar_dados_grafico
+modulo_grafico_anual = processar_dados_grafico
 
 if __name__ == "__main__":
     processar_dados_grafico()
