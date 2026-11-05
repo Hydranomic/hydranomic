@@ -3,60 +3,947 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Evita que o navegador guarde o HTML do usuário anterior em cache -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Página Inicial - Hydranomic</title>
 
-    <title>Página Inicial</title>
+    <!-- BLOQUEIO DE ACESSO: REDIRECIONA PARA LOGIN SE NÃO ESTIVER LOGADO -->
+    {{#unless experience.user}}
+    <script>
+        localStorage.removeItem("hydranomic_sessao_atual");
+        sessionStorage.removeItem("hydranomic_email_sincronizado");
+        window.location.replace("http://hydranomic.kadly.com.br/login?_t=" + new Date().getTime());
+    </script>
+    {{/unless}}
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/relatorio.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Ícones Bootstrap via CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Google Fonts Inter & REM -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=REM:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=REM:wght@300;400;500;600;700&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css');
+
+:root {
+    --bg-color: #E6EFF8;
+    --secondary-color: #205988;
+    --red-status-color: #D96161;
+    --yellow-status-color: #FFE57C;
+    --green-status-color: #43BC8B;
+    --buton-color: #CFE1F4;
+
+    --font-family: "Inter", sans-serif;
+
+    --font-size-heading1: 36px;
+    --font-size-heading2: 32px;
+    --font-size-heading3: 24px;
+    --font-size-heading4: 20px;
+    --font-size-heading5: 16px;
+    --font-size-heading6: 14px;
+    --font-size-heading7: 12px;
+
+    --weight-extra-light: 200;
+    --weight-light: 300;
+    --weight-regular: 400;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+    --weight-extrabold: 800;
+    --italic: italic;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: var(--bg-color, #E6EFF8) !important;
+}
+
+body, main, button, input, select {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+body {
+  min-height: 100vh;
+  color: #555;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* NAVBAR */
+.navbar {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 84px;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #205988;
+  box-shadow: 0 4px 19px rgba(0, 0, 0, 0.28);
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 32px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.menu:hover {
+  opacity: 0.75;
+}
+
+.logo-img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  transform: scale(2.2);
+  transform-origin: center;
+}
+
+.logo {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 21px;
+  letter-spacing: 4px;
+  white-space: nowrap;
+}
+
+.logo .hydra { font-weight: 400; }
+.logo .nomic { font-weight: 700; }
+
+.perfil {
+  position: relative;
+}
+
+.perfil-botao {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+  border: none;
+  color: #ffffff;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.avatar-nav {
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  color: #ffffff;
+  font-size: 33px;
+}
+
+.avatar-modal {
+  width: 58px;
+  height: 58px;
+  background: transparent;
+  color: #205988;
+  font-size: 51px;
+}
+
+.usuario {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.usuario strong {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.usuario small {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.seta {
+  margin-left: 8px;
+  font-size: 15px;
+  transition: transform 0.2s ease;
+}
+
+.perfil-botao[aria-expanded="true"] .seta {
+  transform: rotate(180deg);
+}
+
+.perfil-card {
+  position: absolute;
+  z-index: 20;
+  top: 58px;
+  right: 0;
+  width: 320px;
+  overflow: hidden;
+  background: #ffffff;
+  color: #202b33;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.perfil-card[hidden] {
+  display: none;
+}
+
+.perfil-card::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 28px;
+  width: 20px;
+  height: 20px;
+  background: #ffffff;
+  transform: rotate(45deg);
+}
+
+.perfil-topo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 22px 20px;
+  background: #ffffff;
+}
+
+.perfil-topo h2 {
+  margin-bottom: 3px;
+  font-size: 19px;
+}
+
+.perfil-topo p {
+  color: #6d7780;
+  font-size: 13px;
+}
+
+.informacoes {
+  padding: 3px 20px 10px;
+}
+
+.informacoes p {
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  column-gap: 8px;
+  padding: 11px 0;
+}
+
+.informacoes p > span {
+  grid-row: span 2;
+  color: #205988;
+  font-size: 17px;
+}
+
+.informacoes b {
+  color: #222b31;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.informacoes small {
+  margin-top: 3px;
+  color: #5f6870;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.acoes {
+  display: flex;
+  flex-direction: column;
+  padding: 1px 20px 16px;
+}
+
+.linha-acoes {
+  width: 98.5%;
+  margin: 0 auto 8px;
+  border: none;
+  border-top: 1px solid #222222;
+}
+
+.acoes button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 7px;
+  border: none;
+  background: transparent;
+  color: #205988;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.acoes button:hover {
+  background: #f1f6fa;
+}
+
+.acoes .sair {
+  border-top: 1px solid #222222;
+  color: #bd3838;
+}
+
+.acoes .sair:hover {
+  background: #fff1f1;
+}
+
+.acoes button i {
+  font-size: 17px;
+}
+
+/* SIDEBAR */
+.sidebar-backdrop {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+}
+
+.sidebar-backdrop[hidden],
+.sidebar[hidden] {
+  display: none;
+}
+
+.sidebar {
+  position: fixed;
+  z-index: 60;
+  top: 0;
+  left: 0;
+  width: 341px;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  background: #205988;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 4px 19.5px 11px rgba(0, 0, 0, 0.26);
+  animation: abrir-sidebar 180ms ease-out;
+}
+
+.sidebar-topo {
+  position: relative;
+  height: 103px;
+}
+
+.sidebar-logo {
+  position: absolute;
+  top: 19px;
+  left: 7px;
+  width: 99px;
+  height: 66px;
+  object-fit: contain;
+}
+
+.sidebar-fechar {
+  position: absolute;
+  top: 39px;
+  right: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.sidebar-fechar:hover {
+  opacity: 0.75;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  padding: 47px 30px 0;
+}
+
+.sidebar-menu a {
+  color: #ffffff;
+  text-decoration: none;
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+}
+
+.sidebar-menu a + a {
+  margin-top: 55px;
+}
+
+.sidebar-menu a:hover {
+  opacity: 0.75;
+}
+
+.sidebar-sair {
+  position: absolute;
+  bottom: 40px;
+  left: 80px;
+  width: 181px;
+  height: 47px;
+  border: none;
+  border-radius: 100px;
+  background: #ffffff;
+  color: #205988;
+  font-size: 22px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 23.5px 4px rgba(0, 0, 0, 0.4);
+}
+
+.sidebar-sair:hover {
+  transform: translateY(-2px);
+}
+
+@keyframes abrir-sidebar {
+  from { opacity: 0; transform: translateX(-15px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* DASHBOARD */
+main {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-height: calc(100vh - 80px);
+  padding: 30px 4.3%;
+  grid-template-columns: 28% 1fr;
+  grid-template-rows: auto auto 135px 135px 152px;
+  grid-template-areas:
+      "titulo titulo"
+      "subtitulo subtitulo"
+      "vazao consumo"
+      "status consumo"
+      "previsoes metas";
+  column-gap: 14px;
+  row-gap: 8px;
+  box-sizing: border-box;
+}
+
+main > h1 {
+  grid-area: titulo;
+  margin: 0;
+  padding-left: 5.3%;
+  color: var(--secondary-color);
+  font-size: var(--font-size-heading3);
+  font-weight: var(--weight-bold);
+}
+
+main > h3 {
+  grid-area: subtitulo;
+  margin: -5px 0 17px;
+  padding-left: 5.3%;
+  color: #666;
+  font-size: var(--font-size-heading6);
+  font-weight: var(--weight-regular);
+}
+
+.area-vazao,
+.area-status,
+.area-consumo-agua,
+.area-previsoes,
+.metas {
+  min-width: 0;
+  background-color: #FFFFFF;
+  border: 1px solid #D0D0D0;
+  border-radius: 10px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+}
+
+.area-vazao {
+  grid-area: vazao;
+  padding: 13px 16px;
+}
+
+.area-vazao i {
+  color: var(--secondary-color);
+  margin-right: 7px;
+  font-size: var(--font-size-heading5);
+}
+
+.area-vazao h3 {
+  display: inline;
+  margin: 0;
+  color: var(--secondary-color);
+  font-size: var(--font-size-heading6);
+  font-weight: var(--weight-bold);
+}
+
+.area-vazao h1 {
+  margin: 22px 0 0;
+  text-align: center;
+  color: var(--secondary-color);
+  font-size: var(--font-size-heading4);
+  font-weight: var(--weight-bold);
+}
+
+button-ver-detalhes {
+  display: block;
+  width: max-content;
+  margin: 18px auto 0;
+  padding: 6px 15px;
+  background-color: var(--buton-color);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  color: var(--secondary-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size-heading7);
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+}
+
+button-ver-detalhes:hover {
+  filter: brightness(0.96);
+}
+
+.area-status {
+  grid-area: status;
+  padding: 13px 16px;
+}
+
+.area-status i {
+  color: var(--secondary-color);
+  margin-right: 7px;
+  font-size: var(--font-size-heading6);
+}
+
+.area-status > h3:first-of-type {
+  display: inline;
+  color: var(--secondary-color);
+  font-size: var(--font-size-heading6);
+  font-weight: var(--weight-bold);
+}
+
+.area-status h1 {
+  display: flex;
+  align-items: center;
+  margin: 12px 0 0;
+  color: #222;
+  font-size: var(--font-size-heading6);
+  font-weight: var(--weight-regular);
+}
+
+.area-status h1 + h3 {
+  margin: 2px 0 0 38px;
+  color: #666;
+  font-size: var(--font-size-heading7);
+  font-weight: var(--weight-regular);
+}
+
+.area-consumo-agua {
+  grid-area: consumo;
+  padding: 18px 25px;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.titulo-consumo {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--secondary-color);
+}
+
+.titulo-consumo i {
+  margin: 0;
+  color: var(--secondary-color);
+  font-size: var(--font-size-heading5);
+}
+
+.titulo-consumo h3 {
+  margin: 0;
+  color: var(--secondary-color);
+  font-size: var(--font-size-heading6);
+  font-weight: var(--weight-bold);
+}
+
+.grafico-consumo {
+  position: relative;
+  width: 100%;
+  height: 175px;
+  margin-top: 5px;
+}
+
+.area-previsoes {
+  grid-area: previsoes;
+  padding: 20px;
+}
+
+.area-previsoes i {
+  color: var(--secondary-color);
+  margin-right: 7px;
+  font-size: var(--font-size-heading5);
+}
+
+.area-previsoes > h3:first-of-type {
+  display: inline;
+  color: var(--secondary-color);
+  font-size: var(--font-size-heading6);
+  font-weight: var(--weight-bold);
+}
+
+.area-previsoes > h3:nth-of-type(2) {
+  margin: 12px 0 0 30px;
+  color: #666;
+  font-size: var(--font-size-heading6);
+  font-weight: var(--weight-regular);
+}
+
+.area-previsoes > h1 {
+  margin: 5px 0 0 30px;
+  color: var(--secondary-color);
+  font-size: var(--font-size-heading4);
+  font-weight: var(--weight-bold);
+}
+
+.metas {
+  grid-area: metas;
+  position: relative;
+  padding: 20px;
+}
+
+.metas > i {
+  color: var(--secondary-color);
+  margin-right: 7px;
+  font-size: var(--font-size-heading5);
+}
+
+.metas > h3:first-of-type {
+  display: inline;
+  color: var(--secondary-color);
+  font-size: var(--font-size-heading6);
+  font-weight: var(--weight-bold);
+}
+
+.metas > h3:nth-of-type(2) {
+  position: absolute;
+  top: 47px;
+  left: 20px;
+  margin: 0;
+  color: #666;
+  font-size: var(--font-size-heading6);
+  font-weight: var(--weight-regular);
+}
+
+.metas > h1:nth-of-type(1) {
+  position: absolute;
+  top: 63px;
+  left: 20px;
+  margin: 0;
+  color: var(--secondary-color);
+  font-size: var(--font-size-heading4);
+  font-weight: var(--weight-bold);
+}
+
+.metas > h3:nth-of-type(3) {
+  position: absolute;
+  top: 47px;
+  left: 54%;
+  margin: 0;
+  color: #666;
+  font-size: var(--font-size-heading6);
+  font-weight: var(--weight-regular);
+}
+
+.metas > h1:nth-of-type(2) {
+  position: absolute;
+  top: 63px;
+  left: 54%;
+  margin: 0;
+  color: var(--secondary-color);
+  font-size: var(--font-size-heading4);
+  font-weight: var(--weight-bold);
+}
+
+button-ver-relatorio {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  padding: 6px 18px;
+  background-color: var(--buton-color);
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  color: var(--secondary-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size-heading7);
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+}
+
+button-ver-relatorio:hover {
+  filter: brightness(0.96);
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  main {
+      grid-template-columns: 28% 1fr;
+      padding: 30px 4%;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar { height: 74px; padding: 0 18px; }
+  .usuario { display: none; }
+  .sidebar { width: 88vw; }
+  main {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-areas: "titulo" "subtitulo" "vazao" "status" "consumo" "previsoes" "metas";
+      gap: 10px;
+      padding: 20px 16px;
+  }
+}
+    </style>
 </head>
 
 <body>
+    <!-- NAVBAR INTEGRADA -->
+    <nav class="navbar">
+        <div class="logo-area">
+            <button
+                class="menu"
+                id="abrirSidebar"
+                type="button"
+                aria-label="Abrir menu lateral"
+                aria-expanded="false"
+            >
+                <i class="bi bi-list"></i>
+            </button>
 
-    <div id="navbar-container"></div>
+            <img
+                src="https://raw.githubusercontent.com/Hydranomic/hydranomic/main/experience/assets/logo_hydranomic.png.png"
+                alt="Logo Hydranomic"
+                class="logo-img"
+            >
 
+            <a href="http://hydranomic.kadly.com.br/homepage" class="logo">
+                <span class="hydra">HYDRA</span><span class="nomic">NOMIC</span>
+            </a>
+        </div>
+
+        <div class="perfil">
+            <button
+                class="perfil-botao"
+                id="abrirPerfil"
+                type="button"
+                aria-expanded="false"
+                aria-controls="perfilCard"
+                aria-label="Abrir perfil do usuário"
+            >
+                <span class="avatar avatar-nav">
+                    <i class="bi bi-person-circle"></i>
+                </span>
+
+                <span class="usuario">
+                    <strong id="nav-nome-usuario">
+                        Olá, {{#if experience.user.firstName}}{{experience.user.firstName}}{{else}}Usuário{{/if}}!
+                    </strong>
+                    <small id="nav-cargo-usuario">
+                        {{#if experience.user.experienceGroups.[0].name}}
+                            {{experience.user.experienceGroups.[0].name}}
+                        {{else}}
+                            Usuário
+                        {{/if}}
+                    </small>
+                </span>
+
+                <span class="seta">
+                    <i class="bi bi-chevron-down"></i>
+                </span>
+            </button>
+
+            <!-- MENU DE PERFIL (CARD DO USUÁRIO LOGADO) -->
+            <div class="perfil-card" id="perfilCard" hidden>
+                <div class="perfil-topo">
+                    <span class="avatar avatar-modal">
+                        <i class="bi bi-person-circle"></i>
+                    </span>
+
+                    <div>
+                        <h2 id="card-nome-usuario">
+                            {{#if experience.user.firstName}}{{experience.user.firstName}}{{else}}Usuário{{/if}}
+                        </h2>
+                        <p id="card-subtitulo-cargo">
+                            {{#if experience.user.experienceGroups.[0].name}}
+                                {{experience.user.experienceGroups.[0].name}}
+                            {{else}}
+                                Usuário
+                            {{/if}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="informacoes">
+                    <p>
+                        <span><i class="bi bi-award"></i></span>
+                        <b>Cargo</b>
+                        <small id="card-info-cargo">
+                            {{#if experience.user.experienceGroups.[0].name}}
+                                {{experience.user.experienceGroups.[0].name}}
+                            {{else}}
+                                Usuário
+                            {{/if}}
+                        </small>
+                    </p>
+
+                    <p>
+                        <span><i class="bi bi-envelope"></i></span>
+                        <b>Email</b>
+                        <small id="card-info-email">
+                            {{#if experience.user.email}}{{experience.user.email}}{{else}}-{{/if}}
+                        </small>
+                    </p>
+
+                    <p>
+                        <span><i class="bi bi-clock-history"></i></span>
+                        <b>Último acesso</b>
+                        <small id="card-info-ultimo-acesso" data-last-login="{{experience.user.lastLogin}}">
+                            Carregando...
+                        </small>
+                    </p>
+                </div>
+
+                <div class="acoes">
+                    <hr class="linha-acoes">
+
+                    <button type="button" onclick="window.location.href='http://hydranomic.kadly.com.br/configuracoes'">
+                        <i class="bi bi-gear"></i>
+                        Configurações
+                    </button>
+
+                    <button type="button" class="sair" id="btn-sair-conta" onclick="realizarLogout(event)">
+                        <i class="bi bi-box-arrow-right"></i>
+                        Sair da conta
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- BACKDROP DA SIDEBAR -->
+    <button
+        class="sidebar-backdrop"
+        id="fecharSidebarFundo"
+        type="button"
+        aria-label="Fechar menu lateral"
+        hidden
+    ></button>
+
+    <!-- SIDEBAR LATERAL -->
+    <aside class="sidebar" id="sidebar" aria-label="Menu lateral" hidden>
+        <div class="sidebar-topo">
+            <img
+                src="https://raw.githubusercontent.com/Hydranomic/hydranomic/main/experience/assets/logo_hydranomic.png.png"
+                alt="Hydranomic"
+                class="sidebar-logo"
+            >
+
+            <button
+                class="sidebar-fechar"
+                id="fecharSidebar"
+                type="button"
+                aria-label="Fechar menu lateral"
+            >
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="http://hydranomic.kadly.com.br/homepage">Página inicial</a>
+            <a href="http://hydranomic.kadly.com.br/definicoes" id="link-definicoes">Definições</a>
+            <a href="http://hydranomic.kadly.com.br/metas">Metas de consumo / financeiro</a>
+            <a href="http://hydranomic.kadly.com.br/relatorio">Relatório de consumo</a>
+        </nav>
+
+        <button
+            class="sidebar-sair"
+            id="btn-sair-sidebar"
+            type="button"
+            onclick="realizarLogout(event)"
+        >
+            Sair
+        </button>
+    </aside>
+
+    <!-- DASHBOARD -->
     <main>
-
         <h1>Olá, </h1>
         <h3>Aqui está o resumo do sistema</h3>
 
         <section class="area-vazao">
             <i class="bi bi-graph-up"></i>
             <h3>Vazão atual da água</h3>
-            <h1></h1>
-            <button-ver-detalhes>Ver detalhes</button-ver-detalhes>
+            <h1>-- m³/h</h1>
+            <button-ver-detalhes onclick="window.location.href='http://hydranomic.kadly.com.br/relatorio'">Ver detalhes</button-ver-detalhes>
         </section>
 
         <section class="area-status">
             <i class="bi bi-exclamation-triangle-fill"></i>
             <h3>Status do sistema</h3>
-            <h1></h1>
-            <h3></h3>
-            <button-ver-detalhes>Ver detalhes</button-ver-detalhes>
+            <h1>Carregando...</h1>
+            <h3>Monitoramento ativo</h3>
+            <button-ver-detalhes onclick="window.location.href='http://hydranomic.kadly.com.br/relatorio'">Ver detalhes</button-ver-detalhes>
         </section>
 
-                <section class="area-consumo-agua">
+        <section class="area-consumo-agua">
+            <div class="titulo-consumo">
+                <i class="bi bi-droplet"></i>
+                <h3>Consumo de água</h3>
+            </div>
 
-    <div class="titulo-consumo">
-        <i class="bi bi-droplet"></i>
-        <h3>Consumo de água</h3>
-    </div>
-
-    <div class="grafico-consumo">
-        <canvas id="graficoConsumo"></canvas>
-    </div>
-
-</section>
+            <div class="grafico-consumo">
+                <canvas id="graficoConsumo"></canvas>
+            </div>
+        </section>
 
         <section class="area-previsoes">
             <i class="bi bi-check-all"></i>
             <h3>Previsões</h3>
             <h3>Previsão financeira do próximo mês</h3>
-            <h1></h1>
+            <h1>R$ --</h1>
         </section>
 
         <section class="metas">
@@ -64,149 +951,468 @@
             <h3>Metas</h3>
 
             <h3>Gasto total do mês</h3>
-            <h1></h1>
+            <h1>R$ --</h1>
 
             <h3>Consumo total de água</h3>
-            <h1></h1>
+            <h1>-- m³</h1>
 
-            <button-ver-relatorio>
+            <button-ver-relatorio onclick="window.location.href='http://hydranomic.kadly.com.br/metas'">
                 Ver relatório financeiro
             </button-ver-relatorio>
         </section>
-
     </main>
 
+    <!-- SCRIPT DE INTEGRAÇÃO COM GRAFICO_ANUAL.JSON E SUMARIO_EXECUCAO.JSON -->
     <script>
-    const grafico = document.getElementById('graficoConsumo');
+        let instanciaGraficoConsumo = null;
 
-    new Chart(grafico, {
-        type: 'line',
+        function renderizarGrafico(rotulos, valores) {
+            const canvas = document.getElementById('graficoConsumo');
+            if (!canvas) return;
 
-        data: {
-            labels: [
-                'Jan',
-                'Fev',
-                'Mar',
-                'Abr',
-                'Mai',
-                'Jun',
-                'Jul',
-                'Ago',
-                'Set',
-                'Out',
-                'Nov',
-                'Dez'
-            ],
+            const rotulosPadrao = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+            const rotulosFinais = (Array.isArray(rotulos) && rotulos.length === 12) ? rotulos : rotulosPadrao;
+            const dadosFinais = Array.isArray(valores) ? valores : [435, 515, 560, 475, 590, 625, 680, 620, 570, 520, 490, 430];
 
-            datasets: [{
-                label: 'Consumo de água',
+            if (instanciaGraficoConsumo) {
+                instanciaGraficoConsumo.data.labels = rotulosFinais;
+                instanciaGraficoConsumo.data.datasets[0].data = dadosFinais;
+                instanciaGraficoConsumo.update();
+                return;
+            }
 
-                data: [
-                    435,
-                    515,
-                    560,
-                    475,
-                    590,
-                    625,
-                    680,
-                    620,
-                    570,
-                    520,
-                    490,
-                    430
-                ],
-
-                borderColor: '#205988',
-                backgroundColor: 'rgba(32, 89, 136, 0.10)',
-
-                borderWidth: 2,
-
-                pointRadius: 3,
-                pointBackgroundColor: '#205988',
-
-                tension: 0.3,
-
-                fill: true
-            }]
-        },
-
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-
-            scales: {
-                y: {
-                    min: 300,
-                    max: 700,
-
-                    ticks: {
-                        stepSize: 100,
-
-                        callback: function(valor) {
-                            return valor + 'k';
+            instanciaGraficoConsumo = new Chart(canvas, {
+                type: 'line',
+                data: {
+                    labels: rotulosFinais,
+                    datasets: [{
+                        label: 'Consumo de água (m³)',
+                        data: dadosFinais,
+                        borderColor: '#205988',
+                        backgroundColor: 'rgba(32, 89, 136, 0.10)',
+                        borderWidth: 2,
+                        pointRadius: 3.5,
+                        pointBackgroundColor: '#205988',
+                        tension: 0.3,
+                        fill: true,
+                        spanGaps: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return (context.parsed.y != null) ? `${context.parsed.y} m³` : 'Sem medição';
+                                }
+                            }
                         }
                     },
-
-                    grid: {
-                        color: '#f1f5f9'
-                    }
-                },
-
-                x: {
-                    grid: {
-                        display: false
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function(valor) { return valor + ' m³'; }
+                            },
+                            grid: { color: '#f1f5f9' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
                     }
                 }
+            });
+        }
+
+        async function carregarDadosDoNotebook() {
+            renderizarGrafico(null, null);
+
+            const timestamp = new Date().getTime();
+
+            const URL_GRAFICO = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/grafico_anual.json';
+            const URL_SUMARIO = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/sumario_execucao.json';
+
+            try {
+                const [resGrafico, resSumario] = await Promise.all([
+                    fetch(`${URL_GRAFICO}?_t=${timestamp}`)
+                        .then(r => {
+                            if (!r.ok) throw new Error(`Falha ao ler grafico_anual.json (HTTP ${r.status})`);
+                            return r.json();
+                        })
+                        .catch(e => { console.warn(e.message); return null; }),
+
+                    fetch(`${URL_SUMARIO}?_t=${timestamp}`)
+                        .then(r => {
+                            if (!r.ok) throw new Error(`Falha ao ler sumario_execucao.json (HTTP ${r.status})`);
+                            return r.json();
+                        })
+                        .catch(e => { console.warn(e.message); return null; })
+                ]);
+
+                if (resGrafico && Array.isArray(resGrafico.meses)) {
+                    const rotulos = resGrafico.meses.map(m => m.rotulo || ('Mês ' + m.mes));
+                    const consumos = resGrafico.meses.map(m => m.consumo_m3);
+                    renderizarGrafico(rotulos, consumos);
+                }
+
+                if (resSumario) {
+                    const elPrevisao = document.querySelector('.area-previsoes > h1');
+                    if (elPrevisao && resSumario.fatura_estimada_reais != null) {
+                        elPrevisao.textContent = 'R$ ' + Number(resSumario.fatura_estimada_reais).toLocaleString('pt-BR', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        });
+                    }
+
+                    const elGastoMes = document.querySelector('.metas > h1:nth-of-type(1)');
+                    if (elGastoMes && resSumario.consumo_mes_acumulado_m3 != null) {
+                        const tarifaBase = 59.6;
+                        const gastoTotal = Number(resSumario.consumo_mes_acumulado_m3) * tarifaBase;
+                        elGastoMes.textContent = 'R$ ' + gastoTotal.toLocaleString('pt-BR', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        });
+                    }
+
+                    const elConsumoTotal = document.querySelector('.metas > h1:nth-of-type(2)');
+                    if (elConsumoTotal && resSumario.consumo_mes_acumulado_m3 != null) {
+                        elConsumoTotal.textContent = Number(resSumario.consumo_mes_acumulado_m3).toFixed(2) + ' m³';
+                    }
+
+                    const elStatus = document.querySelector('.area-status > h1');
+                    if (elStatus) {
+                        const status = resSumario.meta_status ? String(resSumario.meta_status).toUpperCase() : "NORMAL";
+                        elStatus.textContent = status;
+                        if (status === "ESTOURADA") {
+                            elStatus.style.color = "var(--red-status-color)";
+                        } else if (status === "ALERTA_80") {
+                            elStatus.style.color = "#c99700";
+                        } else {
+                            elStatus.style.color = "var(--secondary-color)";
+                        }
+                    }
+                } else {
+                    const elStatus = document.querySelector('.area-status > h1');
+                    if (elStatus && elStatus.textContent === "Carregando...") {
+                        elStatus.textContent = "Normal";
+                    }
+                }
+
+            } catch (erro) {
+                console.error('Erro geral ao processar integração:', erro);
+                const elStatus = document.querySelector('.area-status > h1');
+                if (elStatus) elStatus.textContent = "Normal";
             }
         }
-    });
-</script>
 
-    <script>
-        fetch("navbar.html")
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Não foi possível carregar a navbar.");
-                }
-
-                return response.text();
-            })
-            .then(html => {
-                const parser = new DOMParser();
-                const documento = parser.parseFromString(html, "text/html");
-
-                const container = document.getElementById("navbar-container");
-
-                Array.from(documento.body.children).forEach(elemento => {
-                    if (elemento.tagName !== "SCRIPT") {
-                        container.appendChild(
-                            document.importNode(elemento, true)
-                        );
-                    }
-                });
-
-                documento.querySelectorAll("script").forEach(scriptOriginal => {
-                    const novoScript = document.createElement("script");
-
-                    if (scriptOriginal.src) {
-                        novoScript.src = scriptOriginal.src;
-                    } else {
-                        novoScript.textContent = scriptOriginal.textContent;
-                    }
-
-                    document.body.appendChild(novoScript);
-                });
-            })
-            .catch(erro => {
-                console.error(erro);
-            });
+        document.addEventListener('DOMContentLoaded', carregarDadosDoNotebook);
     </script>
 
+    <!-- SCRIPTS DA NAVBAR, SIDEBAR, AUTENTICAÇÃO E PERFIL -->
+    <script>
+        // =========================================================================
+        // FUNÇÃO GLOBAL DE LOGOUT (LIMPA SESSÃO, COOKIES E EVITA CACHE)
+        // =========================================================================
+        function realizarLogout(evento) {
+            if (evento) {
+                evento.preventDefault();
+                evento.stopPropagation();
+            }
+
+            // Remove dados da sessão atual
+            localStorage.removeItem("hydranomic_sessao_atual");
+            sessionStorage.removeItem("hydranomic_email_sincronizado");
+            sessionStorage.setItem("hydranomic_acabou_de_sair", "true");
+
+            // Expira o cookie authorization em todos os caminhos e domínios possíveis
+            const dominios = [
+                "",
+                "; domain=" + window.location.hostname,
+                "; domain=.kadly.com.br",
+                "; domain=hydranomic.kadly.com.br"
+            ];
+            dominios.forEach(function (dom) {
+                document.cookie = "authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; max-age=0; path=/" + dom + ";";
+            });
+
+            // Redireciona para /login (sem barra dupla) e com timestamp anti-cache
+            window.location.replace("http://hydranomic.kadly.com.br/login?logout=1&_t=" + new Date().getTime());
+        }
+
+        // Se o usuário voltar pelo botão "Voltar" do navegador (bfcache), força recarregamento real
+        window.addEventListener("pageshow", function (evento) {
+            if (evento.persisted || sessionStorage.getItem("hydranomic_acabou_de_sair") === "true") {
+                sessionStorage.removeItem("hydranomic_acabou_de_sair");
+                window.location.reload();
+            }
+        });
+
+        const botaoPerfil = document.getElementById("abrirPerfil");
+        const perfilCard = document.getElementById("perfilCard");
+
+        if (botaoPerfil && perfilCard) {
+            botaoPerfil.addEventListener("click", function (evento) {
+                evento.stopPropagation();
+                const perfilAberto = botaoPerfil.getAttribute("aria-expanded") === "true";
+                botaoPerfil.setAttribute("aria-expanded", String(!perfilAberto));
+                perfilCard.hidden = perfilAberto;
+            });
+
+            document.addEventListener("click", function (evento) {
+                if (!evento.target.closest(".perfil")) {
+                    botaoPerfil.setAttribute("aria-expanded", "false");
+                    perfilCard.hidden = true;
+                }
+            });
+        }
+
+        const abrirSidebar = document.getElementById("abrirSidebar");
+        const fecharSidebar = document.getElementById("fecharSidebar");
+        const fecharSidebarFundo = document.getElementById("fecharSidebarFundo");
+        const sidebar = document.getElementById("sidebar");
+
+        if (abrirSidebar && sidebar) {
+            abrirSidebar.addEventListener("click", function () {
+                sidebar.hidden = false;
+                if (fecharSidebarFundo) fecharSidebarFundo.hidden = false;
+                abrirSidebar.setAttribute("aria-expanded", "true");
+                if (botaoPerfil) botaoPerfil.setAttribute("aria-expanded", "false");
+                if (perfilCard) perfilCard.hidden = true;
+            });
+
+            function fecharMenuLateral() {
+                sidebar.hidden = true;
+                if (fecharSidebarFundo) fecharSidebarFundo.hidden = true;
+                abrirSidebar.setAttribute("aria-expanded", "false");
+            }
+
+            if (fecharSidebar) fecharSidebar.addEventListener("click", fecharMenuLateral);
+            if (fecharSidebarFundo) fecharSidebarFundo.addEventListener("click", fecharMenuLateral);
+
+            document.addEventListener("keydown", function (evento) {
+                if (evento.key === "Escape") {
+                    fecharMenuLateral();
+                    if (botaoPerfil) botaoPerfil.setAttribute("aria-expanded", "false");
+                    if (perfilCard) perfilCard.hidden = true;
+                }
+            });
+
+            document.querySelectorAll(".sidebar-menu a").forEach(function (link) {
+                link.addEventListener("click", fecharMenuLateral);
+            });
+        }
+
+        // Garante o clique nos botões de Sair via listener além do onclick
+        document.querySelectorAll(".sair, .sidebar-sair").forEach(function (btnSair) {
+            btnSair.addEventListener("click", realizarLogout);
+        });
+
+        // =========================================================================
+        // GERENCIAMENTO DE USUÁRIOS E GRUPOS (SINCRONIZADO COM WEGNOLOGY)
+        // =========================================================================
+        const STORAGE_KEY_USUARIOS = "hydranomic_usuarios_equipe";
+        const WEGNOLOGY_API_USUARIOS = "http://hydranomic.kadly.com.br/api/usuarios";
+
+        function normalizarUsuarioWegnology(u) {
+            if (!u || !u.email) return null;
+
+            const nomeCompleto = u.nome
+                || [u.firstName, u.lastName].filter(Boolean).join(" ").trim()
+                || u.email.split("@")[0];
+
+            let grupoNome = u.grupo || "";
+            if (!grupoNome && Array.isArray(u.experienceGroups) && u.experienceGroups.length > 0) {
+                const primeiroGrupo = u.experienceGroups[0];
+                grupoNome = typeof primeiroGrupo === "string" ? primeiroGrupo : (primeiroGrupo.name || "");
+            }
+
+            const isAdmin = grupoNome.toLowerCase().indexOf("admin") === 0;
+
+            return {
+                id: u.id || u.experienceUserId || u.email,
+                nome: nomeCompleto,
+                email: u.email.trim().toLowerCase(),
+                grupo: isAdmin ? "Administradores" : "Usuarios"
+            };
+        }
+
+        function obterUsuariosSalvos() {
+            const salvos = localStorage.getItem(STORAGE_KEY_USUARIOS);
+            if (salvos) {
+                try {
+                    const parsed = JSON.parse(salvos);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        return parsed;
+                    }
+                } catch (e) {
+                    console.error("Erro ao ler usuários salvos:", e);
+                }
+            }
+            const inicial = [
+                {
+                    id: "admin-inicial",
+                    nome: "Adm Senai",
+                    email: "adm.senai@hydranomic.com",
+                    grupo: "Administradores"
+                }
+            ];
+            localStorage.setItem(STORAGE_KEY_USUARIOS, JSON.stringify(inicial));
+            return inicial;
+        }
+
+        async function sincronizarUsuariosDaAPI() {
+            try {
+                const resposta = await fetch(WEGNOLOGY_API_USUARIOS + "?_t=" + new Date().getTime(), {
+                    method: "GET",
+                    headers: { "Accept": "application/json" },
+                    cache: "no-store"
+                });
+
+                if (!resposta.ok) return;
+
+                const dados = await resposta.json();
+                const brutos = Array.isArray(dados)
+                    ? dados
+                    : (dados.items || dados.usuarios || dados.users || []);
+
+                if (!Array.isArray(brutos) || brutos.length === 0) return;
+
+                const normalizados = brutos
+                    .map(normalizarUsuarioWegnology)
+                    .filter(Boolean);
+
+                if (normalizados.length > 0) {
+                    localStorage.setItem(STORAGE_KEY_USUARIOS, JSON.stringify(normalizados));
+                }
+            } catch (erro) {
+                console.warn("Erro ao sincronizar usuários na homepage:", erro);
+            }
+        }
+
+        // =========================================================
+        // VERIFICAÇÃO DE LOGIN + DADOS REAIS DO USUÁRIO LOGADO
+        // =========================================================
+        (async function inicializarDadosPerfil() {
+            sessionStorage.removeItem("hydranomic_acabou_de_sair");
+
+            const wegId = "{{experience.user.id}}".trim();
+            const wegNome = "{{experience.user.firstName}}".trim();
+            const wegEmail = "{{experience.user.email}}".trim().toLowerCase();
+            const wegGrupo = "{{experience.user.experienceGroups.[0].name}}".trim();
+            const wegLastLogin = "{{experience.user.lastLogin}}".trim();
+
+            let sessaoSalva = {};
+            try {
+                sessaoSalva = JSON.parse(localStorage.getItem("hydranomic_sessao_atual") || "{}");
+            } catch (e) {
+                sessaoSalva = {};
+            }
+
+            const emailSessao = (sessaoSalva.email || "").trim().toLowerCase();
+
+            // Se não estiver autenticado no WEGnology e nem tiver sessão ativa, manda para /login
+            if (!wegId && !wegEmail && !emailSessao) {
+                window.location.replace("http://hydranomic.kadly.com.br/login?_t=" + new Date().getTime());
+                return;
+            }
+
+            // Se o HTML veio do cache do navegador com um usuário diferente do que acabou de logar,
+            // força uma atualização única buscando do servidor com cache limpo
+            if (wegEmail && emailSessao && wegEmail !== emailSessao) {
+                const chaveReload = "hydranomic_reload_" + emailSessao;
+                if (!sessionStorage.getItem(chaveReload)) {
+                    sessionStorage.setItem(chaveReload, "1");
+                    window.location.replace("http://hydranomic.kadly.com.br/homepage?_t=" + new Date().getTime());
+                    return;
+                }
+            }
+
+            // Só aproveita os dados da sessaoSalva se pertencerem ao MESMO e-mail logado no WEGnology
+            const sessaoMesmoUsuario = (!wegEmail || (emailSessao && emailSessao === wegEmail));
+            if (!sessaoMesmoUsuario) {
+                sessaoSalva = {};
+            }
+
+            await sincronizarUsuariosDaAPI();
+            const listaEquipe = obterUsuariosSalvos();
+
+            const emailAtivo = wegEmail || emailSessao || "";
+
+            const membroEquipe = listaEquipe.find(function (u) {
+                return u.email && emailAtivo && u.email.toLowerCase() === emailAtivo.toLowerCase();
+            }) || {};
+
+            const nomeSessaoValido = (sessaoMesmoUsuario && sessaoSalva.nome && sessaoSalva.nome !== "Usuário")
+                ? sessaoSalva.nome
+                : "";
+
+            const nomeFinal = wegNome
+                || membroEquipe.nome
+                || nomeSessaoValido
+                || (emailAtivo ? emailAtivo.split("@")[0] : "Usuário");
+
+            const grupoBruto = wegGrupo
+                || membroEquipe.grupo
+                || (sessaoMesmoUsuario ? sessaoSalva.grupo : "")
+                || "Usuarios";
+
+            const isAdmin = grupoBruto.toLowerCase().indexOf("admin") === 0;
+            const cargoFormatado = isAdmin ? "Administrador" : "Usuário";
+
+            function formatarDataHora(dataIso) {
+                const data = dataIso ? new Date(dataIso) : new Date();
+                if (isNaN(data.getTime())) return formatarDataHora(null);
+                const dia = String(data.getDate()).padStart(2, "0");
+                const mes = String(data.getMonth() + 1).padStart(2, "0");
+                const ano = data.getFullYear();
+                const hora = String(data.getHours()).padStart(2, "0");
+                const min = String(data.getMinutes()).padStart(2, "0");
+                return dia + "/" + mes + "/" + ano + " às " + hora + ":" + min;
+            }
+
+            const ultimoAcessoTexto = wegLastLogin
+                ? formatarDataHora(wegLastLogin)
+                : ((sessaoMesmoUsuario && sessaoSalva.ultimoAcesso) ? sessaoSalva.ultimoAcesso : formatarDataHora(null));
+
+            if (emailAtivo) {
+                localStorage.setItem("hydranomic_sessao_atual", JSON.stringify({
+                    nome: nomeFinal,
+                    email: emailAtivo,
+                    grupo: grupoBruto,
+                    ultimoAcesso: ultimoAcessoTexto
+                }));
+            }
+
+            const elNavNome = document.getElementById("nav-nome-usuario");
+            const elNavCargo = document.getElementById("nav-cargo-usuario");
+            const elCardNome = document.getElementById("card-nome-usuario");
+            const elCardSubCargo = document.getElementById("card-subtitulo-cargo");
+            const elCardInfoCargo = document.getElementById("card-info-cargo");
+            const elCardInfoEmail = document.getElementById("card-info-email");
+            const elCardUltimoAcesso = document.getElementById("card-info-ultimo-acesso");
+
+            if (elNavNome) elNavNome.textContent = "Olá, " + nomeFinal + "!";
+            if (elNavCargo) elNavCargo.textContent = cargoFormatado;
+            if (elCardNome) elCardNome.textContent = nomeFinal;
+            if (elCardSubCargo) elCardSubCargo.textContent = cargoFormatado;
+            if (elCardInfoCargo) elCardInfoCargo.textContent = cargoFormatado;
+            if (elCardInfoEmail) elCardInfoEmail.textContent = emailAtivo || "-";
+            if (elCardUltimoAcesso) elCardUltimoAcesso.textContent = ultimoAcessoTexto;
+
+            const tituloPrincipal = document.querySelector("main > h1");
+            if (tituloPrincipal) {
+                tituloPrincipal.textContent = "Olá, " + nomeFinal + "!";
+            }
+
+            // Exibe ou oculta o link de Definições de acordo com o perfil atual
+            const linkDefinicoes = document.getElementById("link-definicoes");
+            if (linkDefinicoes) {
+                linkDefinicoes.style.display = isAdmin ? "" : "none";
+            }
+        })();
+    </script>
 </body>
 </html>
