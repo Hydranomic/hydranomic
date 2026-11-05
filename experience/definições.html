@@ -1,468 +1,2315 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Evita que o navegador guarde o HTML do usuário anterior em cache -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Definições do Sistema - Hydranomic</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css');
 
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+:root {
+    --bg-color: #E6EFF8;
+    --secondary-color: #205988;
+    --red-status-color: #D96161;
+    --yellow-status-color: #FFE57C;
+    --green-status-color: #43BC8B;
+    --buton-color: #CFE1F4;
 
-    <link rel="stylesheet" href="css/definicoes.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="css/navbar.css">
-    <script src="js/definicoes.js" defer></script>
+    --font-family: "Inter", sans-serif;
 
-    <title>Definições</title>
+    --font-size-heading1: 36px;
+    --font-size-heading2: 32px;
+    --font-size-heading3: 24px;
+    --font-size-heading4: 20px;
+    --font-size-heading5: 16px;
+    --font-size-heading6: 14px;
+    --font-size-heading7: 12px;
+
+    --weight-extra-light: 200;
+    --weight-light: 300;
+    --weight-regular: 400;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+    --weight-extrabold: 800;
+    --italic: italic;
+}
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: #e6eff8;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 84px;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #205988;
+  box-shadow: 0 4px 19px rgba(0, 0, 0, 0.28);
+}
+
+/* Área esquerda */
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Botão do menu */
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 32px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.menu:hover {
+  opacity: 0.75;
+}
+
+/* Imagem da logo */
+.logo-img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  transform: scale(2.2);
+  transform-origin: center;
+}
+
+/* Texto da logo */
+.logo {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 21px;
+  letter-spacing: 4px;
+  white-space: nowrap;
+}
+
+.logo .hydra {
+  font-weight: 400;
+}
+
+.logo .nomic {
+  font-weight: 700;
+}
+
+/* Área do perfil */
+.perfil {
+  position: relative;
+}
+
+.perfil-botao {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+  border: none;
+  color: #ffffff;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* Avatar */
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Avatar da navbar */
+.avatar-nav {
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  color: #ffffff;
+  font-size: 33px;
+}
+
+.avatar-modal {
+  width: 58px;
+  height: 58px;
+  background: transparent;
+  color: #205988;
+  font-size: 51px;
+}
+
+/* Nome do usuário */
+.usuario {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.usuario strong {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.usuario small {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+/* Seta */
+.seta {
+  margin-left: 8px;
+  font-size: 15px;
+  transition: transform 0.2s ease;
+}
+
+.perfil-botao[aria-expanded="true"] .seta {
+  transform: rotate(180deg);
+}
+
+/* Card do perfil */
+.perfil-card {
+  position: absolute;
+  z-index: 20;
+  top: 58px;
+  right: 0;
+  width: 320px;
+  overflow: hidden;
+  background: #ffffff;
+  color: #202b33;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.perfil-card[hidden] {
+  display: none;
+}
+
+.perfil-card::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 28px;
+  width: 20px;
+  height: 20px;
+  background: #ffffff;
+  transform: rotate(45deg);
+}
+
+.perfil-topo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 22px 20px;
+  background: #ffffff;
+}
+
+.perfil-topo h2 {
+  margin-bottom: 3px;
+  font-size: 19px;
+}
+
+.perfil-topo p {
+  color: #6d7780;
+  font-size: 13px;
+}
+
+.informacoes {
+  padding: 3px 20px 10px;
+}
+
+.informacoes p {
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  column-gap: 8px;
+  padding: 11px 0;
+}
+
+.informacoes p > span {
+  grid-row: span 2;
+  color: #205988;
+  font-size: 17px;
+}
+
+.informacoes b {
+  color: #222b31;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.informacoes small {
+  margin-top: 3px;
+  color: #5f6870;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.acoes {
+  display: flex;
+  flex-direction: column;
+  padding: 1px 20px 16px;
+}
+
+.linha-acoes {
+  width: 98.5%;
+  margin: 0 auto 8px;
+  border: none;
+  border-top: 1px solid #222222;
+}
+
+.acoes button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 7px;
+  border: none;
+  background: transparent;
+  color: #205988;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.acoes .sair {
+  border-top: 1px solid #222222;
+  color: #bd3838;
+}
+
+.acoes button:hover {
+  background: #f1f6fa;
+}
+
+.acoes .sair:hover {
+  background: #fff1f1;
+}
+
+.acoes button i {
+  font-size: 17px;
+}
+
+/* Acessibilidade */
+.menu:focus-visible,
+.perfil-botao:focus-visible,
+.acoes button:focus-visible,
+.logo:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 4px;
+}
+
+/* Sidebar */
+.sidebar-backdrop {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+}
+
+.sidebar-backdrop[hidden],
+.sidebar[hidden] {
+  display: none;
+}
+
+.sidebar {
+  position: fixed;
+  z-index: 60;
+  top: 0;
+  left: 0;
+  width: 341px;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  background: #205988;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 4px 19.5px 11px rgba(0, 0, 0, 0.26);
+  animation: abrir-sidebar 180ms ease-out;
+}
+
+.sidebar-topo {
+  position: relative;
+  height: 103px;
+}
+
+.sidebar-logo {
+  position: absolute;
+  top: 19px;
+  left: 7px;
+  width: 99px;
+  height: 66px;
+  object-fit: contain;
+}
+
+.sidebar-fechar {
+  position: absolute;
+  top: 39px;
+  right: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.sidebar-fechar:hover {
+  opacity: 0.75;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  padding: 47px 30px 0;
+}
+
+.sidebar-menu a {
+  color: #ffffff;
+  text-decoration: none;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+}
+
+.sidebar-menu a + a {
+  margin-top: 55px;
+}
+
+.sidebar-menu a:hover {
+  opacity: 0.75;
+}
+
+.sidebar-sair {
+  position: absolute;
+  bottom: 40px;
+  left: 80px;
+  width: 181px;
+  height: 47px;
+  border: none;
+  border-radius: 100px;
+  background: #ffffff;
+  color: #205988;
+  font-size: 22px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 23.5px 4px rgba(0, 0, 0, 0.4);
+}
+
+.sidebar-sair:hover {
+  transform: translateY(-2px);
+}
+
+@keyframes abrir-sidebar {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* =========================================
+   CONFIGURAÇÃO GERAL
+========================================= */
+
+html, body {
+    min-width: 100%;
+    min-height: 100%;
+    margin: 0;
+    background-color: var(--bg-color, #E6EFF8) !important;
+    color: #222;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+    -webkit-font-smoothing: antialiased;
+}
+
+main {
+    position: relative;
+    z-index: 1;
+    min-height: calc(100vh - 80px);
+    padding: 30px 4.3% 40px;
+}
+
+main > h1 {
+    margin: 0;
+    color: var(--secondary-color);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+main > h2 {
+    margin: 2px 0 16px;
+    color: #666;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+/* =========================================
+   CARDS PRINCIPAIS
+========================================= */
+
+.area-metas-financeiras,
+.status-equipe {
+    display: inline-block;
+    vertical-align: top;
+    width: calc(50% - 15px);
+    height: 296px;
+    margin-bottom: 15px;
+    padding: 0;
+    background-color: #fff;
+    border-radius: 13px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.18);
+    position: relative;
+}
+
+.area-metas-financeiras {
+    margin-right: 10px;
+}
+
+.status-equipe {
+    margin-left: 10px;
+}
+
+.area-metas-financeiras > .bi-cash-coin {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    color: var(--secondary-color);
+    font-size: 17px;
+}
+
+.area-metas-financeiras > h1:first-of-type {
+    margin: 25px 20px 0 50px;
+    color: var(--secondary-color);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.status-equipe > h1:first-of-type {
+    margin: 25px 20px 0 37px;
+    color: var(--secondary-color);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.area-metas-financeiras > h3 {
+    margin: 24px 33px 4px;
+    color: #666;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.area-metas-financeiras > h1:nth-of-type(2),
+.area-metas-financeiras > h1:nth-of-type(3) {
+    margin: 0 33px;
+    color: var(--secondary-color);
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.area-metas-financeiras > h1:nth-of-type(2) {
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #bdbdbd;
+}
+
+.status-equipe > h3 {
+    margin: 25px 37px 5px;
+    color: #666;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.status-equipe > h1:nth-of-type(2),
+.status-equipe > h1:nth-of-type(3) {
+    margin: 0 37px;
+    color: var(--secondary-color);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.status-equipe > .bi-person-badge-fill {
+    position: absolute;
+    top: 80px;
+    right: 48px;
+    color: var(--secondary-color);
+    font-size: 72px;
+}
+
+#btn-nova-meta,
+#btn-gerenciar-equipe {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 148px;
+    height: 30px;
+    padding: 0;
+    background-color: #e6eff8;
+    border: none;
+    border-radius: 7px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    color: #205988;
+    font-family: var(--font-family);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#btn-nova-meta:hover,
+#btn-gerenciar-equipe:hover {
+    transform: translateX(-50%) translateY(-1px);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.18);
+}
+
+button-ver-relatorio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 198px;
+    margin: 16px auto 0;
+    height: 29px;
+    padding: 0 30px;
+    background-color: var(--buton-color);
+    border: none;
+    border-radius: 7px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    color: var(--secondary-color);
+    font-family: var(--font-family);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.area-relatorios {
+    width: 100%;
+    min-height: 180px;
+    padding: 28px 50px 15px;
+    background-color: #fff;
+    border-radius: 13px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.18);
+}
+
+.area-relatorios > h1 {
+    margin: 0 0 25px;
+    color: var(--secondary-color);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* =========================================
+   MODAL NOVA META
+========================================= */
+
+.nova-meta {
+    display: none;
+    position: fixed;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.35);
+    z-index: 1000;
+}
+
+.modal-conteudo {
+    width: 520px;
+    max-width: 90%;
+    padding: 28px 34px 24px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.20);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 10px;
+}
+
+.modal-conteudo h1 {
+    grid-column: 1 / 3;
+    margin: 0;
+    font-size: 18px;
+    color: #205988;
+}
+
+.modal-conteudo h3 {
+    font-size: 13px;
+    color: black;
+    margin: 0;
+}
+
+.modal-conteudo h1 + h3 {
+    grid-column: 1 / 3;
+    color: #666;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.modal-conteudo label {
+    display: block;
+    margin: 14px 0 5px;
+    color: #555;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.modal-conteudo input,
+.modal-conteudo select,
+.modal-conteudo textarea {
+    width: 100%;
+    padding: 9px 10px;
+    background-color: #fff;
+    border: 1px solid #c8c8c8;
+    border-radius: 6px;
+    outline: none;
+    color: #555;
+    font-family: var(--font-family);
+    font-size: 12px;
+}
+
+.modal-conteudo textarea {
+    grid-column: 1 / 3;
+    height: 100px;
+    resize: vertical;
+}
+
+.botoes-modal {
+    grid-column: 1 / 3;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* =========================================
+   MODAL GERENCIAR EQUIPE
+========================================= */
+
+.gerenciar-equipe {
+    display: none;
+    position: fixed;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.20);
+    z-index: 1000;
+}
+
+.modal-conteudo-equipe {
+    width: 560px;
+    max-width: 95%;
+    min-height: 470px;
+    padding: 24px 20px 60px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+    position: relative;
+}
+
+.modal-conteudo-equipe h1 {
+    margin: 0;
+    color: var(--secondary-color);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.modal-conteudo-equipe h1::before {
+    content: "\F4DA";
+    font-family: "bootstrap-icons";
+    color: var(--secondary-color);
+    font-size: 25px;
+    line-height: 1;
+}
+
+.modal-conteudo-equipe h3 {
+    margin: 7px 0 12px;
+    color: #666666;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+.acoes-equipe {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 16px;
+    gap: 10px;
+}
+
+.wrapper-busca-funcionario {
+    position: relative;
+    width: 220px;
+}
+
+.input-buscar-funcionario {
+    width: 220px;
+    height: 35px;
+    padding: 0 10px 0 32px;
+    background-color: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+    color: #333;
+    font-family: var(--font-family);
+    font-size: 12px;
+    outline: none;
+}
+
+.input-buscar-funcionario:focus {
+    border-color: var(--secondary-color);
+}
+
+.icone-lupa-busca {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #bdbdbd;
+    font-size: 14px;
+    pointer-events: none;
+}
+
+button-adicionar-funcionario {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 163px;
+    height: 35px;
+    padding: 0;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 6px;
+    color: #ffffff;
+    font-family: var(--font-family);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button-adicionar-funcionario:hover {
+    opacity: 0.9;
+}
+
+.modal-conteudo-equipe table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #d5d5d5;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.modal-conteudo-equipe th {
+    height: 41px;
+    padding: 0 15px;
+    background-color: #cfe1f4;
+    color: #205988;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    border: none;
+}
+
+.modal-conteudo-equipe th:nth-child(1) { width: 25%; }
+.modal-conteudo-equipe th:nth-child(2) { width: 22%; }
+.modal-conteudo-equipe th:nth-child(3) { width: 41%; }
+.modal-conteudo-equipe th:nth-child(4) { width: 12%; text-align: center; }
+
+.modal-conteudo-equipe td {
+    height: 39px;
+    padding: 0 15px;
+    background-color: #ffffff;
+    color: #555555;
+    font-size: 12px;
+    border-bottom: 1px solid #d5d5d5;
+}
+
+.modal-conteudo-equipe tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.modal-conteudo-equipe td:last-child {
+    text-align: center;
+}
+
+.modal-conteudo-equipe td .bi-trash-fill {
+    color: #d96161;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.modal-conteudo-equipe td .bi-trash-fill:hover {
+    color: #b53d3d;
+}
+
+.badge-grupo {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.badge-admin {
+    background-color: #cfe1f4;
+    color: #205988;
+}
+
+.badge-user {
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+#btn-fechar-equipe {
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+    width: 98px;
+    height: 30px;
+    padding: 0;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 7px;
+    color: #205988;
+    font-family: var(--font-family);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#btn-fechar-equipe:hover {
+    background-color: #f5f5f5;
+}
+
+/* =========================================
+   MODAL ADICIONAR FUNCIONÁRIO
+========================================= */
+
+.adicionar-funcionario {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-conteudo-adicionar-funcionario {
+    position: relative;
+    width: 460px;
+    max-width: 92%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 34px 40px 28px;
+    box-sizing: border-box;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+}
+
+.modal-conteudo-adicionar-funcionario h1 {
+    margin: 0 0 5px 0;
+    color: #205988;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.modal-conteudo-adicionar-funcionario h3:first-of-type {
+    margin: 0 0 16px 0;
+    color: #666;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.modal-conteudo-adicionar-funcionario h3:not(:first-of-type) {
+    margin: 0 0 5px 2px;
+    color: #111;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.modal-conteudo-adicionar-funcionario input[type="text"],
+.modal-conteudo-adicionar-funcionario input[type="email"],
+.modal-conteudo-adicionar-funcionario input[type="password"] {
+    display: block;
+    width: 100%;
+    height: 36px;
+    margin-bottom: 12px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+    outline: none;
+    font-size: 12px;
+}
+
+.modal-conteudo-adicionar-funcionario input:focus {
+    border-color: var(--secondary-color);
+}
+
+.opcoes-cargo-radio {
+    display: flex;
+    gap: 14px;
+    margin: 6px 0 18px;
+}
+
+.opcao-radio-card {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    color: #333;
+    transition: all 0.2s ease;
+    background-color: #fafafa;
+}
+
+.opcao-radio-card:hover {
+    border-color: #205988;
+    background-color: #f0f6fc;
+}
+
+.opcao-radio-card input[type="radio"] {
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    accent-color: #205988;
+    cursor: pointer;
+}
+
+.opcao-radio-card:has(input[type="radio"]:checked) {
+    border-color: #205988;
+    background-color: #e6eff8;
+    color: #205988;
+}
+
+.feedback-status-usuario {
+    font-size: 11px;
+    text-align: center;
+    margin-bottom: 10px;
+    min-height: 16px;
+}
+
+#btn-fechar-adicionar-funcionario {
+    position: absolute;
+    top: 15px;
+    right: 18px;
+    border: none;
+    background: none;
+    font-size: 20px;
+    color: #333;
+    cursor: pointer;
+}
+
+#btn-confirmar-adicionar-funcionario {
+    display: block;
+    margin: 10px auto 0;
+    width: 170px;
+    height: 34px;
+    border: none;
+    border-radius: 6px;
+    background-color: #205988;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+#btn-confirmar-adicionar-funcionario:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* =========================================
+   GERENCIAMENTO DAS CONTAS
+========================================= */
+
+.area-gerenciamento {
+    width: 100%;
+    margin-top: 15px;
+    min-height: 180px;
+    padding: 43px 50px 15px;
+    background-color: #fff;
+    border-radius: 13px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.18);
+    position: relative;
+}
+
+.area-gerenciamento > h1 {
+    margin: 0;
+    color: var(--secondary-color);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.area-gerenciamento > h3 {
+    margin: 5px 0 0;
+    color: #68645d;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.historico-contas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 263px;
+    height: 29px;
+    padding: 0 30px;
+    margin: 27px auto 0;
+    background-color: var(--buton-color);
+    border: none;
+    border-radius: 7px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    color: var(--secondary-color);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.modal-historico-contas {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.30);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-conteudo-historico-contas {
+    width: 622px;
+    max-width: 92%;
+    height: 590px;
+    border-radius: 20px;
+    padding: 52px 70px 48px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-conteudo-historico-contas h1 {
+    margin: 0;
+    color: var(--secondary-color);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.historico-lista {
+    width: 100%;
+    flex: 1;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.botoes-historico {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+#btn-cancelar-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 121px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #c9c9c9;
+    border-radius: 9px;
+    color: var(--secondary-color);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#btn-criar-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 121px;
+    height: 33px;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 9px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.adicionar-conta {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 634px;
+    max-width: 92%;
+    height: 600px;
+    padding: 60px 72px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+    z-index: 1100;
+}
+
+.adicionar-conta > h1 {
+    margin: 0 0 25px;
+    color: var(--secondary-color);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.adicionar-conta > .area-upload {
+    position: relative;
+    width: 100%;
+    height: 343px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #e5f0fa;
+    border-radius: 17px;
+    color: var(--secondary-color);
+    overflow: hidden;
+}
+
+.area-upload > i {
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+    font-size: 58px;
+}
+
+.area-upload > h3 {
+    margin: 0;
+    color: var(--secondary-color);
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.area-upload > h3::after {
+    content: "ou procure arquivos";
+    display: block;
+    margin-top: 4px;
+    color: var(--secondary-color);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.area-upload > input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.adicionar-conta #btn-cancelar-meta {
+    display: block;
+    margin: 38px auto 0;
+}
+
+@media (max-width: 767px) {
+    .area-metas-financeiras,
+    .status-equipe {
+        display: block;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+    </style>
 </head>
-
 <body>
+    <!-- BARRA SUPERIOR (LOGO & AÇÕES) -->
+    <nav class="navbar">
+        <div class="logo-area">
+            <button
+                class="menu"
+                id="abrirSidebar"
+                type="button"
+                aria-label="Abrir menu lateral"
+                aria-expanded="false"
+            >
+                <i class="bi bi-list"></i>
+            </button>
 
-    <div id="navbar-container"></div>
+            <img
+                src="https://raw.githubusercontent.com/Hydranomic/hydranomic/main/experience/assets/logo_hydranomic.png.png"
+                alt="Logo Hydranomic"
+                class="logo-img"
+            >
 
-    <!-- =========================================
-         TÍTULO DA PÁGINA
-         ========================================= -->
+            <a href="http://hydranomic.kadly.com.br/homepage" class="logo">
+                <span class="hydra">HYDRA</span><span class="nomic">NOMIC</span>
+            </a>
+        </div>
+
+        <div class="perfil">
+            <button
+                class="perfil-botao"
+                id="abrirPerfil"
+                type="button"
+                aria-expanded="false"
+                aria-controls="perfilCard"
+                aria-label="Abrir perfil de User"
+            >
+                <span class="avatar avatar-nav">
+                    <i class="bi bi-person-circle"></i>
+                </span>
+
+                <span class="usuario">
+                    <strong>Olá, User!</strong>
+                    <small>Administrador</small>
+                </span>
+
+                <span class="seta">
+                    <i class="bi bi-chevron-down"></i>
+                </span>
+            </button>
+
+            <div class="perfil-card" id="perfilCard" hidden>
+                <div class="perfil-topo">
+                    <span class="avatar avatar-modal">
+                        <i class="bi bi-person-circle"></i>
+                    </span>
+
+                    <div>
+                        <h2>User</h2>
+                        <p>Administrador</p>
+                    </div>
+                </div>
+
+                <div class="informacoes">
+                    <p>
+                        <span><i class="bi bi-pin-map"></i></span>
+                        <b>Estabelecimento</b>
+                        <small>Colégio Central Smart</small>
+                    </p>
+
+                    <p>
+                        <span><i class="bi bi-envelope"></i></span>
+                        <b>Email</b>
+                        <small>user@colegiocentralsmart.com</small>
+                    </p>
+                    <p>
+                        <span><i class="bi bi-clock-history"></i></span>
+                        <b>Último acesso</b>
+                        <small>25/08/2026 às 21:19</small>
+                    </p>
+                </div>
+
+                <div class="acoes">
+                    <hr class="linha-acoes">
+                    <button type="button" onclick="window.location.href='http://hydranomic.kadly.com.br/configuracoes'">
+                        <i class="bi bi-gear"></i>
+                        Configurações
+                    </button>
+                    <button type="button" class="sair" onclick="realizarLogout(event)">
+                        <i class="bi bi-box-arrow-right"></i>
+                        Sair da conta
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- BACKDROP DA SIDEBAR -->
+    <button
+        class="sidebar-backdrop"
+        id="fecharSidebarFundo"
+        type="button"
+        aria-label="Fechar menu lateral"
+        hidden
+    ></button>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar" aria-label="Menu lateral" hidden>
+        <div class="sidebar-topo">
+            <img
+                src="https://raw.githubusercontent.com/Hydranomic/hydranomic/main/experience/assets/logo_hydranomic.png.png"
+                alt="Hydranomic"
+                class="sidebar-logo"
+            >
+
+            <button
+                class="sidebar-fechar"
+                id="fecharSidebar"
+                type="button"
+                aria-label="Fechar menu lateral"
+            >
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="http://hydranomic.kadly.com.br/homepage">Página inicial</a>
+            <a href="http://hydranomic.kadly.com.br/definicoes">Definições</a>
+            <a href="http://hydranomic.kadly.com.br/metas">Metas de consumo / financeiro</a>
+            <a href="http://hydranomic.kadly.com.br/relatorio">Relatório de consumo</a>
+        </nav>
+
+        <button class="sidebar-sair" type="button" onclick="realizarLogout(event)">
+            Sair
+        </button>
+    </aside>
+
 <main>
     <h1>Definições</h1>
-
     <h2>Gerencie metas, relatórios e funcionários</h2>
 
-
-    <!-- =========================================
-         METAS FINANCEIRAS
-         ========================================= -->
-
+    <!-- METAS FINANCEIRAS -->
     <section class="area-metas-financeiras">
-
         <i class="bi bi-cash-coin"></i>
-
         <h1>Metas financeiras ativas</h1>
-
         <h3>Economia mensal</h3>
-
         <h1></h1>
-
         <h3>Gasto máximo mensal</h3>
-
         <h1></h1>
-
-        <button id="btn-nova-meta">
-            + Nova Meta
-        </button>
-
+        <button id="btn-nova-meta">+ Nova Meta</button>
     </section>
 
-
-    <!-- =========================================
-         STATUS DA EQUIPE
-         ========================================= -->
-
+    <!-- STATUS DA EQUIPE -->
     <section class="status-equipe">
-
         <h1>Status da Equipe</h1>
-
         <h3>Funcionários ativos</h3>
-
-        <h1></h1>
-
+        <h1 id="contador-funcionarios-ativos">1</h1>
         <h3>Último acesso registrado</h3>
-
         <i class="bi bi-person-badge-fill"></i>
-
-        <h1></h1>
-
-        <button id="btn-gerenciar-equipe">
-            Gerenciar Equipe
-        </button>
-
+        <h1 id="ultimo-acesso-equipe">Hoje</h1>
+        <button id="btn-gerenciar-equipe">Gerenciar Equipe</button>
     </section>
 
-
-    <!-- =========================================
-         RELATÓRIOS
-         ========================================= -->
-
+    <!-- RELATÓRIOS -->
     <section class="area-relatorios">
-
         <h1>Relatórios recentes</h1>
-
-        <button-ver-relatorio>
-            Ver todos os relatórios
-        </button-ver-relatorio>
-
+        <button-ver-relatorio onclick="window.location.href='http://hydranomic.kadly.com.br/relatorio'">Ver todos os relatórios</button-ver-relatorio>
     </section>
 
-
-
-
-
+    <!-- GERENCIAMENTO DAS CONTAS -->
     <section class="area-gerenciamento">
+        <h1>Gerenciamento das contas de água</h1>
+        <h3>Gerencie e adicione contas de água</h3>
+        <button class="historico-contas">Histórico de contas</button>
+    </section>
 
-    <h1>Gerenciamento das contas de água</h1>
-
-    <h3>Gerencie e adicione contas de água</h3>
-
-    <button class="historico-contas">Histórico de contas</button>
-
-</section>
-
-
-
-
-
-
-    <!-- =========================================
-         MODAL NOVA META
-         ========================================= -->
-
+    <!-- MODAL NOVA META -->
     <section class="nova-meta" id="modal-nova-meta">
-
         <div class="modal-conteudo">
-
-            <!-- TÍTULO -->
-
             <h1>
                 <i class="bi bi-list-stars"></i>
                 Nova meta financeira
             </h1>
-
-            <!-- SUBTÍTULO -->
-
             <h3 class="subtitulo">
                 Defina uma nova meta de economia para acompanhar os resultados
             </h3>
 
-
-            <!-- =========================================
-                 CAMPOS DA META
-                 ========================================= -->
-
             <div class="campo-modal">
-
-                <label for="tipo-meta">
-                    Tipo de meta
-                </label>
-
+                <label for="tipo-meta">Tipo de meta</label>
                 <select name="tipo-meta" id="tipo-meta">
-
-                    <option value="economia-mensal">
-                        Economia
-                    </option>
-
-                    <option value="gasto-maximo-mensal">
-                        Gasto máximo
-                    </option>
-
+                    <option value="economia-mensal">Economia</option>
+                    <option value="gasto-maximo-mensal">Gasto máximo</option>
                 </select>
-
             </div>
-
 
             <div class="campo-modal">
-
-                <label for="nome-meta">
-                    Nome da meta
-                </label>
-
-                <input
-                    type="text"
-                    name="nome-meta"
-                    id="nome-meta"
-                    placeholder="Ex: Economia Mensal"
-                >
-
+                <label for="nome-meta">Nome da meta</label>
+                <input type="text" name="nome-meta" id="nome-meta" placeholder="Ex: Economia Mensal">
             </div>
-
 
             <div class="campo-modal">
-
-                <label for="valor-meta">
-                    Valor da meta
-                </label>
-
-                <input
-                    type="number"
-                    name="valor-meta"
-                    id="valor-meta"
-                    placeholder="R$    0,00"
-                >
-
+                <label for="valor-meta">Valor da meta</label>
+                <input type="number" name="valor-meta" id="valor-meta" placeholder="R$ 0,00">
             </div>
-
 
             <div class="campo-modal">
-
-                <label for="periodo-meta">
-                    Período da meta
-                </label>
-
-                <input
-                    type="month"
-                    name="periodo-meta"
-                    id="periodo-meta"
-                >
-
+                <label for="periodo-meta">Período da meta</label>
+                <input type="month" name="periodo-meta" id="periodo-meta">
             </div>
 
-
-            <!-- =========================================
-                 DESCRIÇÃO
-                 ========================================= -->
-
-            <div class="campo-modal campo-descricao">
-
-                <label for="descricao-meta">
-                    Descrição <span>(opcional)</span>
-                </label>
-
-                <textarea
-                    name="descricao-meta"
-                    id="descricao-meta"
-                    placeholder="Descreva o objetivo dessa meta..."
-                ></textarea>
-
+            <div class="campo-modal campo-descricao" style="grid-column: 1 / 3;">
+                <label for="descricao-meta">Descrição <span>(opcional)</span></label>
+                <textarea name="descricao-meta" id="descricao-meta" placeholder="Descreva o objetivo dessa meta..."></textarea>
             </div>
-
-
-            <!-- =========================================
-                 BOTÕES
-                 ========================================= -->
 
             <div class="botoes-modal">
-
-                <button id="btn-cancelar-meta">
-                    Cancelar
-                </button>
-
-                <button id="btn-criar-meta">
-                    Criar meta
-                </button>
-
+                <button id="btn-cancelar-meta">Cancelar</button>
+                <button id="btn-criar-meta">Criar meta</button>
             </div>
-
         </div>
-
     </section>
-
 
     <!-- =========================================
          MODAL GERENCIAR EQUIPE
          ========================================= -->
-
-    <section
-        class="gerenciar-equipe"
-        id="modal-gerenciar-equipe"
-    >
-
+    <section class="gerenciar-equipe" id="modal-gerenciar-equipe">
         <div class="modal-conteudo-equipe">
-
             <h1>Gerenciar Equipe</h1>
-
-            <h3>
-                Gerencie os membros da equipe
-            </h3>
-
+            <h3>Gerencie os membros da equipe</h3>
 
             <div class="acoes-equipe">
-
-                <button-buscar-funcionario>
-                    Buscar Funcionário
-                </button-buscar-funcionario>
+                <div class="wrapper-busca-funcionario" style="position: relative;">
+                    <i class="bi bi-search icone-lupa-busca"></i>
+                    <input
+                        type="text"
+                        id="input-buscar-funcionario"
+                        class="input-buscar-funcionario"
+                        placeholder="Buscar Funcionário"
+                    >
+                </div>
 
                 <button-adicionar-funcionario id="btn-adicionar-funcionario">
                     + Adicionar Funcionário
                 </button-adicionar-funcionario>
-
             </div>
 
-
             <table>
-
                 <thead>
-
                     <tr>
-
                         <th>Nome</th>
-
-                        <th>Cargo</th>
-
+                        <th>Cargo / Grupo</th>
                         <th>Email</th>
-
                         <th>Ações</th>
-
                     </tr>
-
                 </thead>
-
-
-                <tbody>
-
+                <tbody id="tabela-equipe-body">
+                    <!-- Renderizado via JavaScript -->
                 </tbody>
-
             </table>
 
-
-            <button id="btn-fechar-equipe">
-                Fechar
-            </button>
-
+            <button id="btn-fechar-equipe">Fechar</button>
         </div>
-
     </section>
 
     <!-- =========================================
          MODAL ADICIONAR FUNCIONÁRIO
          ========================================= -->
+    <section class="adicionar-funcionario" id="modal-adicionar-funcionario">
+        <div class="modal-conteudo-adicionar-funcionario">
+            <button id="btn-fechar-adicionar-funcionario" type="button">×</button>
 
-         <section
-    class="adicionar-funcionario"
-    id="modal-adicionar-funcionario"
->
-    <div class="modal-conteudo-adicionar-funcionario">
+            <h1>Adicionar Funcionário</h1>
+            <h3>Adicione novos membros da equipe e vincule ao grupo no WEGnology</h3>
 
-        <button id="btn-fechar-adicionar-funcionario">
-            ×
-        </button>
+            <h3>Nome</h3>
+            <input
+                type="text"
+                id="nome-funcionario"
+                placeholder="Digite o nome do funcionário"
+            >
 
-        <h1>Adicionar Funcionário</h1>
+            <h3>Email</h3>
+            <input
+                type="email"
+                id="email-funcionario"
+                placeholder="Digite o email do funcionário"
+            >
 
-        <h3>
-            Adicione novos membros da equipe
-        </h3>
+            <h3>Senha Inicial</h3>
+            <input
+                type="password"
+                id="senha-funcionario"
+                placeholder="Mínimo 8 caracteres (exigido pelo WEGnology)"
+            >
 
-        <h3>Nome</h3>
+            <h3>Cargo (Grupo de Acesso)</h3>
+            <div class="opcoes-cargo-radio">
+                <label class="opcao-radio-card">
+                    <input
+                        type="radio"
+                        name="cargo-funcionario"
+                        value="Administradores"
+                    >
+                    <span>Administradores</span>
+                </label>
 
-        <input
-            type="text"
-            id="nome-funcionario"
-            placeholder="Digite o nome do funcionário"
-        >
+                <label class="opcao-radio-card">
+                    <input
+                        type="radio"
+                        name="cargo-funcionario"
+                        value="Usuarios"
+                        checked
+                    >
+                    <span>Usuários</span>
+                </label>
+            </div>
 
-        <h3>Email</h3>
+            <div class="feedback-status-usuario" id="feedback-status-usuario"></div>
 
-        <input
-            type="email"
-            id="email-funcionario"
-            placeholder="Digite o email do funcionário"
-        >
-
-        <h3>Cargo</h3>
-
-        <input
-            type="text"
-            id="cargo-funcionario"
-            placeholder="Digite o cargo do funcionário"
-        >
-
-        <button id="btn-confirmar-adicionar-funcionario">
-            Adicionar membro
-        </button>
-
-    </div>
-</section>
-
-
-
-
-
-
- <section 
-    class="modal-historico-contas" 
-    id="modal-historico-contas"
->
-
-    <div class="modal-conteudo-historico-contas">
-
-        <h1>Histórico de contas</h1>
-
-        <!-- As contas serão inseridas aqui depois -->
-        <div class="historico-lista" id="historico-lista">
-        </div>
-
-        <div class="botoes-historico">
-
-            <button id="btn-cancelar-meta">
-                Cancelar
+            <button id="btn-confirmar-adicionar-funcionario" type="button">
+                Adicionar membro
             </button>
-
-            <button id="btn-criar-meta">
-                Adicionar conta
-            </button>
-
         </div>
+    </section>
 
-    </div>
+    <!-- MODAL HISTÓRICO DE CONTAS -->
+    <section class="modal-historico-contas" id="modal-historico-contas">
+        <div class="modal-conteudo-historico-contas">
+            <h1>Histórico de contas</h1>
+            <div class="historico-lista" id="historico-lista"></div>
+            <div class="botoes-historico">
+                <button id="btn-cancelar-meta">Cancelar</button>
+                <button id="btn-criar-meta">Adicionar conta</button>
+            </div>
+        </div>
+    </section>
 
-</section>
-
-
-
-
-
-
-<section class="adicionar-conta" id="modal-adicionar-conta">
-
-    <h1>Adicione uma nova conta de água</h1>
-
-    <div class="area-upload">
-
-        <i class="bi bi-box-arrow-up"></i>
-
-        <h3>Arraste arquivos aqui para carregar</h3>
-
-        <input type="file" id="arquivo" name="arquivo">
-
-    </div>
-
-    <button id="btn-cancelar-meta">
-        Cancelar
-    </button>
-
-</section>
-
-
-<script>
-        fetch("navbar.html")
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Não foi possível carregar a navbar.");
-                }
-
-                return response.text();
-            })
-            .then(html => {
-                const parser = new DOMParser();
-                const documento = parser.parseFromString(html, "text/html");
-
-                const container = document.getElementById("navbar-container");
-
-                Array.from(documento.body.children).forEach(elemento => {
-                    if (elemento.tagName !== "SCRIPT") {
-                        container.appendChild(
-                            document.importNode(elemento, true)
-                        );
-                    }
-                });
-
-                documento.querySelectorAll("script").forEach(scriptOriginal => {
-                    const novoScript = document.createElement("script");
-
-                    if (scriptOriginal.src) {
-                        novoScript.src = scriptOriginal.src;
-                    } else {
-                        novoScript.textContent = scriptOriginal.textContent;
-                    }
-
-                    document.body.appendChild(novoScript);
-                });
-            })
-            .catch(erro => {
-                console.error(erro);
-            });
-    </script>
+    <!-- MODAL ADICIONAR CONTA -->
+    <section class="adicionar-conta" id="modal-adicionar-conta">
+        <h1>Adicione uma nova conta de água</h1>
+        <div class="area-upload">
+            <i class="bi bi-box-arrow-up"></i>
+            <h3>Arraste arquivos aqui para carregar</h3>
+            <input type="file" id="arquivo" name="arquivo">
+        </div>
+        <button id="btn-cancelar-meta">Cancelar</button>
+    </section>
 </main>
+<script>
+    // =========================================================================
+    // FUNÇÃO GLOBAL DE LOGOUT (LIMPA SESSÃO, COOKIES E EVITA CACHE)
+    // =========================================================================
+    function realizarLogout(evento) {
+        if (evento) {
+            evento.preventDefault();
+            evento.stopPropagation();
+        }
 
+        localStorage.removeItem("hydranomic_sessao_atual");
+        sessionStorage.removeItem("hydranomic_email_sincronizado");
+        sessionStorage.setItem("hydranomic_acabou_de_sair", "true");
+
+        const dominios = [
+            "",
+            "; domain=" + window.location.hostname,
+            "; domain=.kadly.com.br",
+            "; domain=hydranomic.kadly.com.br"
+        ];
+        dominios.forEach(function (dom) {
+            document.cookie = "authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; max-age=0; path=/" + dom + ";";
+        });
+
+        window.location.replace("http://hydranomic.kadly.com.br/login?logout=1&_t=" + new Date().getTime());
+    }
+
+    window.addEventListener("pageshow", function (evento) {
+        if (evento.persisted || sessionStorage.getItem("hydranomic_acabou_de_sair") === "true") {
+            sessionStorage.removeItem("hydranomic_acabou_de_sair");
+            window.location.reload();
+        }
+    });
+
+    // =========================================
+    // 1. MENU DE PERFIL & SIDEBAR
+    // =========================================
+    const botaoPerfil = document.getElementById("abrirPerfil");
+    const perfilCard = document.getElementById("perfilCard");
+
+    if (botaoPerfil && perfilCard) {
+        botaoPerfil.addEventListener("click", function (evento) {
+            evento.stopPropagation();
+            const perfilAberto = botaoPerfil.getAttribute("aria-expanded") === "true";
+            botaoPerfil.setAttribute("aria-expanded", String(!perfilAberto));
+            perfilCard.hidden = perfilAberto;
+        });
+
+        document.addEventListener("click", function (evento) {
+            if (!evento.target.closest(".perfil")) {
+                botaoPerfil.setAttribute("aria-expanded", "false");
+                perfilCard.hidden = true;
+            }
+        });
+    }
+
+    const abrirSidebar = document.getElementById("abrirSidebar");
+    const fecharSidebar = document.getElementById("fecharSidebar");
+    const fecharSidebarFundo = document.getElementById("fecharSidebarFundo");
+    const sidebar = document.getElementById("sidebar");
+
+    if (abrirSidebar && sidebar) {
+        abrirSidebar.addEventListener("click", function () {
+            sidebar.hidden = false;
+            if (fecharSidebarFundo) fecharSidebarFundo.hidden = false;
+            abrirSidebar.setAttribute("aria-expanded", "true");
+            if (botaoPerfil) botaoPerfil.setAttribute("aria-expanded", "false");
+            if (perfilCard) perfilCard.hidden = true;
+        });
+
+        function fecharMenuLateral() {
+            sidebar.hidden = true;
+            if (fecharSidebarFundo) fecharSidebarFundo.hidden = true;
+            abrirSidebar.setAttribute("aria-expanded", "false");
+        }
+
+        if (fecharSidebar) fecharSidebar.addEventListener("click", fecharMenuLateral);
+        if (fecharSidebarFundo) fecharSidebarFundo.addEventListener("click", fecharMenuLateral);
+
+        document.addEventListener("keydown", function (evento) {
+            if (evento.key === "Escape") {
+                fecharMenuLateral();
+                if (botaoPerfil) botaoPerfil.setAttribute("aria-expanded", "false");
+                if (perfilCard) perfilCard.hidden = true;
+            }
+        });
+
+        document.querySelectorAll(".sidebar-menu a").forEach(function (link) {
+            link.addEventListener("click", fecharMenuLateral);
+        });
+    }
+
+    document.querySelectorAll(".sair, .sidebar-sair").forEach(function (btnSair) {
+        btnSair.addEventListener("click", realizarLogout);
+    });
+
+    // =========================================
+    // 2. MODAIS GERAIS DE DEFINIÇÕES
+    // =========================================
+    const botaoNovaMeta = document.getElementById("btn-nova-meta");
+    const modalNovaMeta = document.getElementById("modal-nova-meta");
+    const botaoCancelarMeta = document.getElementById("btn-cancelar-meta");
+
+    if (botaoNovaMeta && modalNovaMeta) {
+        botaoNovaMeta.addEventListener("click", function () {
+            modalNovaMeta.style.display = "flex";
+        });
+    }
+    if (botaoCancelarMeta && modalNovaMeta) {
+        botaoCancelarMeta.addEventListener("click", function () {
+            modalNovaMeta.style.display = "none";
+        });
+    }
+
+    const botaoGerenciarEquipe = document.getElementById("btn-gerenciar-equipe");
+    const modalGerenciarEquipe = document.getElementById("modal-gerenciar-equipe");
+    const botaoFecharEquipe = document.getElementById("btn-fechar-equipe");
+
+    if (botaoGerenciarEquipe && modalGerenciarEquipe) {
+        botaoGerenciarEquipe.addEventListener("click", async function () {
+            renderizarTabelaEquipe("");
+            modalGerenciarEquipe.style.display = "flex";
+            await sincronizarUsuariosDaAPI();
+        });
+    }
+    if (botaoFecharEquipe && modalGerenciarEquipe) {
+        botaoFecharEquipe.addEventListener("click", function () {
+            modalGerenciarEquipe.style.display = "none";
+        });
+    }
+
+    const botaoAdicionarFuncionario = document.getElementById("btn-adicionar-funcionario");
+    const modalAdicionarFuncionario = document.getElementById("modal-adicionar-funcionario");
+    const botaoFecharAdicionarFuncionario = document.getElementById("btn-fechar-adicionar-funcionario");
+
+    if (botaoAdicionarFuncionario && modalAdicionarFuncionario) {
+        botaoAdicionarFuncionario.addEventListener("click", function () {
+            const feedback = document.getElementById("feedback-status-usuario");
+            if (feedback) feedback.textContent = "";
+            modalAdicionarFuncionario.style.display = "flex";
+        });
+    }
+    if (botaoFecharAdicionarFuncionario && modalAdicionarFuncionario) {
+        botaoFecharAdicionarFuncionario.addEventListener("click", function () {
+            modalAdicionarFuncionario.style.display = "none";
+        });
+    }
+
+    const btnHistoricoContas = document.querySelector(".historico-contas");
+    const modalHistoricoContas = document.querySelector("#modal-historico-contas");
+    const modalAdicionarConta = document.querySelector("#modal-adicionar-conta");
+
+    if (btnHistoricoContas && modalHistoricoContas) {
+        const btnCancelarHistorico = modalHistoricoContas.querySelector("#btn-cancelar-meta");
+        const btnAdicionarConta = modalHistoricoContas.querySelector("#btn-criar-meta");
+
+        btnHistoricoContas.addEventListener("click", function () {
+            modalHistoricoContas.style.display = "flex";
+        });
+        if (btnCancelarHistorico) {
+            btnCancelarHistorico.addEventListener("click", function () {
+                modalHistoricoContas.style.display = "none";
+            });
+        }
+        if (btnAdicionarConta && modalAdicionarConta) {
+            btnAdicionarConta.addEventListener("click", function () {
+                modalHistoricoContas.style.display = "none";
+                modalAdicionarConta.style.display = "block";
+            });
+        }
+    }
+
+    if (modalAdicionarConta) {
+        const btnCancelarAdicionar = modalAdicionarConta.querySelector("#btn-cancelar-meta");
+        if (btnCancelarAdicionar) {
+            btnCancelarAdicionar.addEventListener("click", function () {
+                modalAdicionarConta.style.display = "none";
+            });
+        }
+    }
+
+    // =========================================================================
+    // 3. GERENCIAMENTO DE USUÁRIOS E GRUPOS (SINCRONIZADO COM WEGNOLOGY)
+    // =========================================================================
+    const STORAGE_KEY_USUARIOS = "hydranomic_usuarios_equipe";
+    const WEGNOLOGY_API_USUARIOS = "http://hydranomic.kadly.com.br/api/usuarios";
+
+    function normalizarUsuarioWegnology(u) {
+        if (!u || !u.email) return null;
+
+        const nomeCompleto = u.nome
+            || [u.firstName, u.lastName].filter(Boolean).join(" ").trim()
+            || u.email.split("@")[0];
+
+        let grupoNome = u.grupo || "";
+        if (!grupoNome && Array.isArray(u.experienceGroups) && u.experienceGroups.length > 0) {
+            const primeiroGrupo = u.experienceGroups[0];
+            grupoNome = typeof primeiroGrupo === "string" ? primeiroGrupo : (primeiroGrupo.name || "");
+        }
+
+        const isAdmin = grupoNome.toLowerCase().indexOf("admin") === 0;
+
+        return {
+            id: u.id || u.experienceUserId || u.email,
+            nome: nomeCompleto,
+            email: u.email.trim().toLowerCase(),
+            grupo: isAdmin ? "Administradores" : "Usuarios"
+        };
+    }
+
+    function obterUsuariosSalvos() {
+        const salvos = localStorage.getItem(STORAGE_KEY_USUARIOS);
+        if (salvos) {
+            try {
+                const parsed = JSON.parse(salvos);
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                    return parsed;
+                }
+            } catch (e) {
+                console.error("Erro ao ler usuários salvos:", e);
+            }
+        }
+        const inicial = [
+            {
+                id: "admin-inicial",
+                nome: "Adm Senai",
+                email: "adm.senai@hydranomic.com",
+                grupo: "Administradores"
+            }
+        ];
+        localStorage.setItem(STORAGE_KEY_USUARIOS, JSON.stringify(inicial));
+        return inicial;
+    }
+
+    function salvarListaUsuarios(lista) {
+        localStorage.setItem(STORAGE_KEY_USUARIOS, JSON.stringify(lista));
+        atualizarContadorEquipe(lista.length);
+    }
+
+    function atualizarContadorEquipe(total) {
+        const contadorEl = document.getElementById("contador-funcionarios-ativos");
+        if (contadorEl) {
+            contadorEl.textContent = total;
+        }
+    }
+
+    async function sincronizarUsuariosDaAPI() {
+        try {
+            const resposta = await fetch(WEGNOLOGY_API_USUARIOS + "?_t=" + new Date().getTime(), {
+                method: "GET",
+                headers: { "Accept": "application/json" },
+                cache: "no-store"
+            });
+
+            if (!resposta.ok) return;
+
+            const dados = await resposta.json();
+            const brutos = Array.isArray(dados)
+                ? dados
+                : (dados.items || dados.usuarios || dados.users || []);
+
+            if (!Array.isArray(brutos) || brutos.length === 0) return;
+
+            const normalizados = brutos
+                .map(normalizarUsuarioWegnology)
+                .filter(Boolean);
+
+            if (normalizados.length > 0) {
+                salvarListaUsuarios(normalizados);
+                const campoBusca = document.getElementById("input-buscar-funcionario");
+                renderizarTabelaEquipe(campoBusca ? campoBusca.value : "");
+            }
+        } catch (erro) {
+            console.warn("Não foi possível buscar a lista de usuários do WEGnology, usando cache local:", erro);
+        }
+    }
+
+    function renderizarTabelaEquipe(filtro) {
+        const tbody = document.getElementById("tabela-equipe-body");
+        const usuarios = obterUsuariosSalvos();
+        atualizarContadorEquipe(usuarios.length);
+
+        if (!tbody) return;
+
+        const termo = (filtro || "").trim().toLowerCase();
+        const filtrados = usuarios.filter(function (u) {
+            return (
+                (u.nome || "").toLowerCase().indexOf(termo) !== -1 ||
+                (u.email || "").toLowerCase().indexOf(termo) !== -1 ||
+                (u.grupo || "").toLowerCase().indexOf(termo) !== -1
+            );
+        });
+
+        tbody.innerHTML = "";
+
+        if (filtrados.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#888;">Nenhum funcionário encontrado.</td></tr>';
+            return;
+        }
+
+        filtrados.forEach(function (usuario) {
+            const tr = document.createElement("tr");
+            const isAdm = (usuario.grupo || "").toLowerCase().indexOf("admin") === 0;
+            const nomeGrupoExibicao = isAdm ? "Administradores" : "Usuários";
+            const classeBadge = isAdm ? "badge-admin" : "badge-user";
+
+            tr.innerHTML =
+                "<td>" + usuario.nome + "</td>" +
+                '<td><span class="badge-grupo ' + classeBadge + '">' + nomeGrupoExibicao + "</span></td>" +
+                "<td>" + usuario.email + "</td>" +
+                '<td><i class="bi bi-trash-fill" title="Remover usuário"></i></td>';
+
+            tr.querySelector(".bi-trash-fill").addEventListener("click", function () {
+                removerFuncionario(usuario.email);
+            });
+
+            tbody.appendChild(tr);
+        });
+    }
+
+    async function adicionarFuncionario() {
+        const inputNome = document.getElementById("nome-funcionario");
+        const inputEmail = document.getElementById("email-funcionario");
+        const inputSenha = document.getElementById("senha-funcionario");
+        const radioCargo = document.querySelector('input[name="cargo-funcionario"]:checked');
+        const feedback = document.getElementById("feedback-status-usuario");
+        const btnConfirmar = document.getElementById("btn-confirmar-adicionar-funcionario");
+
+        const nome = inputNome.value.trim();
+        const email = inputEmail.value.trim().toLowerCase();
+        const senha = inputSenha && inputSenha.value.trim() ? inputSenha.value.trim() : "Hydra@1234";
+        const grupo = radioCargo ? radioCargo.value : "Usuarios";
+
+        if (!nome || !email) {
+            if (feedback) {
+                feedback.style.color = "#D96161";
+                feedback.textContent = "Preencha o nome e o e-mail do funcionário.";
+            }
+            return;
+        }
+
+        const usuarios = obterUsuariosSalvos();
+        const jaExiste = usuarios.some(function (u) {
+            return u.email.toLowerCase() === email;
+        });
+
+        if (jaExiste) {
+            if (feedback) {
+                feedback.style.color = "#D96161";
+                feedback.textContent = "Já existe um usuário cadastrado com este e-mail.";
+            }
+            return;
+        }
+
+        btnConfirmar.disabled = true;
+        if (feedback) {
+            feedback.style.color = "#205988";
+            feedback.textContent = "Salvando e sincronizando com o WEGnology...";
+        }
+
+        const novoUsuario = {
+            id: String(Date.now()),
+            nome: nome,
+            email: email,
+            password: senha,
+            grupo: grupo
+        };
+
+        try {
+            await fetch(WEGNOLOGY_API_USUARIOS, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(novoUsuario)
+            });
+        } catch (erro) {
+            console.warn("Erro ao sincronizar criação com WEGnology:", erro);
+        }
+
+        usuarios.push({
+            id: novoUsuario.id,
+            nome: novoUsuario.nome,
+            email: novoUsuario.email,
+            grupo: novoUsuario.grupo
+        });
+        salvarListaUsuarios(usuarios);
+
+        await sincronizarUsuariosDaAPI();
+
+        const campoBusca = document.getElementById("input-buscar-funcionario");
+        renderizarTabelaEquipe(campoBusca ? campoBusca.value : "");
+
+        inputNome.value = "";
+        inputEmail.value = "";
+        if (inputSenha) inputSenha.value = "";
+        const radioPadrao = document.querySelector('input[name="cargo-funcionario"][value="Usuarios"]');
+        if (radioPadrao) radioPadrao.checked = true;
+
+        btnConfirmar.disabled = false;
+        if (feedback) feedback.textContent = "";
+        if (modalAdicionarFuncionario) modalAdicionarFuncionario.style.display = "none";
+    }
+
+    async function removerFuncionario(email) {
+        if (!confirm("Deseja realmente remover o usuário " + email + "?")) return;
+
+        const usuarios = obterUsuariosSalvos().filter(function (u) {
+            return u.email.toLowerCase() !== email.toLowerCase();
+        });
+        salvarListaUsuarios(usuarios);
+
+        const campoBusca = document.getElementById("input-buscar-funcionario");
+        renderizarTabelaEquipe(campoBusca ? campoBusca.value : "");
+
+        try {
+            await fetch(WEGNOLOGY_API_USUARIOS, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: email })
+            });
+            await sincronizarUsuariosDaAPI();
+        } catch (e) {
+            console.warn("Erro ao solicitar exclusão no endpoint WEGnology:", e);
+        }
+    }
+
+    const btnConfirmarAdd = document.getElementById("btn-confirmar-adicionar-funcionario");
+    if (btnConfirmarAdd) {
+        btnConfirmarAdd.addEventListener("click", adicionarFuncionario);
+    }
+
+    const inputBuscaFunc = document.getElementById("input-buscar-funcionario");
+    if (inputBuscaFunc) {
+        inputBuscaFunc.addEventListener("input", function (e) {
+            renderizarTabelaEquipe(e.target.value);
+        });
+    }
+
+    renderizarTabelaEquipe("");
+    sincronizarUsuariosDaAPI();
+
+    // =========================================================
+    // 4. DADOS REAIS DO USUÁRIO LOGADO + PERMISSÕES
+    // =========================================================
+    (function inicializarDadosPerfil() {
+        sessionStorage.removeItem("hydranomic_acabou_de_sair");
+
+        const wegNome = "{{experience.user.firstName}}".trim();
+        const wegEmail = "{{experience.user.email}}".trim().toLowerCase();
+        const wegGrupo = "{{experience.user.experienceGroups.[0].name}}".trim();
+        const wegLastLogin = "{{experience.user.lastLogin}}".trim();
+
+        let sessaoSalva = {};
+        try {
+            sessaoSalva = JSON.parse(localStorage.getItem("hydranomic_sessao_atual") || "{}");
+        } catch (e) {
+            sessaoSalva = {};
+        }
+
+        const emailSessao = (sessaoSalva.email || "").trim().toLowerCase();
+
+        // Se o HTML veio do cache do navegador com um usuário diferente do logado na sessão, recarrega do servidor
+        if (wegEmail && emailSessao && wegEmail !== emailSessao) {
+            const chaveReload = "hydranomic_reload_def_" + emailSessao;
+            if (!sessionStorage.getItem(chaveReload)) {
+                sessionStorage.setItem(chaveReload, "1");
+                window.location.replace("http://hydranomic.kadly.com.br/definicoes?_t=" + new Date().getTime());
+                return;
+            }
+        }
+
+        const sessaoMesmoUsuario = (!wegEmail || (emailSessao && emailSessao === wegEmail));
+        if (!sessaoMesmoUsuario) {
+            sessaoSalva = {};
+        }
+
+        const listaEquipe = obterUsuariosSalvos();
+
+        const emailAtivo = wegEmail || emailSessao || "";
+
+        const membroEquipe = listaEquipe.find(function (u) {
+            return u.email && emailAtivo && u.email.toLowerCase() === emailAtivo.toLowerCase();
+        }) || {};
+
+        const nomeSessaoValido = (sessaoMesmoUsuario && sessaoSalva.nome && sessaoSalva.nome !== "Usuário") ? sessaoSalva.nome : "";
+
+        const nomeFinal = wegNome || membroEquipe.nome || nomeSessaoValido || (emailAtivo ? emailAtivo.split("@")[0] : "Usuário");
+        const grupoBruto = wegGrupo || membroEquipe.grupo || (sessaoMesmoUsuario ? sessaoSalva.grupo : "") || "Usuarios";
+
+        const isAdmin = grupoBruto.toLowerCase().indexOf("admin") === 0;
+        const cargoFormatado = isAdmin ? "Administrador" : "Usuário";
+
+        function formatarDataHora(dataIso) {
+            const data = dataIso ? new Date(dataIso) : new Date();
+            if (isNaN(data.getTime())) return formatarDataHora(null);
+            const dia = String(data.getDate()).padStart(2, "0");
+            const mes = String(data.getMonth() + 1).padStart(2, "0");
+            const ano = data.getFullYear();
+            const hora = String(data.getHours()).padStart(2, "0");
+            const min = String(data.getMinutes()).padStart(2, "0");
+            return dia + "/" + mes + "/" + ano + " às " + hora + ":" + min;
+        }
+
+        const ultimoAcessoTexto = wegLastLogin
+            ? formatarDataHora(wegLastLogin)
+            : ((sessaoMesmoUsuario && sessaoSalva.ultimoAcesso) ? sessaoSalva.ultimoAcesso : formatarDataHora(null));
+
+        if (emailAtivo) {
+            localStorage.setItem("hydranomic_sessao_atual", JSON.stringify({
+                nome: nomeFinal,
+                email: emailAtivo,
+                grupo: grupoBruto,
+                ultimoAcesso: ultimoAcessoTexto
+            }));
+        }
+
+        const elNavNome = document.getElementById("nav-nome-usuario") || document.querySelector(".usuario strong");
+        const elNavCargo = document.getElementById("nav-cargo-usuario") || document.querySelector(".usuario small");
+        const elCardNome = document.getElementById("card-nome-usuario") || document.querySelector(".perfil-topo h2");
+        const elCardSubCargo = document.getElementById("card-subtitulo-cargo") || document.querySelector(".perfil-topo p");
+        const elUltimoAcessoEquipe = document.getElementById("ultimo-acesso-equipe");
+
+        if (elNavNome) elNavNome.textContent = "Olá, " + nomeFinal + "!";
+        if (elNavCargo) elNavCargo.textContent = cargoFormatado;
+        if (elCardNome) elCardNome.textContent = nomeFinal;
+        if (elCardSubCargo) elCardSubCargo.textContent = cargoFormatado;
+        if (elUltimoAcessoEquipe) elUltimoAcessoEquipe.textContent = ultimoAcessoTexto;
+
+        document.querySelectorAll(".perfil-card .informacoes p").forEach(function (paragrafo) {
+            const titulo = paragrafo.querySelector("b");
+            const valor = paragrafo.querySelector("small");
+            if (!titulo) return;
+
+            const textoTitulo = titulo.textContent.trim().toLowerCase();
+
+            if (textoTitulo.indexOf("estabelecimento") !== -1 || textoTitulo.indexOf("cnpj") !== -1) {
+                paragrafo.remove();
+            } else if (textoTitulo.indexOf("cargo") !== -1 && valor) {
+                valor.textContent = cargoFormatado;
+            } else if (textoTitulo.indexOf("email") !== -1 && valor) {
+                valor.textContent = emailAtivo || "-";
+            } else if (textoTitulo.indexOf("acesso") !== -1 && valor) {
+                valor.textContent = ultimoAcessoTexto;
+            }
+        });
+
+        const tituloPrincipal = document.querySelector("main > h1");
+        if (tituloPrincipal && tituloPrincipal.textContent.trim().indexOf("Olá") === 0) {
+            tituloPrincipal.textContent = "Olá, " + nomeFinal + "!";
+        }
+
+        if (!isAdmin) {
+            document.querySelectorAll(".sidebar-menu a").forEach(function (link) {
+                if (link.getAttribute("href") && link.getAttribute("href").indexOf("/definicoes") !== -1) {
+                    link.remove();
+                }
+            });
+
+            if (window.location.pathname.indexOf("/definicoes") !== -1) {
+                window.location.href = "http://hydranomic.kadly.com.br/homepage";
+            }
+        }
+    })();
+
+    // =====================================================================
+// 5. INTEGRAÇÃO COM WORKFLOW DE METAS (COM TRATAMENTO DE PERMISSÃO)
+// =====================================================================
+(function inicializarEnvioDeMetas() {
+    const modalNovaMeta = document.getElementById("modal-nova-meta");
+    if (!modalNovaMeta) return;
+
+    // Seletor escopado para evitar conflito com o botão de mesmo ID do histórico
+    const btnCriarMeta = modalNovaMeta.querySelector("#btn-criar-meta");
+    if (!btnCriarMeta) return;
+
+    btnCriarMeta.addEventListener("click", async function (evento) {
+        evento.preventDefault();
+
+        // 1. Validação prévia de permissão local
+        const sessao = JSON.parse(localStorage.getItem("hydranomic_sessao_atual") || "{}");
+        const grupo = sessao.grupo || "";
+        const isAdmin = grupo.toLowerCase().indexOf("admin") === 0;
+
+        if (!isAdmin) {
+            alert("Apenas administradores possuem permissão para criar metas.");
+            modalNovaMeta.style.display = "none";
+            return;
+        }
+
+        // 2. Extração dos campos reais do modal
+        const campoTipo = modalNovaMeta.querySelector("#tipo-meta");
+        const campoNome = modalNovaMeta.querySelector("#nome-meta");
+        const campoValor = modalNovaMeta.querySelector("#valor-meta");
+        const campoPeriodo = modalNovaMeta.querySelector("#periodo-meta");
+        const campoDescricao = modalNovaMeta.querySelector("#descricao-meta");
+
+        const nome = campoNome ? campoNome.value.trim() : "";
+        const valorNumerico = campoValor ? parseFloat(campoValor.value) : 0;
+        const periodo = campoPeriodo ? campoPeriodo.value.trim() : "";
+        const tipo = campoTipo ? campoTipo.value : "gasto-maximo-mensal";
+        const descricao = campoDescricao ? campoDescricao.value.trim() : "";
+
+        if (!nome) {
+            alert("Por favor, informe o nome da meta.");
+            campoNome && campoNome.focus();
+            return;
+        }
+
+        if (isNaN(valorNumerico) || valorNumerico <= 0) {
+            alert("Por favor, informe um valor financeiro válido maior que zero.");
+            campoValor && campoValor.focus();
+            return;
+        }
+
+        if (!periodo) {
+            alert("Por favor, selecione o mês/ano de vigência da meta.");
+            campoPeriodo && campoPeriodo.focus();
+            return;
+        }
+
+        const payload = {
+            acao: "definir_meta",
+            tipo: tipo,
+            nome: nome,
+            valor: valorNumerico,
+            periodo: periodo,
+            descricao: descricao
+        };
+
+        const textoOriginal = btnCriarMeta.textContent;
+        btnCriarMeta.disabled = true;
+        btnCriarMeta.textContent = "Gravando...";
+
+        try {
+            // Rota dentro do mesmo domínio configurado na Experience
+            const urlMetas = "http://hydranomic.kadly.com.br/api/metas";
+
+            const resposta = await fetch(urlMetas, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                // credentials: 'include' envia os cookies de sessão de login da WEGnology
+                credentials: "include",
+                body: JSON.stringify(payload)
+            });
+
+            if (resposta.status === 401 || resposta.status === 403) {
+                alert("Você não tem autorização para realizar esta operação.");
+                return;
+            }
+
+            if (!resposta.ok) {
+                throw new Error("HTTP " + resposta.status);
+            }
+
+            alert("Meta cadastrada com sucesso! Os indicadores da plataforma serão atualizados.");
+
+            // Limpa o formulário e fecha o modal
+            campoNome.value = "";
+            campoValor.value = "";
+            campoPeriodo.value = "";
+            if (campoDescricao) campoDescricao.value = "";
+            modalNovaMeta.style.display = "none";
+
+        } catch (erro) {
+            console.error("Erro na comunicação com a API de metas:", erro);
+            alert("Não foi possível salvar a meta no momento. Verifique a conexão com a plataforma.");
+        } finally {
+            btnCriarMeta.disabled = false;
+            btnCriarMeta.textContent = textoOriginal;
+        }
+    });
+})();
+</script>
 </body>
-
 </html>
