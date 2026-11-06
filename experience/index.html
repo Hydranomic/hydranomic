@@ -1088,6 +1088,11 @@ button-ver-relatorio:hover {
                         elConsumoTotal.textContent = Number(resSumario.consumo_mes_acumulado_m3).toFixed(2) + ' m³';
                     }
 
+                    const elVazao = document.querySelector('.area-vazao > h1');
+                    if (elVazao && resSumario.vazao_atual_m3h != null) {
+                        elVazao.textContent = Number(resSumario.vazao_atual_m3h).toFixed(2) + ' m³/h';
+                    }
+
                     const elStatus = document.querySelector('.area-status > h1');
                     if (elStatus) {
                         const status = resSumario.meta_status ? String(resSumario.meta_status).toUpperCase() : "NORMAL";
