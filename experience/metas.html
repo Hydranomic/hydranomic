@@ -741,7 +741,7 @@ body {
   width: 86px;
   height: 86px;
   border-radius: 50%;
-  background: conic-gradient(#205988 80%, #e2e8f0 0);
+  background: conic-gradient(#205988 0%, #e2e8f0 0);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1278,7 +1278,7 @@ html, body {
               <strong class="valor-grande" id="meta-financeira-limite">R$ --</strong>
             </div>
 
-            <div class="anel-progresso">
+            <div class="anel-progresso" id="anel-progresso-financeiro">
               <div class="miolo-anel">
                 <span class="porcentagem-anel" id="meta-financeira-porcentagem">0%</span>
                 <span class="subtexto-anel">da meta</span>
@@ -1291,9 +1291,9 @@ html, body {
             </div>
           </div>
 
-          <div class="faixa-destaque-azul">
+          <div class="faixa-destaque-azul" id="faixa-gasto-financeiro">
             <i class="bi bi-currency-dollar icone-cifrao"></i>
-            <p><strong id="meta-financeira-faixa-texto">R$ --</strong> Gastos no mês atual.</p>
+            <p><strong id="meta-financeira-faixa-texto">R$ --</strong> <span id="meta-financeira-faixa-complemento">Gastos no mês selecionado.</span></p>
           </div>
         </article>
 
@@ -1315,70 +1315,14 @@ html, body {
           </div>
 
           <div class="area-grafico">
-            <svg viewBox="0 0 540 220" class="svg-grafico">
-              <line x1="35" y1="25" x2="520" y2="25" stroke="#f1f5f9" stroke-width="1"/>
-              <line x1="35" y1="60" x2="520" y2="60" stroke="#f1f5f9" stroke-width="1"/>
-              <line x1="35" y1="95" x2="520" y2="95" stroke="#f1f5f9" stroke-width="1"/>
-              <line x1="35" y1="130" x2="520" y2="130" stroke="#f1f5f9" stroke-width="1"/>
-              <line x1="35" y1="165" x2="520" y2="165" stroke="#f1f5f9" stroke-width="1"/>
-              <line x1="35" y1="200" x2="520" y2="200" stroke="#e2e8f0" stroke-width="1"/>
-
-              <text x="25" y="28" class="texto-eixo">25k</text>
-              <text x="25" y="63" class="texto-eixo">20k</text>
-              <text x="25" y="98" class="texto-eixo">15k</text>
-              <text x="25" y="133" class="texto-eixo">10k</text>
-              <text x="25" y="168" class="texto-eixo">5k</text>
-              <text x="25" y="200" class="texto-eixo">0</text>
-
-              <rect x="420" y="25" width="36" height="175" fill="#f0f6fa"/>
-
-              <path d="M 45 155 L 85 145 L 130 135 L 175 145 L 220 135 L 265 125 L 310 115 L 355 105 L 400 95 L 445 88 L 485 75 L 515 70"
-                    fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="4,4"/>
-
-              <path d="M 45 105 L 85 98 L 130 84 L 175 92 L 220 78 L 265 68 L 310 74 L 355 74 L 438 120"
-                    fill="none" stroke="#1e4566" stroke-width="2.5"/>
-
-              <g class="pontos-grafico">
-                <circle cx="45" cy="105" r="3.5" fill="#1e4566"/>
-                <text x="45" y="98" class="rotulo-ponto">14.500</text>
-
-                <circle cx="85" cy="98" r="3.5" fill="#1e4566"/>
-                <text x="85" y="91" class="rotulo-ponto">15.200</text>
-
-                <circle cx="130" cy="84" r="3.5" fill="#1e4566"/>
-                <text x="130" y="77" class="rotulo-ponto">16.800</text>
-
-                <circle cx="175" cy="92" r="3.5" fill="#1e4566"/>
-                <text x="175" y="85" class="rotulo-ponto">15.600</text>
-
-                <circle cx="220" cy="78" r="3.5" fill="#1e4566"/>
-                <text x="220" y="71" class="rotulo-ponto">17.300</text>
-
-                <circle cx="265" cy="68" r="3.5" fill="#1e4566"/>
-                <text x="265" y="61" class="rotulo-ponto">18.100</text>
-
-                <circle cx="310" cy="74" r="3.5" fill="#1e4566"/>
-                <text x="310" y="67" class="rotulo-ponto">17.600</text>
-
-                <circle cx="355" cy="74" r="3.5" fill="#1e4566"/>
-                <text x="355" y="67" class="rotulo-ponto">17.600</text>
-
-                <circle cx="438" cy="120" r="3.5" fill="#1e4566"/>
-                <text x="438" y="135" class="rotulo-ponto ponto-destaque">14.050</text>
-              </g>
-
-              <text x="45" y="215" class="texto-mes-eixo">Jan</text>
-              <text x="85" y="215" class="texto-mes-eixo">Fev</text>
-              <text x="130" y="215" class="texto-mes-eixo">Mar</text>
-              <text x="175" y="215" class="texto-mes-eixo">Abr</text>
-              <text x="220" y="215" class="texto-mes-eixo">Mai</text>
-              <text x="265" y="215" class="texto-mes-eixo">Jun</text>
-              <text x="310" y="215" class="texto-mes-eixo">Jul</text>
-              <text x="355" y="215" class="texto-mes-eixo">Ago</text>
-              <text x="438" y="215" class="texto-mes-eixo mes-x-ativo">Set</text>
-              <text x="468" y="215" class="texto-mes-eixo">Out</text>
-              <text x="495" y="215" class="texto-mes-eixo">Nov</text>
-              <text x="518" y="215" class="texto-mes-eixo">Dez</text>
+            <svg viewBox="0 0 540 220" class="svg-grafico" id="svg-evolucao-metas">
+              <g id="svg-grade-eixo-y"></g>
+              <rect id="svg-destaque-mes" x="0" y="25" width="36" height="175" fill="#f0f6fa" visibility="hidden"/>
+              <path id="svg-linha-meta" d="" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="4,4"/>
+              <path id="svg-linha-consumo" d="" fill="none" stroke="#1e4566" stroke-width="2.5"/>
+              <g class="pontos-grafico" id="svg-pontos-meta"></g>
+              <g class="pontos-grafico" id="svg-pontos-consumo"></g>
+              <g id="svg-rotulos-eixo-x"></g>
             </svg>
           </div>
         </article>
@@ -1391,20 +1335,20 @@ html, body {
 
           <div class="grade-previsao-ia">
             <div class="caixa-ia-destaque">
-              <p>Com base no seu histórico de consumo, a IA prevê que seu consumo mensal ficará cerca de</p>
+              <p id="ia-texto-intro">Com base no seu histórico de consumo, a IA prevê que seu consumo mensal ficará cerca de</p>
 
-              <div class="valor-queda">
-                <i class="bi bi-arrow-down-short"></i>
-                <span>4,8%</span>
+              <div class="valor-queda" id="ia-variacao-container">
+                <i class="bi bi-dash" id="ia-variacao-icone"></i>
+                <span id="ia-variacao-percentual">--%</span>
               </div>
 
-              <small>Abaixo do mês anterior.</small>
+              <small id="ia-variacao-subtexto">Aguardando dados do modelo...</small>
             </div>
 
             <div class="bloco-previsao">
-              <span class="rotulo-ia">Previsão para setembro/2026</span>
-              <strong class="valor-ia">17.200 L</strong>
-              <small class="subtexto-ia">Em relação a agosto/2026</small>
+              <span class="rotulo-ia" id="ia-previsao-rotulo">Previsão próximo período</span>
+              <strong class="valor-ia" id="ia-previsao-volume">-- L</strong>
+              <small class="subtexto-ia" id="ia-previsao-referencia">--</small>
             </div>
 
             <div class="bloco-previsao">
@@ -1412,7 +1356,7 @@ html, body {
               <strong class="valor-ia" id="ia-previsao-financeira">R$ --</strong>
 
               <div class="barra-previsao-fundo">
-                <div class="barra-previsao-preenchida" id="ia-barra-previsao" style="width: 65%;"></div>
+                <div class="barra-previsao-preenchida" id="ia-barra-previsao" style="width: 0%;"></div>
               </div>
             </div>
           </div>
@@ -1430,8 +1374,8 @@ html, body {
 
         <div class="textos-recomendacao">
           <span class="rotulo-recomendacao">Meta recomendada pela IA</span>
-          <strong class="titulo-recomendacao">16.500 L - R$ 16.000</strong>
-          <p class="descricao-recomendacao">Baseada na média dos últimos 3 meses e na tendência atual de consumo.</p>
+          <strong class="titulo-recomendacao" id="ia-meta-recomendada-valor">-- L - R$ --</strong>
+          <p class="descricao-recomendacao" id="ia-meta-recomendada-desc">Baseada na média histórica e na tendência atual de consumo.</p>
         </div>
       </div>
 
@@ -1442,7 +1386,7 @@ html, body {
 
         <div class="textos-dica">
           <strong class="titulo-dica">Dica da IA</strong>
-          <p class="descricao-dica">Reduzir o consumo entre 8h e 11h pode gerar uma economia significativa.</p>
+          <p class="descricao-dica" id="ia-dica-texto">Carregando análise para o período selecionado...</p>
         </div>
       </div>
     </section>
@@ -1762,102 +1706,599 @@ html, body {
     })();
 
     // =========================================================================
-    // CARROSSEL DESLIZANTE DE MESES (JANEIRO A DEZEMBRO DINÂMICO E AUTOMATIZADO)
+    // CARROSSEL E RENDERIZAÇÃO DINÂMICA POR MÊS (100% BASEADO NOS JSONS WEGNOLOGY)
     // =========================================================================
-    (function configurarCarrosselMeses() {
-        const dadosMeses = [
-            { id: "01", abrev: "Jan", nome: "Janeiro", valor: "15.200 L", status: '<i class="bi bi-check-circle-fill icone-verde"></i>' },
-            { id: "02", abrev: "Fev", nome: "Fevereiro", valor: "14.800 L", status: '<i class="bi bi-check-circle-fill icone-verde"></i>' },
-            { id: "03", abrev: "Mar", nome: "Março", valor: "16.000 L", status: '<i class="bi bi-circle-fill ponto-vermelho"></i>' },
-            { id: "04", abrev: "Abr", nome: "Abril", valor: "16.000 L", status: '<i class="bi bi-circle-fill ponto-amarelo"></i>' },
-            { id: "05", abrev: "Mai", nome: "Maio", valor: "16.000 L", status: '<i class="bi bi-check-circle-fill icone-verde"></i>' },
-            { id: "06", abrev: "Jun", nome: "Junho", valor: "16.000 L", status: '<i class="bi bi-check-circle-fill icone-verde"></i>' },
-            { id: "07", abrev: "Jul", nome: "Julho", valor: "16.000 L", status: '<i class="bi bi-check-circle-fill icone-verde"></i>' },
-            { id: "08", abrev: "Ago", nome: "Agosto", valor: "14.050 L", status: '<i class="bi bi-activity"></i>' },
-            { id: "09", abrev: "Set", nome: "Setembro", valor: "-", status: '' },
-            { id: "10", abrev: "Out", nome: "Outubro", valor: "-", status: '' },
-            { id: "11", abrev: "Nov", nome: "Novembro", valor: "-", status: '' },
-            { id: "12", abrev: "Dez", nome: "Dezembro", valor: "-", status: '' }
+    (async function inicializarMetasECarrossel() {
+        const CATALOGO_MESES = [
+            { id: "01", num: 1, abrev: "Jan", nome: "Janeiro" },
+            { id: "02", num: 2, abrev: "Fev", nome: "Fevereiro" },
+            { id: "03", num: 3, abrev: "Mar", nome: "Março" },
+            { id: "04", num: 4, abrev: "Abr", nome: "Abril" },
+            { id: "05", num: 5, abrev: "Mai", nome: "Maio" },
+            { id: "06", num: 6, abrev: "Jun", nome: "Junho" },
+            { id: "07", num: 7, abrev: "Jul", nome: "Julho" },
+            { id: "08", num: 8, abrev: "Ago", nome: "Agosto" },
+            { id: "09", num: 9, abrev: "Set", nome: "Setembro" },
+            { id: "10", num: 10, abrev: "Out", nome: "Outubro" },
+            { id: "11", num: 11, abrev: "Nov", nome: "Novembro" },
+            { id: "12", num: 12, abrev: "Dez", nome: "Dezembro" }
         ];
 
-        const anoPadrao = "2026";
         const containerLista = document.getElementById("lista-carrossel-meses");
         const btnAnterior = document.getElementById("btn-carrossel-anterior");
         const btnProximo = document.getElementById("btn-carrossel-proximo");
         const botaoMesAtual = document.querySelector(".botao-mes-atual");
 
+        const timestamp = new Date().getTime();
+        const BASE_URL = "https://files.wnology.io/6a7df1ea72e58afcb00daed0";
+
+        const buscarJson = (arquivo) =>
+            fetch(`${BASE_URL}/${arquivo}?_t=${timestamp}`, { cache: "no-store" })
+                .then(r => {
+                    if (!r.ok) throw new Error(`Falha ao ler ${arquivo} (HTTP ${r.status})`);
+                    return r.json();
+                })
+                .catch(e => {
+                    console.warn(e.message);
+                    return null;
+                });
+
+        const [resConfig, resMeta, resConsumo, resContas, resGrafico, resSumario, resPrevisao] = await Promise.all([
+            buscarJson("config.json"),
+            buscarJson("progresso_meta.json"),
+            buscarJson("consumo_mes.json"),
+            buscarJson("conta.json"),
+            buscarJson("grafico_anual.json"),
+            buscarJson("sumario_execucao.json"),
+            buscarJson("previsao_ml.json")
+        ]);
+
+        const tarifaBase = Number(resPrevisao?.tarifa_m3 ?? 59.6);
+        const listaContas = Array.isArray(resContas) ? resContas : [];
+        const metasPorMes = (resConfig && typeof resConfig.metas_por_mes === "object" && resConfig.metas_por_mes) ? resConfig.metas_por_mes : {};
+        const metaAtivaGlobal = resConfig?.meta_ativa || null;
+
+        // Determina o mês inicial e o ano de referência a partir dos dados reais
         const parametros = new URLSearchParams(window.location.search);
-        let mesSelecionado = parametros.get("mes") || (anoPadrao + "-08");
+        const mesUrl = parametros.get("mes");
 
-        if (!containerLista) return;
+        const refMetaAtiva = metaAtivaGlobal
+            ? String(metaAtivaGlobal.mes_referencia || metaAtivaGlobal.periodo || "").slice(0, 7)
+            : (resMeta?.mes_referencia ? String(resMeta.mes_referencia).slice(0, 7) : "");
 
-        // Renderiza automaticamente todos os 12 meses na barra
-        containerLista.innerHTML = dadosMeses.map(function (m) {
-            const mesChave = anoPadrao + "-" + m.id;
-            const ehAtivo = mesChave === mesSelecionado ? " mes-ativo" : "";
-            return `
-                <div class="item-mes${ehAtivo}" data-mes="${mesChave}">
-                    <span class="nome-mes">${m.abrev} ${anoPadrao}</span>
-                    <span class="valor-mes">${m.valor} ${m.status}</span>
-                </div>
-            `;
-        }).join("");
+        const refConsumoMes = resConsumo?.mes_referencia ? String(resConsumo.mes_referencia).slice(0, 7) : "";
+        const ultimaContaId = listaContas.length > 0 ? String(listaContas[listaContas.length - 1].id || "").slice(0, 7) : "";
+        const hoje = new Date();
+        const refHoje = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, "0")}`;
 
-        // Clique nas setas: desliza a barra para os lados (revelando Jan, Fev ou meses futuros)
-        if (btnAnterior) {
-            btnAnterior.addEventListener("click", function () {
-                containerLista.scrollBy({ left: -260, behavior: "smooth" });
+        const validarChaveMes = (str) => /^\d{4}-(0[1-9]|1[0-2])$/.test(str);
+
+        let mesSelecionado = [mesUrl, refMetaAtiva, refConsumoMes, ultimaContaId, refHoje].find(validarChaveMes) || refHoje;
+        let anoReferencia = mesSelecionado.split("-")[0];
+
+        // Consolida dados mês a mês (01 a 12) para o ano de referência
+        function obterDadosDoMes(idMes) {
+            const chave = `${anoReferencia}-${idMes}`;
+            const numMes = parseInt(idMes, 10);
+
+            // 1. Meta do mês (em m³)
+            let limiteM3 = null;
+            let nomeMeta = null;
+
+            if (metasPorMes[chave] && metasPorMes[chave].valor != null) {
+                limiteM3 = Number(metasPorMes[chave].valor);
+                nomeMeta = metasPorMes[chave].nome || "Meta Mensal";
+            } else if (metaAtivaGlobal && metaAtivaGlobal.valor != null) {
+                const refAtiva = String(metaAtivaGlobal.mes_referencia || metaAtivaGlobal.periodo || "").slice(0, 7);
+                if (refAtiva === chave || String(metaAtivaGlobal.periodo || "").toLowerCase() === "mensal") {
+                    limiteM3 = Number(metaAtivaGlobal.valor);
+                    nomeMeta = metaAtivaGlobal.nome || "Meta Mensal";
+                }
+            } else if (resMeta && resMeta.meta_ativa && resMeta.limite_m3 != null) {
+                const refProg = String(resMeta.mes_referencia || resMeta.periodo || "").slice(0, 7);
+                if (!refProg || refProg === chave) {
+                    limiteM3 = Number(resMeta.limite_m3);
+                    nomeMeta = resMeta.meta_nome || "Meta Mensal";
+                }
+            }
+
+            // 2. Consumo real (em m³) e valor financeiro da conta (se existir)
+            let consumoM3 = null;
+            let valorContaReais = null;
+
+            const regConta = listaContas.find(c => String(c.id) === chave);
+            if (regConta && regConta.consumo_m3 != null) {
+                consumoM3 = Number(regConta.consumo_m3);
+                if (regConta.valor_total != null) {
+                    valorContaReais = Number(regConta.valor_total);
+                }
+            }
+
+            if (refConsumoMes === chave && resConsumo?.consumo_acumulado_mes_m3 != null) {
+                consumoM3 = Number(resConsumo.consumo_acumulado_mes_m3);
+            }
+
+            if (consumoM3 == null && resGrafico && Array.isArray(resGrafico.meses)) {
+                const itemGraf = resGrafico.meses.find(m => Number(m.mes) === numMes);
+                if (itemGraf && itemGraf.consumo_m3 != null) {
+                    consumoM3 = Number(itemGraf.consumo_m3);
+                }
+            }
+
+            if (consumoM3 == null && refMetaAtiva === chave && resMeta?.consumo_atual_m3 != null) {
+                consumoM3 = Number(resMeta.consumo_atual_m3);
+            }
+
+            return {
+                id: idMes,
+                chave: chave,
+                limiteM3: (limiteM3 != null && !isNaN(limiteM3) && limiteM3 > 0) ? limiteM3 : null,
+                nomeMeta: nomeMeta,
+                consumoM3: (consumoM3 != null && !isNaN(consumoM3)) ? consumoM3 : null,
+                valorContaReais: (valorContaReais != null && !isNaN(valorContaReais)) ? valorContaReais : null
+            };
+        }
+
+        function construirMapaAnual() {
+            return CATALOGO_MESES.map(m => {
+                const dados = obterDadosDoMes(m.id);
+                return Object.assign({}, m, dados);
             });
         }
 
-        if (btnProximo) {
-            btnProximo.addEventListener("click", function () {
-                containerLista.scrollBy({ left: 260, behavior: "smooth" });
+        let mapaMeses = construirMapaAnual();
+
+        // Renderiza os 12 itens do carrossel com valores e ícones de status dinâmicos
+        function renderizarItensCarrossel() {
+            if (!containerLista) return;
+
+            containerLista.innerHTML = mapaMeses.map(function (m) {
+                const ehAtivo = m.chave === mesSelecionado ? " mes-ativo" : "";
+                let textoValor = "-";
+                let iconeStatus = "";
+
+                if (m.consumoM3 != null) {
+                    const consumoL = Math.round(m.consumoM3 * 1000);
+                    textoValor = consumoL.toLocaleString("pt-BR") + " L";
+                } else if (m.limiteM3 != null) {
+                    const metaL = Math.round(m.limiteM3 * 1000);
+                    textoValor = metaL.toLocaleString("pt-BR") + " L";
+                }
+
+                if (m.limiteM3 != null && m.consumoM3 != null) {
+                    const perc = (m.consumoM3 / m.limiteM3) * 100;
+                    if (perc >= 100) {
+                        iconeStatus = '<i class="bi bi-circle-fill ponto-vermelho" title="Meta ultrapassada"></i>';
+                    } else if (perc >= 80) {
+                        iconeStatus = '<i class="bi bi-circle-fill ponto-amarelo" title="Alerta de meta (>= 80%)"></i>';
+                    } else {
+                        iconeStatus = '<i class="bi bi-check-circle-fill icone-verde" title="Dentro da meta"></i>';
+                    }
+                } else if (m.limiteM3 != null) {
+                    iconeStatus = '<i class="bi bi-bullseye" title="Meta definida"></i>';
+                } else if (m.consumoM3 != null) {
+                    iconeStatus = '<i class="bi bi-activity" title="Consumo registrado"></i>';
+                }
+
+                return `
+                    <div class="item-mes${ehAtivo}" data-mes="${m.chave}">
+                        <span class="nome-mes">${m.abrev} ${anoReferencia}</span>
+                        <span class="valor-mes">${textoValor} ${iconeStatus}</span>
+                    </div>
+                `;
+            }).join("");
+
+            containerLista.querySelectorAll(".item-mes").forEach(function (item) {
+                item.addEventListener("click", function () {
+                    selecionarMes(item.dataset.mes);
+                });
             });
         }
 
-        // Centraliza automaticamente o mês ativo no carrossel
+        // Renderiza o gráfico SVG (Consumo real vs Meta) destacando o mês selecionado
+        function renderizarGraficoSVG() {
+            const gGradeY = document.getElementById("svg-grade-eixo-y");
+            const rectDestaque = document.getElementById("svg-destaque-mes");
+            const pathMeta = document.getElementById("svg-linha-meta");
+            const pathConsumo = document.getElementById("svg-linha-consumo");
+            const gPontosMeta = document.getElementById("svg-pontos-meta");
+            const gPontosConsumo = document.getElementById("svg-pontos-consumo");
+            const gRotulosX = document.getElementById("svg-rotulos-eixo-x");
+
+            if (!gGradeY || !pathConsumo || !gRotulosX) return;
+
+            const coordsX = [45, 88, 131, 174, 217, 260, 303, 346, 389, 432, 475, 515];
+            const yTop = 25;
+            const yBase = 200;
+            const alturaUtil = yBase - yTop;
+
+            // Calcula o teto do eixo Y em Litros com base nos valores reais e metas
+            let maiorValorL = 0;
+            mapaMeses.forEach(m => {
+                if (m.consumoM3 != null) maiorValorL = Math.max(maiorValorL, m.consumoM3 * 1000);
+                if (m.limiteM3 != null) maiorValorL = Math.max(maiorValorL, m.limiteM3 * 1000);
+            });
+            if (maiorValorL <= 0) maiorValorL = 25000;
+
+            const passoBruto = maiorValorL / 5;
+            const grandeza = Math.pow(10, Math.floor(Math.log10(passoBruto)));
+            const passoNormalizado = Math.ceil(passoBruto / grandeza) * grandeza;
+            const tetoY = passoNormalizado * 5;
+
+            const formatarEixoY = (val) => {
+                if (val === 0) return "0";
+                if (val >= 1000) {
+                    const k = val / 1000;
+                    return (Number.isInteger(k) ? k : k.toFixed(1).replace(".", ",")) + "k";
+                }
+                return String(Math.round(val));
+            };
+
+            let htmlGrade = "";
+            for (let i = 0; i <= 5; i++) {
+                const y = yTop + (i * (alturaUtil / 5));
+                const valorEixo = tetoY - (i * passoNormalizado);
+                const corLinha = i === 5 ? "#e2e8f0" : "#f1f5f9";
+                htmlGrade += `<line x1="35" y1="${y}" x2="525" y2="${y}" stroke="${corLinha}" stroke-width="1"/>`;
+                htmlGrade += `<text x="30" y="${y + 3}" class="texto-eixo">${formatarEixoY(valorEixo)}</text>`;
+            }
+            gGradeY.innerHTML = htmlGrade;
+
+            const calcularY = (litros) => {
+                const proporcao = Math.max(0, Math.min(litros / tetoY, 1));
+                return yBase - (proporcao * alturaUtil);
+            };
+
+            const comandosConsumo = [];
+            const comandosMeta = [];
+            let htmlPontosConsumo = "";
+            let htmlPontosMeta = "";
+            let htmlRotulosX = "";
+
+            mapaMeses.forEach((m, idx) => {
+                const x = coordsX[idx];
+                const ehSelecionado = m.chave === mesSelecionado;
+
+                if (ehSelecionado && rectDestaque) {
+                    rectDestaque.setAttribute("x", String(x - 18));
+                    rectDestaque.setAttribute("visibility", "visible");
+                }
+
+                // Rótulo do mês no eixo X (clicável também)
+                const classeMesX = ehSelecionado ? "texto-mes-eixo mes-x-ativo" : "texto-mes-eixo";
+                htmlRotulosX += `<text x="${x}" y="215" class="${classeMesX}" data-mes="${m.chave}" style="cursor:pointer;">${m.abrev}</text>`;
+
+                // Ponto e linha de Meta (L)
+                if (m.limiteM3 != null) {
+                    const metaL = m.limiteM3 * 1000;
+                    const yM = calcularY(metaL);
+                    comandosMeta.push(`${comandosMeta.length === 0 ? "M" : "L"} ${x} ${yM.toFixed(1)}`);
+                    htmlPontosMeta += `<circle cx="${x}" cy="${yM.toFixed(1)}" r="${ehSelecionado ? 4 : 2.8}" fill="#2563eb"/>`;
+                }
+
+                // Ponto e linha de Consumo Real (L)
+                if (m.consumoM3 != null) {
+                    const consumoL = Math.round(m.consumoM3 * 1000);
+                    const yC = calcularY(consumoL);
+                    comandosConsumo.push(`${comandosConsumo.length === 0 ? "M" : "L"} ${x} ${yC.toFixed(1)}`);
+                    const classeTextoPonto = ehSelecionado ? "rotulo-ponto ponto-destaque" : "rotulo-ponto";
+                    const offsetTextoY = yC < 38 ? yC + 13 : yC - 7;
+                    htmlPontosConsumo += `
+                        <circle cx="${x}" cy="${yC.toFixed(1)}" r="${ehSelecionado ? 4.5 : 3.5}" fill="#1e4566"/>
+                        <text x="${x}" y="${offsetTextoY.toFixed(1)}" class="${classeTextoPonto}">${consumoL.toLocaleString("pt-BR")}</text>
+                    `;
+                }
+            });
+
+            // Se apenas 1 mês tiver meta no ano, traça uma linha horizontal de referência daquela meta
+            if (comandosMeta.length === 1) {
+                const unicoMesMeta = mapaMeses.find(m => m.limiteM3 != null);
+                const yUnico = calcularY(unicoMesMeta.limiteM3 * 1000).toFixed(1);
+                pathMeta.setAttribute("d", `M ${coordsX[0]} ${yUnico} L ${coordsX[11]} ${yUnico}`);
+            } else {
+                pathMeta.setAttribute("d", comandosMeta.join(" "));
+            }
+
+            pathConsumo.setAttribute("d", comandosConsumo.join(" "));
+            if (gPontosMeta) gPontosMeta.innerHTML = htmlPontosMeta;
+            if (gPontosConsumo) gPontosConsumo.innerHTML = htmlPontosConsumo;
+            gRotulosX.innerHTML = htmlRotulosX;
+
+            gRotulosX.querySelectorAll("text[data-mes]").forEach(el => {
+                el.addEventListener("click", () => selecionarMes(el.getAttribute("data-mes")));
+            });
+        }
+
+        // Atualiza todos os cards da página para o mês selecionado
+        function atualizarPainelDoMes(chaveMes) {
+            const partes = chaveMes.split("-");
+            const idMes = partes[1];
+            const idxMes = parseInt(idMes, 10) - 1;
+            const dadosMes = mapaMeses[idxMes] || obterDadosDoMes(idMes);
+            const nomeMesAno = `${dadosMes.nome || idMes}/${partes[0]}`;
+
+            // Atualiza texto do botão superior
+            if (botaoMesAtual) {
+                const spanBtn = botaoMesAtual.querySelector("span");
+                if (spanBtn && dadosMes.nome) {
+                    spanBtn.textContent = `${dadosMes.nome} ${partes[0]}`;
+                }
+            }
+
+            // Elementos DOM - Card Meta de Consumo Mensal
+            const elMetaDefinida = document.getElementById("meta-definida-valor");
+            const elConsumoAtual = document.getElementById("meta-consumo-atual");
+            const elPorcentagem = document.getElementById("meta-porcentagem-valor");
+            const elFaixaSaldo = document.querySelector("#faixa-saldo-restante p");
+            const elArcoProgresso = document.getElementById("arco-progresso-svg");
+
+            // Elementos DOM - Card Meta Financeira
+            const elFinLimite = document.getElementById("meta-financeira-limite");
+            const elFinPorcentagem = document.getElementById("meta-financeira-porcentagem");
+            const elFinGasto = document.getElementById("meta-financeira-gasto");
+            const elFinFaixaTexto = document.getElementById("meta-financeira-faixa-texto");
+            const elFinFaixaComp = document.getElementById("meta-financeira-faixa-complemento");
+            const elAnelFin = document.getElementById("anel-progresso-financeiro");
+
+            const temConsumo = dadosMes.consumoM3 != null;
+            const consumoM3 = temConsumo ? dadosMes.consumoM3 : 0;
+            const consumoL = Math.round(consumoM3 * 1000);
+            const gastoAtual = dadosMes.valorContaReais != null ? dadosMes.valorContaReais : (consumoM3 * tarifaBase);
+
+            if (elConsumoAtual) {
+                elConsumoAtual.textContent = temConsumo
+                    ? consumoL.toLocaleString("pt-BR") + " L"
+                    : "0 L";
+            }
+
+            if (elFinGasto) {
+                elFinGasto.textContent = temConsumo
+                    ? "R$ " + gastoAtual.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+                    : "R$ 0,00";
+            }
+
+            if (elFinFaixaTexto) {
+                elFinFaixaTexto.textContent = temConsumo
+                    ? "R$ " + gastoAtual.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+                    : "R$ 0,00";
+            }
+            if (elFinFaixaComp) {
+                elFinFaixaComp.textContent = `Gastos registrados em ${nomeMesAno}.`;
+            }
+
+            if (dadosMes.limiteM3 != null && dadosMes.limiteM3 > 0) {
+                const limiteM3 = dadosMes.limiteM3;
+                const limiteL = Math.round(limiteM3 * 1000);
+                const percentual = Math.min(Math.round((consumoM3 / limiteM3) * 100), 999);
+                const saldoRestanteL = Math.max(0, Math.round((limiteM3 - consumoM3) * 1000));
+                const gastoLimite = limiteM3 * tarifaBase;
+
+                if (elMetaDefinida) {
+                    elMetaDefinida.textContent = limiteL.toLocaleString("pt-BR") + " L";
+                }
+                if (elPorcentagem) {
+                    elPorcentagem.textContent = percentual + "%";
+                }
+
+                if (elFaixaSaldo) {
+                    if (consumoM3 >= limiteM3) {
+                        const excessoL = Math.round((consumoM3 - limiteM3) * 1000);
+                        elFaixaSaldo.innerHTML = `<strong id="meta-saldo-restante" style="color: var(--red-status-color);">Meta ultrapassada em ${excessoL.toLocaleString("pt-BR")} L</strong> (${nomeMesAno}).`;
+                    } else {
+                        elFaixaSaldo.innerHTML = `<strong id="meta-saldo-restante">${saldoRestanteL.toLocaleString("pt-BR")} L</strong> Restantes para atingir a meta de ${nomeMesAno}.`;
+                    }
+                }
+
+                let corStatus = "#205988";
+                if (percentual >= 100) {
+                    corStatus = "#D96161";
+                } else if (percentual >= 80) {
+                    corStatus = "#f59e0b";
+                }
+
+                if (elArcoProgresso) {
+                    const angulo = Math.min(percentual / 100, 1.0) * Math.PI;
+                    const cx = 70, cy = 80, r = 55;
+                    const x = cx - r * Math.cos(angulo);
+                    const y = cy - r * Math.sin(angulo);
+                    elArcoProgresso.setAttribute("d", `M 15 80 A 55 55 0 0 1 ${x.toFixed(1)} ${y.toFixed(1)}`);
+                    elArcoProgresso.setAttribute("stroke", percentual >= 80 && percentual < 100 ? "#FFE57C" : corStatus);
+                }
+
+                if (elFinLimite) {
+                    elFinLimite.textContent = "R$ " + gastoLimite.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                }
+                if (elFinPorcentagem) {
+                    elFinPorcentagem.textContent = percentual + "%";
+                }
+                if (elAnelFin) {
+                    const percAnel = Math.min(percentual, 100);
+                    elAnelFin.style.background = `conic-gradient(${corStatus} ${percAnel}%, #e2e8f0 0)`;
+                }
+            } else {
+                // Mês sem meta cadastrada
+                if (elMetaDefinida) elMetaDefinida.textContent = "Sem meta";
+                if (elPorcentagem) elPorcentagem.textContent = "0%";
+                if (elFaixaSaldo) {
+                    elFaixaSaldo.innerHTML = `<strong id="meta-saldo-restante">Nenhuma meta definida</strong> para ${nomeMesAno}.`;
+                }
+                if (elArcoProgresso) {
+                    elArcoProgresso.setAttribute("d", "M 15 80 A 55 55 0 0 1 15 80");
+                    elArcoProgresso.setAttribute("stroke", "#205988");
+                }
+                if (elFinLimite) elFinLimite.textContent = "Sem meta";
+                if (elFinPorcentagem) elFinPorcentagem.textContent = "0%";
+                if (elAnelFin) {
+                    elAnelFin.style.background = "conic-gradient(#205988 0%, #e2e8f0 0)";
+                }
+            }
+
+            // Atualiza Card de Análise de IA e Recomendação contextualizada com o mês selecionado
+            atualizarSecaoIA(dadosMes, idxMes);
+        }
+
+        function atualizarSecaoIA(dadosMes, idxMes) {
+            const elVariacaoContainer = document.getElementById("ia-variacao-container");
+            const elVariacaoIcone = document.getElementById("ia-variacao-icone");
+            const elVariacaoPerc = document.getElementById("ia-variacao-percentual");
+            const elVariacaoSub = document.getElementById("ia-variacao-subtexto");
+            const elPrevisaoRotulo = document.getElementById("ia-previsao-rotulo");
+            const elPrevisaoVol = document.getElementById("ia-previsao-volume");
+            const elPrevisaoRef = document.getElementById("ia-previsao-referencia");
+            const elPrevisaoFin = document.getElementById("ia-previsao-financeira");
+            const elBarraPrevisao = document.getElementById("ia-barra-previsao");
+            const elRecomendadaVal = document.getElementById("ia-meta-recomendada-valor");
+            const elRecomendadaDesc = document.getElementById("ia-meta-recomendada-desc");
+            const elDicaTexto = document.getElementById("ia-dica-texto");
+
+            // Consumo previsto pelo ML (em m³) e fatura estimada
+            const previsaoMlM3 = resPrevisao?.previsao_m3 ?? resSumario?.previsao_proximo_mes_m3 ?? null;
+            const faturaEstimada = resPrevisao?.valor_estimado_conta ?? resSumario?.fatura_estimada_reais ?? (previsaoMlM3 != null ? previsaoMlM3 * tarifaBase : null);
+            const ultimoRegM3 = resPrevisao?.ultimo_consumo_registrado_m3 ?? null;
+
+            const mesAnt = idxMes > 0 ? mapaMeses[idxMes - 1] : null;
+            const baseComparacaoM3 = (dadosMes.consumoM3 != null && mesAnt && mesAnt.consumoM3 != null)
+                ? mesAnt.consumoM3
+                : ultimoRegM3;
+            const alvoComparacaoM3 = (dadosMes.consumoM3 != null && mesAnt && mesAnt.consumoM3 != null)
+                ? dadosMes.consumoM3
+                : previsaoMlM3;
+
+            if (baseComparacaoM3 != null && baseComparacaoM3 > 0 && alvoComparacaoM3 != null) {
+                const diffPerc = ((alvoComparacaoM3 - baseComparacaoM3) / baseComparacaoM3) * 100;
+                const absPerc = Math.abs(diffPerc).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + "%";
+
+                if (elVariacaoPerc) elVariacaoPerc.textContent = absPerc;
+                if (diffPerc <= 0) {
+                    if (elVariacaoContainer) elVariacaoContainer.style.color = "#22c55e";
+                    if (elVariacaoIcone) elVariacaoIcone.className = "bi bi-arrow-down-short";
+                    if (elVariacaoSub) elVariacaoSub.textContent = `Abaixo da referência (${Math.round(baseComparacaoM3 * 1000).toLocaleString("pt-BR")} L).`;
+                } else {
+                    if (elVariacaoContainer) elVariacaoContainer.style.color = "var(--red-status-color)";
+                    if (elVariacaoIcone) elVariacaoIcone.className = "bi bi-arrow-up-short";
+                    if (elVariacaoSub) elVariacaoSub.textContent = `Acima da referência (${Math.round(baseComparacaoM3 * 1000).toLocaleString("pt-BR")} L).`;
+                }
+            } else {
+                if (elVariacaoPerc) elVariacaoPerc.textContent = "0%";
+                if (elVariacaoIcone) elVariacaoIcone.className = "bi bi-dash";
+                if (elVariacaoSub) elVariacaoSub.textContent = "Sem base anterior para comparação.";
+            }
+
+            if (previsaoMlM3 != null) {
+                const mesPrevNum = Number(resPrevisao?.mes || ((idxMes + 1) % 12) + 1);
+                const anoPrevNum = Number(resPrevisao?.ano || anoReferencia);
+                const infoMesPrev = CATALOGO_MESES.find(m => m.num === mesPrevNum);
+                const nomeMesPrev = infoMesPrev ? infoMesPrev.nome.toLowerCase() : `mês ${mesPrevNum}`;
+
+                if (elPrevisaoRotulo) elPrevisaoRotulo.textContent = `Previsão para ${nomeMesPrev}/${anoPrevNum}`;
+                if (elPrevisaoVol) elPrevisaoVol.textContent = Math.round(previsaoMlM3 * 1000).toLocaleString("pt-BR") + " L";
+                if (elPrevisaoRef) {
+                    elPrevisaoRef.textContent = resPrevisao?.modelo
+                        ? `Modelo: ${resPrevisao.modelo}`
+                        : `Referência: ${dadosMes.nome}/${anoReferencia}`;
+                }
+            }
+
+            if (elPrevisaoFin && faturaEstimada != null) {
+                elPrevisaoFin.textContent = "R$ " + Number(faturaEstimada).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+
+            if (elBarraPrevisao) {
+                if (dadosMes.limiteM3 && previsaoMlM3 != null) {
+                    const percBarra = Math.min(100, Math.round((previsaoMlM3 / dadosMes.limiteM3) * 100));
+                    elBarraPrevisao.style.width = percBarra + "%";
+                } else if (previsaoMlM3 != null) {
+                    elBarraPrevisao.style.width = "65%";
+                } else {
+                    elBarraPrevisao.style.width = "0%";
+                }
+            }
+
+            // Calcula a meta recomendada pela IA com base nos últimos 3 meses com consumo real
+            const mesesComConsumo = mapaMeses.filter(m => m.consumoM3 != null && m.consumoM3 > 0);
+            const ultimosTres = mesesComConsumo.slice(-3);
+            if (ultimosTres.length > 0) {
+                const mediaM3 = ultimosTres.reduce((acc, m) => acc + m.consumoM3, 0) / ultimosTres.length;
+                const metaRecM3 = Math.round(mediaM3 * 0.95); // Sugere 5% de economia sobre a média recente
+                const metaRecL = metaRecM3 * 1000;
+                const metaRecReais = metaRecM3 * tarifaBase;
+
+                if (elRecomendadaVal) {
+                    elRecomendadaVal.textContent = `${metaRecL.toLocaleString("pt-BR")} L - R$ ${metaRecReais.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                }
+                if (elRecomendadaDesc) {
+                    const nomesBase = ultimosTres.map(m => m.abrev).join(", ");
+                    elRecomendadaDesc.textContent = `Sugestão de redução de 5% baseada na média de ${nomesBase}/${anoReferencia}.`;
+                }
+            }
+
+            // Dica dinâmica baseada na situação do mês selecionado
+            if (elDicaTexto) {
+                if (dadosMes.limiteM3 != null && dadosMes.consumoM3 != null) {
+                    const p = Math.round((dadosMes.consumoM3 / dadosMes.limiteM3) * 100);
+                    if (p >= 100) {
+                        elDicaTexto.textContent = `A meta de ${dadosMes.nome} foi excedida (${p}%). Verifique possíveis vazamentos ou picos diários no relatório.`;
+                    } else if (p >= 80) {
+                        elDicaTexto.textContent = `Consumo em alerta (${p}% da meta em ${dadosMes.nome}). Reduzir a vazão nos horários de pico evita ultrapassar o limite.`;
+                    } else {
+                        elDicaTexto.textContent = `Consumo de ${dadosMes.nome} controlado (${p}% da meta). Mantenha o padrão atual para garantir a economia mensal.`;
+                    }
+                } else if (dadosMes.consumoM3 != null) {
+                    elDicaTexto.textContent = `${dadosMes.nome} possui ${Math.round(dadosMes.consumoM3 * 1000).toLocaleString("pt-BR")} L registrados, mas ainda não tem meta definida.`;
+                } else {
+                    elDicaTexto.textContent = `Ainda não há medições consolidadas para ${dadosMes.nome}/${anoReferencia}.`;
+                }
+            }
+        }
+
         function centralizarMesAtivo() {
+            if (!containerLista) return;
             const ativo = containerLista.querySelector(".item-mes.mes-ativo");
             if (ativo) {
                 ativo.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
             }
         }
-        setTimeout(centralizarMesAtivo, 180);
 
-        // Seleção de mês ao clicar no item
-        const itensMes = containerLista.querySelectorAll(".item-mes");
-        itensMes.forEach(function (item) {
-            item.addEventListener("click", function () {
-                itensMes.forEach(i => i.classList.remove("mes-ativo"));
-                item.classList.add("mes-ativo");
-                item.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+        function selecionarMes(novaChave) {
+            if (!validarChaveMes(novaChave)) return;
+            const novoAno = novaChave.split("-")[0];
+            mesSelecionado = novaChave;
 
-                const chave = item.dataset.mes;
-                const partes = chave.split("-");
-                const mObj = dadosMeses.find(m => m.id === partes[1]);
-                if (botaoMesAtual && mObj) {
-                    const spanBtn = botaoMesAtual.querySelector("span");
-                    if (spanBtn) spanBtn.textContent = mObj.nome + " " + partes[0];
-                }
-            });
-        });
-
-        // Atualiza texto do botão do topo
-        if (botaoMesAtual) {
-            const partes = mesSelecionado.split("-");
-            const mObj = dadosMeses.find(m => m.id === partes[1]);
-            if (mObj) {
-                const spanBtn = botaoMesAtual.querySelector("span");
-                if (spanBtn) spanBtn.textContent = mObj.nome + " " + partes[0];
+            if (novoAno !== anoReferencia) {
+                anoReferencia = novoAno;
+                mapaMeses = construirMapaAnual();
+                renderizarItensCarrossel();
+            } else if (containerLista) {
+                containerLista.querySelectorAll(".item-mes").forEach(i => {
+                    i.classList.toggle("mes-ativo", i.dataset.mes === mesSelecionado);
+                });
             }
 
-            // Dropdown rápido caso clique no botão de cima
+            centralizarMesAtivo();
+            atualizarPainelDoMes(mesSelecionado);
+            renderizarGraficoSVG();
+        }
+
+        // Navegação por setas do carrossel
+        if (btnAnterior && containerLista) {
+            btnAnterior.addEventListener("click", function () {
+                containerLista.scrollBy({ left: -260, behavior: "smooth" });
+            });
+        }
+
+        if (btnProximo && containerLista) {
+            btnProximo.addEventListener("click", function () {
+                containerLista.scrollBy({ left: 260, behavior: "smooth" });
+            });
+        }
+
+        // Dropdown rápido no botão de calendário do topo
+        if (botaoMesAtual) {
             const listaDropdown = document.createElement("div");
             listaDropdown.className = "lista-seletor-meses";
             listaDropdown.hidden = true;
-            listaDropdown.innerHTML = dadosMeses.map(function (m) {
-                return '<button type="button" class="opcao-mes" data-mes="' + anoPadrao + '-' + m.id + '">' + m.nome + " " + anoPadrao + "</button>";
+            listaDropdown.innerHTML = CATALOGO_MESES.map(function (m) {
+                return `<button type="button" class="opcao-mes" data-mes="${anoReferencia}-${m.id}">${m.nome} ${anoReferencia}</button>`;
             }).join("");
             document.body.appendChild(listaDropdown);
 
@@ -1883,9 +2324,7 @@ html, body {
 
             listaDropdown.querySelectorAll(".opcao-mes").forEach(function (btnOpcao) {
                 btnOpcao.addEventListener("click", function () {
-                    const sel = btnOpcao.dataset.mes;
-                    const itemAlvo = containerLista.querySelector(`.item-mes[data-mes="${sel}"]`);
-                    if (itemAlvo) itemAlvo.click();
+                    selecionarMes(btnOpcao.dataset.mes);
                     listaDropdown.hidden = true;
                 });
             });
@@ -1895,144 +2334,11 @@ html, body {
             });
             window.addEventListener("resize", posicionarDropdown);
         }
-    })();
 
-    // =========================================================================
-    // INTEGRAÇÃO DINÂMICA: METAS DE CONSUMO, FINANCEIRA E PREVISÕES DO WEGNOLOGY
-    // =========================================================================
-    (async function carregarDadosMetasDinamicas() {
-        const timestamp = new Date().getTime();
-        const URL_CONFIG = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/config.json';
-        const URL_META   = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/progresso_meta.json';
-        const URL_CONSUMO= 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/consumo_mes.json';
-        const URL_SUMARIO= 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/sumario_execucao.json';
-        const URL_PREVISAO= 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/previsao_ml.json';
-
-        const buscarJson = (url, nome) =>
-            fetch(`${url}?_t=${timestamp}`)
-                .then(r => {
-                    if (!r.ok) throw new Error(`Falha ao ler ${nome} (HTTP ${r.status})`);
-                    return r.json();
-                })
-                .catch(e => { console.warn(e.message); return null; });
-
-        try {
-            const [resConfig, resMeta, resConsumo, resSumario, resPrevisao] = await Promise.all([
-                buscarJson(URL_CONFIG, 'config.json'),
-                buscarJson(URL_META, 'progresso_meta.json'),
-                buscarJson(URL_CONSUMO, 'consumo_mes.json'),
-                buscarJson(URL_SUMARIO, 'sumario_execucao.json'),
-                buscarJson(URL_PREVISAO, 'previsao_ml.json')
-            ]);
-
-            // Determina a meta configurada (de config.json ou progresso_meta.json)
-            const metaAtiva = resConfig?.meta_ativa || null;
-            let limiteM3 = null;
-            let nomeMeta = "Meta Mensal";
-
-            if (metaAtiva) {
-                limiteM3 = Number(metaAtiva.valor);
-                nomeMeta = metaAtiva.nome || nomeMeta;
-            } else if (resMeta && resMeta.meta_ativa && resMeta.limite_m3 != null) {
-                limiteM3 = Number(resMeta.limite_m3);
-                nomeMeta = resMeta.meta_nome || nomeMeta;
-            }
-
-            // Determina o consumo atual acumulado em m³
-            const consumoAtualM3 = Number(
-                resConsumo?.consumo_acumulado_mes_m3 ??
-                resMeta?.consumo_atual_m3 ??
-                resSumario?.consumo_mes_acumulado_m3 ??
-                0
-            );
-
-            // Converte para Litros (1 m³ = 1.000 L)
-            const consumoAtualL = consumoAtualM3 * 1000;
-            const tarifaBase = Number(resPrevisao?.tarifa_m3 ?? 59.6);
-
-            // Elementos DOM de Meta de Consumo
-            const elMetaDefinida = document.getElementById("meta-definida-valor");
-            const elConsumoAtual = document.getElementById("meta-consumo-atual");
-            const elPorcentagem  = document.getElementById("meta-porcentagem-valor");
-            const elSaldoRestante= document.getElementById("meta-saldo-restante");
-            const elFaixaTexto   = document.querySelector("#faixa-saldo-restante p");
-
-            if (elConsumoAtual) {
-                elConsumoAtual.textContent = consumoAtualL.toLocaleString("pt-BR", { maximumFractionDigits: 0 }) + " L";
-            }
-
-            if (limiteM3 != null && limiteM3 > 0) {
-                const limiteL = limiteM3 * 1000;
-                const percentual = Math.min(Math.round((consumoAtualM3 / limiteM3) * 100), 999);
-                const saldoRestanteM3 = Math.max(0, limiteM3 - consumoAtualM3);
-                const saldoRestanteL = saldoRestanteM3 * 1000;
-
-                if (elMetaDefinida) {
-                    elMetaDefinida.textContent = limiteL.toLocaleString("pt-BR", { maximumFractionDigits: 0 }) + " L";
-                }
-                if (elPorcentagem) {
-                    elPorcentagem.textContent = percentual + "%";
-                }
-                if (elSaldoRestante) {
-                    if (consumoAtualM3 >= limiteM3) {
-                        elSaldoRestante.textContent = "0 L";
-                        if (elFaixaTexto) {
-                            elFaixaTexto.innerHTML = `<strong style="color: var(--red-status-color);">Meta de consumo ultrapassada!</strong>`;
-                        }
-                    } else {
-                        elSaldoRestante.textContent = saldoRestanteL.toLocaleString("pt-BR", { maximumFractionDigits: 0 }) + " L";
-                    }
-                }
-
-                // Ajusta arco visual do medidor SVG
-                const elArcoProgresso = document.getElementById("arco-progresso-svg");
-                if (elArcoProgresso) {
-                    const angulo = Math.min(percentual / 100, 1.0) * Math.PI;
-                    const cx = 70, cy = 80, r = 55;
-                    const x = cx - r * Math.cos(angulo);
-                    const y = cy - r * Math.sin(angulo);
-                    elArcoProgresso.setAttribute("d", `M 15 80 A 55 55 0 0 1 ${x.toFixed(1)} ${y.toFixed(1)}`);
-                    if (percentual >= 100) {
-                        elArcoProgresso.setAttribute("stroke", "#D96161");
-                    } else if (percentual >= 80) {
-                        elArcoProgresso.setAttribute("stroke", "#FFE57C");
-                    } else {
-                        elArcoProgresso.setAttribute("stroke", "#205988");
-                    }
-                }
-
-                // Elementos da Meta Financeira
-                const elFinLimite = document.getElementById("meta-financeira-limite");
-                const elFinPorcentagem = document.getElementById("meta-financeira-porcentagem");
-                const elFinGasto = document.getElementById("meta-financeira-gasto");
-                const elFinFaixa = document.getElementById("meta-financeira-faixa-texto");
-
-                const gastoLimite = limiteM3 * tarifaBase;
-                const gastoAtual = consumoAtualM3 * tarifaBase;
-
-                if (elFinLimite) elFinLimite.textContent = "R$ " + gastoLimite.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                if (elFinGasto) elFinGasto.textContent = "R$ " + gastoAtual.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                if (elFinPorcentagem) elFinPorcentagem.textContent = percentual + "%";
-                if (elFinFaixa) elFinFaixa.textContent = "R$ " + gastoAtual.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-            } else {
-                if (elMetaDefinida) elMetaDefinida.textContent = "Sem meta";
-                if (elPorcentagem) elPorcentagem.textContent = "--%";
-                if (elSaldoRestante && elFaixaTexto) {
-                    elFaixaTexto.innerHTML = `<strong>Nenhuma meta ativa configurada no momento.</strong>`;
-                }
-            }
-
-            // Previsão Financeira da IA
-            const elIaFin = document.getElementById("ia-previsao-financeira");
-            const faturaEstimada = resPrevisao?.valor_estimado_conta ?? resSumario?.fatura_estimada_reais ?? null;
-            if (elIaFin && faturaEstimada != null) {
-                elIaFin.textContent = "R$ " + Number(faturaEstimada).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            }
-
-        } catch (erro) {
-            console.warn("Aviso ao carregar dados dinâmicos de metas:", erro);
-        }
+        // Inicialização da tela
+        renderizarItensCarrossel();
+        selecionarMes(mesSelecionado);
+        setTimeout(centralizarMesAtivo, 180);
     })();
 </script>
 </body>
