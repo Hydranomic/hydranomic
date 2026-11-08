@@ -1,24 +1,1204 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Metas de consumo / financeiro - Hydranomic</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Evita que o navegador guarde o HTML do usuário anterior em cache -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Metas de Consumo / Financeiro - Hydranomic</title>
+    
+    <!-- Ícone via URL direta com proporção 1:1 e recorte automático via Canvas -->
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Hydranomic/hydranomic/main/experience/assets/logo_hydranomic.png.png">
+    <script>
+        (function () {
+            var img = new Image();
+            img.crossOrigin = "anonymous";
+            img.onload = function () {
+                var c = document.createElement("canvas");
+                c.width = 64; c.height = 64;
+                var ctx = c.getContext("2d");
+                ctx.drawImage(img, 178, 62, 256, 256, 0, 0, 64, 64);
+                var l = document.querySelector("link[rel*='icon']");
+                if (l) l.href = c.toDataURL("image/png");
+            };
+            img.src = "https://raw.githubusercontent.com/Hydranomic/hydranomic/main/experience/assets/logo_hydranomic.png.png";
+        })();
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css');
 
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-  >
+:root {
+    --bg-color: #E6EFF8;
+    --secondary-color: #205988;
+    --red-status-color: #D96161;
+    --yellow-status-color: #FFE57C;
+    --green-status-color: #43BC8B;
+    --buton-color: #CFE1F4;
 
-  <link rel="stylesheet" href="css/navbar.css">
-  <link rel="stylesheet" href="css/metas.css">
+    --font-family: "Inter", sans-serif;
+
+    --font-size-heading1: 36px;
+    --font-size-heading2: 32px;
+    --font-size-heading3: 24px;
+    --font-size-heading4: 20px;
+    --font-size-heading5: 16px;
+    --font-size-heading6: 14px;
+    --font-size-heading7: 12px;
+    
+    --weight-extra-light: 200;
+    --weight-light: 300;
+    --weight-regular: 400;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+    --weight-extrabold: 800;
+    --italic: italic;
+}
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: #e6eff8;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 84px;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #205988;
+  box-shadow: 0 4px 19px rgba(0, 0, 0, 0.28);
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 32px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.menu:hover {
+  opacity: 0.75;
+}
+
+.logo-img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  transform: scale(2.2);
+  transform-origin: center;
+}
+
+.logo {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 21px;
+  letter-spacing: 4px;
+  white-space: nowrap;
+}
+
+.logo .hydra {
+  font-weight: 400;
+}
+
+.logo .nomic {
+  font-weight: 700;
+}
+
+.perfil {
+  position: relative;
+}
+
+.perfil-botao {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+  border: none;
+  color: #ffffff;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.avatar-nav {
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  color: #ffffff;
+  font-size: 33px;
+}
+
+.avatar-modal {
+  width: 58px;
+  height: 58px;
+  background: transparent;
+  color: #205988;
+  font-size: 51px;
+}
+
+.usuario {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.usuario strong {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.usuario small {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.seta {
+  margin-left: 8px;
+  font-size: 15px;
+  transition: transform 0.2s ease;
+}
+
+.perfil-botao[aria-expanded="true"] .seta {
+  transform: rotate(180deg);
+}
+
+.perfil-card {
+  position: absolute;
+  z-index: 20;
+  top: 58px;
+  right: 0;
+  width: 320px;
+  overflow: hidden;
+  background: #ffffff;
+  color: #202b33;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.perfil-card[hidden] {
+  display: none;
+}
+
+.perfil-card::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 28px;
+  width: 20px;
+  height: 20px;
+  background: #ffffff;
+  transform: rotate(45deg);
+}
+
+.perfil-topo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 22px 20px;
+  background: #ffffff;
+}
+
+.perfil-topo h2 {
+  margin-bottom: 3px;
+  font-size: 19px;
+}
+
+.perfil-topo p {
+  color: #6d7780;
+  font-size: 13px;
+}
+
+.informacoes {
+  padding: 3px 20px 10px;
+}
+
+.informacoes p {
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  column-gap: 8px;
+  padding: 11px 0;
+}
+
+.informacoes p > span {
+  grid-row: span 2;
+  color: #205988;
+  font-size: 17px;
+}
+
+.informacoes b {
+  color: #222b31;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.informacoes small {
+  margin-top: 3px;
+  color: #5f6870;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.acoes {
+  display: flex;
+  flex-direction: column;
+  padding: 1px 20px 16px;
+}
+
+.linha-acoes {
+  width: 98.5%;
+  margin: 0 auto 8px;
+  border: none;
+  border-top: 1px solid #222222;
+}
+
+.acoes button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 7px;
+  border: none;
+  background: transparent;
+  color: #205988;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.acoes .sair {
+  border-top: 1px solid #222222;
+  color: #bd3838;
+}
+
+.acoes button:hover {
+  background: #f1f6fa;
+}
+
+.acoes .sair:hover {
+  background: #fff1f1;
+}
+
+.acoes button i {
+  font-size: 17px;
+}
+
+.menu:focus-visible,
+.perfil-botao:focus-visible,
+.acoes button:focus-visible,
+.logo:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 4px;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    height: 74px;
+    padding: 0 18px;
+  }
+  .logo-area { gap: 10px; }
+  .menu { width: 36px; height: 36px; font-size: 28px; }
+  .logo-img { width: 36px; height: 36px; transform: scale(1.25); }
+  .logo { font-size: 15px; letter-spacing: 2px; }
+  .usuario { display: none; }
+  .seta { margin-left: 2px; }
+  .perfil-card {
+    position: fixed;
+    top: 86px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+    max-width: 320px;
+    margin-left: auto;
+  }
+}
+
+.sidebar-backdrop {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+}
+
+.sidebar-backdrop[hidden],
+.sidebar[hidden] {
+  display: none;
+}
+
+.sidebar {
+  position: fixed;
+  z-index: 60;
+  top: 0;
+  left: 0;
+  width: 341px;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  background: #205988;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 4px 19.5px 11px rgba(0, 0, 0, 0.26);
+  animation: abrir-sidebar 180ms ease-out;
+}
+
+.sidebar-topo {
+  position: relative;
+  height: 103px;
+}
+
+.sidebar-logo {
+  position: absolute;
+  top: 19px;
+  left: 7px;
+  width: 99px;
+  height: 66px;
+  object-fit: contain;
+}
+
+.sidebar-fechar {
+  position: absolute;
+  top: 39px;
+  right: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.sidebar-fechar:hover {
+  opacity: 0.75;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  padding: 47px 30px 0;
+}
+
+.sidebar-menu a {
+  color: #ffffff;
+  text-decoration: none;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+}
+
+.sidebar-menu a + a {
+  margin-top: 55px;
+}
+
+.sidebar-menu a:hover {
+  opacity: 0.75;
+}
+
+.sidebar-sair {
+  position: absolute;
+  bottom: 40px;
+  left: 80px;
+  width: 181px;
+  height: 47px;
+  border: none;
+  border-radius: 100px;
+  background: #ffffff;
+  color: #205988;
+  font-size: 22px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 23.5px 4px rgba(0, 0, 0, 0.4);
+}
+
+.sidebar-sair:hover {
+  transform: translateY(-2px);
+}
+
+@keyframes abrir-sidebar {
+  from { opacity: 0; transform: translateX(-15px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@media (max-width: 600px) {
+  .sidebar { width: 88vw; }
+  .sidebar-fechar { right: 28px; }
+  .sidebar-sair { left: 50%; transform: translateX(-50%); }
+}
+
+.pagina-metas {
+  max-width: 1300px;
+  margin: 18px auto 30px auto;
+  padding: 0 3%;
+}
+
+.cabecalho-metas {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.titulo-pagina {
+  font-size: 22px;
+  font-weight: 700;
+  color: #184e77;
+}
+
+.subtitulo-pagina {
+  font-size: 13px;
+  color: #5e7a92;
+  margin-top: 2px;
+}
+
+.botao-mes-atual {
+  background: #ffffff;
+  border: 1px solid #d4e2ed;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #184e77;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+/* CARROSSEL DE MESES DESLIZANTE */
+.carrossel-meses {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 10px 14px;
+  min-height: 84px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  margin-bottom: 22px;
+}
+
+.seta-carrossel {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  color: #64748b;
+  cursor: pointer;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.seta-carrossel:hover {
+  background: #f1f5f9;
+  color: #184e77;
+}
+
+.lista-meses {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.lista-meses::-webkit-scrollbar {
+  display: none;
+}
+
+.item-mes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: 8px;
+  min-width: 120px;
+  flex-shrink: 0;
+  border-right: 1px solid #edf2f7;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  user-select: none;
+}
+
+.item-mes:hover:not(.mes-ativo) {
+  background: #f8fafc;
+}
+
+.item-mes:last-child {
+  border-right: none;
+}
+
+.nome-mes {
+  font-size: 14px;
+  font-weight: 700;
+  color: #184e77;
+}
+
+.valor-mes {
+  font-size: 13px;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.ponto-vermelho {
+  font-size: 8px;
+  color: #dc2626;
+}
+
+.ponto-amarelo {
+  font-size: 8px;
+  color: #f59e0b;
+}
+
+.icone-verde {
+  font-size: 13px;
+  color: #16a34a;
+}
+
+.mes-ativo {
+  background: #1d5784 !important;
+  color: #ffffff !important;
+  border-radius: 10px;
+  padding: 14px 24px;
+  box-shadow: 0 6px 18px rgba(29, 87, 132, 0.4);
+  border-right: none;
+}
+
+.mes-ativo .nome-mes,
+.mes-ativo .valor-mes {
+  color: #ffffff !important;
+}
+
+.mes-ativo .valor-mes i {
+  font-size: 14px;
+}
+
+.grade-principal-metas {
+  display: grid;
+  grid-template-columns: 1fr 1.18fr;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: stretch;
+}
+
+.coluna-esquerda,
+.coluna-direita {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cartao-metas {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 16px 22px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.titulo-cartao-icone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.icone-titulo {
+  font-size: 18px;
+  color: #184e77;
+}
+
+.titulo-cartao-icone h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #184e77;
+}
+
+.conteudo-meta-consumo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px 12px 6px;
+}
+
+.coluna-dado {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.alinhar-direita {
+  text-align: right;
+}
+
+.rotulo-dado {
+  font-size: 12px;
+  color: #6b8499;
+}
+
+.valor-grande {
+  font-size: 21px;
+  font-weight: 700;
+  color: #184e77;
+}
+
+.medidor-arco {
+  position: relative;
+  width: 130px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg-arco {
+  width: 100%;
+  height: 100%;
+}
+
+.texto-arco {
+  position: absolute;
+  bottom: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.porcentagem-arco {
+  font-size: 22px;
+  font-weight: 800;
+  color: #184e77;
+}
+
+.subtexto-arco {
+  font-size: 10px;
+  color: #6b8499;
+  margin-top: -2px;
+}
+
+.anel-progresso {
+  position: relative;
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: conic-gradient(#205988 80%, #e2e8f0 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.miolo-anel {
+  width: 66px;
+  height: 66px;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.porcentagem-anel {
+  font-size: 19px;
+  font-weight: 800;
+  color: #184e77;
+}
+
+.subtexto-anel {
+  font-size: 10px;
+  color: #6b8499;
+}
+
+.faixa-destaque-azul {
+  background: #eaf3fa;
+  border-radius: 9px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: #526e85;
+}
+
+.faixa-destaque-azul strong {
+  color: #184e77;
+  font-weight: 700;
+}
+
+.icone-ondas {
+  font-size: 18px;
+  color: #184e77;
+}
+
+.icone-cifrao {
+  font-size: 17px;
+  color: #184e77;
+}
+
+.cabecalho-grafico {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.legenda-grafico {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  color: #475569;
+}
+
+.item-legenda {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.traco-real {
+  width: 18px;
+  height: 3px;
+  background: #184e77;
+  border-radius: 2px;
+}
+
+.traco-meta {
+  width: 18px;
+  height: 2px;
+  border-top: 2px dashed #2563eb;
+}
+
+.area-grafico {
+  width: 100%;
+}
+
+.svg-grafico {
+  width: 100%;
+  max-height: 180px;
+  display: block;
+}
+
+.texto-eixo {
+  font-size: 9.5px;
+  fill: #64748b;
+  text-anchor: end;
+}
+
+.texto-mes-eixo {
+  font-size: 9.5px;
+  fill: #64748b;
+  text-anchor: middle;
+}
+
+.mes-x-ativo {
+  font-weight: 700;
+  fill: #184e77;
+}
+
+.rotulo-ponto {
+  font-size: 7.5px;
+  fill: #184e77;
+  text-anchor: middle;
+  font-weight: 600;
+}
+
+.ponto-destaque {
+  font-weight: 800;
+  fill: #184e77;
+}
+
+.grade-previsao-ia {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.caixa-ia-destaque {
+  background: #f0f6fa;
+  border-radius: 9px;
+  padding: 10px 14px;
+}
+
+.caixa-ia-destaque p {
+  font-size: 11px;
+  color: #4d687d;
+  line-height: 1.35;
+}
+
+.valor-queda {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 800;
+  color: #22c55e;
+  margin: 2px 0;
+}
+
+.valor-queda i {
+  font-size: 22px;
+}
+
+.caixa-ia-destaque small {
+  font-size: 10px;
+  color: #6b8499;
+}
+
+.bloco-previsao {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border-left: 1px solid #e5edf4;
+  padding-left: 16px;
+}
+
+.rotulo-ia {
+  font-size: 11px;
+  color: #6b8499;
+}
+
+.valor-ia {
+  font-size: 18px;
+  font-weight: 700;
+  color: #184e77;
+}
+
+.subtexto-ia {
+  font-size: 10px;
+  color: #6b8499;
+}
+
+.barra-previsao-fundo {
+  width: 100%;
+  height: 5px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.barra-previsao-preenchida {
+  height: 100%;
+  background: #184e77;
+  border-radius: 10px;
+}
+
+.banner-recomendacao-ia {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 14px 22px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.lado-recomendacao {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.icone-robo-circulo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #184e77;
+  color: #184e77;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.textos-recomendacao {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.rotulo-recomendacao {
+  font-size: 11px;
+  color: #6b8499;
+}
+
+.titulo-recomendacao {
+  font-size: 16px;
+  font-weight: 700;
+  color: #184e77;
+}
+
+.descricao-recomendacao {
+  font-size: 11px;
+  color: #6b8499;
+}
+
+.pilula-dica-ia {
+  background: #eef6fc;
+  border-radius: 12px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 420px;
+}
+
+.icone-lampada {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #184e77;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.titulo-dica {
+  font-size: 11px;
+  font-weight: 700;
+  color: #184e77;
+}
+
+.descricao-dica {
+  font-size: 10.5px;
+  color: #526e85;
+  line-height: 1.25;
+}
+
+@media (max-width: 992px) {
+  .grade-principal-metas {
+    grid-template-columns: 1fr;
+  }
+  .banner-recomendacao-ia {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .pilula-dica-ia {
+    max-width: 100%;
+  }
+}
+
+body, main, button, input, select {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+html, body {
+    background-color: var(--bg-color, #E6EFF8) !important;
+}
+</style>
 </head>
-
 <body>
+    <!-- BARRA SUPERIOR (LOGO & AÇÕES) -->
+    <nav class="navbar">
+        <div class="logo-area">
+            <button
+                class="menu"
+                id="abrirSidebar"
+                type="button"
+                aria-label="Abrir menu lateral"
+                aria-expanded="false"
+            >
+                <i class="bi bi-list"></i>
+            </button>
 
-  <div id="navbar-container"></div>
+            <img
+                src="https://raw.githubusercontent.com/Hydranomic/hydranomic/main/experience/assets/logo_hydranomic.png.png"
+                alt="Logo Hydranomic"
+                class="logo-img"
+            >
 
-  <main class="pagina-metas">
+            <a href="http://hydranomic.kadly.com.br/homepage" class="logo">
+                <span class="hydra">HYDRA</span><span class="nomic">NOMIC</span>
+            </a>
+        </div>
+
+        <div class="perfil">
+            <button
+                class="perfil-botao"
+                id="abrirPerfil"
+                type="button"
+                aria-expanded="false"
+                aria-controls="perfilCard"
+                aria-label="Abrir perfil do usuário"
+            >
+                <span class="avatar avatar-nav">
+                    <i class="bi bi-person-circle"></i>
+                </span>
+
+                <span class="usuario">
+                    <strong id="nav-nome-usuario"></strong>
+                    <small id="nav-cargo-usuario"></small>
+                </span>
+
+                <span class="seta">
+                    <i class="bi bi-chevron-down"></i>
+                </span>
+            </button>
+
+            <div class="perfil-card" id="perfilCard" hidden>
+                <div class="perfil-topo">
+                    <span class="avatar avatar-modal">
+                        <i class="bi bi-person-circle"></i>
+                    </span>
+
+                    <div>
+                        <h2 id="card-nome-usuario"></h2>
+                        <p id="card-subtitulo-cargo"></p>
+                    </div>
+                </div>
+
+                <div class="informacoes">
+                    <p>
+                        <span><i class="bi bi-award"></i></span>
+                        <b>Cargo</b>
+                        <small id="card-info-cargo"></small>
+                    </p>
+
+                    <p>
+                        <span><i class="bi bi-envelope"></i></span>
+                        <b>Email</b>
+                        <small id="card-info-email">
+                            {{#if experience.user.email}}{{experience.user.email}}{{else}}-{{/if}}
+                        </small>
+                    </p>
+
+                    <p>
+                        <span><i class="bi bi-clock-history"></i></span>
+                        <b>Último acesso</b>
+                        <small id="card-info-ultimo-acesso" data-last-login="{{experience.user.lastLogin}}">
+                            Carregando...
+                        </small>
+                    </p>
+                </div>
+
+                <div class="acoes">
+                    <hr class="linha-acoes">
+
+                    <button type="button" onclick="window.location.href='http://hydranomic.kadly.com.br/configuracoes'">
+                        <i class="bi bi-gear"></i>
+                        Configurações
+                    </button>
+
+                    <button type="button" class="sair" id="btn-sair-conta" onclick="realizarLogout(event)">
+                        <i class="bi bi-box-arrow-right"></i>
+                        Sair da conta
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- BACKDROP DA SIDEBAR -->
+    <button
+        class="sidebar-backdrop"
+        id="fecharSidebarFundo"
+        type="button"
+        aria-label="Fechar menu lateral"
+        hidden
+    ></button>
+
+    <!-- SIDEBAR (MENU LATERAL RETRÁTIL) -->
+    <aside class="sidebar" id="sidebar" aria-label="Menu lateral" hidden>
+        <div class="sidebar-topo">
+            <img
+                src="https://raw.githubusercontent.com/Hydranomic/hydranomic/main/experience/assets/logo_hydranomic.png.png"
+                alt="Hydranomic"
+                class="sidebar-logo"
+            >
+
+            <button
+                class="sidebar-fechar"
+                id="fecharSidebar"
+                type="button"
+                aria-label="Fechar menu lateral"
+            >
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="http://hydranomic.kadly.com.br/homepage">Página inicial</a>
+            <a href="http://hydranomic.kadly.com.br/definicoes" id="link-definicoes">Definições</a>
+            <a href="http://hydranomic.kadly.com.br/metas">Metas de consumo / financeiro</a>
+            <a href="http://hydranomic.kadly.com.br/relatorio">Relatório de consumo</a>
+        </nav>
+
+        <button class="sidebar-sair" type="button" onclick="realizarLogout(event)">
+            Sair
+        </button>
+    </aside>
+
+<main class="pagina-metas">
 
     <header class="cabecalho-metas">
       <div class="titulos-metas">
@@ -32,54 +1212,16 @@
       </button>
     </header>
 
+    <!-- CARROSSEL DE MESES INTERATIVO -->
     <section class="carrossel-meses">
-      <button class="seta-carrossel" type="button" aria-label="Mês anterior">
+      <button class="seta-carrossel" id="btn-carrossel-anterior" type="button" aria-label="Mês anterior">
         <i class="bi bi-chevron-left"></i>
       </button>
 
-      <div class="lista-meses">
-        <div class="item-mes">
-          <span class="nome-mes">Mar 2026</span>
-          <span class="valor-mes">16.000 L <i class="bi bi-circle-fill ponto-vermelho"></i></span>
-        </div>
+      <!-- Preenchido dinamicamente via JS de Jan a Dez -->
+      <div class="lista-meses" id="lista-carrossel-meses"></div>
 
-        <div class="item-mes">
-          <span class="nome-mes">Abr 2026</span>
-          <span class="valor-mes">16.000 L <i class="bi bi-circle-fill ponto-amarelo"></i></span>
-        </div>
-
-        <div class="item-mes">
-          <span class="nome-mes">Mai 2026</span>
-          <span class="valor-mes">16.000 L <i class="bi bi-check-circle-fill icone-verde"></i></span>
-        </div>
-
-        <div class="item-mes">
-          <span class="nome-mes">Jun 2026</span>
-          <span class="valor-mes">16.000 L <i class="bi bi-check-circle-fill icone-verde"></i></span>
-        </div>
-
-        <div class="item-mes">
-          <span class="nome-mes">Jul 2026</span>
-          <span class="valor-mes">16.000 L <i class="bi bi-check-circle-fill icone-verde"></i></span>
-        </div>
-
-        <div class="item-mes mes-ativo">
-          <span class="nome-mes">Ago 2026</span>
-          <span class="valor-mes">14.050 L <i class="bi bi-activity"></i></span>
-        </div>
-
-        <div class="item-mes">
-          <span class="nome-mes">Set 2026</span>
-          <span class="valor-mes">-</span>
-        </div>
-
-        <div class="item-mes">
-          <span class="nome-mes">Out 2026</span>
-          <span class="valor-mes">-</span>
-        </div>
-      </div>
-
-      <button class="seta-carrossel" type="button" aria-label="Próximo mês">
+      <button class="seta-carrossel" id="btn-carrossel-proximo" type="button" aria-label="Próximo mês">
         <i class="bi bi-chevron-right"></i>
       </button>
     </section>
@@ -97,30 +1239,30 @@
           <div class="conteudo-meta-consumo">
             <div class="coluna-dado">
               <span class="rotulo-dado">Meta definida</span>
-              <strong class="valor-grande">18.000 L</strong>
+              <strong class="valor-grande" id="meta-definida-valor">-- L</strong>
             </div>
 
             <div class="medidor-arco">
               <svg viewBox="0 0 140 90" class="svg-arco">
                 <path d="M 15 80 A 55 55 0 0 1 125 80" fill="none" stroke="#e2e8f0" stroke-width="12" stroke-linecap="round"/>
-                <path d="M 15 80 A 55 55 0 0 1 110 35" fill="none" stroke="#205988" stroke-width="12" stroke-linecap="round"/>
+                <path id="arco-progresso-svg" d="M 15 80 A 55 55 0 0 1 15 80" fill="none" stroke="#205988" stroke-width="12" stroke-linecap="round"/>
               </svg>
 
               <div class="texto-arco">
-                <span class="porcentagem-arco">78%</span>
+                <span class="porcentagem-arco" id="meta-porcentagem-valor">0%</span>
                 <span class="subtexto-arco">da meta utilizada</span>
               </div>
             </div>
 
             <div class="coluna-dado alinhar-direita">
               <span class="rotulo-dado">Consumo atual</span>
-              <strong class="valor-grande">14.050 L</strong>
+              <strong class="valor-grande" id="meta-consumo-atual">-- L</strong>
             </div>
           </div>
 
-          <div class="faixa-destaque-azul">
+          <div class="faixa-destaque-azul" id="faixa-saldo-restante">
             <i class="bi bi-water icone-ondas"></i>
-            <p><strong>3.950 L</strong> Restantes para atingir a meta.</p>
+            <p><strong id="meta-saldo-restante">-- L</strong> Restantes para atingir a meta.</p>
           </div>
         </article>
 
@@ -132,26 +1274,26 @@
 
           <div class="conteudo-meta-consumo">
             <div class="coluna-dado">
-              <span class="rotulo-dado">Economia estimada</span>
-              <strong class="valor-grande">R$ 2.300,00</strong>
+              <span class="rotulo-dado">Gasto limite da meta</span>
+              <strong class="valor-grande" id="meta-financeira-limite">R$ --</strong>
             </div>
 
-            <div class="anel-progresso progresso-80">
+            <div class="anel-progresso">
               <div class="miolo-anel">
-                <span class="porcentagem-anel">80%</span>
+                <span class="porcentagem-anel" id="meta-financeira-porcentagem">0%</span>
                 <span class="subtexto-anel">da meta</span>
               </div>
             </div>
 
             <div class="coluna-dado alinhar-direita">
-              <span class="rotulo-dado">Economia alcançada</span>
-              <strong class="valor-grande">R$ 1.840,00</strong>
+              <span class="rotulo-dado">Gasto acumulado</span>
+              <strong class="valor-grande" id="meta-financeira-gasto">R$ --</strong>
             </div>
           </div>
 
           <div class="faixa-destaque-azul">
             <i class="bi bi-currency-dollar icone-cifrao"></i>
-            <p><strong>R$ 20.080,00</strong> Gastos no mês de setembro.</p>
+            <p><strong id="meta-financeira-faixa-texto">R$ --</strong> Gastos no mês atual.</p>
           </div>
         </article>
 
@@ -267,10 +1409,10 @@
 
             <div class="bloco-previsao">
               <span class="rotulo-ia">Previsão financeira</span>
-              <strong class="valor-ia">R$ 1.840,00</strong>
+              <strong class="valor-ia" id="ia-previsao-financeira">R$ --</strong>
 
               <div class="barra-previsao-fundo">
-                <div class="barra-previsao-preenchida" style="width: 65%;"></div>
+                <div class="barra-previsao-preenchida" id="ia-barra-previsao" style="width: 65%;"></div>
               </div>
             </div>
           </div>
@@ -307,42 +1449,591 @@
 
   </main>
 
-  <script>
-    fetch("navbar.html")
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Não foi possível carregar a navbar.");
+<script>
+    // =========================================================================
+    // FUNÇÃO GLOBAL DE LOGOUT (LIMPA SESSÃO, COOKIES E EVITA CACHE)
+    // =========================================================================
+    function realizarLogout(evento) {
+        if (evento) {
+            evento.preventDefault();
+            evento.stopPropagation();
         }
 
-        return response.text();
-      })
-      .then(html => {
-        const parser = new DOMParser();
-        const documento = parser.parseFromString(html, "text/html");
-        const container = document.getElementById("navbar-container");
+        localStorage.removeItem("hydranomic_sessao_atual");
+        sessionStorage.removeItem("hydranomic_email_sincronizado");
+        sessionStorage.setItem("hydranomic_acabou_de_sair", "true");
 
-        Array.from(documento.body.children).forEach(elemento => {
-          if (elemento.tagName !== "SCRIPT") {
-            container.appendChild(document.importNode(elemento, true));
-          }
+        const dominios = [
+            "",
+            "; domain=" + window.location.hostname,
+            "; domain=.kadly.com.br",
+            "; domain=hydranomic.kadly.com.br"
+        ];
+        dominios.forEach(function (dom) {
+            document.cookie = "authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; max-age=0; path=/" + dom + ";";
         });
 
-        documento.querySelectorAll("script").forEach(scriptOriginal => {
-          const novoScript = document.createElement("script");
+        window.location.replace("http://hydranomic.kadly.com.br/login?logout=1&_t=" + new Date().getTime());
+    }
 
-          if (scriptOriginal.src) {
-            novoScript.src = scriptOriginal.src;
-          } else {
-            novoScript.textContent = scriptOriginal.textContent;
-          }
+    window.addEventListener("pageshow", function (evento) {
+        if (evento.persisted || sessionStorage.getItem("hydranomic_acabou_de_sair") === "true") {
+            sessionStorage.removeItem("hydranomic_acabou_de_sair");
+            window.location.reload();
+        }
+    });
 
-          document.body.appendChild(novoScript);
+    // Interações do Menu de Perfil
+    const botaoPerfil = document.getElementById("abrirPerfil");
+    const perfilCard = document.getElementById("perfilCard");
+
+    if (botaoPerfil && perfilCard) {
+        botaoPerfil.addEventListener("click", function (evento) {
+            evento.stopPropagation();
+            const perfilAberto = botaoPerfil.getAttribute("aria-expanded") === "true";
+            botaoPerfil.setAttribute("aria-expanded", String(!perfilAberto));
+            perfilCard.hidden = perfilAberto;
         });
-      })
-      .catch(erro => {
-        console.error(erro);
-      });
-  </script>
 
+        document.addEventListener("click", function (evento) {
+            if (!evento.target.closest(".perfil")) {
+                botaoPerfil.setAttribute("aria-expanded", "false");
+                perfilCard.hidden = true;
+            }
+        });
+    }
+
+    // Interações da Sidebar Retrátil
+    const abrirSidebar = document.getElementById("abrirSidebar");
+    const fecharSidebar = document.getElementById("fecharSidebar");
+    const fecharSidebarFundo = document.getElementById("fecharSidebarFundo");
+    const sidebar = document.getElementById("sidebar");
+
+    if (abrirSidebar && sidebar) {
+        abrirSidebar.addEventListener("click", function () {
+            sidebar.hidden = false;
+            if (fecharSidebarFundo) fecharSidebarFundo.hidden = false;
+            abrirSidebar.setAttribute("aria-expanded", "true");
+            if (botaoPerfil) botaoPerfil.setAttribute("aria-expanded", "false");
+            if (perfilCard) perfilCard.hidden = true;
+        });
+
+        function fecharMenuLateral() {
+            sidebar.hidden = true;
+            if (fecharSidebarFundo) fecharSidebarFundo.hidden = true;
+            abrirSidebar.setAttribute("aria-expanded", "false");
+        }
+
+        if (fecharSidebar) fecharSidebar.addEventListener("click", fecharMenuLateral);
+        if (fecharSidebarFundo) fecharSidebarFundo.addEventListener("click", fecharMenuLateral);
+
+        document.addEventListener("keydown", function (evento) {
+            if (evento.key === "Escape") {
+                fecharMenuLateral();
+                if (botaoPerfil) botaoPerfil.setAttribute("aria-expanded", "false");
+                if (perfilCard) perfilCard.hidden = true;
+            }
+        });
+
+        document.querySelectorAll(".sidebar-menu a").forEach(function (link) {
+            link.addEventListener("click", fecharMenuLateral);
+        });
+    }
+
+    document.querySelectorAll(".sair, .sidebar-sair").forEach(function (btnSair) {
+        btnSair.addEventListener("click", realizarLogout);
+    });
+
+    // =========================================================================
+    // GERENCIAMENTO DE USUÁRIOS E GRUPOS (LOCALSTORAGE + INTEGRAÇÃO WEGNOLOGY)
+    // =========================================================================
+
+    const STORAGE_KEY_USUARIOS = "hydranomic_usuarios_equipe";
+    const WEGNOLOGY_API_USUARIOS = "http://hydranomic.kadly.com.br/api/usuarios";
+
+    function normalizarUsuarioWegnology(u) {
+        if (!u || !u.email) return null;
+
+        const nomeCompleto = u.nome
+            || [u.firstName, u.lastName].filter(Boolean).join(" ").trim()
+            || u.email.split("@")[0];
+
+        let grupoNome = u.grupo || "";
+        if (!grupoNome && Array.isArray(u.experienceGroups) && u.experienceGroups.length > 0) {
+            const primeiroGrupo = u.experienceGroups[0];
+            grupoNome = typeof primeiroGrupo === "string" ? primeiroGrupo : (primeiroGrupo.name || "");
+        }
+
+        const isAdmin = grupoNome.toLowerCase().indexOf("admin") === 0;
+
+        return {
+            id: u.id || u.experienceUserId || u.email,
+            nome: nomeCompleto,
+            email: u.email.trim().toLowerCase(),
+            grupo: isAdmin ? "Administradores" : "Usuarios"
+        };
+    }
+
+    function obterUsuariosSalvos() {
+        const salvos = localStorage.getItem(STORAGE_KEY_USUARIOS);
+        if (salvos) {
+            try {
+                const parsed = JSON.parse(salvos);
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                    return parsed;
+                }
+            } catch (e) {
+                console.error("Erro ao ler usuários salvos:", e);
+            }
+        }
+        const inicial = [
+            {
+                id: "admin-inicial",
+                nome: "Adm Senai",
+                email: "adm.senai@hydranomic.com",
+                grupo: "Administradores"
+            }
+        ];
+        localStorage.setItem(STORAGE_KEY_USUARIOS, JSON.stringify(inicial));
+        return inicial;
+    }
+
+    async function sincronizarUsuariosDaAPI() {
+        try {
+            const resposta = await fetch(WEGNOLOGY_API_USUARIOS + "?_t=" + new Date().getTime(), {
+                method: "GET",
+                headers: { "Accept": "application/json" },
+                cache: "no-store"
+            });
+
+            if (!resposta.ok) return;
+
+            const dados = await resposta.json();
+            const brutos = Array.isArray(dados)
+                ? dados
+                : (dados.items || dados.usuarios || dados.users || []);
+
+            if (!Array.isArray(brutos) || brutos.length === 0) return;
+
+            const normalizados = brutos
+                .map(normalizarUsuarioWegnology)
+                .filter(Boolean);
+
+            if (normalizados.length > 0) {
+                localStorage.setItem(STORAGE_KEY_USUARIOS, JSON.stringify(normalizados));
+            }
+        } catch (erro) {
+            console.warn("Erro ao sincronizar usuários em metas:", erro);
+        }
+    }
+
+    // =========================================================
+    // DADOS REAIS DO USUÁRIO LOGADO + ESCONDER DEFINIÇÕES PARA USUÁRIOS
+    // =========================================================
+    (async function inicializarDadosPerfil() {
+        sessionStorage.removeItem("hydranomic_acabou_de_sair");
+
+        const wegId = "{{experience.user.id}}".trim();
+        const wegNome = "{{experience.user.firstName}}".trim();
+        const wegEmail = "{{experience.user.email}}".trim().toLowerCase();
+        const wegGrupo = "{{experience.user.experienceGroups.[0].name}}".trim();
+        const wegLastLogin = "{{experience.user.lastLogin}}".trim();
+
+        let sessaoSalva = {};
+        try {
+            sessaoSalva = JSON.parse(localStorage.getItem("hydranomic_sessao_atual") || "{}");
+        } catch (e) {
+            sessaoSalva = {};
+        }
+
+        const emailSessao = (sessaoSalva.email || "").trim().toLowerCase();
+
+        if (!wegId && !wegEmail && !emailSessao) {
+            window.location.replace("http://hydranomic.kadly.com.br/login?_t=" + new Date().getTime());
+            return;
+        }
+
+        if (wegEmail && emailSessao && wegEmail !== emailSessao) {
+            const chaveReload = "hydranomic_reload_" + window.location.pathname + "_" + emailSessao;
+            if (!sessionStorage.getItem(chaveReload)) {
+                sessionStorage.setItem(chaveReload, "1");
+                window.location.replace(window.location.pathname + "?_t=" + new Date().getTime());
+                return;
+            }
+        }
+
+        const sessaoMesmoUsuario = (!wegEmail || (emailSessao && emailSessao === wegEmail));
+        if (!sessaoMesmoUsuario) {
+            sessaoSalva = {};
+        }
+
+        function formatarDataHora(dataIso) {
+            const data = dataIso ? new Date(dataIso) : new Date();
+            if (isNaN(data.getTime())) return formatarDataHora(null);
+            const dia = String(data.getDate()).padStart(2, "0");
+            const mes = String(data.getMonth() + 1).padStart(2, "0");
+            const ano = data.getFullYear();
+            const hora = String(data.getHours()).padStart(2, "0");
+            const min = String(data.getMinutes()).padStart(2, "0");
+            return dia + "/" + mes + "/" + ano + " às " + hora + ":" + min;
+        }
+
+        function formatarNomeExibicao(nome) {
+            return nome
+                .replace(/[._-]+/g, " ")
+                .toLowerCase()
+                .replace(/\b\w/g, letra => letra.toUpperCase());
+        }
+
+        function aplicarDadosNaTela() {
+            const listaEquipe = obterUsuariosSalvos();
+            const emailAtivo = wegEmail || emailSessao || "";
+
+            const membroEquipe = listaEquipe.find(function (u) {
+                return u.email && emailAtivo && u.email.toLowerCase() === emailAtivo.toLowerCase();
+            }) || {};
+
+            const nomeSessaoValido = (sessaoMesmoUsuario && sessaoSalva.nome && sessaoSalva.nome !== "Usuário" && sessaoSalva.nome !== "User")
+                ? sessaoSalva.nome
+                : "";
+
+            const nomeFinal = wegNome
+                || membroEquipe.nome
+                || nomeSessaoValido
+                || (emailAtivo ? emailAtivo.split("@")[0] : "Usuário");
+
+            const nomeFormatado = formatarNomeExibicao(nomeFinal);
+
+            const grupoBruto = wegGrupo
+                || membroEquipe.grupo
+                || (sessaoMesmoUsuario ? sessaoSalva.grupo : "")
+                || "Usuarios";
+
+            const isAdmin = grupoBruto.toLowerCase().indexOf("admin") === 0;
+            const cargoFormatado = isAdmin ? "Administrador" : "Usuário";
+
+            const ultimoAcessoTexto = wegLastLogin
+                ? formatarDataHora(wegLastLogin)
+                : ((sessaoMesmoUsuario && sessaoSalva.ultimoAcesso) ? sessaoSalva.ultimoAcesso : formatarDataHora(null));
+
+            if (emailAtivo) {
+                localStorage.setItem("hydranomic_sessao_atual", JSON.stringify({
+                    nome: nomeFinal,
+                    email: emailAtivo,
+                    grupo: grupoBruto,
+                    ultimoAcesso: ultimoAcessoTexto
+                }));
+            }
+
+            const elNavNome = document.getElementById("nav-nome-usuario") || document.querySelector(".usuario strong");
+            const elNavCargo = document.getElementById("nav-cargo-usuario") || document.querySelector(".usuario small");
+            const elCardNome = document.getElementById("card-nome-usuario") || document.querySelector(".perfil-topo h2");
+            const elCardSubCargo = document.getElementById("card-subtitulo-cargo") || document.querySelector(".perfil-topo p");
+            const elCardInfoCargo = document.getElementById("card-info-cargo");
+            const elCardInfoEmail = document.getElementById("card-info-email");
+            const elCardUltimoAcesso = document.getElementById("card-info-ultimo-acesso");
+
+            if (elNavNome) elNavNome.textContent = "Olá, " + nomeFormatado + "!";
+            if (elNavCargo) elNavCargo.textContent = cargoFormatado;
+            if (elCardNome) elCardNome.textContent = nomeFormatado;
+            if (elCardSubCargo) elCardSubCargo.textContent = cargoFormatado;
+            if (elCardInfoCargo) elCardInfoCargo.textContent = cargoFormatado;
+            if (elCardInfoEmail) elCardInfoEmail.textContent = emailAtivo || "-";
+            if (elCardUltimoAcesso) elCardUltimoAcesso.textContent = ultimoAcessoTexto;
+
+            const linkDefinicoes = document.getElementById("link-definicoes");
+            if (linkDefinicoes) {
+                linkDefinicoes.style.display = isAdmin ? "" : "none";
+            } else if (!isAdmin) {
+                document.querySelectorAll(".sidebar-menu a").forEach(function (link) {
+                    if (link.getAttribute("href") && link.getAttribute("href").indexOf("/definicoes") !== -1) {
+                        link.style.display = "none";
+                    }
+                });
+            }
+        }
+
+        // 1º: Preenche IMEDIATAMENTE na abertura da página (0ms)
+        aplicarDadosNaTela();
+
+        // 2º: Atualiza em segundo plano sem travar a tela
+        await sincronizarUsuariosDaAPI();
+        aplicarDadosNaTela();
+    })();
+
+    // =========================================================================
+    // CARROSSEL DESLIZANTE DE MESES (JANEIRO A DEZEMBRO DINÂMICO E AUTOMATIZADO)
+    // =========================================================================
+    (function configurarCarrosselMeses() {
+        const dadosMeses = [
+            { id: "01", abrev: "Jan", nome: "Janeiro", valor: "15.200 L", status: '<i class="bi bi-check-circle-fill icone-verde"></i>' },
+            { id: "02", abrev: "Fev", nome: "Fevereiro", valor: "14.800 L", status: '<i class="bi bi-check-circle-fill icone-verde"></i>' },
+            { id: "03", abrev: "Mar", nome: "Março", valor: "16.000 L", status: '<i class="bi bi-circle-fill ponto-vermelho"></i>' },
+            { id: "04", abrev: "Abr", nome: "Abril", valor: "16.000 L", status: '<i class="bi bi-circle-fill ponto-amarelo"></i>' },
+            { id: "05", abrev: "Mai", nome: "Maio", valor: "16.000 L", status: '<i class="bi bi-check-circle-fill icone-verde"></i>' },
+            { id: "06", abrev: "Jun", nome: "Junho", valor: "16.000 L", status: '<i class="bi bi-check-circle-fill icone-verde"></i>' },
+            { id: "07", abrev: "Jul", nome: "Julho", valor: "16.000 L", status: '<i class="bi bi-check-circle-fill icone-verde"></i>' },
+            { id: "08", abrev: "Ago", nome: "Agosto", valor: "14.050 L", status: '<i class="bi bi-activity"></i>' },
+            { id: "09", abrev: "Set", nome: "Setembro", valor: "-", status: '' },
+            { id: "10", abrev: "Out", nome: "Outubro", valor: "-", status: '' },
+            { id: "11", abrev: "Nov", nome: "Novembro", valor: "-", status: '' },
+            { id: "12", abrev: "Dez", nome: "Dezembro", valor: "-", status: '' }
+        ];
+
+        const anoPadrao = "2026";
+        const containerLista = document.getElementById("lista-carrossel-meses");
+        const btnAnterior = document.getElementById("btn-carrossel-anterior");
+        const btnProximo = document.getElementById("btn-carrossel-proximo");
+        const botaoMesAtual = document.querySelector(".botao-mes-atual");
+
+        const parametros = new URLSearchParams(window.location.search);
+        let mesSelecionado = parametros.get("mes") || (anoPadrao + "-08");
+
+        if (!containerLista) return;
+
+        // Renderiza automaticamente todos os 12 meses na barra
+        containerLista.innerHTML = dadosMeses.map(function (m) {
+            const mesChave = anoPadrao + "-" + m.id;
+            const ehAtivo = mesChave === mesSelecionado ? " mes-ativo" : "";
+            return `
+                <div class="item-mes${ehAtivo}" data-mes="${mesChave}">
+                    <span class="nome-mes">${m.abrev} ${anoPadrao}</span>
+                    <span class="valor-mes">${m.valor} ${m.status}</span>
+                </div>
+            `;
+        }).join("");
+
+        // Clique nas setas: desliza a barra para os lados (revelando Jan, Fev ou meses futuros)
+        if (btnAnterior) {
+            btnAnterior.addEventListener("click", function () {
+                containerLista.scrollBy({ left: -260, behavior: "smooth" });
+            });
+        }
+
+        if (btnProximo) {
+            btnProximo.addEventListener("click", function () {
+                containerLista.scrollBy({ left: 260, behavior: "smooth" });
+            });
+        }
+
+        // Centraliza automaticamente o mês ativo no carrossel
+        function centralizarMesAtivo() {
+            const ativo = containerLista.querySelector(".item-mes.mes-ativo");
+            if (ativo) {
+                ativo.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+            }
+        }
+        setTimeout(centralizarMesAtivo, 180);
+
+        // Seleção de mês ao clicar no item
+        const itensMes = containerLista.querySelectorAll(".item-mes");
+        itensMes.forEach(function (item) {
+            item.addEventListener("click", function () {
+                itensMes.forEach(i => i.classList.remove("mes-ativo"));
+                item.classList.add("mes-ativo");
+                item.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+
+                const chave = item.dataset.mes;
+                const partes = chave.split("-");
+                const mObj = dadosMeses.find(m => m.id === partes[1]);
+                if (botaoMesAtual && mObj) {
+                    const spanBtn = botaoMesAtual.querySelector("span");
+                    if (spanBtn) spanBtn.textContent = mObj.nome + " " + partes[0];
+                }
+            });
+        });
+
+        // Atualiza texto do botão do topo
+        if (botaoMesAtual) {
+            const partes = mesSelecionado.split("-");
+            const mObj = dadosMeses.find(m => m.id === partes[1]);
+            if (mObj) {
+                const spanBtn = botaoMesAtual.querySelector("span");
+                if (spanBtn) spanBtn.textContent = mObj.nome + " " + partes[0];
+            }
+
+            // Dropdown rápido caso clique no botão de cima
+            const listaDropdown = document.createElement("div");
+            listaDropdown.className = "lista-seletor-meses";
+            listaDropdown.hidden = true;
+            listaDropdown.innerHTML = dadosMeses.map(function (m) {
+                return '<button type="button" class="opcao-mes" data-mes="' + anoPadrao + '-' + m.id + '">' + m.nome + " " + anoPadrao + "</button>";
+            }).join("");
+            document.body.appendChild(listaDropdown);
+
+            const estiloDropdown = document.createElement("style");
+            estiloDropdown.textContent = `
+                .lista-seletor-meses { position: fixed; z-index: 9999; min-width: 190px; padding: 6px; background: #ffffff; border: 1px solid #d4e2ed; border-radius: 8px; box-shadow: 0 8px 22px rgba(0,0,0,.14); }
+                .opcao-mes { display: block; width: 100%; padding: 8px 12px; border: 0; border-radius: 6px; background: transparent; color: #184e77; text-align: left; cursor: pointer; font: inherit; font-size: 13px; }
+                .opcao-mes:hover { background: #e8f1f8; font-weight: 700; }
+            `;
+            document.head.appendChild(estiloDropdown);
+
+            function posicionarDropdown() {
+                const ret = botaoMesAtual.getBoundingClientRect();
+                listaDropdown.style.top = (ret.bottom + 6) + "px";
+                listaDropdown.style.left = Math.max(8, ret.right - 190) + "px";
+            }
+
+            botaoMesAtual.addEventListener("click", function (e) {
+                e.stopPropagation();
+                posicionarDropdown();
+                listaDropdown.hidden = !listaDropdown.hidden;
+            });
+
+            listaDropdown.querySelectorAll(".opcao-mes").forEach(function (btnOpcao) {
+                btnOpcao.addEventListener("click", function () {
+                    const sel = btnOpcao.dataset.mes;
+                    const itemAlvo = containerLista.querySelector(`.item-mes[data-mes="${sel}"]`);
+                    if (itemAlvo) itemAlvo.click();
+                    listaDropdown.hidden = true;
+                });
+            });
+
+            document.addEventListener("click", function () {
+                listaDropdown.hidden = true;
+            });
+            window.addEventListener("resize", posicionarDropdown);
+        }
+    })();
+
+    // =========================================================================
+    // INTEGRAÇÃO DINÂMICA: METAS DE CONSUMO, FINANCEIRA E PREVISÕES DO WEGNOLOGY
+    // =========================================================================
+    (async function carregarDadosMetasDinamicas() {
+        const timestamp = new Date().getTime();
+        const URL_CONFIG = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/config.json';
+        const URL_META   = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/progresso_meta.json';
+        const URL_CONSUMO= 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/consumo_mes.json';
+        const URL_SUMARIO= 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/sumario_execucao.json';
+        const URL_PREVISAO= 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/previsao_ml.json';
+
+        const buscarJson = (url, nome) =>
+            fetch(`${url}?_t=${timestamp}`)
+                .then(r => {
+                    if (!r.ok) throw new Error(`Falha ao ler ${nome} (HTTP ${r.status})`);
+                    return r.json();
+                })
+                .catch(e => { console.warn(e.message); return null; });
+
+        try {
+            const [resConfig, resMeta, resConsumo, resSumario, resPrevisao] = await Promise.all([
+                buscarJson(URL_CONFIG, 'config.json'),
+                buscarJson(URL_META, 'progresso_meta.json'),
+                buscarJson(URL_CONSUMO, 'consumo_mes.json'),
+                buscarJson(URL_SUMARIO, 'sumario_execucao.json'),
+                buscarJson(URL_PREVISAO, 'previsao_ml.json')
+            ]);
+
+            // Determina a meta configurada (de config.json ou progresso_meta.json)
+            const metaAtiva = resConfig?.meta_ativa || null;
+            let limiteM3 = null;
+            let nomeMeta = "Meta Mensal";
+
+            if (metaAtiva) {
+                limiteM3 = Number(metaAtiva.valor);
+                nomeMeta = metaAtiva.nome || nomeMeta;
+            } else if (resMeta && resMeta.meta_ativa && resMeta.limite_m3 != null) {
+                limiteM3 = Number(resMeta.limite_m3);
+                nomeMeta = resMeta.meta_nome || nomeMeta;
+            }
+
+            // Determina o consumo atual acumulado em m³
+            const consumoAtualM3 = Number(
+                resConsumo?.consumo_acumulado_mes_m3 ??
+                resMeta?.consumo_atual_m3 ??
+                resSumario?.consumo_mes_acumulado_m3 ??
+                0
+            );
+
+            // Converte para Litros (1 m³ = 1.000 L)
+            const consumoAtualL = consumoAtualM3 * 1000;
+            const tarifaBase = Number(resPrevisao?.tarifa_m3 ?? 59.6);
+
+            // Elementos DOM de Meta de Consumo
+            const elMetaDefinida = document.getElementById("meta-definida-valor");
+            const elConsumoAtual = document.getElementById("meta-consumo-atual");
+            const elPorcentagem  = document.getElementById("meta-porcentagem-valor");
+            const elSaldoRestante= document.getElementById("meta-saldo-restante");
+            const elFaixaTexto   = document.querySelector("#faixa-saldo-restante p");
+
+            if (elConsumoAtual) {
+                elConsumoAtual.textContent = consumoAtualL.toLocaleString("pt-BR", { maximumFractionDigits: 0 }) + " L";
+            }
+
+            if (limiteM3 != null && limiteM3 > 0) {
+                const limiteL = limiteM3 * 1000;
+                const percentual = Math.min(Math.round((consumoAtualM3 / limiteM3) * 100), 999);
+                const saldoRestanteM3 = Math.max(0, limiteM3 - consumoAtualM3);
+                const saldoRestanteL = saldoRestanteM3 * 1000;
+
+                if (elMetaDefinida) {
+                    elMetaDefinida.textContent = limiteL.toLocaleString("pt-BR", { maximumFractionDigits: 0 }) + " L";
+                }
+                if (elPorcentagem) {
+                    elPorcentagem.textContent = percentual + "%";
+                }
+                if (elSaldoRestante) {
+                    if (consumoAtualM3 >= limiteM3) {
+                        elSaldoRestante.textContent = "0 L";
+                        if (elFaixaTexto) {
+                            elFaixaTexto.innerHTML = `<strong style="color: var(--red-status-color);">Meta de consumo ultrapassada!</strong>`;
+                        }
+                    } else {
+                        elSaldoRestante.textContent = saldoRestanteL.toLocaleString("pt-BR", { maximumFractionDigits: 0 }) + " L";
+                    }
+                }
+
+                // Ajusta arco visual do medidor SVG
+                const elArcoProgresso = document.getElementById("arco-progresso-svg");
+                if (elArcoProgresso) {
+                    const angulo = Math.min(percentual / 100, 1.0) * Math.PI;
+                    const cx = 70, cy = 80, r = 55;
+                    const x = cx - r * Math.cos(angulo);
+                    const y = cy - r * Math.sin(angulo);
+                    elArcoProgresso.setAttribute("d", `M 15 80 A 55 55 0 0 1 ${x.toFixed(1)} ${y.toFixed(1)}`);
+                    if (percentual >= 100) {
+                        elArcoProgresso.setAttribute("stroke", "#D96161");
+                    } else if (percentual >= 80) {
+                        elArcoProgresso.setAttribute("stroke", "#FFE57C");
+                    } else {
+                        elArcoProgresso.setAttribute("stroke", "#205988");
+                    }
+                }
+
+                // Elementos da Meta Financeira
+                const elFinLimite = document.getElementById("meta-financeira-limite");
+                const elFinPorcentagem = document.getElementById("meta-financeira-porcentagem");
+                const elFinGasto = document.getElementById("meta-financeira-gasto");
+                const elFinFaixa = document.getElementById("meta-financeira-faixa-texto");
+
+                const gastoLimite = limiteM3 * tarifaBase;
+                const gastoAtual = consumoAtualM3 * tarifaBase;
+
+                if (elFinLimite) elFinLimite.textContent = "R$ " + gastoLimite.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                if (elFinGasto) elFinGasto.textContent = "R$ " + gastoAtual.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                if (elFinPorcentagem) elFinPorcentagem.textContent = percentual + "%";
+                if (elFinFaixa) elFinFaixa.textContent = "R$ " + gastoAtual.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+            } else {
+                if (elMetaDefinida) elMetaDefinida.textContent = "Sem meta";
+                if (elPorcentagem) elPorcentagem.textContent = "--%";
+                if (elSaldoRestante && elFaixaTexto) {
+                    elFaixaTexto.innerHTML = `<strong>Nenhuma meta ativa configurada no momento.</strong>`;
+                }
+            }
+
+            // Previsão Financeira da IA
+            const elIaFin = document.getElementById("ia-previsao-financeira");
+            const faturaEstimada = resPrevisao?.valor_estimado_conta ?? resSumario?.fatura_estimada_reais ?? null;
+            if (elIaFin && faturaEstimada != null) {
+                elIaFin.textContent = "R$ " + Number(faturaEstimada).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+
+        } catch (erro) {
+            console.warn("Aviso ao carregar dados dinâmicos de metas:", erro);
+        }
+    })();
+</script>
 </body>
 </html>
