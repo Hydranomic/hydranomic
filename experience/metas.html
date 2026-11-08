@@ -1274,7 +1274,7 @@ html, body {
 
           <div class="conteudo-meta-consumo">
             <div class="coluna-dado">
-              <span class="rotulo-dado">Gasto limite da meta</span>
+              <span class="rotulo-dado" id="meta-financeira-rotulo-limite">Gasto limite da meta</span>
               <strong class="valor-grande" id="meta-financeira-limite">R$ --</strong>
             </div>
 
@@ -1753,14 +1753,37 @@ html, body {
             buscarJson("previsao_ml.json")
         ]);
 
-        const tarifaBase = Number(resPrevisao?.tarifa_m3 ?? 59.6);
+        // Lê a mesma variável compartilhada atualizada pela página de Definições (STORAGE_KEY_METAS)
+        const STORAGE_KEY_METAS = "hydranomic_metas_definidas";
+        function obterVariavelMetasCompartilhada() {
+            try {
+                const bruto = localStorage.getItem(STORAGE_KEY_METAS);
+                const parsed = bruto ? JSON.parse(bruto) : null;
+                if (parsed && typeof parsed === "object") {
+                    if (!parsed.ativas || typeof parsed.ativas !== "object") parsed.ativas = {};
+                    if (!parsed.por_mes || typeof parsed.por_mes !== "object") parsed.por_mes = {};
+                    return parsed;
+                }
+            } catch (e) {
+                console.warn("Erro ao ler hydranomic_metas_definidas:", e);
+            }
+            return { ativas: {}, por_mes: {}, ultimo_mes_atualizado: "" };
+        }
+
+        const estadoMetasCompartilhado = obterVariavelMetasCompartilhada();
+        window.hydranomicMetasAtivas = estadoMetasCompartilhado;
+
+        const tarifaSalva = parseFloat(localStorage.getItem("hydranomic_tarifa_valor"));
+        const tarifaBase = (!isNaN(tarifaSalva) && tarifaSalva > 0) ? tarifaSalva : Number(resPrevisao?.tarifa_m3 ?? 59.6);
         const listaContas = Array.isArray(resContas) ? resContas : [];
         const metasPorMes = (resConfig && typeof resConfig.metas_por_mes === "object" && resConfig.metas_por_mes) ? resConfig.metas_por_mes : {};
+        const metasAtivasConfig = (resConfig && typeof resConfig.metas_ativas_por_tipo === "object" && resConfig.metas_ativas_por_tipo) ? resConfig.metas_ativas_por_tipo : {};
         const metaAtivaGlobal = resConfig?.meta_ativa || null;
 
-        // Determina o mês inicial e o ano de referência a partir dos dados reais
+        // Determina o mês inicial e o ano de referência a partir da variável compartilhada e dados reais
         const parametros = new URLSearchParams(window.location.search);
         const mesUrl = parametros.get("mes");
+        const ultimoMesDefinicoes = estadoMetasCompartilhado.ultimo_mes_atualizado || "";
 
         const refMetaAtiva = metaAtivaGlobal
             ? String(metaAtivaGlobal.mes_referencia || metaAtivaGlobal.periodo || "").slice(0, 7)
@@ -1773,33 +1796,97 @@ html, body {
 
         const validarChaveMes = (str) => /^\d{4}-(0[1-9]|1[0-2])$/.test(str);
 
-        let mesSelecionado = [mesUrl, refMetaAtiva, refConsumoMes, ultimaContaId, refHoje].find(validarChaveMes) || refHoje;
+        let mesSelecionado = [mesUrl, ultimoMesDefinicoes, refMetaAtiva, refConsumoMes, ultimaContaId, refHoje].find(validarChaveMes) || refHoje;
         let anoReferencia = mesSelecionado.split("-")[0];
 
-        // Consolida dados mês a mês (01 a 12) para o ano de referência
+        // Consolida dados mês a mês (01 a 12) separando Meta de Consumo (Litros/m³) e Meta Financeira (R$)
         function obterDadosDoMes(idMes) {
             const chave = `${anoReferencia}-${idMes}`;
             const numMes = parseInt(idMes, 10);
 
-            // 1. Meta do mês (em m³)
+            const metasMesLocal = (estadoMetasCompartilhado.por_mes && estadoMetasCompartilhado.por_mes[chave]) || {};
+            const metasAtivasLocal = estadoMetasCompartilhado.ativas || {};
+            const regConfigMes = metasPorMes[chave] || {};
+            const porTipoConfigMes = (regConfigMes && typeof regConfigMes.por_tipo === "object") ? regConfigMes.por_tipo : {};
+
+            // 1A. Meta de Consumo Mensal (para o Card 'Meta de consumo mensal' e Gráfico em Litros)
             let limiteM3 = null;
             let nomeMeta = null;
 
-            if (metasPorMes[chave] && metasPorMes[chave].valor != null) {
-                limiteM3 = Number(metasPorMes[chave].valor);
-                nomeMeta = metasPorMes[chave].nome || "Meta Mensal";
-            } else if (metaAtivaGlobal && metaAtivaGlobal.valor != null) {
+            const extrairM3DeMetaConsumo = (obj) => {
+                if (!obj) return null;
+                if (obj.valor_litros != null && !isNaN(Number(obj.valor_litros)) && Number(obj.valor_litros) > 0) {
+                    return Number(obj.valor_litros) / 1000;
+                }
+                if (obj.valor != null && !isNaN(Number(obj.valor)) && Number(obj.valor) > 0) {
+                    const v = Number(obj.valor);
+                    return v > 500 ? (v / 1000) : v;
+                }
+                return null;
+            };
+
+            const metaConsumoLocalMes = metasMesLocal["consumo-mensal"];
+            const metaConsumoConfigMes = porTipoConfigMes["consumo-mensal"] || porTipoConfigMes["reducao_mensal"];
+            const metaConsumoAtivaLocal = metasAtivasLocal["consumo-mensal"];
+            const metaConsumoAtivaConfig = metasAtivasConfig["consumo-mensal"] || metasAtivasConfig["reducao_mensal"];
+
+            if (metaConsumoLocalMes) {
+                limiteM3 = extrairM3DeMetaConsumo(metaConsumoLocalMes);
+                nomeMeta = metaConsumoLocalMes.nome || "Meta de Consumo Mensal";
+            } else if (metaConsumoConfigMes) {
+                limiteM3 = extrairM3DeMetaConsumo(metaConsumoConfigMes);
+                nomeMeta = metaConsumoConfigMes.nome || "Meta de Consumo Mensal";
+            } else if (regConfigMes && regConfigMes.valor != null && regConfigMes.tipo !== "gasto-maximo-mensal" && regConfigMes.tipo !== "economia-mensal") {
+                limiteM3 = extrairM3DeMetaConsumo(regConfigMes);
+                nomeMeta = regConfigMes.nome || "Meta Mensal";
+            } else if (metaConsumoAtivaLocal && String(metaConsumoAtivaLocal.mes_referencia || metaConsumoAtivaLocal.periodo || "").slice(0, 7) === chave) {
+                limiteM3 = extrairM3DeMetaConsumo(metaConsumoAtivaLocal);
+                nomeMeta = metaConsumoAtivaLocal.nome || "Meta de Consumo Mensal";
+            } else if (metaConsumoAtivaConfig && String(metaConsumoAtivaConfig.mes_referencia || metaConsumoAtivaConfig.periodo || "").slice(0, 7) === chave) {
+                limiteM3 = extrairM3DeMetaConsumo(metaConsumoAtivaConfig);
+                nomeMeta = metaConsumoAtivaConfig.nome || "Meta de Consumo Mensal";
+            } else if (metaAtivaGlobal && metaAtivaGlobal.valor != null && metaAtivaGlobal.tipo !== "gasto-maximo-mensal" && metaAtivaGlobal.tipo !== "economia-mensal") {
                 const refAtiva = String(metaAtivaGlobal.mes_referencia || metaAtivaGlobal.periodo || "").slice(0, 7);
                 if (refAtiva === chave || String(metaAtivaGlobal.periodo || "").toLowerCase() === "mensal") {
-                    limiteM3 = Number(metaAtivaGlobal.valor);
+                    limiteM3 = extrairM3DeMetaConsumo(metaAtivaGlobal);
                     nomeMeta = metaAtivaGlobal.nome || "Meta Mensal";
                 }
-            } else if (resMeta && resMeta.meta_ativa && resMeta.limite_m3 != null) {
+            } else if (resMeta && resMeta.meta_ativa && (resMeta.limite_m3 != null || resMeta.limite_meta_m3 != null)) {
                 const refProg = String(resMeta.mes_referencia || resMeta.periodo || "").slice(0, 7);
                 if (!refProg || refProg === chave) {
-                    limiteM3 = Number(resMeta.limite_m3);
+                    limiteM3 = Number(resMeta.limite_m3 ?? resMeta.limite_meta_m3);
                     nomeMeta = resMeta.meta_nome || "Meta Mensal";
                 }
+            }
+
+            // 1B. Metas Financeiras do mês (para o Card 'Meta Financeira' em R$)
+            let metaGastoReais = null;
+            let nomeMetaGasto = null;
+            let metaEconomiaReais = null;
+            let nomeMetaEconomia = null;
+
+            const objGastoMes = metasMesLocal["gasto-maximo-mensal"]
+                || porTipoConfigMes["gasto-maximo-mensal"]
+                || (regConfigMes.tipo === "gasto-maximo-mensal" ? regConfigMes : null)
+                || ((metasAtivasLocal["gasto-maximo-mensal"] && !metasAtivasLocal["gasto-maximo-mensal"].derivada_de_consumo && String(metasAtivasLocal["gasto-maximo-mensal"].mes_referencia || metasAtivasLocal["gasto-maximo-mensal"].periodo || "").slice(0, 7) === chave) ? metasAtivasLocal["gasto-maximo-mensal"] : null)
+                || ((metasAtivasConfig["gasto-maximo-mensal"] && String(metasAtivasConfig["gasto-maximo-mensal"].mes_referencia || metasAtivasConfig["gasto-maximo-mensal"].periodo || "").slice(0, 7) === chave) ? metasAtivasConfig["gasto-maximo-mensal"] : null)
+                || ((metaAtivaGlobal && metaAtivaGlobal.tipo === "gasto-maximo-mensal" && String(metaAtivaGlobal.mes_referencia || metaAtivaGlobal.periodo || "").slice(0, 7) === chave) ? metaAtivaGlobal : null);
+
+            if (objGastoMes && objGastoMes.valor != null && Number(objGastoMes.valor) > 0) {
+                metaGastoReais = Number(objGastoMes.valor);
+                nomeMetaGasto = objGastoMes.nome || "Gasto máximo mensal";
+            }
+
+            const objEcoMes = metasMesLocal["economia-mensal"]
+                || porTipoConfigMes["economia-mensal"]
+                || (regConfigMes.tipo === "economia-mensal" ? regConfigMes : null)
+                || ((metasAtivasLocal["economia-mensal"] && String(metasAtivasLocal["economia-mensal"].mes_referencia || metasAtivasLocal["economia-mensal"].periodo || "").slice(0, 7) === chave) ? metasAtivasLocal["economia-mensal"] : null)
+                || ((metasAtivasConfig["economia-mensal"] && String(metasAtivasConfig["economia-mensal"].mes_referencia || metasAtivasConfig["economia-mensal"].periodo || "").slice(0, 7) === chave) ? metasAtivasConfig["economia-mensal"] : null)
+                || ((metaAtivaGlobal && metaAtivaGlobal.tipo === "economia-mensal" && String(metaAtivaGlobal.mes_referencia || metaAtivaGlobal.periodo || "").slice(0, 7) === chave) ? metaAtivaGlobal : null);
+
+            if (objEcoMes && objEcoMes.valor != null && Number(objEcoMes.valor) > 0) {
+                metaEconomiaReais = Number(objEcoMes.valor);
+                nomeMetaEconomia = objEcoMes.nome || "Economia mensal";
             }
 
             // 2. Consumo real (em m³) e valor financeiro da conta (se existir)
@@ -1834,6 +1921,10 @@ html, body {
                 chave: chave,
                 limiteM3: (limiteM3 != null && !isNaN(limiteM3) && limiteM3 > 0) ? limiteM3 : null,
                 nomeMeta: nomeMeta,
+                metaGastoReais: (metaGastoReais != null && !isNaN(metaGastoReais) && metaGastoReais > 0) ? metaGastoReais : null,
+                nomeMetaGasto: nomeMetaGasto,
+                metaEconomiaReais: (metaEconomiaReais != null && !isNaN(metaEconomiaReais) && metaEconomiaReais > 0) ? metaEconomiaReais : null,
+                nomeMetaEconomia: nomeMetaEconomia,
                 consumoM3: (consumoM3 != null && !isNaN(consumoM3)) ? consumoM3 : null,
                 valorContaReais: (valorContaReais != null && !isNaN(valorContaReais)) ? valorContaReais : null
             };
@@ -1863,6 +1954,10 @@ html, body {
                 } else if (m.limiteM3 != null) {
                     const metaL = Math.round(m.limiteM3 * 1000);
                     textoValor = metaL.toLocaleString("pt-BR") + " L";
+                } else if (m.metaGastoReais != null) {
+                    textoValor = "R$ " + Math.round(m.metaGastoReais).toLocaleString("pt-BR");
+                } else if (m.metaEconomiaReais != null) {
+                    textoValor = "R$ " + Math.round(m.metaEconomiaReais).toLocaleString("pt-BR");
                 }
 
                 if (m.limiteM3 != null && m.consumoM3 != null) {
@@ -1874,7 +1969,7 @@ html, body {
                     } else {
                         iconeStatus = '<i class="bi bi-check-circle-fill icone-verde" title="Dentro da meta"></i>';
                     }
-                } else if (m.limiteM3 != null) {
+                } else if (m.limiteM3 != null || m.metaGastoReais != null || m.metaEconomiaReais != null) {
                     iconeStatus = '<i class="bi bi-bullseye" title="Meta definida"></i>';
                 } else if (m.consumoM3 != null) {
                     iconeStatus = '<i class="bi bi-activity" title="Consumo registrado"></i>';
@@ -2033,6 +2128,7 @@ html, body {
             const elArcoProgresso = document.getElementById("arco-progresso-svg");
 
             // Elementos DOM - Card Meta Financeira
+            const elFinRotuloLimite = document.getElementById("meta-financeira-rotulo-limite");
             const elFinLimite = document.getElementById("meta-financeira-limite");
             const elFinPorcentagem = document.getElementById("meta-financeira-porcentagem");
             const elFinGasto = document.getElementById("meta-financeira-gasto");
@@ -2057,79 +2153,150 @@ html, body {
                     : "R$ 0,00";
             }
 
-            if (elFinFaixaTexto) {
-                elFinFaixaTexto.textContent = temConsumo
-                    ? "R$ " + gastoAtual.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-                    : "R$ 0,00";
-            }
-            if (elFinFaixaComp) {
-                elFinFaixaComp.textContent = `Gastos registrados em ${nomeMesAno}.`;
-            }
-
+            // 1. ATUALIZA CARD META DE CONSUMO MENSAL (EM LITROS)
             if (dadosMes.limiteM3 != null && dadosMes.limiteM3 > 0) {
                 const limiteM3 = dadosMes.limiteM3;
                 const limiteL = Math.round(limiteM3 * 1000);
-                const percentual = Math.min(Math.round((consumoM3 / limiteM3) * 100), 999);
-                const saldoRestanteL = Math.max(0, Math.round((limiteM3 - consumoM3) * 1000));
-                const gastoLimite = limiteM3 * tarifaBase;
+                const percentualConsumo = Math.min(Math.round((consumoL / limiteL) * 100), 999);
+                const saldoRestanteL = Math.max(0, limiteL - consumoL);
 
                 if (elMetaDefinida) {
                     elMetaDefinida.textContent = limiteL.toLocaleString("pt-BR") + " L";
                 }
                 if (elPorcentagem) {
-                    elPorcentagem.textContent = percentual + "%";
+                    elPorcentagem.textContent = percentualConsumo + "%";
                 }
 
                 if (elFaixaSaldo) {
-                    if (consumoM3 >= limiteM3) {
-                        const excessoL = Math.round((consumoM3 - limiteM3) * 1000);
+                    if (consumoL >= limiteL) {
+                        const excessoL = consumoL - limiteL;
                         elFaixaSaldo.innerHTML = `<strong id="meta-saldo-restante" style="color: var(--red-status-color);">Meta ultrapassada em ${excessoL.toLocaleString("pt-BR")} L</strong> (${nomeMesAno}).`;
                     } else {
                         elFaixaSaldo.innerHTML = `<strong id="meta-saldo-restante">${saldoRestanteL.toLocaleString("pt-BR")} L</strong> Restantes para atingir a meta de ${nomeMesAno}.`;
                     }
                 }
 
-                let corStatus = "#205988";
-                if (percentual >= 100) {
-                    corStatus = "#D96161";
-                } else if (percentual >= 80) {
-                    corStatus = "#f59e0b";
+                let corStatusConsumo = "#205988";
+                if (percentualConsumo >= 100) {
+                    corStatusConsumo = "#D96161";
+                } else if (percentualConsumo >= 80) {
+                    corStatusConsumo = "#FFE57C";
                 }
 
                 if (elArcoProgresso) {
-                    const angulo = Math.min(percentual / 100, 1.0) * Math.PI;
+                    const angulo = Math.min(percentualConsumo / 100, 1.0) * Math.PI;
                     const cx = 70, cy = 80, r = 55;
                     const x = cx - r * Math.cos(angulo);
                     const y = cy - r * Math.sin(angulo);
                     elArcoProgresso.setAttribute("d", `M 15 80 A 55 55 0 0 1 ${x.toFixed(1)} ${y.toFixed(1)}`);
-                    elArcoProgresso.setAttribute("stroke", percentual >= 80 && percentual < 100 ? "#FFE57C" : corStatus);
-                }
-
-                if (elFinLimite) {
-                    elFinLimite.textContent = "R$ " + gastoLimite.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                }
-                if (elFinPorcentagem) {
-                    elFinPorcentagem.textContent = percentual + "%";
-                }
-                if (elAnelFin) {
-                    const percAnel = Math.min(percentual, 100);
-                    elAnelFin.style.background = `conic-gradient(${corStatus} ${percAnel}%, #e2e8f0 0)`;
+                    elArcoProgresso.setAttribute("stroke", corStatusConsumo);
                 }
             } else {
-                // Mês sem meta cadastrada
                 if (elMetaDefinida) elMetaDefinida.textContent = "Sem meta";
                 if (elPorcentagem) elPorcentagem.textContent = "0%";
                 if (elFaixaSaldo) {
-                    elFaixaSaldo.innerHTML = `<strong id="meta-saldo-restante">Nenhuma meta definida</strong> para ${nomeMesAno}.`;
+                    elFaixaSaldo.innerHTML = `<strong id="meta-saldo-restante">Nenhuma meta de consumo definida</strong> para ${nomeMesAno}.`;
                 }
                 if (elArcoProgresso) {
                     elArcoProgresso.setAttribute("d", "M 15 80 A 55 55 0 0 1 15 80");
                     elArcoProgresso.setAttribute("stroke", "#205988");
                 }
+            }
+
+            // 2. ATUALIZA CARD META FINANCEIRA (EM REAIS - GASTO MÁXIMO, ECONOMIA OU EQUIVALENTE DA META)
+            const temGastoMaximo = dadosMes.metaGastoReais != null && dadosMes.metaGastoReais > 0;
+            const temMetaEconomia = dadosMes.metaEconomiaReais != null && dadosMes.metaEconomiaReais > 0;
+            const temEquivalenteConsumo = !temGastoMaximo && !temMetaEconomia && dadosMes.limiteM3 != null && dadosMes.limiteM3 > 0;
+
+            if (temGastoMaximo || temEquivalenteConsumo) {
+                const gastoLimite = temGastoMaximo ? dadosMes.metaGastoReais : (dadosMes.limiteM3 * tarifaBase);
+                const percFin = gastoLimite > 0 ? Math.min(Math.round((gastoAtual / gastoLimite) * 100), 999) : 0;
+
+                if (elFinRotuloLimite) {
+                    elFinRotuloLimite.textContent = "Gasto limite da meta";
+                }
+                if (elFinLimite) {
+                    elFinLimite.textContent = "R$ " + gastoLimite.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                }
+                if (elFinPorcentagem) {
+                    elFinPorcentagem.textContent = percFin + "%";
+                }
+
+                let corStatusFin = "#205988";
+                if (percFin >= 100) {
+                    corStatusFin = "#D96161";
+                } else if (percFin >= 80) {
+                    corStatusFin = "#f59e0b";
+                }
+
+                if (elAnelFin) {
+                    const percAnel = Math.min(percFin, 100);
+                    elAnelFin.style.background = `conic-gradient(${corStatusFin} ${percAnel}%, #e2e8f0 0)`;
+                }
+
+                if (gastoAtual > gastoLimite) {
+                    const excessoReais = gastoAtual - gastoLimite;
+                    if (elFinFaixaTexto) {
+                        elFinFaixaTexto.textContent = "R$ " + excessoReais.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    }
+                    if (elFinFaixaComp) {
+                        elFinFaixaComp.textContent = `Acima do limite financeiro de ${nomeMesAno}.`;
+                    }
+                } else {
+                    const saldoReais = Math.max(0, gastoLimite - gastoAtual);
+                    if (elFinFaixaTexto) {
+                        elFinFaixaTexto.textContent = "R$ " + saldoReais.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    }
+                    if (elFinFaixaComp) {
+                        const compEco = temMetaEconomia
+                            ? ` (Meta de economia: R$ ${dadosMes.metaEconomiaReais.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}).`
+                            : ` Restantes dentro do limite financeiro de ${nomeMesAno}.`;
+                        elFinFaixaComp.textContent = compEco;
+                    }
+                }
+            } else if (temMetaEconomia) {
+                const valorMetaEco = dadosMes.metaEconomiaReais;
+                const mesAnt = idxMes > 0 ? mapaMeses[idxMes - 1] : null;
+                const gastoMesAnt = (mesAnt && mesAnt.consumoM3 != null)
+                    ? (mesAnt.valorContaReais != null ? mesAnt.valorContaReais : mesAnt.consumoM3 * tarifaBase)
+                    : 0;
+                const economiaObtida = gastoMesAnt > gastoAtual ? (gastoMesAnt - gastoAtual) : 0;
+                const percEco = valorMetaEco > 0
+                    ? Math.min(Math.round(((economiaObtida > 0 ? economiaObtida : gastoAtual) / valorMetaEco) * 100), 999)
+                    : 0;
+
+                if (elFinRotuloLimite) {
+                    elFinRotuloLimite.textContent = "Meta de economia";
+                }
+                if (elFinLimite) {
+                    elFinLimite.textContent = "R$ " + valorMetaEco.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                }
+                if (elFinPorcentagem) {
+                    elFinPorcentagem.textContent = Math.min(percEco, 100) + "%";
+                }
+                if (elAnelFin) {
+                    elAnelFin.style.background = `conic-gradient(#205988 ${Math.min(percEco, 100)}%, #e2e8f0 0)`;
+                }
+                if (elFinFaixaTexto) {
+                    elFinFaixaTexto.textContent = "R$ " + valorMetaEco.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                }
+                if (elFinFaixaComp) {
+                    elFinFaixaComp.textContent = `Meta de economia definida para ${nomeMesAno} (Gasto atual: R$ ${gastoAtual.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}).`;
+                }
+            } else {
+                if (elFinRotuloLimite) elFinRotuloLimite.textContent = "Gasto limite da meta";
                 if (elFinLimite) elFinLimite.textContent = "Sem meta";
                 if (elFinPorcentagem) elFinPorcentagem.textContent = "0%";
                 if (elAnelFin) {
                     elAnelFin.style.background = "conic-gradient(#205988 0%, #e2e8f0 0)";
+                }
+                if (elFinFaixaTexto) {
+                    elFinFaixaTexto.textContent = temConsumo
+                        ? "R$ " + gastoAtual.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+                        : "R$ 0,00";
+                }
+                if (elFinFaixaComp) {
+                    elFinFaixaComp.textContent = `Gastos registrados em ${nomeMesAno}.`;
                 }
             }
 
