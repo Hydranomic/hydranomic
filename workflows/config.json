@@ -1,4 +1,20 @@
 {
-	"meta_ativa": null,
-	"solicitacao_exclusao": null
+  "meta_ativa": {
+    "tipo": "reducao_mensal",
+    "nome": "Meta de Consumo",
+    "valor": 18.0,
+    "periodo": "2026-08",
+    "mes_referencia": "2026-08",
+    "data_criacao": "2026-11-05",
+    "descricao": "",
+    "status": "ativa"
+  },
+  "metas_por_mes": {
+    "2026-08": {
+      "nome": "Meta de Agosto",
+      "valor": 18.0,
+      "periodo": "2026-08"
+    }
+  },
+  "solicitacao_exclusao": null
 }
