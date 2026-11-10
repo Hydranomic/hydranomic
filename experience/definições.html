@@ -2311,10 +2311,13 @@ button-adicionar-funcionario:hover {
             modalTarifa.style.display = "none";
         });
     }
-    // =========================================================================
-    // SISTEMA DE UPLOAD E HISTÓRICO DE CONTAS (SALVAMENTO + EXIBIÇÃO POR MÊS)
+     // =========================================================================
+    // SISTEMA DE UPLOAD E HISTÓRICO DE CONTAS (SALVAMENTO + SINCRONIZAÇÃO)
     // =========================================================================
     const STORAGE_KEY_CONTAS = "hydranomic_historico_contas";
+    const URL_ENDPOINT_CONTAS = "/salvar-contas";
+    const URL_ARQUIVO_CONTAS = "https://files.wnology.io/6a7df1ea72e58afcb00daed0/historico_contas.json";
+
     const btnHistoricoContas = document.querySelector(".historico-contas");
     const modalHistoricoContas = document.querySelector("#modal-historico-contas");
     const historicoListaEl = document.getElementById("historico-lista");
@@ -2333,23 +2336,33 @@ button-adicionar-funcionario:hover {
     const tamanhoArquivo = document.getElementById("tamanho-arquivo-selecionado");
     const btnEnviarArquivo = document.getElementById("btn-enviar-arquivo-conta");
     let arquivoSelecionado = null;
+
+    function filtrarContasValidas(lista) {
+        if (!Array.isArray(lista)) return [];
+        return lista.filter(function (item) {
+            return item && typeof item === "object" && typeof item.mesReferencia === "string" && item.mesReferencia.trim().length >= 4;
+        });
+    }
+
     function obterContasSalvas() {
         try {
             const raw = localStorage.getItem(STORAGE_KEY_CONTAS);
             const parsed = raw ? JSON.parse(raw) : [];
-            return Array.isArray(parsed) ? parsed : [];
+            return filtrarContasValidas(parsed);
         } catch (e) {
             console.warn("Erro ao ler contas salvas:", e);
             return [];
         }
     }
+
     function salvarContasNoStorage(lista) {
+        const validas = filtrarContasValidas(lista);
         try {
-            localStorage.setItem(STORAGE_KEY_CONTAS, JSON.stringify(lista));
+            localStorage.setItem(STORAGE_KEY_CONTAS, JSON.stringify(validas));
             return true;
         } catch (e) {
             try {
-                const enxuta = lista.map(function (item) {
+                const enxuta = validas.map(function (item) {
                     const copia = Object.assign({}, item);
                     if (copia.conteudoDataUrl && copia.conteudoDataUrl.length > 200000) {
                         copia.conteudoDataUrl = null;
@@ -2364,6 +2377,21 @@ button-adicionar-funcionario:hover {
             }
         }
     }
+
+    async function sincronizarContasServidor() {
+        try {
+            const resp = await fetch(URL_ARQUIVO_CONTAS + "?_t=" + Date.now(), { cache: "no-store" });
+            if (!resp.ok) return;
+            const dados = await resp.json();
+            if (Array.isArray(dados)) {
+                salvarContasNoStorage(dados);
+                renderizarHistoricoContas();
+            }
+        } catch (e) {
+            console.warn("Erro ao sincronizar contas com o servidor:", e);
+        }
+    }
+
     function formatarNomeMes(mesStr) {
         if (!mesStr || mesStr.indexOf("-") === -1) return "Mês não informado";
         const meses = [
@@ -2376,9 +2404,10 @@ button-adicionar-funcionario:hover {
         if (isNaN(idx) || idx < 0 || idx > 11) return mesStr;
         return meses[idx] + " de " + ano;
     }
+
     function abrirArquivoConta(conta) {
         if (!conta || !conta.conteudoDataUrl) {
-            alert("Arquivo salvo apenas como registro (tamanho acima do limite do navegador para visualização).");
+            alert("Arquivo salvo apenas como registro (tamanho acima do limite para visualização).");
             return;
         }
         try {
@@ -2402,18 +2431,32 @@ button-adicionar-funcionario:hover {
             document.body.removeChild(link);
         }
     }
-    function removerConta(idConta) {
+
+    async function removerConta(idConta) {
         if (!confirm("Deseja remover esta conta de água?")) return;
         const atualizadas = obterContasSalvas().filter(function (c) {
             return String(c.id) !== String(idConta);
         });
         salvarContasNoStorage(atualizadas);
         renderizarHistoricoContas();
+
+        try {
+            await fetch(URL_ENDPOINT_CONTAS, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify({ acao: "remover_conta", id: idConta })
+            });
+        } catch (e) {
+            console.warn("Erro ao remover conta no servidor:", e);
+        }
     }
+
     function renderizarHistoricoContas() {
         if (!historicoListaEl) return;
         const contas = obterContasSalvas();
         historicoListaEl.innerHTML = "";
+
         if (contas.length === 0) {
             const vazio = document.createElement("p");
             vazio.style.color = "#5e7a92";
@@ -2423,31 +2466,43 @@ button-adicionar-funcionario:hover {
             historicoListaEl.appendChild(vazio);
             return;
         }
-        const ordenadas = contas.slice().reverse();
+
+        const ordenadas = contas.slice().sort(function (a, b) {
+            return (b.mesReferencia || "").localeCompare(a.mesReferencia || "");
+        });
+
         ordenadas.forEach(function (conta) {
             const bloco = document.createElement("div");
             bloco.className = "bloco-conta-mes";
+
             const tituloMes = document.createElement("div");
             tituloMes.className = "conta-mes-titulo";
             tituloMes.textContent = formatarNomeMes(conta.mesReferencia);
+
             const caixaArquivo = document.createElement("div");
             caixaArquivo.className = "conta-arquivo-box";
+
             const info = document.createElement("div");
             info.className = "conta-arquivo-info";
+
             const icone = document.createElement("i");
             const ehPdf = (conta.tipoMime || "").indexOf("pdf") !== -1 || /\.pdf$/i.test(conta.nomeArquivo || "");
             const ehImg = (conta.tipoMime || "").indexOf("image/") === 0 || /\.(png|jpe?g|webp)$/i.test(conta.nomeArquivo || "");
             icone.className = ehPdf
                 ? "bi bi-file-earmark-pdf-fill"
                 : (ehImg ? "bi bi-file-earmark-image-fill" : "bi bi-file-earmark-text-fill");
+
             const nomeEl = document.createElement("span");
             nomeEl.className = "conta-arquivo-nome";
             nomeEl.textContent = conta.nomeArquivo || "Conta de água";
             nomeEl.title = conta.nomeArquivo || "";
+
             info.appendChild(icone);
             info.appendChild(nomeEl);
+
             const acoes = document.createElement("div");
             acoes.className = "conta-arquivo-acoes";
+
             if (conta.conteudoDataUrl) {
                 const btnAbrir = document.createElement("button");
                 btnAbrir.type = "button";
@@ -2459,6 +2514,7 @@ button-adicionar-funcionario:hover {
                 });
                 acoes.appendChild(btnAbrir);
             }
+
             const btnExcluir = document.createElement("button");
             btnExcluir.type = "button";
             btnExcluir.className = "btn-conta-icone excluir";
@@ -2468,6 +2524,7 @@ button-adicionar-funcionario:hover {
                 removerConta(conta.id);
             });
             acoes.appendChild(btnExcluir);
+
             caixaArquivo.appendChild(info);
             caixaArquivo.appendChild(acoes);
             bloco.appendChild(tituloMes);
@@ -2475,6 +2532,7 @@ button-adicionar-funcionario:hover {
             historicoListaEl.appendChild(bloco);
         });
     }
+
     function resetarFormularioUpload() {
         arquivoSelecionado = null;
         if (inputArquivo) inputArquivo.value = "";
@@ -2492,6 +2550,7 @@ button-adicionar-funcionario:hover {
             btnEnviarArquivo.textContent = "Salvar conta";
         }
     }
+
     function processarArquivo(file) {
         if (!file) return;
         arquivoSelecionado = file;
@@ -2504,9 +2563,45 @@ button-adicionar-funcionario:hover {
         if (boxArquivo) boxArquivo.style.display = "flex";
         if (btnEnviarArquivo) btnEnviarArquivo.disabled = false;
     }
+
     function lerArquivoComoDataUrl(file) {
         return new Promise(function (resolve) {
-            if (!file || file.size > 2.5 * 1024 * 1024) {
+            if (!file) {
+                resolve(null);
+                return;
+            }
+            if (file.type && file.type.indexOf("image/") === 0) {
+                const img = new Image();
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    img.onload = function () {
+                        const canvas = document.createElement("canvas");
+                        let w = img.width;
+                        let h = img.height;
+                        const maxDim = 1200;
+                        if (w > maxDim || h > maxDim) {
+                            if (w > h) {
+                                h = Math.round((h * maxDim) / w);
+                                w = maxDim;
+                            } else {
+                                w = Math.round((w * maxDim) / h);
+                                h = maxDim;
+                            }
+                        }
+                        canvas.width = w;
+                        canvas.height = h;
+                        const ctx = canvas.getContext("2d");
+                        ctx.drawImage(img, 0, 0, w, h);
+                        resolve(canvas.toDataURL("image/jpeg", 0.72));
+                    };
+                    img.onerror = function () { resolve(null); };
+                    img.src = e.target.result;
+                };
+                reader.onerror = function () { resolve(null); };
+                reader.readAsDataURL(file);
+                return;
+            }
+            if (file.size > 2.5 * 1024 * 1024) {
                 resolve(null);
                 return;
             }
@@ -2516,6 +2611,7 @@ button-adicionar-funcionario:hover {
             reader.readAsDataURL(file);
         });
     }
+
     if (dropArea && inputArquivo) {
         dropArea.addEventListener("click", function () {
             inputArquivo.click();
@@ -2547,17 +2643,21 @@ button-adicionar-funcionario:hover {
             }
         });
     }
+
     if (btnHistoricoContas && modalHistoricoContas) {
         btnHistoricoContas.addEventListener("click", function () {
             renderizarHistoricoContas();
             modalHistoricoContas.style.display = "flex";
+            sincronizarContasServidor();
         });
     }
+
     if (btnCancelarHist && modalHistoricoContas) {
         btnCancelarHist.addEventListener("click", function () {
             modalHistoricoContas.style.display = "none";
         });
     }
+
     if (btnAbrirUpload && modalAdicionarConta) {
         btnAbrirUpload.addEventListener("click", function () {
             modalHistoricoContas.style.display = "none";
@@ -2565,6 +2665,7 @@ button-adicionar-funcionario:hover {
             modalAdicionarConta.style.display = "block";
         });
     }
+
     if (btnFecharUpload && modalAdicionarConta) {
         btnFecharUpload.addEventListener("click", function () {
             modalAdicionarConta.style.display = "none";
@@ -2573,6 +2674,7 @@ button-adicionar-funcionario:hover {
             if (modalHistoricoContas) modalHistoricoContas.style.display = "flex";
         });
     }
+
     if (btnEnviarArquivo) {
         btnEnviarArquivo.addEventListener("click", async function () {
             if (!arquivoSelecionado) {
@@ -2585,24 +2687,58 @@ button-adicionar-funcionario:hover {
                 if (inputMesConta) inputMesConta.focus();
                 return;
             }
+
             btnEnviarArquivo.textContent = "Salvando...";
             btnEnviarArquivo.disabled = true;
+
             const dataUrl = await lerArquivoComoDataUrl(arquivoSelecionado);
-            const contas = obterContasSalvas();
-            contas.push({
+            let dataUrlParaServidor = dataUrl;
+
+            if (dataUrlParaServidor && dataUrlParaServidor.length > 220000) {
+                alert("Atenção: Este arquivo excede o limite de 256 KB do servidor WEGnology para envio direto. O registro do mês será salvo para todos os navegadores, mas recomendamos arquivos de até 150 KB para visualização em outros navegadores.");
+                dataUrlParaServidor = null;
+            }
+
+            const novaConta = {
                 id: String(Date.now()),
                 mesReferencia: mesSelecionado,
                 nomeArquivo: arquivoSelecionado.name,
                 tipoMime: arquivoSelecionado.type || "",
                 conteudoDataUrl: dataUrl
-            });
-            const salvou = salvarContasNoStorage(contas);
-            if (!salvou) {
-                alert("Não foi possível salvar a conta no navegador.");
-                btnEnviarArquivo.textContent = "Salvar conta";
-                btnEnviarArquivo.disabled = false;
-                return;
+            };
+
+            const contas = obterContasSalvas();
+            contas.push(novaConta);
+            salvarContasNoStorage(contas);
+
+            try {
+                const resp = await fetch(URL_ENDPOINT_CONTAS, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                    body: JSON.stringify({
+                        acao: "salvar_conta",
+                        id: novaConta.id,
+                        mesReferencia: novaConta.mesReferencia,
+                        nomeArquivo: novaConta.nomeArquivo,
+                        tipoMime: novaConta.tipoMime,
+                        conteudoDataUrl: dataUrlParaServidor
+                    })
+                });
+
+                if (!resp.ok) {
+                    alert("Aviso: Salvo neste navegador, mas o servidor retornou erro HTTP " + resp.status + ". Verifique o workflow POST /salvar-contas no WEGnology.");
+                } else {
+                    const dadosServidor = await resp.json().catch(function () { return null; });
+                    if (Array.isArray(dadosServidor)) {
+                        salvarContasNoStorage(dadosServidor);
+                    }
+                }
+            } catch (erro) {
+                console.warn("Erro de rede ao salvar no servidor:", erro);
+                alert("Salvo neste navegador. Não foi possível conectar ao servidor /salvar-contas.");
             }
+
             resetarFormularioUpload();
             modalAdicionarConta.style.display = "none";
             renderizarHistoricoContas();
@@ -2611,7 +2747,9 @@ button-adicionar-funcionario:hover {
             }
         });
     }
+
     renderizarHistoricoContas();
+    sincronizarContasServidor();
     // =========================================================================
     // 3. GERENCIAMENTO DE USUÁRIOS E GRUPOS (SINCRONIZADO COM WEGNOLOGY)
     // =========================================================================
