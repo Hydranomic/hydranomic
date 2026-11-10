@@ -16,5 +16,9 @@
       "periodo": "2026-08"
     }
   },
-  "solicitacao_exclusao": null
+  "solicitacao_exclusao": null,
+  "notificacoes": {
+    "notificacao_prazos": true,
+    "alerta_status": true
+  }
 }

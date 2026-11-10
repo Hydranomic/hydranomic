@@ -1,0 +1,16 @@
+{
+  "meta_ativa": true,
+  "meta_nome": "Meta de Consumo",
+  "limite_m3": 18.0,
+  "consumo_atual_m3": 0.0,
+  "percentual_atingido": 0.0,
+  "saldo_restante_m3": 18.0,
+  "situacao": "NORMAL",
+  "periodo": "2026-08",
+  "alertas_ativos": [],
+  "notificacoes": {
+    "notificacao_prazos": true,
+    "alerta_status": true
+  },
+  "dias_restantes_mes": 21
+}
