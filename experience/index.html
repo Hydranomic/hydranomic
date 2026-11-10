@@ -143,6 +143,278 @@ body {
 .logo .hydra { font-weight: 400; }
 .logo .nomic { font-weight: 700; }
 
+.nav-acoes-direita {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.notificacao-container {
+  position: relative;
+}
+
+.notificacao-botao {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 19px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.notificacao-botao:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.notificacao-botao:active {
+  transform: scale(0.95);
+}
+
+.notificacao-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #ef4444;
+  border-radius: 10px;
+  border: 2px solid #205988;
+  box-sizing: border-box;
+  line-height: 1;
+}
+
+.notificacao-card {
+  position: absolute;
+  top: 52px;
+  right: -10px;
+  z-index: 25;
+  width: 320px;
+  max-height: 400px;
+  overflow: hidden;
+  background: #ffffff;
+  color: #202b33;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+  display: flex;
+  flex-direction: column;
+}
+
+.notificacao-card[hidden] {
+  display: none !important;
+}
+
+.notificacao-card::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  right: 22px;
+  width: 14px;
+  height: 14px;
+  background: #ffffff;
+  transform: rotate(45deg);
+}
+
+.notificacao-topo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid #eef2f6;
+  background: #ffffff;
+}
+
+.notificacao-topo h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--secondary-color, #205988);
+}
+
+.notificacao-contador {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.notificacao-lista {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.notificacao-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 18px;
+  border-bottom: 1px solid #f1f5f9;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s ease;
+  cursor: pointer;
+}
+
+.notificacao-item:last-child {
+  border-bottom: none;
+}
+
+.notificacao-item:hover {
+  background-color: #f8fafc;
+}
+
+.notificacao-item-icone {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.notificacao-item-icone.perigo { color: #dc2626; }
+.notificacao-item-icone.alerta { color: #d97706; }
+.notificacao-item-icone.info { color: #2563eb; }
+
+.notificacao-item-conteudo {
+  flex: 1;
+}
+
+.notificacao-item-titulo {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 2px;
+}
+
+.notificacao-item-msg {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.35;
+}
+
+.notificacao-vazia {
+  margin: 0;
+  padding: 24px 16px;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+/* CARD ALERTA ATIVO NO DASHBOARD */
+.card-alerta-ativo {
+  grid-area: alerta;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 20px;
+  border-radius: 10px;
+  margin: 4px 0 10px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  animation: surgimentoAlerta 0.25s ease-out;
+}
+
+@keyframes surgimentoAlerta {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card-alerta-conteudo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+}
+
+.card-alerta-conteudo i {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.card-alerta-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.card-alerta-texto strong {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.card-alerta-texto span {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.card-alerta-ativo.severidade-perigo {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+.card-alerta-ativo.severidade-perigo i {
+  color: #dc2626;
+}
+
+.card-alerta-ativo.severidade-alerta {
+  background-color: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+}
+.card-alerta-ativo.severidade-alerta i {
+  color: #d97706;
+}
+
+.card-alerta-ativo.severidade-info {
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+}
+.card-alerta-ativo.severidade-info i {
+  color: #2563eb;
+}
+
+.btn-fechar-alerta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  opacity: 0.7;
+  transition: opacity 0.2s, background-color 0.2s;
+}
+
+.btn-fechar-alerta:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
 .perfil {
   position: relative;
 }
@@ -452,10 +724,11 @@ main {
   min-height: calc(100vh - 80px);
   padding: 30px 4.3%;
   grid-template-columns: 28% 1fr;
-  grid-template-rows: auto auto 135px 135px 152px;
+  grid-template-rows: auto auto auto 135px 135px 152px;
   grid-template-areas:
       "titulo titulo"
       "subtitulo subtitulo"
+      "alerta alerta"
       "vazao consumo"
       "status consumo"
       "previsoes metas";
@@ -737,7 +1010,7 @@ button-ver-relatorio:hover {
   main {
       display: grid;
       grid-template-columns: 1fr;
-      grid-template-areas: "titulo" "subtitulo" "vazao" "status" "consumo" "previsoes" "metas";
+      grid-template-areas: "titulo" "subtitulo" "alerta" "vazao" "status" "consumo" "previsoes" "metas";
       gap: 10px;
       padding: 20px 16px;
   }
@@ -770,7 +1043,34 @@ button-ver-relatorio:hover {
             </a>
         </div>
 
-        <div class="perfil">
+        <div class="nav-acoes-direita">
+            <!-- NOTIFICAÇÕES (SINO COM BADGE E MODAL COM PRÉVIA) -->
+            <div class="notificacao-container">
+                <button
+                    class="notificacao-botao"
+                    id="abrirNotificacoes"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="notificacaoCard"
+                    aria-label="Abrir prévia de notificações"
+                >
+                    <i class="bi bi-bell"></i>
+                    <span class="notificacao-badge" id="notificacaoBadge" style="display: none;">0</span>
+                </button>
+
+                <!-- MODAL / CARD DE NOTIFICAÇÕES -->
+                <div class="notificacao-card" id="notificacaoCard" hidden>
+                    <div class="notificacao-topo">
+                        <h3>Notificações</h3>
+                        <span class="notificacao-contador" id="notificacaoContadorTexto">0 ativas</span>
+                    </div>
+                    <div class="notificacao-lista" id="notificacaoLista">
+                        <p class="notificacao-vazia">Nenhum alerta pendente no momento.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="perfil">
             <button
                 class="perfil-botao"
                 id="abrirPerfil"
@@ -867,6 +1167,7 @@ button-ver-relatorio:hover {
                 </div>
             </div>
         </div>
+        </div>
     </nav>
 
     <!-- BACKDROP DA SIDEBAR -->
@@ -918,6 +1219,19 @@ button-ver-relatorio:hover {
     <main>
         <h1>Olá, </h1>
         <h3>Aqui está o resumo do sistema</h3>
+        <!-- CARD ATIVO DE ALERTA NO DASHBOARD (DISPENSÁVEL PELO USUÁRIO) -->
+        <section class="card-alerta-ativo" id="cardAlertaAtivo" style="display: none;" role="alert" aria-live="polite">
+            <div class="card-alerta-conteudo">
+                <i class="bi bi-exclamation-triangle-fill" id="cardAlertaIcone"></i>
+                <div class="card-alerta-texto">
+                    <strong id="cardAlertaTitulo">Alerta</strong>
+                    <span id="cardAlertaMensagem">Mensagem do alerta</span>
+                </div>
+            </div>
+            <button type="button" class="btn-fechar-alerta" id="btnFecharCardAlerta" aria-label="Fechar notificação">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </section>
 
         <section class="area-vazao">
             <i class="bi bi-graph-up"></i>
@@ -1038,27 +1352,32 @@ button-ver-relatorio:hover {
 
             const timestamp = new Date().getTime();
 
-            const URL_GRAFICO  = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/grafico_anual.json';
-            const URL_PREVISAO = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/previsao_ml.json';
-            const URL_META     = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/progresso_meta.json';
-            const URL_CONSUMO  = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/consumo_mes.json';
-            const URL_SUMARIO  = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/sumario_execucao.json';
-
-            const buscarJson = (url, nome) =>
-                fetch(`${url}?_t=${timestamp}`)
-                    .then(r => {
-                        if (!r.ok) throw new Error(`Falha ao ler ${nome} (HTTP ${r.status})`);
-                        return r.json();
-                    })
-                    .catch(e => { console.warn(e.message); return null; });
+            const URL_GRAFICO = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/grafico_anual.json';
+            const URL_SUMARIO = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/sumario_execucao.json';
+            const URL_CONFIG = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/config.json';
 
             try {
-                const [resGrafico, resPrevisao, resMeta, resConsumo, resSumario] = await Promise.all([
-                    buscarJson(URL_GRAFICO, 'grafico_anual.json'),
-                    buscarJson(URL_PREVISAO, 'previsao_ml.json'),
-                    buscarJson(URL_META, 'progresso_meta.json'),
-                    buscarJson(URL_CONSUMO, 'consumo_mes.json'),
-                    buscarJson(URL_SUMARIO, 'sumario_execucao.json')
+                const [resGrafico, resSumario, resConfig] = await Promise.all([
+                    fetch(`${URL_GRAFICO}?_t=${timestamp}`)
+                        .then(r => {
+                            if (!r.ok) throw new Error(`Falha ao ler grafico_anual.json (HTTP ${r.status})`);
+                            return r.json();
+                        })
+                        .catch(e => { console.warn(e.message); return null; }),
+
+                    fetch(`${URL_SUMARIO}?_t=${timestamp}`)
+                        .then(r => {
+                            if (!r.ok) throw new Error(`Falha ao ler sumario_execucao.json (HTTP ${r.status})`);
+                            return r.json();
+                        })
+                        .catch(e => { console.warn(e.message); return null; }),
+
+                    fetch(`${URL_CONFIG}?_t=${timestamp}`)
+                        .then(r => {
+                            if (!r.ok) throw new Error(`Falha ao ler config.json (HTTP ${r.status})`);
+                            return r.json();
+                        })
+                        .catch(e => { console.warn(e.message); return null; })
                 ]);
 
                 if (resGrafico && Array.isArray(resGrafico.meses)) {
@@ -1097,23 +1416,165 @@ button-ver-relatorio:hover {
                     });
                 }
 
-                const elConsumoTotal = document.querySelector('.metas > h1:nth-of-type(2)');
-                if (elConsumoTotal && consumoTotalM3 != null) {
-                    elConsumoTotal.textContent = Number(consumoTotalM3).toFixed(2) + ' m³';
+                    const elConsumoTotal = document.querySelector('.metas > h1:nth-of-type(2)');
+                    if (elConsumoTotal && resSumario.consumo_mes_acumulado_m3 != null) {
+                        elConsumoTotal.textContent = Number(resSumario.consumo_mes_acumulado_m3).toFixed(2) + ' m³';
+                    }
+
+                    const elVazao = document.querySelector('.area-vazao > h1');
+                    if (elVazao && resSumario.vazao_atual_m3h != null) {
+                        elVazao.textContent = Number(resSumario.vazao_atual_m3h).toFixed(2) + ' m³/h';
+                    }
+
+                    const elStatus = document.querySelector('.area-status > h1');
+                    if (elStatus) {
+                        const status = resSumario.meta_status ? String(resSumario.meta_status).toUpperCase() : "NORMAL";
+                        elStatus.textContent = status;
+                        if (status === "ESTOURADA") {
+                            elStatus.style.color = "var(--red-status-color)";
+                        } else if (status === "ALERTA_80") {
+                            elStatus.style.color = "#c99700";
+                        } else {
+                            elStatus.style.color = "var(--secondary-color)";
+                        }
+                    }
+                } else {
+                    const elStatus = document.querySelector('.area-status > h1');
+                    if (elStatus && elStatus.textContent === "Carregando...") {
+                        elStatus.textContent = "Normal";
+                    }
                 }
 
-                // 4. Status do sistema
-                const elStatus = document.querySelector('.area-status > h1');
-                if (elStatus) {
-                    const statusBruto = resMeta?.situacao ?? resSumario?.meta_status ?? "NORMAL";
-                    const status = String(statusBruto).toUpperCase();
-                    elStatus.textContent = status;
-                    if (status === "ESTOURADA") {
-                        elStatus.style.color = "var(--red-status-color)";
-                    } else if (status === "ALERTA_80") {
-                        elStatus.style.color = "#c99700";
+                // =========================================================================
+                // PROCESSAMENTO DE PREFERÊNCIAS E ALERTAS ATIVOS (SEM LOCALSTORAGE / SEM ALERT)
+                // =========================================================================
+                const prefNotificacoes = (resConfig && resConfig.notificacoes) ||
+                                         (resSumario && resSumario.notificacoes) ||
+                                         { notificacao_prazos: true, alerta_status: true };
+
+                let listaAlertas = [];
+
+                if (resSumario && Array.isArray(resSumario.alertas_ativos) && resSumario.alertas_ativos.length > 0) {
+                    listaAlertas = resSumario.alertas_ativos;
+                } else {
+                    const statusMeta = resSumario && resSumario.meta_status ? String(resSumario.meta_status).toUpperCase() : "NORMAL";
+                    if (statusMeta === "ESTOURADA") {
+                        listaAlertas.push({
+                            id: "meta_estourada",
+                            tipo: "limite_estourado",
+                            severidade: "perigo",
+                            titulo: "Meta Ultrapassada!",
+                            mensagem: "O consumo de água ultrapassou o limite estabelecido para este mês."
+                        });
+                    } else if (statusMeta === "ALERTA_80") {
+                        listaAlertas.push({
+                            id: "meta_80",
+                            tipo: "alerta_80",
+                            severidade: "alerta",
+                            titulo: "Atenção: 80% da Meta Atingida",
+                            mensagem: "O consumo atingiu 80% ou mais da meta mensal estabelecida."
+                        });
+                    }
+
+                    const hoje = new Date();
+                    const ultimoDia = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0).getDate();
+                    const diasRestantes = Math.max(0, ultimoDia - hoje.getDate());
+                    if (diasRestantes <= 2) {
+                        listaAlertas.push({
+                            id: "prazo_fim_mes",
+                            tipo: "prazo_proximo",
+                            severidade: "info",
+                            titulo: "Prazo de Fechamento Próximo",
+                            mensagem: diasRestantes <= 1
+                                ? "Faltam menos de 24h para o fechamento do ciclo mensal da meta."
+                                : `Faltam ${diasRestantes} dias para o fechamento do ciclo mensal da meta.`
+                        });
+                    }
+                }
+
+                // Filtra de acordo com a configuração salva no WEGnology config.json
+                const alertasFiltrados = listaAlertas.filter(alerta => {
+                    if (alerta.tipo === "limite_estourado" || alerta.tipo === "alerta_80" || alerta.tipo === "status") {
+                        return prefNotificacoes.alerta_status !== false;
+                    }
+                    if (alerta.tipo === "prazo_proximo" || alerta.tipo === "prazo") {
+                        return prefNotificacoes.notificacao_prazos !== false;
+                    }
+                    return true;
+                });
+
+                // Atualiza o sino e contador badge
+                const elBadge = document.getElementById("notificacaoBadge");
+                const elContadorTexto = document.getElementById("notificacaoContadorTexto");
+                const elNotificacaoLista = document.getElementById("notificacaoLista");
+
+                if (elBadge) {
+                    if (alertasFiltrados.length > 0) {
+                        elBadge.textContent = alertasFiltrados.length;
+                        elBadge.style.display = "flex";
                     } else {
-                        elStatus.style.color = "var(--secondary-color)";
+                        elBadge.style.display = "none";
+                    }
+                }
+
+                if (elContadorTexto) {
+                    elContadorTexto.textContent = alertasFiltrados.length === 1
+                        ? "1 ativa"
+                        : `${alertasFiltrados.length} ativas`;
+                }
+
+                // Renderiza os itens dentro do dropdown preview do sino
+                if (elNotificacaoLista) {
+                    if (alertasFiltrados.length === 0) {
+                        elNotificacaoLista.innerHTML = '<p class="notificacao-vazia">Nenhum alerta pendente no momento.</p>';
+                    } else {
+                        elNotificacaoLista.innerHTML = alertasFiltrados.map(alerta => {
+                            let iconeClasse = "bi-info-circle-fill";
+                            let sev = alerta.severidade || "info";
+                            if (sev === "perigo") iconeClasse = "bi-exclamation-octagon-fill";
+                            else if (sev === "alerta") iconeClasse = "bi-exclamation-triangle-fill";
+
+                            return `
+                                <a href="http://hydranomic.kadly.com.br/metas" class="notificacao-item">
+                                    <i class="bi ${iconeClasse} notificacao-item-icone ${sev}"></i>
+                                    <div class="notificacao-item-conteudo">
+                                        <div class="notificacao-item-titulo">${alerta.titulo}</div>
+                                        <div class="notificacao-item-msg">${alerta.mensagem}</div>
+                                    </div>
+                                </a>
+                            `;
+                        }).join("");
+                    }
+                }
+
+                // Renderiza Card Ativo no Dashboard (ativo até que o usuário clique no X)
+                const cardAlerta = document.getElementById("cardAlertaAtivo");
+                const cardAlertaTitulo = document.getElementById("cardAlertaTitulo");
+                const cardAlertaMensagem = document.getElementById("cardAlertaMensagem");
+                const cardAlertaIcone = document.getElementById("cardAlertaIcone");
+
+                if (cardAlerta) {
+                    if (alertasFiltrados.length > 0) {
+                        const prioridades = { "perigo": 3, "alerta": 2, "info": 1 };
+                        const alertaPrincipal = [...alertasFiltrados].sort((a, b) => (prioridades[b.severidade] || 0) - (prioridades[a.severidade] || 0))[0];
+
+                        const chaveDispensado = "alerta_dispensado_" + alertaPrincipal.id;
+                        const foiDispensado = sessionStorage.getItem(chaveDispensado) === "true";
+
+                        if (!foiDispensado) {
+                            cardAlerta.className = `card-alerta-ativo severidade-${alertaPrincipal.severidade || "info"}`;
+                            if (cardAlertaTitulo) cardAlertaTitulo.textContent = alertaPrincipal.titulo;
+                            if (cardAlertaMensagem) cardAlertaMensagem.textContent = alertaPrincipal.mensagem;
+                            if (cardAlertaIcone) {
+                                cardAlertaIcone.className = `bi ${alertaPrincipal.severidade === "perigo" ? "bi-exclamation-octagon-fill" : (alertaPrincipal.severidade === "alerta" ? "bi-exclamation-triangle-fill" : "bi-info-circle-fill")}`;
+                            }
+                            cardAlerta.setAttribute("data-alerta-id", alertaPrincipal.id);
+                            cardAlerta.style.display = "flex";
+                        } else {
+                            cardAlerta.style.display = "none";
+                        }
+                    } else {
+                        cardAlerta.style.display = "none";
                     }
                 }
 
@@ -1168,10 +1629,52 @@ button-ver-relatorio:hover {
 
         const botaoPerfil = document.getElementById("abrirPerfil");
         const perfilCard = document.getElementById("perfilCard");
+        const botaoNotificacoes = document.getElementById("abrirNotificacoes");
+        const notificacaoCard = document.getElementById("notificacaoCard");
+
+        // Controle do Dropdown de Notificações
+        if (botaoNotificacoes && notificacaoCard) {
+            botaoNotificacoes.addEventListener("click", function (evento) {
+                evento.stopPropagation();
+                if (perfilCard && !perfilCard.hidden) {
+                    perfilCard.hidden = true;
+                    if (botaoPerfil) botaoPerfil.setAttribute("aria-expanded", "false");
+                }
+                const aberto = botaoNotificacoes.getAttribute("aria-expanded") === "true";
+                botaoNotificacoes.setAttribute("aria-expanded", String(!aberto));
+                notificacaoCard.hidden = aberto;
+            });
+
+            document.addEventListener("click", function (evento) {
+                if (!evento.target.closest(".notificacao-container")) {
+                    botaoNotificacoes.setAttribute("aria-expanded", "false");
+                    notificacaoCard.hidden = true;
+                }
+            });
+        }
+
+        // Fechamento do Card Ativo de Notificação pelo X
+        const btnFecharCardAlerta = document.getElementById("btnFecharCardAlerta");
+        const cardAlertaAtivo = document.getElementById("cardAlertaAtivo");
+        if (btnFecharCardAlerta && cardAlertaAtivo) {
+            btnFecharCardAlerta.addEventListener("click", function (evento) {
+                evento.preventDefault();
+                evento.stopPropagation();
+                cardAlertaAtivo.style.display = "none";
+                const alertaId = cardAlertaAtivo.getAttribute("data-alerta-id");
+                if (alertaId) {
+                    sessionStorage.setItem("alerta_dispensado_" + alertaId, "true");
+                }
+            });
+        }
 
         if (botaoPerfil && perfilCard) {
             botaoPerfil.addEventListener("click", function (evento) {
                 evento.stopPropagation();
+                if (notificacaoCard && !notificacaoCard.hidden) {
+                    notificacaoCard.hidden = true;
+                    if (botaoNotificacoes) botaoNotificacoes.setAttribute("aria-expanded", "false");
+                }
                 const perfilAberto = botaoPerfil.getAttribute("aria-expanded") === "true";
                 botaoPerfil.setAttribute("aria-expanded", String(!perfilAberto));
                 perfilCard.hidden = perfilAberto;

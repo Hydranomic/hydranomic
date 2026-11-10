@@ -1,25 +1,26 @@
 #include <WiFi.h>
 #include <ArduinoJson.h>
 #include <PubSubClient.h>
-#include <Preferences.h>
 
 // Pinos dos LEDs de status
-const int PIN_LED_VERDE = 4;     // Sucesso continuo de envio
-const int PIN_LED_AMARELO = 5;   // Erro de conexao WiFi (status == false)
-const int PIN_LED_VERMELHO = 19; // Erro de conexao com Broker WEGnology ou envio de dados
+const int PIN_LED_VERDE = 4;     // Sucesso de conexao/envio
+const int PIN_LED_AMARELO = 19;   // Erro de conexao WiFi
+const int PIN_LED_VERMELHO = 21; // Erro de conexao com Broker WEGnology ou envio de dados
 
-int SENSOR = 13;
+// Conexão esp com sensor
+int SENSOR = 15;
+
 int leituraHidrometro;
 int estadoAnterior = HIGH;
 
 int count = 0;
 int id = 1;
 
-Preferences prefs;
-
+// Conexão esp e broker
 const char* WIFI_SSID = "Nicolle";
 const char* WIFI_PASSWORD = "Nicolle13";
 
+/////////////////////////////////////////////////////////////
 const char* MQTT_SERVER = "broker.app.wnology.io";
 const char* MQTT_ACCESS_KEY = "aa6fa6d5-f77d-46da-b4e4-f23bf995d04f";
 const char* MQTT_ACCESS_SECRET = "77547f8f4f0d805edeb1982eadf46251d6bf0bf8b565b9e3c7fd92746459807b";
@@ -33,74 +34,48 @@ WiFiClient espClient;
 PubSubClient client(espClient);
 
 char attributes[200];
-unsigned long ultimoEnvio = 0;
 
-// Prototipos das funcoes
-bool connectWiFi();
-bool connectMQTT();
-bool publishData();
+void connectWiFi();
+void connectMQTT();
+void publishData();
+
+void desconnectWifi();
+void desconnectClient();
+
 void setLedStatus(bool verde, bool amarelo, bool vermelho);
 void sinalizarErroWifi();
 void sinalizarErroBrokerOuEnvio();
 void sinalizarSucesso();
-void desconnectWifi();
-void desconnectClient();
 
 void setup() {
-  // Configuracao dos LEDs de status
+  // Inicializa os pinos dos LEDs apagados
   pinMode(PIN_LED_VERDE, OUTPUT);
   pinMode(PIN_LED_AMARELO, OUTPUT);
   pinMode(PIN_LED_VERMELHO, OUTPUT);
-
-  // Inicializa LEDs apagados durante o boot
   setLedStatus(false, false, false);
 
   pinMode(SENSOR, INPUT_PULLUP);
   Serial.begin(115200);
-  delay(100);
-
-  prefs.begin("hidro", false);
-  count = prefs.getInt("pulsos", 0);
   client.setKeepAlive(100);
   client.setServer(MQTT_SERVER, MQTT_PORT);
   estadoAnterior = digitalRead(SENSOR);
 
-  Serial.println("Iniciando conexoes...");
-
-  // Conecta ao WiFi com tratamento de erro
-  if (connectWiFi()) {
-    // Conecta ao Broker WEGnology com tratamento de erro
-    if (connectMQTT()) {
-      // Envio inicial de sincronizacao para confirmar status de sucesso
-      publishData();
-    }
-  }
+  connectWiFi();
+  connectMQTT();
+  // //envio imediato de mensagens pequenas como JSONs de IoT
+  // espClient.setNoDelay(true);
+  desconnectWifi();
+  desconnectClient();
 }
 
 void loop() {
-  // 1. Verificacao de status da conexao WiFi
-  if (WiFi.status() != WL_CONNECTED) {
-    sinalizarErroWifi();
-    Serial.println("WiFi desconectado! Tentando reconectar...");
-    connectWiFi();
-    return;
-  }
- 
-  // 2. Verificacao de conexao com o Broker WEGnology (se WiFi estiver OK)
-  if (!client.connected()) {
-    sinalizarErroBrokerOuEnvio();
-    Serial.println("Broker WEGnology desconectado! Tentando reconectar...");
-    connectMQTT();
-  } else {
-    client.loop();
-  }
 
-  // 3. Leitura e contagem de pulsos do hidrometro
   leituraHidrometro = digitalRead(SENSOR);
 
   if (leituraHidrometro == LOW && estadoAnterior == HIGH) {
+
     count++;
-    prefs.putInt("pulsos", count);
+
     Serial.print("Pulso: ");
     Serial.println(count);
 
@@ -119,10 +94,14 @@ void loop() {
     publishData();
   }
 
+  //Processa o ping do Keepalive (precisa rodar em todo ciclo)
+  client.loop();
+
   estadoAnterior = leituraHidrometro;
+
 }
 
-// Funcoes de controle visual dos LEDs
+// Funcoes de controle dos LEDs
 void setLedStatus(bool verde, bool amarelo, bool vermelho) {
   digitalWrite(PIN_LED_VERDE, verde ? HIGH : LOW);
   digitalWrite(PIN_LED_AMARELO, amarelo ? HIGH : LOW);
@@ -130,99 +109,92 @@ void setLedStatus(bool verde, bool amarelo, bool vermelho) {
 }
 
 void sinalizarErroWifi() {
-  // WiFi false/desconectado: liga apenas LED Amarelo (pin 5)
-  setLedStatus(false, true, false);
+  Serial.println(">>> STATUS LED: AMARELO (Erro de WiFi)");
+  setLedStatus(false, true, false); // Liga apenas LED Amarelo (pino 5)
 }
 
 void sinalizarErroBrokerOuEnvio() {
-  // Erro no Broker ou no envio de dados (com WiFi OK): liga apenas LED Vermelho (pin 19)
-  setLedStatus(false, false, true);
+  Serial.println(">>> STATUS LED: VERMELHO (Erro de Broker/Envio)");
+  setLedStatus(false, false, true); // Liga apenas LED Vermelho (pino 19)
 }
 
 void sinalizarSucesso() {
-  // Mensagens enviadas com sucesso: mantem LED Verde aceso (pin 4)
-  setLedStatus(true, false, false);
+  Serial.println(">>> STATUS LED: VERDE (Sucesso)");
+  setLedStatus(true, false, false); // Liga apenas LED Verde (pino 4)
 }
 
-// Conexao WiFi com timeout e retorno de status
-bool connectWiFi() {
-  if (WiFi.status() == WL_CONNECTED) {
-    return true;
-  }
-
+void connectWiFi() {
+  WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-  Serial.print("Conectando ao WiFi");
+  int tentativas = 0;
 
-  unsigned long startAttemptTime = millis();
-  // Aguarda conexao por ate 10 segundos
-  while (WiFi.status() != WL_CONNECTED && millis() - startAttemptTime < 10000) {
+  // Aguarda tentar conectar ao WiFi (ate 15 tentativas de 500ms)
+  while (WiFi.status() != WL_CONNECTED && tentativas < 15) {
     delay(500);
-    Serial.print(".");
+    Serial.println("Connecting to WiFi...");
+    tentativas++;
   }
-  Serial.println();
 
-  if (WiFi.status() == WL_CONNECTED) {
-    Serial.println("Conectado com sucesso a rede WiFi!");
+  if (WiFi.status() == WL_CONNECTED && WiFi.localIP() != IPAddress(0, 0, 0, 0)) {
+    Serial.println("Connected to WiFi network");
     Serial.println("-------------");
     WiFi.setSleep(false);
-    return true;
+    delay(500); // Aguarda estabilizar o DNS do roteador para evitar falso erro -2
   } else {
-    Serial.println("Falha ao conectar ao WiFi (status == false).");
-    sinalizarErroWifi();
-    return false;
+    Serial.println("Failed to connect to WiFi");
+    sinalizarErroWifi(); // Acende LED Amarelo
   }
 }
 
-// Conexao MQTT com timeout por tentativas e retorno de status
-bool connectMQTT() {
-  if (client.connected()) {
-    return true;
-  }
-
-  // Se o WiFi nao estiver conectado, o erro prioritario e o WiFi
-  if (WiFi.status() != WL_CONNECTED) {
+void connectMQTT() {
+  // 1. Se o WiFi nao estiver conectado ou sem IP, o erro e de WiFi (LED Amarelo)
+  if (WiFi.status() != WL_CONNECTED || WiFi.localIP() == IPAddress(0, 0, 0, 0)) {
     sinalizarErroWifi();
-    return false;
+    return;
   }
 
   client.setServer(MQTT_SERVER, MQTT_PORT);
   int tentativas = 0;
 
   while (!client.connected() && tentativas < 3) {
-    tentativas++;
-    Serial.print("Tentativa de conexao ao Broker WEGnology (");
-    Serial.print(tentativas);
-    Serial.println("/3)...");
+    // Se o WiFi cair no meio das tentativas do Broker, prioriza o erro de WiFi (Amarelo)
+    if (WiFi.status() != WL_CONNECTED) {
+      Serial.println("WiFi lost during MQTT connection");
+      sinalizarErroWifi();
+      return;
+    }
 
+    Serial.println("Connecting to MQTT server...");
     if (client.connect(DEVICE_ID, MQTT_ACCESS_KEY, MQTT_ACCESS_SECRET)) {
-      Serial.println("Conectado a plataforma WEGNOLOGY!");
+      Serial.println("Connected to WEGNOLOGY platform");
       Serial.println("-------------");
-      return true;
     } else {
-      Serial.print("Falha na conexao com a WEGNOLOGY. Codigo de erro: ");
+      Serial.print("Failed to connect to WEGNOLOGY platform, error code: ");
       Serial.println(client.state());
-      delay(1500);
+      tentativas++;
+      delay(2000);
     }
   }
 
-  // Falha na conexao com o broker apos tentativas
-  Serial.println("Erro persistente ao conectar no broker WEGnology.");
-  sinalizarErroBrokerOuEnvio();
-  return false;
+  // Define o LED apos finalizar as tentativas
+  if (client.connected()) {
+    sinalizarSucesso(); // Acende LED Verde
+  } else if (WiFi.status() != WL_CONNECTED) {
+    sinalizarErroWifi(); // Se falhou porque o WiFi caiu -> LED Amarelo
+  } else {
+    sinalizarErroBrokerOuEnvio(); // Se o WiFi continua OK mas o Broker recusou/falhou -> LED Vermelho
+  }
 }
 
-// Publicacao de dados com tratamento de erro e sinalizacao
-bool publishData() {
+void publishData() {
   if (WiFi.status() != WL_CONNECTED) {
-    Serial.println("Nao foi possivel publicar: WiFi desconectado.");
     sinalizarErroWifi();
-    return false;
+    return;
   }
 
   if (!client.connected()) {
-    Serial.println("Nao foi possivel publicar: Broker desconectado.");
     sinalizarErroBrokerOuEnvio();
-    return false;
+    return;
   }
 
   DynamicJsonDocument doc(200);
@@ -235,20 +207,36 @@ bool publishData() {
   Serial.print("Enviando payload: ");
   Serial.println(payload);
 
-  bool enviado = client.publish(MQTT_TOPIC, attributes);
-  if (enviado) {
-    Serial.println("**** MENSAGEM ENVIADA COM SUCESSO ******");
-    sinalizarSucesso(); // Liga o LED Verde (pin 4)
-    return true;
-  } else {
-    Serial.println("**** ERRO NO ENVIO DOS DADOS AO BROKER ******");
-    sinalizarErroBrokerOuEnvio(); // Liga o LED Vermelho (pin 19)
-    return false;
+  if (client.connected() && count % 10 == 0) {
+    if (client.publish(MQTT_TOPIC, attributes)) {
+      Serial.println("****PULSO ENVIADA******");
+      sinalizarSucesso(); // Acende LED Verde no envio com sucesso
+    } else {
+      Serial.println("****ERRO AO ENVIAR PULSO******");
+      sinalizarErroBrokerOuEnvio(); // Acende LED Vermelho se o envio falhar
+    }
   }
 }
 
+void call_pub() {
+  if (!client.connected()) {
+    Serial.println("Reconnecting to WEGNOLOGY platform");
+    connectMQTT();
+  }
+
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.println("Reconnecting to WiFi");
+    connectWiFi();
+  }
+
+  client.loop();
+  publishData();
+  Serial.println("-------------");
+}
+
 void desconnectWifi() {
-  WiFi.disconnect();
+  // Desconecta limpando o status para que quedas futuras de WiFi sejam detectadas corretamente
+  WiFi.disconnect(true, true);
 }
 
 void desconnectClient() {

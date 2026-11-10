@@ -128,7 +128,9 @@ def executar(estado: Any = None) -> Dict[str, Any]:
                 "fatura_estimada_reais": res_ml.get("valor_estimado_conta"),
                 "data_treinamento_ml": res_ml.get("data_treinamento"),
                 "ano_grafico": res_grafico.get("ano_referencia"),
-                "meta_status": res_meta.get("situacao") if res_meta else "sem_meta_ativa"
+                "meta_status": res_meta.get("situacao") if res_meta else "sem_meta_ativa",
+                "alertas_ativos": res_meta.get("alertas_ativos", []) if res_meta else [],
+                "notificacoes": res_meta.get("notificacoes", {"notificacao_prazos": True, "alerta_status": True}) if res_meta else {"notificacao_prazos": True, "alerta_status": True}
             }
             salvar_json("sumario_execucao.json", sumario_execucao)
     return resultados
