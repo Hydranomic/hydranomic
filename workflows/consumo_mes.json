@@ -2,6 +2,12 @@
   "mes_referencia": "2026-10",
   "unidade_consumidora": 14079,
   "consumo_acumulado_mes_m3": 268.4,
+  "vazao_atual_m3h": 0.0,
+  "ultima_leitura": {
+    "pulsos": 268400,
+    "timestamp": "2026-10-22T23:59:59",
+    "vazao_calculada_m3h": 0.0
+  },
   "dias": [
     {"dia": 1, "data": "2026-10-01", "consumo_m3": 11.2},
     {"dia": 2, "data": "2026-10-02", "consumo_m3": 13.5},

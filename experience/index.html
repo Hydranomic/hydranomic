@@ -1038,24 +1038,27 @@ button-ver-relatorio:hover {
 
             const timestamp = new Date().getTime();
 
-            const URL_GRAFICO = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/grafico_anual.json';
-            const URL_SUMARIO = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/sumario_execucao.json';
+            const URL_GRAFICO  = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/grafico_anual.json';
+            const URL_PREVISAO = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/previsao_ml.json';
+            const URL_META     = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/progresso_meta.json';
+            const URL_CONSUMO  = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/consumo_mes.json';
+            const URL_SUMARIO  = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/sumario_execucao.json';
+
+            const buscarJson = (url, nome) =>
+                fetch(`${url}?_t=${timestamp}`)
+                    .then(r => {
+                        if (!r.ok) throw new Error(`Falha ao ler ${nome} (HTTP ${r.status})`);
+                        return r.json();
+                    })
+                    .catch(e => { console.warn(e.message); return null; });
 
             try {
-                const [resGrafico, resSumario] = await Promise.all([
-                    fetch(`${URL_GRAFICO}?_t=${timestamp}`)
-                        .then(r => {
-                            if (!r.ok) throw new Error(`Falha ao ler grafico_anual.json (HTTP ${r.status})`);
-                            return r.json();
-                        })
-                        .catch(e => { console.warn(e.message); return null; }),
-
-                    fetch(`${URL_SUMARIO}?_t=${timestamp}`)
-                        .then(r => {
-                            if (!r.ok) throw new Error(`Falha ao ler sumario_execucao.json (HTTP ${r.status})`);
-                            return r.json();
-                        })
-                        .catch(e => { console.warn(e.message); return null; })
+                const [resGrafico, resPrevisao, resMeta, resConsumo, resSumario] = await Promise.all([
+                    buscarJson(URL_GRAFICO, 'grafico_anual.json'),
+                    buscarJson(URL_PREVISAO, 'previsao_ml.json'),
+                    buscarJson(URL_META, 'progresso_meta.json'),
+                    buscarJson(URL_CONSUMO, 'consumo_mes.json'),
+                    buscarJson(URL_SUMARIO, 'sumario_execucao.json')
                 ]);
 
                 if (resGrafico && Array.isArray(resGrafico.meses)) {
@@ -1064,46 +1067,53 @@ button-ver-relatorio:hover {
                     renderizarGrafico(rotulos, consumos);
                 }
 
-                if (resSumario) {
-                    const elPrevisao = document.querySelector('.area-previsoes > h1');
-                    if (elPrevisao && resSumario.fatura_estimada_reais != null) {
-                        elPrevisao.textContent = 'R$ ' + Number(resSumario.fatura_estimada_reais).toLocaleString('pt-BR', {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2
-                        });
-                    }
+                // 1. Vazão atual da água
+                const elVazao = document.querySelector('.area-vazao > h1');
+                const vazaoAtual = resSumario?.vazao_atual_m3h ?? resConsumo?.vazao_atual_m3h ?? null;
+                if (elVazao && vazaoAtual != null) {
+                    elVazao.textContent = Number(vazaoAtual).toFixed(2) + ' m³/h';
+                }
 
-                    const elGastoMes = document.querySelector('.metas > h1:nth-of-type(1)');
-                    if (elGastoMes && resSumario.consumo_mes_acumulado_m3 != null) {
-                        const tarifaBase = 59.6;
-                        const gastoTotal = Number(resSumario.consumo_mes_acumulado_m3) * tarifaBase;
-                        elGastoMes.textContent = 'R$ ' + gastoTotal.toLocaleString('pt-BR', {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2
-                        });
-                    }
+                // 2. Previsões (Machine Learning)
+                const elPrevisao = document.querySelector('.area-previsoes > h1');
+                const faturaEstimada = resPrevisao?.valor_estimado_conta ?? resSumario?.fatura_estimada_reais ?? null;
+                if (elPrevisao && faturaEstimada != null) {
+                    elPrevisao.textContent = 'R$ ' + Number(faturaEstimada).toLocaleString('pt-BR', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                }
 
-                    const elConsumoTotal = document.querySelector('.metas > h1:nth-of-type(2)');
-                    if (elConsumoTotal && resSumario.consumo_mes_acumulado_m3 != null) {
-                        elConsumoTotal.textContent = Number(resSumario.consumo_mes_acumulado_m3).toFixed(2) + ' m³';
-                    }
+                // 3. Consumo total de água e Gasto total do mês (Metas)
+                const consumoTotalM3 = resConsumo?.consumo_acumulado_mes_m3 ?? resMeta?.consumo_atual_m3 ?? resSumario?.consumo_mes_acumulado_m3 ?? null;
+                const tarifaBase = Number(resPrevisao?.tarifa_m3 ?? 59.6);
 
-                    const elStatus = document.querySelector('.area-status > h1');
-                    if (elStatus) {
-                        const status = resSumario.meta_status ? String(resSumario.meta_status).toUpperCase() : "NORMAL";
-                        elStatus.textContent = status;
-                        if (status === "ESTOURADA") {
-                            elStatus.style.color = "var(--red-status-color)";
-                        } else if (status === "ALERTA_80") {
-                            elStatus.style.color = "#c99700";
-                        } else {
-                            elStatus.style.color = "var(--secondary-color)";
-                        }
-                    }
-                } else {
-                    const elStatus = document.querySelector('.area-status > h1');
-                    if (elStatus && elStatus.textContent === "Carregando...") {
-                        elStatus.textContent = "Normal";
+                const elGastoMes = document.querySelector('.metas > h1:nth-of-type(1)');
+                if (elGastoMes && consumoTotalM3 != null) {
+                    const gastoTotal = Number(consumoTotalM3) * tarifaBase;
+                    elGastoMes.textContent = 'R$ ' + gastoTotal.toLocaleString('pt-BR', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                }
+
+                const elConsumoTotal = document.querySelector('.metas > h1:nth-of-type(2)');
+                if (elConsumoTotal && consumoTotalM3 != null) {
+                    elConsumoTotal.textContent = Number(consumoTotalM3).toFixed(2) + ' m³';
+                }
+
+                // 4. Status do sistema
+                const elStatus = document.querySelector('.area-status > h1');
+                if (elStatus) {
+                    const statusBruto = resMeta?.situacao ?? resSumario?.meta_status ?? "NORMAL";
+                    const status = String(statusBruto).toUpperCase();
+                    elStatus.textContent = status;
+                    if (status === "ESTOURADA") {
+                        elStatus.style.color = "var(--red-status-color)";
+                    } else if (status === "ALERTA_80") {
+                        elStatus.style.color = "#c99700";
+                    } else {
+                        elStatus.style.color = "var(--secondary-color)";
                     }
                 }
 
