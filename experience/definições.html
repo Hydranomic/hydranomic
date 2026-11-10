@@ -2941,32 +2941,25 @@ button-adicionar-funcionario:hover {
         await sincronizarUsuariosDaAPI();
         aplicarDadosNaTela(true);
     })();
+        // =====================================================================
+    // 5. INTEGRAÇÃO E VARIÁVEL COMPARTILHADA DE METAS (SEM LOCALSTORAGE)
     // =====================================================================
-    // 5. INTEGRAÇÃO E VARIÁVEL COMPARTILHADA DE METAS
-    // =====================================================================
-    const STORAGE_KEY_METAS = "hydranomic_metas_definidas";
     const WEGNOLOGY_FILES_URL = "https://files.wnology.io/6a7df1ea72e58afcb00daed0";
+    try {
+        localStorage.removeItem("hydranomic_metas_definidas");
+    } catch (_) {}
+    window.hydranomicMetasAtivas = { ativas: {}, por_mes: {}, ultimo_mes_atualizado: "" };
+
     function obterMetasSalvas() {
-        try {
-            const bruto = localStorage.getItem(STORAGE_KEY_METAS);
-            const parsed = bruto ? JSON.parse(bruto) : null;
-            if (parsed && typeof parsed === "object") {
-                if (!parsed.ativas || typeof parsed.ativas !== "object") parsed.ativas = {};
-                if (!parsed.por_mes || typeof parsed.por_mes !== "object") parsed.por_mes = {};
-                return parsed;
-            }
-        } catch (e) {
-            console.warn("Erro ao ler metas locais:", e);
+        if (!window.hydranomicMetasAtivas || typeof window.hydranomicMetasAtivas !== "object") {
+            window.hydranomicMetasAtivas = { ativas: {}, por_mes: {}, ultimo_mes_atualizado: "" };
         }
-        return { ativas: {}, por_mes: {}, ultimo_mes_atualizado: "" };
+        if (!window.hydranomicMetasAtivas.ativas) window.hydranomicMetasAtivas.ativas = {};
+        if (!window.hydranomicMetasAtivas.por_mes) window.hydranomicMetasAtivas.por_mes = {};
+        return window.hydranomicMetasAtivas;
     }
     function salvarVariavelMetas(estadoMetas) {
         window.hydranomicMetasAtivas = estadoMetas;
-        try {
-            localStorage.setItem(STORAGE_KEY_METAS, JSON.stringify(estadoMetas));
-        } catch (e) {
-            console.warn("Erro ao gravar metas no localStorage:", e);
-        }
     }
     function registrarMetaNaVariavel(metaObj) {
         if (!metaObj || !metaObj.tipo) return obterMetasSalvas();
@@ -3324,9 +3317,10 @@ button-adicionar-funcionario:hover {
             const textoOriginal = btnCriarMeta.textContent;
             btnCriarMeta.disabled = true;
             btnCriarMeta.textContent = "Gravando...";
+            let resposta = null;
             try {
                 const urlMetas = "http://hydranomic.kadly.com.br/definicoes";
-                const resposta = await fetch(urlMetas, {
+                resposta = await fetch(urlMetas, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -3334,16 +3328,32 @@ button-adicionar-funcionario:hover {
                     credentials: "include",
                     body: JSON.stringify(payload)
                 });
-                if (resposta.status === 401 || resposta.status === 403) {
-                    alert("Você não tem autorização para realizar esta operação.");
-                    return;
-                }
             } catch (erro) {
-                console.warn("Aviso ao sincronizar com endpoint de metas:", erro);
+                console.error("Falha de conexão com a WEGnology:", erro);
+                alert("Erro de conexão ao tentar se comunicar com o servidor WEGnology.");
+                btnCriarMeta.disabled = false;
+                btnCriarMeta.textContent = textoOriginal;
+                return;
             } finally {
                 btnCriarMeta.disabled = false;
                 btnCriarMeta.textContent = textoOriginal;
             }
+
+            if (!resposta) return;
+
+            if (resposta.status === 401 || resposta.status === 403) {
+                alert("Você não tem autorização para realizar esta operação.");
+                return;
+            }
+
+            if (!resposta.ok) {
+                const corpoErro = await resposta.text().catch(() => "");
+                console.error("Erro da WEGnology HTTP " + resposta.status + ":", corpoErro);
+                alert("A WEGnology recusou a requisição com Erro HTTP " + resposta.status + " (Bad Request).\n\nA meta NÃO foi salva no servidor.\nVerifique o nó Validate Payload ou Administradores no Workflow da WEGnology.\n\nDetalhes do servidor: " + (corpoErro || "Nenhuma mensagem retornada"));
+                return;
+            }
+
+            // Apenas se a requisição respondeu 200 OK do servidor da WEGnology:
             const estadoAtualizado = registrarMetaNaVariavel(payload);
             renderizarCardMetasDefinicoes(estadoAtualizado);
             alert("Meta cadastrada com sucesso! Os indicadores da plataforma foram atualizados.");
