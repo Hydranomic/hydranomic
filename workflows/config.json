@@ -1,19 +1,51 @@
 {
   "meta_ativa": {
-    "tipo": "reducao_mensal",
+    "tipo": "consumo-mensal",
+    "unidade": "L",
     "nome": "Meta de Consumo",
     "valor": 18.0,
+    "valor_litros": 18000,
     "periodo": "2026-08",
     "mes_referencia": "2026-08",
     "data_criacao": "2026-11-05",
     "descricao": "",
     "status": "ativa"
   },
+  "metas_ativas_por_tipo": {
+    "consumo-mensal": {
+      "tipo": "consumo-mensal",
+      "unidade": "L",
+      "nome": "Meta de Consumo",
+      "valor": 18.0,
+      "valor_litros": 18000,
+      "periodo": "2026-08",
+      "mes_referencia": "2026-08",
+      "data_criacao": "2026-11-05",
+      "descricao": "",
+      "status": "ativa"
+    }
+  },
   "metas_por_mes": {
     "2026-08": {
-      "nome": "Meta de Agosto",
+      "nome": "Meta de Consumo",
       "valor": 18.0,
-      "periodo": "2026-08"
+      "valor_litros": 18000,
+      "periodo": "2026-08",
+      "tipo": "consumo-mensal",
+      "por_tipo": {
+        "consumo-mensal": {
+          "tipo": "consumo-mensal",
+          "unidade": "L",
+          "nome": "Meta de Consumo",
+          "valor": 18.0,
+          "valor_litros": 18000,
+          "periodo": "2026-08",
+          "mes_referencia": "2026-08",
+          "data_criacao": "2026-11-05",
+          "descricao": "",
+          "status": "ativa"
+        }
+      }
     }
   },
   "solicitacao_exclusao": null,
