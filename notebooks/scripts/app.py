@@ -103,7 +103,7 @@ def executar(estado: Any = None) -> Dict[str, Any]:
         case "2" | "grafico":
             resultado_grafico = processar_dados_grafico()
             resultados["detalhes"]["grafico"] = resultado_grafico
-        case "3" | "metas":
+        case "3" | "metas" | "definir_meta" | "salvar_notificacoes":
             consumo_atual = contexto.get("consumo_atual")
             if consumo_atual is None:
                 grafico = processar_dados_grafico(salvar=False)

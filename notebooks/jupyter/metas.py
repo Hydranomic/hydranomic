@@ -127,6 +127,48 @@ def avaliar_progresso_meta(consumo_atual_m3: float, salvar: bool = True) -> Dict
                     alterou = True
                 if alterou and salvar:
                     salvar_config(config)
+
+            if (ctx.get("acao") == "definir_meta" or ctx.get("nome")) and ctx.get("valor") is not None:
+                periodo_meta = str(ctx.get("periodo") or ctx.get("data") or datetime.now().strftime("%Y-%m")).strip()
+                mes_ref = periodo_meta[:7] if len(periodo_meta) >= 7 else datetime.now().strftime("%Y-%m")
+                tipo_meta = str(ctx.get("tipo") or "consumo-mensal").strip()
+                valor_meta = float(ctx.get("valor"))
+                valor_litros = float(ctx.get("valor_litros")) if ctx.get("valor_litros") is not None else (valor_meta * 1000.0 if tipo_meta in ("consumo-mensal", "reducao_mensal") else None)
+                nova_meta_obj = {
+                    "tipo": tipo_meta,
+                    "unidade": ctx.get("unidade") or ("L" if tipo_meta in ("consumo-mensal", "reducao_mensal") else "R$"),
+                    "nome": ctx.get("nome", "Meta de Consumo"),
+                    "valor": valor_meta,
+                    "valor_litros": valor_litros,
+                    "periodo": periodo_meta,
+                    "mes_referencia": mes_ref,
+                    "data_criacao": datetime.now().strftime("%Y-%m-%d"),
+                    "descricao": ctx.get("descricao", ""),
+                    "status": "ativa"
+                }
+                if not isinstance(config.get("metas_ativas_por_tipo"), dict):
+                    config["metas_ativas_por_tipo"] = {}
+                config["metas_ativas_por_tipo"][tipo_meta] = nova_meta_obj
+                if tipo_meta in ("consumo-mensal", "reducao_mensal") or not config.get("meta_ativa"):
+                    config["meta_ativa"] = nova_meta_obj
+                if not isinstance(config.get("metas_por_mes"), dict):
+                    config["metas_por_mes"] = {}
+                reg_mes = config["metas_por_mes"].get(mes_ref)
+                if not isinstance(reg_mes, dict):
+                    reg_mes = {}
+                if not isinstance(reg_mes.get("por_tipo"), dict):
+                    reg_mes["por_tipo"] = {}
+                reg_mes["por_tipo"][tipo_meta] = nova_meta_obj
+                if tipo_meta in ("consumo-mensal", "reducao_mensal") or "valor" not in reg_mes:
+                    reg_mes["nome"] = nova_meta_obj["nome"]
+                    reg_mes["valor"] = nova_meta_obj["valor"]
+                    reg_mes["valor_litros"] = valor_litros
+                    reg_mes["periodo"] = periodo_meta
+                    reg_mes["tipo"] = tipo_meta
+                config["metas_por_mes"][mes_ref] = reg_mes
+                config["solicitacao_exclusao"] = None
+                if salvar:
+                    salvar_config(config)
     except Exception:
         pass
 
