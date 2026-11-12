@@ -1,34 +1,241 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login | Hydronomic</title>
-    <link rel="stylesheet" href="css/login.css" />
-    <link rel="stylesheet" href="css/responsive.css" />
-  </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Login - Hydranomic</title>
+    
+    <!-- Ícone via URL direta com proporção 1:1 -->
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Hydranomic/hydranomic/main/experience/assets/logo_hydranomic.png.png">
+    <script>
+        (function () {
+            var img = new Image();
+            img.crossOrigin = "anonymous";
+            img.onload = function () {
+                var c = document.createElement("canvas");
+                c.width = 64; c.height = 64;
+                var ctx = c.getContext("2d");
+                ctx.drawImage(img, 178, 62, 256, 256, 0, 0, 64, 64);
+                var l = document.querySelector("link[rel*='icon']");
+                if (l) l.href = c.toDataURL("image/png");
+            };
+            img.src = "https://raw.githubusercontent.com/Hydranomic/hydranomic/main/experience/assets/logo_hydranomic.png.png";
+        })();
+    </script>
 
-  <body>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+:root {
+    --bg-color: #E6EFF8;
+    --secondary-color: #205988;
+    --red-status-color: #D96161;
+    --yellow-status-color: #FFE57C;
+    --green-status-color: #43BC8B;
+    --buton-color: #CFE1F4;
+    --font-family: "Inter", sans-serif;
+    --font-size-heading1: 36px;
+    --font-size-heading2: 32px;
+    --font-size-heading3: 24px;
+    --font-size-heading4: 20px;
+    --font-size-heading5: 16px;
+    --font-size-heading6: 14px;
+    --font-size-heading7: 12px;
+    --weight-extra-light: 200;
+    --weight-light: 300;
+    --weight-regular: 400;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+    --weight-extrabold: 800;
+    --italic: italic;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { min-width: 100%; min-height: 100%; }
+body { background: var(--bg-color); color: #000; font-family: var(--font-family); -webkit-font-smoothing: antialiased; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+
+.pagina {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+}
+
+.cartao-autenticacao {
+    width: 850px;
+    min-height: 432px;
+    display: grid;
+    grid-template-columns: 290px minmax(0, 1fr);
+    overflow: hidden;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22) !important;
+}
+
+.painel-boas-vindas {
+    position: relative;
+    min-height: 432px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 24px;
+    background: var(--secondary-color) !important;
+    color: #ffffff !important;
+    border-radius: 20px 0 0 20px;
+    text-align: center;
+}
+
+.logo-marca {
+    width: auto;
+    max-width: 140px;
+    height: auto;
+    max-height: 100px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+.texto-boas-vindas { width: 220px; margin-top: 24px; align-self: center; }
+.texto-boas-vindas h1 {
+    margin: 0; color: #fff; font-size: var(--font-size-heading4);
+    font-weight: var(--weight-bold); font-style: var(--italic);
+    line-height: 1.25; letter-spacing: -0.3px;
+}
+.texto-boas-vindas p {
+    margin: 10px 0 0; color: #fff; font-size: var(--font-size-heading6);
+    font-weight: var(--weight-light); line-height: 1.4; opacity: 0.92;
+}
+
+.painel-formulario {
+    min-height: 432px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    border-radius: 0 20px 20px 0;
+}
+
+.cabecalho-formulario { margin-top: 45px; text-align: center; }
+.cabecalho-formulario h2 { margin: 0; color: #000; font-size: var(--font-size-heading3); font-weight: var(--weight-semibold); line-height: 1.2; }
+.cabecalho-formulario p { margin: 7px 0 0; color: #000; font-size: var(--font-size-heading4); font-weight: var(--weight-regular); line-height: 1.2; }
+
+.alerta-erro {
+    width: min(330px, calc(100% - 50px));
+    margin-top: 15px; margin-bottom: -10px; padding: 10px 14px;
+    background-color: #fde8e8; border: 1px solid #f8b4b4;
+    border-radius: 10px; color: #c81e1e; font-size: 13px;
+    font-weight: var(--weight-semibold); text-align: center; line-height: 1.3;
+}
+
+.formulario-cadastro {
+    width: min(330px, calc(100% - 50px));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.formulario-cadastro input {
+    width: 100%; height: 55px; padding: 0 23px;
+    border: 0; border-radius: 50px; outline: none;
+    background: #ebebeb; color: #000;
+    font-size: var(--font-size-heading5); font-weight: var(--weight-regular);
+    transition: background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.formulario-cadastro .campo-senha { margin-top: 28px; background: #ececec; }
+.formulario-cadastro input::placeholder { color: #919090; opacity: 1; }
+.formulario-cadastro input:focus { background: #e3e3e3; box-shadow: 0 0 0 3px rgba(32, 89, 136, 0.28); }
+
+.botao-principal-cadastro {
+    width: 160px; height: 44px; margin-top: 30px;
+    display: flex; align-items: center; justify-content: center;
+    border: 0; border-radius: 50px;
+    background: var(--secondary-color) !important; color: #ffffff !important;
+    font-size: var(--font-size-heading6); font-weight: var(--weight-bold);
+    cursor: pointer; transition: transform 160ms ease, background-color 160ms ease;
+}
+
+.botao-principal-cadastro:hover { transform: translateY(-1px); }
+.botao-principal-cadastro:active { transform: scale(0.97); }
+
+.esqueceu-sua-senha {
+    margin-top: 14px; background: none; border: none;
+    color: var(--secondary-color); font-size: var(--font-size-heading6);
+    font-weight: var(--weight-extrabold); text-decoration: none; cursor: pointer;
+}
+.esqueceu-sua-senha:hover { text-decoration: underline; }
+
+.oculto {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+.imagem-fundo {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background-image: url("https://raw.githubusercontent.com/Hydranomic/hydranomic/main/experience/assets/fundo.jpeg") !important;
+    background-size: 100% 100%; background-position: center; background-repeat: no-repeat; z-index: -1;
+}
+
+.modal-redefinir-senha {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.45); align-items: center; justify-content: center; padding: 16px;
+}
+.modal-redefinir-conteudo {
+    position: relative; width: 420px; max-width: 100%;
+    background: #ffffff; border-radius: 18px; padding: 34px 32px 28px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25); text-align: center;
+}
+.btn-fechar-redefinir {
+    position: absolute; top: 14px; right: 18px; border: none;
+    background: transparent; font-size: 22px; color: #555; cursor: pointer;
+}
+.modal-redefinir-conteudo h3 { margin: 0; color: var(--secondary-color); font-size: 20px; font-weight: 700; }
+.modal-redefinir-conteudo p { margin: 6px 0 20px; color: #666; font-size: 13px; }
+.modal-redefinir-conteudo input {
+    width: 100%; height: 46px; padding: 0 18px; margin-bottom: 14px;
+    border: 1px solid #d9d9d9; border-radius: 50px; background: #f5f5f5; font-size: 14px; outline: none;
+}
+.modal-redefinir-conteudo input:focus { background: #fff; border-color: var(--secondary-color); box-shadow: 0 0 0 3px rgba(32, 89, 136, 0.18); }
+.mensagem-status-senha { min-height: 18px; margin: 4px 0 12px; font-size: 12px; font-weight: 600; }
+.btn-salvar-nova-senha {
+    width: 100%; height: 44px; border: none; border-radius: 50px;
+    background: var(--secondary-color); color: #fff; font-size: 14px; font-weight: 700; cursor: pointer;
+}
+
+@media (max-width: 767px) {
+    .pagina { min-height: 100vh; padding: 20px 16px; }
+    .cartao-autenticacao { width: 100%; max-width: 326px; min-height: 0; display: flex; flex-direction: column; }
+    .painel-formulario { order: 1; width: 100%; min-height: 367px; padding: 0 0 28px; border-radius: 20px; }
+    .cabecalho-formulario { margin-top: 35px; }
+    .formulario-cadastro { width: 100%; margin-top: 20px; padding: 0 20px; }
+    .formulario-cadastro input { max-width: 250px; height: 52px; font-size: 14px; }
+    .botao-principal-cadastro { width: 133px; height: 45px; }
+    .painel-boas-vindas { display: none; }
+}
+    </style>
+</head>
+<body>
     <section class="imagem-fundo"></section>
     <main class="pagina">
-      <section class="cartao-autenticacao" aria-label="Cadastro Hidronomic">
+      <section class="cartao-autenticacao" aria-label="Acesso à conta">
 
-        <aside class="painel-boas-vindas" aria-label="Acesso à conta">
-          <img
-            class="logo-marca"
-            src="assets/logo_hydranomic.png.png"
-            alt="Logo Hidronomic"
-            data-node-id="18-23"
-          />
-
+        <aside class="painel-boas-vindas" aria-label="Boas-vindas">
+          <img class="logo-marca" src="https://raw.githubusercontent.com/Hydranomic/hydranomic/main/experience/assets/logo_hydranomic.png.png" alt="Logo Hydranomic" />
           <div class="texto-boas-vindas">
-            <h1>Não tem<br />conta?</h1>
-            <p>Crie uma agora mesmo.</p>
+            <h1>Bem-vindo à<br />Hydranomic</h1>
+            <p>Solicite suas credenciais ao administrador do sistema para acessar.</p>
           </div>
-
-          <a class="botao-secundario-cadastro" href="cadastro.html">
-          CADASTRAR
-          </a>
         </aside>
 
         <section class="painel-formulario" aria-labelledby="titulo-criar-conta">
@@ -37,42 +244,133 @@
             <p>Preencha seus dados</p>
           </header>
 
-          <form class="formulario-cadastro" action="#" method="post">
+          {{#if pageData.loginFailure}}
+            <div class="alerta-erro">E-mail ou senha incorretos.</div>
+          {{/if}}
 
-            <label class="oculto" for="usuario">Usuário</label>
-            <input
-            class="campo-usuario"
-              id="usuario"
-              name="usuario"
-              type="text"
-              placeholder="Usuário"
-              autocomplete="username"
-              required
-            />
+          <form class="formulario-cadastro" action="/login" method="post" id="form-login">
+            <label class="oculto" for="email">E-mail</label>
+            <input class="campo-usuario" id="email" name="email" type="email" value="{{ pageData.email }}" placeholder="E-mail" autocomplete="email" required autofocus />
 
-            <label class="oculto" for="senha">Senha</label>
-            <input
-            class="campo-senha"
-              id="senha"
-              name="senha"
-              type="password"
-              placeholder="Senha"
-              autocomplete="new-password"
-              required
-            />
+            <label class="oculto" for="password">Senha</label>
+            <input class="campo-senha" id="password" name="password" type="password" placeholder="Senha" autocomplete="current-password" required />
 
-            <a href="esqueceu_senha.html" class="esqueceu-sua-senha">
+            <button type="button" id="btn-abrir-redefinir-senha" class="esqueceu-sua-senha">
               Esqueceu sua senha?
-            </a>
-
-            <button class="botao-principal-cadastro" type="submit">
-              ENTRAR
             </button>
 
+            <button id="btn-entrar" class="botao-principal-cadastro" type="submit">
+              ENTRAR
+            </button>
           </form>
         </section>
 
       </section>
     </main>
-  </body>
+
+    <!-- MODAL DE REDEFINIÇÃO DE SENHA -->
+    <section class="modal-redefinir-senha" id="modal-redefinir-senha">
+        <div class="modal-redefinir-conteudo">
+            <button type="button" class="btn-fechar-redefinir" id="btn-fechar-redefinir">×</button>
+            <h3>Redefinir Senha</h3>
+            <p>Informe seu e-mail cadastrado e escolha uma nova senha</p>
+            <input type="email" id="redefinir-email" placeholder="Digite seu e-mail" required />
+            <input type="password" id="redefinir-nova-senha" placeholder="Nova senha (mín. 8 caracteres)" required />
+            <input type="password" id="redefinir-confirmar-senha" placeholder="Confirme a nova senha" required />
+            <div class="mensagem-status-senha" id="mensagem-status-senha"></div>
+            <button type="button" class="btn-salvar-nova-senha" id="btn-salvar-nova-senha">Salvar nova senha</button>
+        </div>
+    </section>
+
+    <script>
+        const formLogin = document.getElementById("form-login");
+        const btnEntrar = document.getElementById("btn-entrar");
+
+        if (formLogin) {
+            formLogin.addEventListener("submit", function () {
+                if (btnEntrar) {
+                    btnEntrar.disabled = true;
+                    btnEntrar.textContent = "ENTRANDO...";
+                }
+            });
+        }
+
+        // REDEFINIR SENHA
+        const ENDPOINT_REDEFINIR_SENHA = "http://hydranomic.kadly.com.br/api/redefinir-senha";
+        const modalRedefinir = document.getElementById("modal-redefinir-senha");
+        const btnAbrirRedefinir = document.getElementById("btn-abrir-redefinir-senha");
+        const btnFecharRedefinir = document.getElementById("btn-fechar-redefinir");
+        const btnSalvarSenha = document.getElementById("btn-salvar-nova-senha");
+        const statusSenha = document.getElementById("mensagem-status-senha");
+
+        if (btnAbrirRedefinir && modalRedefinir) {
+            btnAbrirRedefinir.addEventListener("click", function () {
+                const emailLogin = document.getElementById("email").value.trim();
+                if (emailLogin) document.getElementById("redefinir-email").value = emailLogin;
+                statusSenha.textContent = "";
+                modalRedefinir.style.display = "flex";
+            });
+        }
+
+        if (btnFecharRedefinir && modalRedefinir) {
+            btnFecharRedefinir.addEventListener("click", () => modalRedefinir.style.display = "none");
+        }
+
+        if (btnSalvarSenha) {
+            btnSalvarSenha.addEventListener("click", async function () {
+                const email = document.getElementById("redefinir-email").value.trim().toLowerCase();
+                const novaSenha = document.getElementById("redefinir-nova-senha").value.trim();
+                const confirmarSenha = document.getElementById("redefinir-confirmar-senha").value.trim();
+
+                if (!email || !novaSenha || !confirmarSenha) {
+                    statusSenha.style.color = "#c81e1e";
+                    statusSenha.textContent = "Preencha todos os campos.";
+                    return;
+                }
+                if (novaSenha.length < 8) {
+                    statusSenha.style.color = "#c81e1e";
+                    statusSenha.textContent = "A nova senha deve ter no mínimo 8 caracteres.";
+                    return;
+                }
+                if (novaSenha !== confirmarSenha) {
+                    statusSenha.style.color = "#c81e1e";
+                    statusSenha.textContent = "As senhas não coincidem.";
+                    return;
+                }
+
+                btnSalvarSenha.disabled = true;
+                statusSenha.style.color = "#205988";
+                statusSenha.textContent = "Atualizando senha...";
+
+                try {
+                    const resposta = await fetch(ENDPOINT_REDEFINIR_SENHA, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email: email, password: novaSenha })
+                    });
+
+                    if (resposta.ok) {
+                        statusSenha.style.color = "#2e7d32";
+                        statusSenha.textContent = "Senha alterada com sucesso! Você já pode entrar.";
+                        document.getElementById("email").value = email;
+                        setTimeout(() => {
+                            modalRedefinir.style.display = "none";
+                            document.getElementById("redefinir-nova-senha").value = "";
+                            document.getElementById("redefinir-confirmar-senha").value = "";
+                            statusSenha.textContent = "";
+                        }, 1500);
+                    } else {
+                        statusSenha.style.color = "#c81e1e";
+                        statusSenha.textContent = "E-mail não encontrado ou erro ao atualizar.";
+                    }
+                } catch (erro) {
+                    statusSenha.style.color = "#c81e1e";
+                    statusSenha.textContent = "Erro de conexão ao tentar redefinir a senha.";
+                } finally {
+                    btnSalvarSenha.disabled = false;
+                }
+            });
+        }
+    </script>
+</body>
 </html>
