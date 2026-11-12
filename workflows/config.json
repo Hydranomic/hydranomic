@@ -52,5 +52,15 @@
   "notificacoes": {
     "notificacao_prazos": true,
     "alerta_status": true
+  },
+  "notificacoes_usuarios": {
+    "nicolle": {
+      "notificacao_prazos": true,
+      "alerta_status": true
+    },
+    "gabriela": {
+      "notificacao_prazos": false,
+      "alerta_status": false
+    }
   }
 }

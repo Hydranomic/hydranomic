@@ -125,6 +125,27 @@ def avaliar_progresso_meta(consumo_atual_m3: float, salvar: bool = True) -> Dict
                 if "alerta_status" in ctx:
                     config["notificacoes"]["alerta_status"] = bool(ctx["alerta_status"])
                     alterou = True
+                if not isinstance(config.get("notificacoes_usuarios"), dict):
+                    config["notificacoes_usuarios"] = {}
+                pref_usr = {
+                    "notificacao_prazos": bool(config["notificacoes"]["notificacao_prazos"]),
+                    "alerta_status": bool(config["notificacoes"]["alerta_status"])
+                }
+                chaves_usr = []
+                for campo_u in ("usuario", "nome_usuario", "email", "user_id"):
+                    val_u = str(ctx.get(campo_u) or "").strip().lower()
+                    if val_u:
+                        chaves_usr.append(val_u)
+                        if "@" in val_u:
+                            chaves_usr.append(val_u.split("@")[0].strip())
+                if isinstance(ctx.get("chaves_usuario"), list):
+                    for cu in ctx["chaves_usuario"]:
+                        if cu:
+                            chaves_usr.append(str(cu).strip().lower())
+                for cu in set(chaves_usr):
+                    if cu:
+                        config["notificacoes_usuarios"][cu] = dict(pref_usr)
+                        alterou = True
                 if alterou and salvar:
                     salvar_config(config)
 
@@ -247,6 +268,7 @@ def avaliar_progresso_meta(consumo_atual_m3: float, salvar: bool = True) -> Dict
 
     relatorio["alertas_ativos"] = alertas_ativos
     relatorio["notificacoes"] = conf_notif
+    relatorio["notificacoes_usuarios"] = config.get("notificacoes_usuarios", {})
     relatorio["dias_restantes_mes"] = dias_restantes
 
     if salvar:

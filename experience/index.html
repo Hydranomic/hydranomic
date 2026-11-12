@@ -7,7 +7,6 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>Página Inicial - Hydranomic</title>
-
     <!-- Ícone via URL direta com corte proporcional 1:1 igual à tela de login -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Hydranomic/hydranomic/main/experience/assets/logo_hydranomic.png.png">
     <script>
@@ -25,438 +24,179 @@
             img.src = "https://raw.githubusercontent.com/Hydranomic/hydranomic/main/experience/assets/logo_hydranomic.png.png";
         })();
     </script>
-
     <!-- BLOQUEIO DE ACESSO SE NÃO ESTIVER LOGADO -->
     {{#unless experience.user}}
     <script>
         window.location.replace("/login");
     </script>
     {{/unless}}
-
     <!-- Ícones Bootstrap via CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
     <!-- Google Fonts Inter & REM -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=REM:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <style>
-:root {
-    --bg-color: #E6EFF8;
-    --secondary-color: #205988;
-    --red-status-color: #D96161;
-    --yellow-status-color: #E2A03F;
-    --green-status-color: #43BC8B;
-    --buton-color: #CFE1F4;
-    --font-family: "Inter", sans-serif;
-    --font-size-heading1: 36px;
-    --font-size-heading2: 32px;
-    --font-size-heading3: 24px;
-    --font-size-heading4: 20px;
-    --font-size-heading5: 16px;
-    --font-size-heading6: 14px;
-    --font-size-heading7: 12px;
-    --weight-extra-light: 200;
-    --weight-light: 300;
-    --weight-regular: 400;
-    --weight-semibold: 600;
-    --weight-bold: 700;
-    --weight-extrabold: 800;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html, body {
-  background-color: var(--bg-color, #E6EFF8) !important;
-  overflow-x: hidden;
-}
-body, main, button, input, select {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-}
-body { min-height: 100vh; color: #555; -webkit-font-smoothing: antialiased; }
-
-/* NAVBAR */
-.navbar {
-  position: relative; z-index: 10; width: 100%; height: 84px;
-  padding: 0 4.3%; display: flex; align-items: center; justify-content: space-between;
-  background: #205988; box-shadow: 0 4px 19px rgba(0, 0, 0, 0.28);
-}
-.logo-area { display: flex; align-items: center; gap: 15px; }
-.menu {
-  display: flex; align-items: center; justify-content: center;
-  width: 42px; height: 42px; border: none; background: transparent;
-  color: #ffffff; font-size: 32px; cursor: pointer; transition: opacity 0.2s ease;
-}
-.menu:hover { opacity: 0.75; }
-.logo-img { width: 42px; height: 42px; object-fit: contain; transform: scale(2.2); transform-origin: center; }
-.logo { color: #ffffff; text-decoration: none; font-size: 21px; letter-spacing: 4px; white-space: nowrap; }
-.logo .hydra { font-weight: 400; }
-.logo .nomic { font-weight: 700; }
-
-.perfil { position: relative; }
-.perfil-botao {
-  display: flex; align-items: center; gap: 10px; padding: 5px 0;
-  border: none; color: #ffffff; background: transparent; text-align: left; cursor: pointer;
-}
-.avatar { display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0; }
-.avatar-nav { width: 40px; height: 40px; background: transparent; color: #ffffff; font-size: 33px; }
-.avatar-modal { width: 58px; height: 58px; background: transparent; color: #205988; font-size: 51px; }
-
-.usuario { display: flex; flex-direction: column; gap: 2px; }
-.usuario strong { font-size: 15px; font-weight: 700; }
-.usuario small { font-size: 12px; opacity: 0.85; }
-.seta { margin-left: 8px; font-size: 15px; transition: transform 0.2s ease; }
-.perfil-botao[aria-expanded="true"] .seta { transform: rotate(180deg); }
-
-.perfil-card {
-  position: absolute; z-index: 20; top: 58px; right: 0; width: 320px;
-  overflow: hidden; background: #ffffff; color: #202b33; border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-}
-.perfil-card[hidden] { display: none; }
-.perfil-card::before {
-  content: ""; position: absolute; top: -10px; right: 28px; width: 20px; height: 20px;
-  background: #ffffff; transform: rotate(45deg);
-}
-.perfil-topo { position: relative; z-index: 1; display: flex; align-items: center; gap: 13px; padding: 22px 20px; background: #ffffff; }
-.perfil-topo h2 { margin-bottom: 3px; font-size: 19px; }
-.perfil-topo p { color: #6d7780; font-size: 13px; }
-
-.informacoes { padding: 3px 20px 10px; }
-.informacoes p { display: grid; grid-template-columns: 25px 1fr; column-gap: 8px; padding: 11px 0; }
-.informacoes p > span { grid-row: span 2; color: #205988; font-size: 17px; }
-.informacoes b { color: #222b31; font-size: 13px; font-weight: 700; }
-.informacoes small { margin-top: 3px; color: #5f6870; font-size: 13px; overflow-wrap: anywhere; }
-
-.acoes { display: flex; flex-direction: column; padding: 1px 20px 16px; }
-.linha-acoes { width: 98.5%; margin: 0 auto 8px; border: none; border-top: 1px solid #222222; }
-.acoes button {
-  display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px 7px;
-  border: none; background: transparent; color: #205988; font-size: 14px; text-align: left; cursor: pointer;
-}
-.acoes button:hover { background: #f1f6fa; }
-.acoes .sair { border-top: 1px solid #222222; color: #bd3838; }
-.acoes .sair:hover { background: #fff1f1; }
-.acoes button i { font-size: 17px; }
-
-/* SIDEBAR */
-.sidebar-backdrop { position: fixed; z-index: 50; inset: 0; width: 100%; height: 100%; border: none; background: rgba(0, 0, 0, 0.4); }
-.sidebar-backdrop[hidden], .sidebar[hidden] { display: none; }
-.sidebar {
-  position: fixed; z-index: 60; top: 0; left: 0; width: 341px; max-width: 85vw; height: 100vh;
-  min-height: 600px; overflow-y: auto; background: #205988; border-radius: 0 10px 10px 0;
-  box-shadow: 0 4px 19.5px 11px rgba(0, 0, 0, 0.26); animation: abrir-sidebar 180ms ease-out;
-}
-.sidebar-topo { position: relative; height: 103px; }
-.sidebar-logo { position: absolute; top: 19px; left: 7px; width: 99px; height: 66px; object-fit: contain; }
-.sidebar-fechar {
-  position: absolute; top: 39px; right: 45px; display: flex; align-items: center; justify-content: center;
-  width: 25px; height: 25px; border: none; background: transparent; color: #ffffff; font-size: 21px; cursor: pointer;
-}
-.sidebar-fechar:hover { opacity: 0.75; }
-
-.sidebar-menu { display: flex; flex-direction: column; padding: 47px 30px 0; }
-.sidebar-menu a { color: #ffffff; text-decoration: none; font-family: var(--font-family); font-size: 18px; font-weight: 700; line-height: 22px; }
-.sidebar-menu a + a { margin-top: 55px; }
-.sidebar-menu a:hover { opacity: 0.75; }
-
-.sidebar-sair {
-  position: absolute; bottom: 40px; left: 80px; width: 181px; height: 47px;
-  border: none; border-radius: 100px; background: #ffffff; color: #205988;
-  font-size: 22px; font-weight: 600; cursor: pointer; box-shadow: 0 0 23.5px 4px rgba(0, 0, 0, 0.4);
-}
-.sidebar-sair:hover { transform: translateY(-2px); }
-
-@keyframes abrir-sidebar { from { opacity: 0; transform: translateX(-15px); } to { opacity: 1; transform: translateX(0); } }
-
-/* DASHBOARD MAIN LAYOUT */
-main {
-  position: relative; 
-  z-index: 1; 
-  display: grid; 
-  min-height: calc(100vh - 84px);
-  padding: 24px 4.3% 30px; 
-  grid-template-columns: 28% 1fr;
-  grid-template-rows: auto 135px 135px 152px;
-  grid-template-areas: 
-    "cabecalho cabecalho" 
-    "vazao consumo" 
-    "status consumo" 
-    "previsoes metas";
-  column-gap: 14px; 
-  row-gap: 14px;
-  box-sizing: border-box;
-  align-content: start;
-}
-
-.cabecalho-pagina {
-  grid-area: cabecalho;
-  margin-bottom: 20px;
-}
-.cabecalho-pagina h1 {
-  margin: 0;
-  color: var(--secondary-color);
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1.2;
-}
-.cabecalho-pagina h3 {
-  margin: 4px 0 0 0;
-  color: #5e7a92;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.25;
-}
-
-.area-vazao, .area-status, .area-consumo-agua, .area-previsoes, .metas {
-  min-width: 0; background-color: #FFFFFF; border: 1px solid #D0D0D0;
-  border-radius: 10px; box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
-}
-
-/* VAZÃO */
-.area-vazao {
-  grid-area: vazao;
-  padding: 13px 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.area-vazao > div:first-child i { color: var(--secondary-color); margin-right: 7px; font-size: var(--font-size-heading5); }
-.area-vazao > div:first-child h3 { display: inline; margin: 0; color: var(--secondary-color); font-size: var(--font-size-heading6); font-weight: var(--weight-bold); }
-.area-vazao h1 { margin: 8px 0 0; text-align: center; color: var(--secondary-color); font-size: 20px; font-weight: var(--weight-bold); }
-
-button-ver-detalhes {
-  display: block; width: max-content; margin: 0 auto; padding: 6px 15px;
-  background-color: var(--buton-color); border: none; border-radius: 8px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15); color: var(--secondary-color);
-  font-size: var(--font-size-heading7); font-weight: var(--weight-semibold); cursor: pointer;
-  text-align: center;
-}
-button-ver-detalhes:hover { opacity: 0.9; }
-
-/* STATUS DO SISTEMA */
-.area-status {
-  grid-area: status;
-  padding: 13px 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.status-topo {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  color: var(--secondary-color);
-}
-.status-topo i { font-size: var(--font-size-heading6); }
-.status-topo h3 { font-size: var(--font-size-heading6); font-weight: var(--weight-bold); margin: 0; color: var(--secondary-color); }
-
-.status-corpo {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin: 4px 0 0 2px;
-}
-.status-icone {
-  font-size: 19px;
-  color: var(--green-status-color);
-  flex-shrink: 0;
-}
-.status-textos h2 {
-  font-size: 14px;
-  font-weight: 700;
-  color: #2b3a4a;
-  margin: 0;
-  line-height: 1.2;
-}
-.status-textos p {
-  margin: 2px 0 0 0;
-  color: #7b8a97;
-  font-size: 11px;
-  line-height: 1.2;
-}
-
-/* CONSUMO DE ÁGUA */
-.area-consumo-agua {
-  grid-area: consumo;
-  padding: 18px 25px;
-  display: flex;
-  flex-direction: column;
-}
-.titulo-consumo { display: flex; align-items: center; gap: 7px; color: var(--secondary-color); }
-.titulo-consumo i { color: var(--secondary-color); font-size: var(--font-size-heading5); }
-.titulo-consumo h3 { color: var(--secondary-color); font-size: var(--font-size-heading6); font-weight: var(--weight-bold); margin: 0; }
-.grafico-consumo { position: relative; width: 100%; flex: 1; min-height: 180px; margin-top: 5px; }
-
-/* PREVISÕES */
-.area-previsoes {
-  grid-area: previsoes;
-  padding: 16px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.previsoes-header {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  color: var(--secondary-color);
-}
-.previsoes-header i { font-size: var(--font-size-heading5); color: var(--secondary-color); }
-.previsoes-header h3 { font-size: var(--font-size-heading6); font-weight: var(--weight-bold); margin: 0; color: var(--secondary-color); }
-
-.previsoes-corpo h4 {
-  margin: 10px 0 4px 0;
-  color: #666;
-  font-size: 13px;
-  font-weight: 400;
-}
-.previsoes-corpo h1 {
-  margin: 0;
-  color: var(--secondary-color);
-  font-size: 20px;
-  font-weight: var(--weight-bold);
-}
-
-/* METAS */
-.metas {
-  grid-area: metas;
-  padding: 16px 22px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.metas-header {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  color: var(--secondary-color);
-}
-.metas-header i { font-size: var(--font-size-heading5); }
-.metas-header h3 { font-size: var(--font-size-heading6); font-weight: var(--weight-bold); margin: 0; }
-
-.metas-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 28px;
-  margin: 8px 0 10px;
-}
-
-.col-meta {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 20px;
-}
-.item-meta {
-  display: flex;
-  flex-direction: column;
-}
-.item-meta span.rotulo {
-  display: block;
-  font-size: 12px;
-  color: #666;
-  font-weight: 500;
-  margin-bottom: 2px;
-  white-space: nowrap;
-}
-.item-meta strong.valor {
-  display: block;
-  font-size: 18px;
-  color: var(--secondary-color);
-  font-weight: 700;
-  white-space: nowrap;
-}
-.item-meta strong.valor-meta {
-  display: block;
-  color: #557999;
-  font-size: 16px;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-button-ver-relatorio {
-  display: block;
-  margin: 0 auto;
-  width: max-content;
-  padding: 6px 20px;
-  background-color: var(--buton-color);
-  border-radius: 8px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-  color: var(--secondary-color);
-  font-size: var(--font-size-heading7);
-  font-weight: var(--weight-semibold);
-  cursor: pointer;
-  text-align: center;
-}
-button-ver-relatorio:hover { opacity: 0.9; }
-
-/* RESPONSIVIDADE */
-@media (max-width: 1080px) {
-  main {
-    grid-template-columns: 32% 1fr;
-    grid-template-rows: auto auto auto auto;
-    padding: 20px 3%;
-  }
-  .metas-grid {
-    grid-template-columns: 1fr;
-    row-gap: 12px;
-  }
-}
-
-@media (max-width: 850px) {
-  main {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    grid-template-areas: 
-      "cabecalho" 
-      "vazao" 
-      "status" 
-      "consumo" 
-      "previsoes" 
-      "metas";
-    padding: 18px 16px;
-    gap: 14px;
-  }
-  .grafico-consumo {
-    height: 200px;
-    min-height: 200px;
-  }
-}
-
-@media (max-width: 576px) {
-  .navbar { height: 70px; padding: 0 16px; }
-  .usuario { display: none; }
-  .logo { font-size: 18px; letter-spacing: 2px; }
-  .logo-img { width: 36px; height: 36px; transform: scale(1.8); }
-
-  .perfil-card {
-    position: fixed;
-    top: 75px;
-    left: 12px;
-    right: 12px;
-    width: auto;
-  }
-  .perfil-card::before { display: none; }
-
-  main {
-    padding: 16px 12px 25px;
-    gap: 12px;
-  }
-
-  .col-meta {
-    gap: 14px;
-    justify-content: space-between;
-  }
-  .item-meta strong.valor { font-size: 16px; }
-  .item-meta strong.valor-meta { font-size: 14px; }
-}
+    :root { --bg-color: #E6EFF8; --secondary-color: #205988; --red-status-color: #D96161; --yellow-status-color: #E2A03F; --green-status-color: #43BC8B; --buton-color: #CFE1F4; --font-family: "Inter", sans-serif; --font-size-heading1: 36px; --font-size-heading2: 32px; --font-size-heading3: 24px; --font-size-heading4: 20px; --font-size-heading5: 16px; --font-size-heading6: 14px; --font-size-heading7: 12px; --weight-extra-light: 200; --weight-light: 300; --weight-regular: 400; --weight-semibold: 600; --weight-bold: 700; --weight-extrabold: 800; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { background-color: var(--bg-color, #E6EFF8) !important; overflow-x: hidden; }
+    body, main, button, input, select { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important; }
+    body { min-height: 100vh; color: #555; -webkit-font-smoothing: antialiased; }
+    /* NAVBAR */ .navbar { position: relative; z-index: 10; width: 100%; height: 84px; padding: 0 4.3%; display: flex; align-items: center; justify-content: space-between; background: #205988; box-shadow: 0 4px 19px rgba(0, 0, 0, 0.28); }
+    .logo-area { display: flex; align-items: center; gap: 15px; }
+    .menu { display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border: none; background: transparent; color: #ffffff; font-size: 32px; cursor: pointer; transition: opacity 0.2s ease; }
+    .menu:hover { opacity: 0.75; }
+    .logo-img { width: 42px; height: 42px; object-fit: contain; transform: scale(2.2); transform-origin: center; }
+    .logo { color: #ffffff; text-decoration: none; font-size: 21px; letter-spacing: 4px; white-space: nowrap; }
+    .logo .hydra { font-weight: 400; }
+    .logo .nomic { font-weight: 700; }
+    .perfil { position: relative; display: flex; align-items: center; gap: 18px; }
+    /* NOTIFICAÇÕES (SINO NA NAVBAR E MODAL) */ .notificacao-container { position: relative; display: flex; align-items: center; }
+    .notificacao-botao { position: relative; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: none; border-radius: 50%; background: transparent; color: #ffffff; font-size: 22px; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }
+    .notificacao-botao:hover { background: rgba(255, 255, 255, 0.14); transform: translateY(-1px); }
+    .notificacao-badge { position: absolute; top: 4px; right: 4px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: #D96161; color: #ffffff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 2px solid #205988; }
+    .notificacao-badge[hidden] { display: none !important; }
+    .notificacao-card { position: absolute; z-index: 30; top: 54px; right: -8px; width: 340px; max-height: 420px; display: flex; flex-direction: column; overflow: hidden; background: #ffffff; color: #202b33; border-radius: 12px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.22); }
+    .notificacao-card[hidden] { display: none !important; }
+    .notificacao-card::before { content: ""; position: absolute; top: -8px; right: 20px; width: 16px; height: 16px; background: #205988; transform: rotate(45deg); }
+    .notificacao-topo { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #205988; color: #ffffff; }
+    .notificacao-topo h3 { margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; display: flex; align-items: center; gap: 8px; }
+    .notificacao-lista { overflow-y: auto; max-height: 350px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
+    .notificacao-vazia { padding: 24px 12px; text-align: center; color: #6d7780; font-size: 13px; }
+    .notificacao-item { display: flex; align-items: flex-start; gap: 10px; padding: 11px 12px; border-radius: 8px; background: #f8fafc; border-left: 4px solid #205988; font-size: 12.5px; line-height: 1.4; }
+    .notificacao-item.perigo { border-left-color: #D96161; background: #fff5f5; }
+    .notificacao-item.alerta { border-left-color: #E2A03F; background: #fffaf0; }
+    .notificacao-item.info { border-left-color: #205988; background: #f0f7ff; }
+    .notificacao-item i { font-size: 17px; margin-top: 1px; flex-shrink: 0; }
+    .notificacao-item.perigo i { color: #D96161; }
+    .notificacao-item.alerta i { color: #E2A03F; }
+    .notificacao-item.info i { color: #205988; }
+    .notificacao-item-corpo { display: flex; flex-direction: column; gap: 3px; }
+    .notificacao-item-corpo strong { color: #1e293b; font-size: 13px; font-weight: 700; }
+    .notificacao-item-corpo span { color: #475569; font-size: 12px; }
+    /* CARD RETANGULAR DE NOTIFICAÇÃO NO CANTO INFERIOR DIREITO DA HOMEPAGE */ .card-notificacao-flutuante { position: fixed; bottom: 24px; right: 24px; z-index: 1000; width: 390px; max-width: calc(100vw - 32px); background: #ffffff; color: #1e293b; border-radius: 10px; border-left: 6px solid #D96161; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22); padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; animation: surgirCardNotificacao 0.25s ease-out; }
+    .card-notificacao-flutuante[hidden] { display: none !important; }
+    .card-notificacao-flutuante.alerta { border-left-color: #E2A03F; }
+    .card-notificacao-flutuante.info { border-left-color: #205988; }
+    .card-notificacao-topo { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .card-notificacao-titulo { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; color: #205988; }
+    .card-notificacao-flutuante.perigo .card-notificacao-titulo i { color: #D96161; font-size: 19px; }
+    .card-notificacao-flutuante.alerta .card-notificacao-titulo i { color: #E2A03F; font-size: 19px; }
+    .card-notificacao-flutuante.info .card-notificacao-titulo i { color: #205988; font-size: 19px; }
+    .card-notificacao-fechar { border: none; background: transparent; color: #64748b; font-size: 16px; cursor: pointer; padding: 4px; line-height: 1; border-radius: 4px; }
+    .card-notificacao-fechar:hover { background: #f1f5f9; color: #1e293b; }
+    .card-notificacao-lista { display: flex; flex-direction: column; gap: 8px; max-height: 210px; overflow-y: auto; }
+    .card-notificacao-msg { font-size: 13px; color: #334155; line-height: 1.45; padding: 8px 10px; background: #f8fafc; border-radius: 6px; border: 1px solid #e2e8f0; }
+    .card-notificacao-msg strong { display: block; color: #0f172a; margin-bottom: 2px; font-size: 13px; }
+    @keyframes surgirCardNotificacao { from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+    }
+    .perfil-botao { display: flex; align-items: center; gap: 10px; padding: 5px 0; border: none; color: #ffffff; background: transparent; text-align: left; cursor: pointer; }
+    .avatar { display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0; }
+    .avatar-nav { width: 40px; height: 40px; background: transparent; color: #ffffff; font-size: 33px; }
+    .avatar-modal { width: 58px; height: 58px; background: transparent; color: #205988; font-size: 51px; }
+    .usuario { display: flex; flex-direction: column; gap: 2px; }
+    .usuario strong { font-size: 15px; font-weight: 700; }
+    .usuario small { font-size: 12px; opacity: 0.85; }
+    .seta { margin-left: 8px; font-size: 15px; transition: transform 0.2s ease; }
+    .perfil-botao[aria-expanded="true"] .seta { transform: rotate(180deg); }
+    .perfil-card { position: absolute; z-index: 20; top: 58px; right: 0; width: 320px; overflow: hidden; background: #ffffff; color: #202b33; border-radius: 12px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); }
+    .perfil-card[hidden] { display: none; }
+    .perfil-card::before { content: ""; position: absolute; top: -10px; right: 28px; width: 20px; height: 20px; background: #ffffff; transform: rotate(45deg); }
+    .perfil-topo { position: relative; z-index: 1; display: flex; align-items: center; gap: 13px; padding: 22px 20px; background: #ffffff; }
+    .perfil-topo h2 { margin-bottom: 3px; font-size: 19px; }
+    .perfil-topo p { color: #6d7780; font-size: 13px; }
+    .informacoes { padding: 3px 20px 10px; }
+    .informacoes p { display: grid; grid-template-columns: 25px 1fr; column-gap: 8px; padding: 11px 0; }
+    .informacoes p > span { grid-row: span 2; color: #205988; font-size: 17px; }
+    .informacoes b { color: #222b31; font-size: 13px; font-weight: 700; }
+    .informacoes small { margin-top: 3px; color: #5f6870; font-size: 13px; overflow-wrap: anywhere; }
+    .acoes { display: flex; flex-direction: column; padding: 1px 20px 16px; }
+    .linha-acoes { width: 98.5%; margin: 0 auto 8px; border: none; border-top: 1px solid #222222; }
+    .acoes button { display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px 7px; border: none; background: transparent; color: #205988; font-size: 14px; text-align: left; cursor: pointer; }
+    .acoes button:hover { background: #f1f6fa; }
+    .acoes .sair { border-top: 1px solid #222222; color: #bd3838; }
+    .acoes .sair:hover { background: #fff1f1; }
+    .acoes button i { font-size: 17px; }
+    /* SIDEBAR */ .sidebar-backdrop { position: fixed; z-index: 50; inset: 0; width: 100%; height: 100%; border: none; background: rgba(0, 0, 0, 0.4); }
+    .sidebar-backdrop[hidden], .sidebar[hidden] { display: none; }
+    .sidebar { position: fixed; z-index: 60; top: 0; left: 0; width: 341px; max-width: 85vw; height: 100vh; min-height: 600px; overflow-y: auto; background: #205988; border-radius: 0 10px 10px 0; box-shadow: 0 4px 19.5px 11px rgba(0, 0, 0, 0.26); animation: abrir-sidebar 180ms ease-out; }
+    .sidebar-topo { position: relative; height: 103px; }
+    .sidebar-logo { position: absolute; top: 19px; left: 7px; width: 99px; height: 66px; object-fit: contain; }
+    .sidebar-fechar { position: absolute; top: 39px; right: 45px; display: flex; align-items: center; justify-content: center; width: 25px; height: 25px; border: none; background: transparent; color: #ffffff; font-size: 21px; cursor: pointer; }
+    .sidebar-fechar:hover { opacity: 0.75; }
+    .sidebar-menu { display: flex; flex-direction: column; padding: 47px 30px 0; }
+    .sidebar-menu a { color: #ffffff; text-decoration: none; font-family: var(--font-family); font-size: 18px; font-weight: 700; line-height: 22px; }
+    .sidebar-menu a + a { margin-top: 55px; }
+    .sidebar-menu a:hover { opacity: 0.75; }
+    .sidebar-sair { position: absolute; bottom: 40px; left: 80px; width: 181px; height: 47px; border: none; border-radius: 100px; background: #ffffff; color: #205988; font-size: 22px; font-weight: 600; cursor: pointer; box-shadow: 0 0 23.5px 4px rgba(0, 0, 0, 0.4); }
+    .sidebar-sair:hover { transform: translateY(-2px); }
+    @keyframes abrir-sidebar { from { opacity: 0; transform: translateX(-15px); }
+    to { opacity: 1; transform: translateX(0); }
+    }
+    /* DASHBOARD MAIN LAYOUT */ main { position: relative; z-index: 1; display: grid; min-height: calc(100vh - 84px); padding: 24px 4.3% 30px; grid-template-columns: 28% 1fr; grid-template-rows: auto 135px 135px 152px; grid-template-areas: "cabecalho cabecalho" "vazao consumo" "status consumo" "previsoes metas"; column-gap: 14px; row-gap: 14px; box-sizing: border-box; align-content: start; }
+    .cabecalho-pagina { grid-area: cabecalho; margin-bottom: 20px; }
+    .cabecalho-pagina h1 { margin: 0; color: var(--secondary-color); font-size: 24px; font-weight: 700; line-height: 1.2; }
+    .cabecalho-pagina h3 { margin: 4px 0 0 0; color: #5e7a92; font-size: 13px; font-weight: 400; line-height: 1.25; }
+    .area-vazao, .area-status, .area-consumo-agua, .area-previsoes, .metas { min-width: 0; background-color: #FFFFFF; border: 1px solid #D0D0D0; border-radius: 10px; box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15); }
+    /* VAZÃO */ .area-vazao { grid-area: vazao; padding: 13px 16px; display: flex; flex-direction: column; justify-content: space-between; }
+    .area-vazao > div:first-child i { color: var(--secondary-color); margin-right: 7px; font-size: var(--font-size-heading5); }
+    .area-vazao > div:first-child h3 { display: inline; margin: 0; color: var(--secondary-color); font-size: var(--font-size-heading6); font-weight: var(--weight-bold); }
+    .area-vazao h1 { margin: 8px 0 0; text-align: center; color: var(--secondary-color); font-size: 20px; font-weight: var(--weight-bold); }
+    button-ver-detalhes { display: block; width: max-content; margin: 0 auto; padding: 6px 15px; background-color: var(--buton-color); border: none; border-radius: 8px; box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15); color: var(--secondary-color); font-size: var(--font-size-heading7); font-weight: var(--weight-semibold); cursor: pointer; text-align: center; }
+    button-ver-detalhes:hover { opacity: 0.9; }
+    /* STATUS DO SISTEMA */ .area-status { grid-area: status; padding: 13px 16px; display: flex; flex-direction: column; justify-content: space-between; }
+    .status-topo { display: flex; align-items: center; gap: 7px; color: var(--secondary-color); }
+    .status-topo i { font-size: var(--font-size-heading6); }
+    .status-topo h3 { font-size: var(--font-size-heading6); font-weight: var(--weight-bold); margin: 0; color: var(--secondary-color); }
+    .status-corpo { display: flex; align-items: center; gap: 9px; margin: 4px 0 0 2px; }
+    .status-icone { font-size: 19px; color: var(--green-status-color); flex-shrink: 0; }
+    .status-textos h2 { font-size: 14px; font-weight: 700; color: #2b3a4a; margin: 0; line-height: 1.2; }
+    .status-textos p { margin: 2px 0 0 0; color: #7b8a97; font-size: 11px; line-height: 1.2; }
+    /* CONSUMO DE ÁGUA */ .area-consumo-agua { grid-area: consumo; padding: 18px 25px; display: flex; flex-direction: column; }
+    .titulo-consumo { display: flex; align-items: center; gap: 7px; color: var(--secondary-color); }
+    .titulo-consumo i { color: var(--secondary-color); font-size: var(--font-size-heading5); }
+    .titulo-consumo h3 { color: var(--secondary-color); font-size: var(--font-size-heading6); font-weight: var(--weight-bold); margin: 0; }
+    .grafico-consumo { position: relative; width: 100%; flex: 1; min-height: 180px; margin-top: 5px; }
+    /* PREVISÕES */ .area-previsoes { grid-area: previsoes; padding: 16px 20px; display: flex; flex-direction: column; justify-content: space-between; }
+    .previsoes-header { display: flex; align-items: center; gap: 7px; color: var(--secondary-color); }
+    .previsoes-header i { font-size: var(--font-size-heading5); color: var(--secondary-color); }
+    .previsoes-header h3 { font-size: var(--font-size-heading6); font-weight: var(--weight-bold); margin: 0; color: var(--secondary-color); }
+    .previsoes-corpo h4 { margin: 10px 0 4px 0; color: #666; font-size: 13px; font-weight: 400; }
+    .previsoes-corpo h1 { margin: 0; color: var(--secondary-color); font-size: 20px; font-weight: var(--weight-bold); }
+    /* METAS */ .metas { grid-area: metas; padding: 16px 22px; display: flex; flex-direction: column; justify-content: space-between; }
+    .metas-header { display: flex; align-items: center; gap: 7px; color: var(--secondary-color); }
+    .metas-header i { font-size: var(--font-size-heading5); }
+    .metas-header h3 { font-size: var(--font-size-heading6); font-weight: var(--weight-bold); margin: 0; }
+    .metas-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; margin: 8px 0 10px; }
+    .col-meta { display: flex; flex-direction: row; align-items: flex-start; gap: 20px; }
+    .item-meta { display: flex; flex-direction: column; }
+    .item-meta span.rotulo { display: block; font-size: 12px; color: #666; font-weight: 500; margin-bottom: 2px; white-space: nowrap; }
+    .item-meta strong.valor { display: block; font-size: 18px; color: var(--secondary-color); font-weight: 700; white-space: nowrap; }
+    .item-meta strong.valor-meta { display: block; color: #557999; font-size: 16px; font-weight: 600; white-space: nowrap; }
+    button-ver-relatorio { display: block; margin: 0 auto; width: max-content; padding: 6px 20px; background-color: var(--buton-color); border-radius: 8px; box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15); color: var(--secondary-color); font-size: var(--font-size-heading7); font-weight: var(--weight-semibold); cursor: pointer; text-align: center; }
+    button-ver-relatorio:hover { opacity: 0.9; }
+    /* RESPONSIVIDADE */ @media (max-width: 1080px) { main { grid-template-columns: 32% 1fr; grid-template-rows: auto auto auto auto; padding: 20px 3%; }
+    .metas-grid { grid-template-columns: 1fr; row-gap: 12px; }
+    }
+    @media (max-width: 850px) { main { grid-template-columns: 1fr; grid-template-rows: auto; grid-template-areas: "cabecalho" "vazao" "status" "consumo" "previsoes" "metas"; padding: 18px 16px; gap: 14px; }
+    .grafico-consumo { height: 200px; min-height: 200px; }
+    }
+    @media (max-width: 576px) { .navbar { height: 70px; padding: 0 16px; }
+    .usuario { display: none; }
+    .logo { font-size: 18px; letter-spacing: 2px; }
+    .logo-img { width: 36px; height: 36px; transform: scale(1.8); }
+    .perfil-card { position: fixed; top: 75px; left: 12px; right: 12px; width: auto; }
+    .perfil-card::before { display: none; }
+    main { padding: 16px 12px 25px; gap: 12px; }
+    .col-meta { gap: 14px; justify-content: space-between; }
+    .item-meta strong.valor { font-size: 16px; }
+    .item-meta strong.valor-meta { font-size: 14px; }
+    }
     </style>
 </head>
-
 <body>
     <!-- NAVBAR -->
     <nav class="navbar">
@@ -469,8 +209,23 @@ button-ver-relatorio:hover { opacity: 0.9; }
                 <span class="hydra">HYDRA</span><span class="nomic">NOMIC</span>
             </a>
         </div>
-
         <div class="perfil">
+            <!-- SINO DE NOTIFICAÇÕES -->
+            <div class="notificacao-container">
+                <button class="notificacao-botao" id="abrirNotificacoes" type="button" aria-expanded="false" aria-controls="notificacaoCard" aria-label="Notificações">
+                    <i class="bi bi-bell-fill"></i>
+                    <span class="notificacao-badge" id="notificacaoBadge" hidden>0</span>
+                </button>
+                <!-- MODAL DE NOTIFICAÇÕES RECEBIDAS -->
+                <div class="notificacao-card" id="notificacaoCard" hidden>
+                    <div class="notificacao-topo">
+                        <h3><i class="bi bi-bell-fill"></i> Notificações</h3>
+                    </div>
+                    <div class="notificacao-lista" id="notificacaoLista">
+                        <div class="notificacao-vazia">Nenhuma notificação no momento.</div>
+                    </div>
+                </div>
+            </div>
             <button class="perfil-botao" id="abrirPerfil" type="button" aria-expanded="false" aria-controls="perfilCard" aria-label="Abrir perfil do usuário">
                 <span class="avatar avatar-nav"><i class="bi bi-person-circle"></i></span>
                 <span class="usuario">
@@ -479,7 +234,6 @@ button-ver-relatorio:hover { opacity: 0.9; }
                 </span>
                 <span class="seta"><i class="bi bi-chevron-down"></i></span>
             </button>
-
             <!-- CARD DE PERFIL -->
             <div class="perfil-card" id="perfilCard" hidden>
                 <div class="perfil-topo">
@@ -489,7 +243,6 @@ button-ver-relatorio:hover { opacity: 0.9; }
                         <p id="card-subtitulo-cargo">--</p>
                     </div>
                 </div>
-
                 <div class="informacoes">
                     <p>
                         <span><i class="bi bi-award"></i></span>
@@ -507,7 +260,6 @@ button-ver-relatorio:hover { opacity: 0.9; }
                         <small id="card-info-ultimo-acesso">--</small>
                     </p>
                 </div>
-
                 <div class="acoes">
                     <hr class="linha-acoes">
                     <button type="button" onclick="window.location.href='http://hydranomic.kadly.com.br/configuracoes'">
@@ -520,10 +272,8 @@ button-ver-relatorio:hover { opacity: 0.9; }
             </div>
         </div>
     </nav>
-
     <!-- BACKDROP E SIDEBAR -->
     <button class="sidebar-backdrop" id="fecharSidebarFundo" type="button" aria-label="Fechar menu lateral" hidden></button>
-
     <aside class="sidebar" id="sidebar" aria-label="Menu lateral" hidden>
         <div class="sidebar-topo">
             <img src="https://raw.githubusercontent.com/Hydranomic/hydranomic/main/experience/assets/logo_hydranomic.png.png" alt="Hydranomic" class="sidebar-logo">
@@ -531,26 +281,22 @@ button-ver-relatorio:hover { opacity: 0.9; }
                 <i class="bi bi-x-lg"></i>
             </button>
         </div>
-
         <nav class="sidebar-menu">
             <a href="http://hydranomic.kadly.com.br/homepage">Página inicial</a>
             <a href="http://hydranomic.kadly.com.br/definicoes" id="link-definicoes" style="display: none;">Definições</a>
             <a href="http://hydranomic.kadly.com.br/metas">Metas de consumo / financeiro</a>
             <a href="http://hydranomic.kadly.com.br/relatorio">Relatório de consumo</a>
         </nav>
-
         <button class="sidebar-sair" id="btn-sair-sidebar" type="button" onclick="realizarLogout(event)">
             Sair
         </button>
     </aside>
-
     <!-- DASHBOARD -->
     <main>
         <div class="cabecalho-pagina">
             <h1 id="titulo-boas-vindas">Olá!</h1>
             <h3>Aqui está o resumo do sistema</h3>
         </div>
-
         <!-- VAZÃO -->
         <section class="area-vazao">
             <div>
@@ -560,7 +306,6 @@ button-ver-relatorio:hover { opacity: 0.9; }
             <h1>-- m³/h</h1>
             <button-ver-detalhes onclick="window.location.href='http://hydranomic.kadly.com.br/relatorio'">Ver detalhes</button-ver-detalhes>
         </section>
-
         <!-- STATUS DO SISTEMA -->
         <section class="area-status">
             <div>
@@ -578,7 +323,6 @@ button-ver-relatorio:hover { opacity: 0.9; }
             </div>
             <button-ver-detalhes onclick="window.location.href='http://hydranomic.kadly.com.br/relatorio'">Ver detalhes</button-ver-detalhes>
         </section>
-
         <!-- CONSUMO DE ÁGUA -->
         <section class="area-consumo-agua">
             <div class="titulo-consumo">
@@ -589,7 +333,6 @@ button-ver-relatorio:hover { opacity: 0.9; }
                 <canvas id="graficoConsumo"></canvas>
             </div>
         </section>
-
         <!-- PREVISÕES -->
         <section class="area-previsoes">
             <div>
@@ -603,7 +346,6 @@ button-ver-relatorio:hover { opacity: 0.9; }
                 </div>
             </div>
         </section>
-
         <!-- METAS COM COMPARAÇÃO LADO A LADO -->
         <section class="metas">
             <div>
@@ -611,7 +353,6 @@ button-ver-relatorio:hover { opacity: 0.9; }
                     <i class="bi bi-cash-coin"></i>
                     <h3>Metas</h3>
                 </div>
-
                 <div class="metas-grid">
                     <!-- Coluna Esquerda: Financeiro (Lado a Lado) -->
                     <div class="col-meta">
@@ -624,7 +365,6 @@ button-ver-relatorio:hover { opacity: 0.9; }
                             <strong class="valor-meta" id="meta-gasto-alvo">R$ --</strong>
                         </div>
                     </div>
-
                     <!-- Coluna Direita: Consumo de Água (Lado a Lado) -->
                     <div class="col-meta">
                         <div class="item-meta">
@@ -638,32 +378,39 @@ button-ver-relatorio:hover { opacity: 0.9; }
                     </div>
                 </div>
             </div>
-
             <button-ver-relatorio onclick="window.location.href='http://hydranomic.kadly.com.br/metas'">
                 Ver relatório financeiro
             </button-ver-relatorio>
         </section>
     </main>
-
+    <!-- CARD RETANGULAR DE NOTIFICAÇÃO NO CANTO INFERIOR DIREITO -->
+    <div class="card-notificacao-flutuante perigo" id="cardNotificacaoHomepage" role="alert" aria-live="polite" hidden>
+        <div class="card-notificacao-topo">
+            <div class="card-notificacao-titulo">
+                <i class="bi bi-exclamation-triangle-fill" id="iconeCardNotificacao"></i>
+                <span id="tituloCardNotificacao">Alerta de Consumo</span>
+            </div>
+            <button type="button" class="card-notificacao-fechar" id="fecharCardNotificacao" aria-label="Fechar notificação">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <div class="card-notificacao-lista" id="listaCardNotificacao"></div>
+    </div>
     <!-- INTEGRAÇÃO COM ARQUIVOS JSON -->
     <script>
         let instanciaGraficoConsumo = null;
-
         function renderizarGrafico(rotulos, valores) {
             const canvas = document.getElementById('graficoConsumo');
             if (!canvas) return;
-
             const rotulosPadrao = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
             const rotulosFinais = (Array.isArray(rotulos) && rotulos.length === 12) ? rotulos : rotulosPadrao;
             const dadosFinais = Array.isArray(valores) ? valores : [435, 515, 560, 475, 590, 625, 680, 620, 570, 520, 490, 430];
-
             if (instanciaGraficoConsumo) {
                 instanciaGraficoConsumo.data.labels = rotulosFinais;
                 instanciaGraficoConsumo.data.datasets[0].data = dadosFinais;
                 instanciaGraficoConsumo.update();
                 return;
             }
-
             instanciaGraficoConsumo = new Chart(canvas, {
                 type: 'line',
                 data: {
@@ -692,22 +439,18 @@ button-ver-relatorio:hover { opacity: 0.9; }
                 }
             });
         }
-
         async function carregarDadosDoNotebook() {
             renderizarGrafico(null, null);
             const timestamp = Date.now();
-
             const URL_GRAFICO  = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/grafico_anual.json';
             const URL_PREVISAO = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/previsao_ml.json';
             const URL_META     = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/progresso_meta.json';
             const URL_CONSUMO  = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/consumo_mes.json';
             const URL_SUMARIO  = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/sumario_execucao.json';
-
             const buscarJson = (url, nome) =>
                 fetch(`${url}?_t=${timestamp}`)
                     .then(r => r.ok ? r.json() : null)
                     .catch(e => { console.warn(e.message); return null; });
-
             try {
                 const [resGrafico, resPrevisao, resMeta, resConsumo, resSumario] = await Promise.all([
                     buscarJson(URL_GRAFICO, 'grafico_anual.json'),
@@ -716,58 +459,47 @@ button-ver-relatorio:hover { opacity: 0.9; }
                     buscarJson(URL_CONSUMO, 'consumo_mes.json'),
                     buscarJson(URL_SUMARIO, 'sumario_execucao.json')
                 ]);
-
                 if (resGrafico && Array.isArray(resGrafico.meses)) {
                     renderizarGrafico(resGrafico.meses.map(m => m.rotulo || ('Mês ' + m.mes)), resGrafico.meses.map(m => m.consumo_m3));
                 }
-
                 // Vazão Atual
                 const elVazao = document.querySelector('.area-vazao > h1');
                 if (elVazao && resSumario && resSumario.vazao_atual_m3h != null) {
                     elVazao.textContent = Number(resSumario.vazao_atual_m3h).toFixed(2) + ' m³/h';
                 }
-
                 // Previsão Financeira
                 const elPrevisao = document.querySelector('.previsoes-corpo > h1');
                 const faturaEstimada = resPrevisao?.valor_estimado_conta ?? resSumario?.fatura_estimada_reais ?? null;
                 if (elPrevisao && faturaEstimada != null) {
                     elPrevisao.textContent = 'R$ ' + Number(faturaEstimada).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 }
-
                 // Valores de Consumo e Metas
                 const consumoTotalM3 = resConsumo?.consumo_acumulado_mes_m3 ?? resMeta?.consumo_atual_m3 ?? resSumario?.consumo_mes_acumulado_m3 ?? null;
                 const tarifaBase = Number(resPrevisao?.tarifa_m3 ?? 59.6);
-
                 const elGastoMes = document.getElementById('meta-gasto-atual');
                 if (elGastoMes && consumoTotalM3 != null) {
                     elGastoMes.textContent = 'R$ ' + (Number(consumoTotalM3) * tarifaBase).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 }
-
                 const elConsumoTotal = document.getElementById('meta-consumo-atual');
                 if (elConsumoTotal && consumoTotalM3 != null) {
                     elConsumoTotal.textContent = Number(consumoTotalM3).toFixed(2) + ' m³';
                 }
-
                 // Metas Alvo
                 const metaM3 = resMeta?.meta_consumo_m3 ?? resMeta?.meta_mensal_m3 ?? resSumario?.meta_consumo_m3 ?? null;
                 const metaReais = resMeta?.meta_gasto_reais ?? resMeta?.meta_mensal_reais ?? (metaM3 != null ? metaM3 * tarifaBase : null);
-
                 const elMetaGastoAlvo = document.getElementById('meta-gasto-alvo');
                 if (elMetaGastoAlvo && metaReais != null) {
                     elMetaGastoAlvo.textContent = 'R$ ' + Number(metaReais).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 }
-
                 const elMetaConsumoAlvo = document.getElementById('meta-consumo-alvo');
                 if (elMetaConsumoAlvo && metaM3 != null) {
                     elMetaConsumoAlvo.textContent = Number(metaM3).toFixed(2) + ' m³';
                 }
-
                 // Atualização do Status do Sistema
                 const status = String(resMeta?.situacao ?? resSumario?.meta_status ?? "NORMAL").toUpperCase();
                 const iconeStatus = document.getElementById('icone-status');
                 const textoStatusPrincipal = document.getElementById('texto-status-principal');
                 const textoStatusDesc = document.getElementById('texto-status-desc');
-
                 if (status === "ESTOURADA" || status === "PERIGO") {
                     if (iconeStatus) {
                         iconeStatus.className = 'bi bi-exclamation-triangle-fill status-icone';
@@ -790,14 +522,212 @@ button-ver-relatorio:hover { opacity: 0.9; }
                     if (textoStatusPrincipal) textoStatusPrincipal.textContent = 'Sistema normal';
                     if (textoStatusDesc) textoStatusDesc.textContent = 'Todos os parâmetros dentro do ideal';
                 }
+                // Processamento de Notificações por Administrador Logado (sem localStorage)
+                await processarNotificacoesUsuario({
+                    resMeta,
+                    resSumario,
+                    consumoTotalM3,
+                    metaM3,
+                    status,
+                    timestamp
+                });
             } catch (erro) {
                 console.error('Erro de dados:', erro);
             }
         }
-
+        // Controle em memória apenas para fechar o card durante a visualização atual
+        let cardNotificacaoFechadoManualmente = false;
+        function obterChavesUsuarioLogado() {
+            const wegId = "{{experience.user.id}}".trim().toLowerCase();
+            const wegEmail = "{{experience.user.email}}".trim().toLowerCase();
+            const wegNome = "{{experience.user.firstName}}".trim().toLowerCase();
+            const prefixoEmail = wegEmail.includes("@") ? wegEmail.split("@")[0].trim().toLowerCase() : wegEmail;
+            const chaves = [wegNome, prefixoEmail, wegEmail, wegId].filter(c => c && !c.includes("\x7B\x7B"));
+            return Array.from(new Set(chaves));
+        }
+        function obterPreferenciasDoAdministrador(configJson, resMeta, resSumario) {
+            const padrao = { notificacao_prazos: false, alerta_status: false };
+            const chaves = obterChavesUsuarioLogado();
+            const mapaUsuarios = (configJson && typeof configJson.notificacoes_usuarios === "object" && configJson.notificacoes_usuarios)
+                || (resMeta && typeof resMeta.notificacoes_usuarios === "object" && resMeta.notificacoes_usuarios)
+                || (resSumario && typeof resSumario.notificacoes_usuarios === "object" && resSumario.notificacoes_usuarios)
+                || null;
+            if (mapaUsuarios) {
+                const chavesMapa = Object.keys(mapaUsuarios);
+                for (const chave of chaves) {
+                    const encontrada = chavesMapa.find(k => k.trim().toLowerCase() === chave);
+                    if (encontrada && mapaUsuarios[encontrada] && typeof mapaUsuarios[encontrada] === "object") {
+                        const pref = mapaUsuarios[encontrada];
+                        return {
+                            notificacao_prazos: Boolean(pref.notificacao_prazos),
+                            alerta_status: Boolean(pref.alerta_status)
+                        };
+                    }
+                }
+            }
+            if (configJson && typeof configJson.notificacoes === "object" && configJson.notificacoes) {
+                const chavesNotif = Object.keys(configJson.notificacoes);
+                for (const chave of chaves) {
+                    const encontrada = chavesNotif.find(k => k.trim().toLowerCase() === chave);
+                    if (encontrada && configJson.notificacoes[encontrada] && typeof configJson.notificacoes[encontrada] === "object") {
+                        const pref = configJson.notificacoes[encontrada];
+                        return {
+                            notificacao_prazos: Boolean(pref.notificacao_prazos),
+                            alerta_status: Boolean(pref.alerta_status)
+                        };
+                    }
+                }
+                if ("alerta_status" in configJson.notificacoes || "notificacao_prazos" in configJson.notificacoes) {
+                    return {
+                        notificacao_prazos: Boolean(configJson.notificacoes.notificacao_prazos),
+                        alerta_status: Boolean(configJson.notificacoes.alerta_status)
+                    };
+                }
+            }
+            return padrao;
+        }
+        async function processarNotificacoesUsuario({ resMeta, resSumario, consumoTotalM3, metaM3, status, timestamp }) {
+            const URL_CONFIG = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/config.json';
+            let configJson = null;
+            try {
+                const resp = await fetch(`${URL_CONFIG}?_t=${timestamp}`);
+                if (resp.ok) configJson = await resp.json();
+            } catch (e) {
+                console.warn('Não foi possível carregar config.json:', e);
+            }
+            const prefs = obterPreferenciasDoAdministrador(configJson, resMeta, resSumario);
+            const permiteStatus = Boolean(prefs.alerta_status);
+            const permitePrazos = Boolean(prefs.notificacao_prazos);
+            const limiteMeta = metaM3 ?? resMeta?.limite_m3 ?? configJson?.meta_ativa?.valor ?? null;
+            const consumoAtual = consumoTotalM3 != null ? Number(consumoTotalM3) : null;
+            const limiteNum = limiteMeta != null ? Number(limiteMeta) : null;
+            const alertasBrutos = Array.isArray(resMeta?.alertas_ativos) && resMeta.alertas_ativos.length > 0
+                ? resMeta.alertas_ativos
+                : (Array.isArray(resSumario?.alertas_ativos) ? resSumario.alertas_ativos : []);
+            const notificacoesFinais = [];
+            alertasBrutos.forEach(alerta => {
+                const tipo = String(alerta.tipo || alerta.id || "").toLowerCase();
+                const ehPrazo = tipo.includes("prazo");
+                if (ehPrazo && permitePrazos) {
+                    notificacoesFinais.push(alerta);
+                } else if (!ehPrazo && permiteStatus) {
+                    notificacoesFinais.push(alerta);
+                }
+            });
+            const jaTemAlertaConsumo = notificacoesFinais.some(n => !String(n.tipo || n.id || "").toLowerCase().includes("prazo"));
+            if (permiteStatus && !jaTemAlertaConsumo) {
+                const pct = (consumoAtual != null && limiteNum && limiteNum > 0) ? ((consumoAtual / limiteNum) * 100) : null;
+                if (status === "ESTOURADA" || status === "PERIGO" || (pct != null && pct >= 100)) {
+                    notificacoesFinais.push({
+                        id: "meta_estourada",
+                        tipo: "limite_estourado",
+                        severidade: "perigo",
+                        titulo: "Consumo Acima do Normal!",
+                        mensagem: (consumoAtual != null && limiteNum != null)
+                            ? `O consumo atual de ${consumoAtual.toFixed(2)} m³ ultrapassou a meta de ${limiteNum.toFixed(2)} m³ (${pct.toFixed(1)}%).`
+                            : "O consumo de água ultrapassou a meta estabelecida para o período."
+                    });
+                } else if (status === "ALERTA_80" || status === "ALERTA" || (pct != null && pct >= 80)) {
+                    notificacoesFinais.push({
+                        id: "meta_80",
+                        tipo: "alerta_80",
+                        severidade: "alerta",
+                        titulo: "Alerta: Consumo Próximo ao Limite",
+                        mensagem: (consumoAtual != null && limiteNum != null)
+                            ? `O consumo atingiu ${pct.toFixed(1)}% da meta (${consumoAtual.toFixed(2)} m³ de ${limiteNum.toFixed(2)} m³).`
+                            : "O consumo de água atingiu 80% ou mais da meta mensal."
+                    });
+                }
+            }
+            const jaTemAlertaPrazo = notificacoesFinais.some(n => String(n.tipo || n.id || "").toLowerCase().includes("prazo"));
+            if (permitePrazos && !jaTemAlertaPrazo) {
+                const hoje = new Date();
+                const ultimoDia = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0).getDate();
+                const diasRestantes = resMeta?.dias_restantes_mes != null
+                    ? Number(resMeta.dias_restantes_mes)
+                    : Math.max(0, ultimoDia - hoje.getDate());
+                if (diasRestantes <= 2) {
+                    notificacoesFinais.push({
+                        id: "prazo_fim_mes",
+                        tipo: "prazo_proximo",
+                        severidade: "info",
+                        titulo: "Prazo de Fechamento Próximo",
+                        mensagem: diasRestantes <= 1
+                            ? "Faltam menos de 24h para o encerramento do ciclo mensal da sua meta."
+                            : `Faltam ${diasRestantes} dias para o encerramento do ciclo mensal da sua meta.`
+                    });
+                }
+            }
+            renderizarNotificacoesNaInterface(notificacoesFinais);
+        }
+        function renderizarNotificacoesNaInterface(notificacoes) {
+            const badge = document.getElementById("notificacaoBadge");
+            const listaSino = document.getElementById("notificacaoLista");
+            const cardHomepage = document.getElementById("cardNotificacaoHomepage");
+            const listaCardHomepage = document.getElementById("listaCardNotificacao");
+            const tituloCardHomepage = document.getElementById("tituloCardNotificacao");
+            const iconeCardHomepage = document.getElementById("iconeCardNotificacao");
+            const qtd = Array.isArray(notificacoes) ? notificacoes.length : 0;
+            if (badge) {
+                if (qtd > 0) {
+                    badge.textContent = String(qtd);
+                    badge.hidden = false;
+                } else {
+                    badge.textContent = "0";
+                    badge.hidden = true;
+                }
+            }
+            if (listaSino) {
+                if (qtd === 0) {
+                    listaSino.innerHTML = '<div class="notificacao-vazia">Nenhuma notificação recebida no momento.</div>';
+                } else {
+                    listaSino.innerHTML = notificacoes.map(n => {
+                        const sev = (n.severidade === "perigo" || n.severidade === "alerta" || n.severidade === "info") ? n.severidade : "perigo";
+                        const icone = sev === "perigo"
+                            ? "bi-exclamation-triangle-fill"
+                            : (sev === "alerta" ? "bi-exclamation-circle-fill" : "bi-clock-history");
+                        return `
+                            <div class="notificacao-item ${sev}">
+                                <i class="bi ${icone}"></i>
+                                <div class="notificacao-item-corpo">
+                                    <strong>${n.titulo || "Notificação"}</strong>
+                                    <span>${n.mensagem || ""}</span>
+                                </div>
+                            </div>
+                        `;
+                    }).join("");
+                }
+            }
+            if (cardHomepage && listaCardHomepage) {
+                if (qtd === 0 || cardNotificacaoFechadoManualmente) {
+                    cardHomepage.hidden = true;
+                } else {
+                    const temPerigo = notificacoes.some(n => n.severidade === "perigo");
+                    const temAlerta = notificacoes.some(n => n.severidade === "alerta");
+                    const sevPrincipal = temPerigo ? "perigo" : (temAlerta ? "alerta" : "info");
+                    cardHomepage.className = `card-notificacao-flutuante ${sevPrincipal}`;
+                    if (iconeCardHomepage) {
+                        iconeCardHomepage.className = sevPrincipal === "perigo"
+                            ? "bi bi-exclamation-triangle-fill"
+                            : (sevPrincipal === "alerta" ? "bi bi-exclamation-circle-fill" : "bi bi-bell-fill");
+                    }
+                    if (tituloCardHomepage) {
+                        tituloCardHomepage.textContent = qtd === 1
+                            ? (notificacoes[0].titulo || "Notificação do Sistema")
+                            : `Você possui ${qtd} notificações ativas`;
+                    }
+                    listaCardHomepage.innerHTML = notificacoes.map(n => `
+                        <div class="card-notificacao-msg">
+                            ${qtd > 1 ? `<strong>${n.titulo || "Notificação"}</strong>` : ""}
+                            <span>${n.mensagem || ""}</span>
+                        </div>
+                    `).join("");
+                    cardHomepage.hidden = false;
+                }
+            }
+        }
         document.addEventListener('DOMContentLoaded', carregarDadosDoNotebook);
     </script>
-
     <!-- SCRIPT DE PERFIL DINÂMICO E CONTROLES -->
     <script>
         // =========================================================================
@@ -808,67 +738,82 @@ button-ver-relatorio:hover { opacity: 0.9; }
                 evento.preventDefault();
                 evento.stopPropagation();
             }
-
             try {
                 localStorage.clear();
                 sessionStorage.clear();
             } catch (e) {}
-
             const dominios = ["", "; domain=" + window.location.hostname, "; domain=.kadly.com.br", "; domain=hydranomic.kadly.com.br"];
             dominios.forEach(dom => {
                 document.cookie = "authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; max-age=0; path=/" + dom + ";";
             });
-
             window.location.replace("http://hydranomic.kadly.com.br/login?_r=" + Date.now());
         }
-
         // =========================================================================
         // 2. CONTROLES DA NAVBAR E SIDEBAR
         // =========================================================================
+        const botaoNotificacoes = document.getElementById("abrirNotificacoes");
+        const notificacaoCard = document.getElementById("notificacaoCard");
         const botaoPerfil = document.getElementById("abrirPerfil");
         const perfilCard = document.getElementById("perfilCard");
-
+        const botaoFecharCardHomepage = document.getElementById("fecharCardNotificacao");
+        const cardNotificacaoHomepage = document.getElementById("cardNotificacaoHomepage");
+        if (botaoFecharCardHomepage && cardNotificacaoHomepage) {
+            botaoFecharCardHomepage.addEventListener("click", function () {
+                cardNotificacaoFechadoManualmente = true;
+                cardNotificacaoHomepage.hidden = true;
+            });
+        }
+        if (botaoNotificacoes && notificacaoCard) {
+            botaoNotificacoes.addEventListener("click", function (e) {
+                e.stopPropagation();
+                const aberto = botaoNotificacoes.getAttribute("aria-expanded") === "true";
+                botaoNotificacoes.setAttribute("aria-expanded", String(!aberto));
+                notificacaoCard.hidden = aberto;
+                if (botaoPerfil) botaoPerfil.setAttribute("aria-expanded", "false");
+                if (perfilCard) perfilCard.hidden = true;
+            });
+        }
         if (botaoPerfil && perfilCard) {
             botaoPerfil.addEventListener("click", function (e) {
                 e.stopPropagation();
                 const aberto = botaoPerfil.getAttribute("aria-expanded") === "true";
                 botaoPerfil.setAttribute("aria-expanded", String(!aberto));
                 perfilCard.hidden = aberto;
+                if (botaoNotificacoes) botaoNotificacoes.setAttribute("aria-expanded", "false");
+                if (notificacaoCard) notificacaoCard.hidden = true;
             });
-
             document.addEventListener("click", function (e) {
-                if (!e.target.closest(".perfil")) {
+                if (!e.target.closest("#abrirPerfil") && !e.target.closest("#perfilCard")) {
                     botaoPerfil.setAttribute("aria-expanded", "false");
                     perfilCard.hidden = true;
                 }
+                if (botaoNotificacoes && notificacaoCard && !e.target.closest(".notificacao-container")) {
+                    botaoNotificacoes.setAttribute("aria-expanded", "false");
+                    notificacaoCard.hidden = true;
+                }
             });
         }
-
         const abrirSidebar = document.getElementById("abrirSidebar");
         const fecharSidebar = document.getElementById("fecharSidebar");
         const fecharSidebarFundo = document.getElementById("fecharSidebarFundo");
         const sidebar = document.getElementById("sidebar");
-
         if (abrirSidebar && sidebar) {
             function fecharMenu() {
                 sidebar.hidden = true;
                 if (fecharSidebarFundo) fecharSidebarFundo.hidden = true;
                 abrirSidebar.setAttribute("aria-expanded", "false");
             }
-
             abrirSidebar.addEventListener("click", function () {
                 sidebar.hidden = false;
                 if (fecharSidebarFundo) fecharSidebarFundo.hidden = false;
                 abrirSidebar.setAttribute("aria-expanded", "true");
                 if (perfilCard) perfilCard.hidden = true;
             });
-
             if (fecharSidebar) fecharSidebar.addEventListener("click", fecharMenu);
             if (fecharSidebarFundo) fecharSidebarFundo.addEventListener("click", fecharMenu);
             document.addEventListener("keydown", e => { if (e.key === "Escape") fecharMenu(); });
             document.querySelectorAll(".sidebar-menu a").forEach(l => l.addEventListener("click", fecharMenu));
         }
-
         // =========================================================================
         // 3. SINCRONIZAÇÃO DIRETA COM O USUÁRIO ATUAL DO SERVIDOR (SEM LOOP DE RELOAD)
         // =========================================================================
@@ -876,20 +821,16 @@ button-ver-relatorio:hover { opacity: 0.9; }
             const wegEmail = "{{experience.user.email}}".trim().toLowerCase();
             const wegNome = "{{experience.user.firstName}}".trim();
             const wegLastLogin = "{{experience.user.lastLogin}}".trim();
-
             const grupos = [
                 {{#each experience.user.experienceGroups}}
                     "{{this.name}}",
                 {{/each}}
-            ];
-
+            ].filter(function(item) { return Boolean(item && item.trim()); });
             if (!wegEmail) {
                 return;
             }
-
             const ehAdmin = grupos.some(g => String(g).toLowerCase().includes("admin") || String(g).toLowerCase().includes("adm"))
                 || wegEmail.startsWith("adm.") || wegEmail.startsWith("admin.") || wegEmail.startsWith("adm@") || wegEmail.startsWith("admin@");
-
             function formatarDataHora(dataIso) {
                 const data = dataIso ? new Date(dataIso) : new Date();
                 if (isNaN(data.getTime())) return "--";
@@ -900,11 +841,9 @@ button-ver-relatorio:hover { opacity: 0.9; }
                 const min = String(data.getMinutes()).padStart(2, "0");
                 return `${dia}/${mes}/${ano} às ${hora}:${min}`;
             }
-
             const cargoFormatado = ehAdmin ? "Administrador" : "Usuário";
             const nomeFinal = wegNome || wegEmail.split("@")[0];
             const ultimoAcessoTexto = formatarDataHora(wegLastLogin);
-
             const elNavNome = document.getElementById("nav-nome-usuario");
             const elNavCargo = document.getElementById("nav-cargo-usuario");
             const elCardNome = document.getElementById("card-nome-usuario");
@@ -914,7 +853,6 @@ button-ver-relatorio:hover { opacity: 0.9; }
             const elCardUltimoAcesso = document.getElementById("card-info-ultimo-acesso");
             const elTitulo = document.getElementById("titulo-boas-vindas");
             const linkDefinicoes = document.getElementById("link-definicoes");
-
             if (elNavNome) elNavNome.textContent = "Olá, " + nomeFinal + "!";
             if (elNavCargo) elNavCargo.textContent = cargoFormatado;
             if (elCardNome) elCardNome.textContent = nomeFinal;
@@ -923,11 +861,9 @@ button-ver-relatorio:hover { opacity: 0.9; }
             if (elCardEmail) elCardEmail.textContent = wegEmail;
             if (elCardUltimoAcesso) elCardUltimoAcesso.textContent = ultimoAcessoTexto;
             if (elTitulo) elTitulo.textContent = "Olá, " + nomeFinal + "!";
-
             if (linkDefinicoes) {
                 linkDefinicoes.style.display = ehAdmin ? "block" : "none";
             }
-
             try {
                 localStorage.setItem("hydranomic_sessao_atual", JSON.stringify({
                     email: wegEmail,
