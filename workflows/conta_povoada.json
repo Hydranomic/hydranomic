@@ -1,5 +1,4005 @@
 [
   {
+    "id": "1915-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 850.00,
+    "valor_agua": 344.25,
+    "valor_esgoto": 257.55,
+    "valor_tratamento": 248.20,
+    "consumo_m3": 85
+  },
+  {
+    "id": "1915-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 900.00,
+    "valor_agua": 364.50,
+    "valor_esgoto": 272.70,
+    "valor_tratamento": 262.80,
+    "consumo_m3": 90
+  },
+  {
+    "id": "1915-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 940.00,
+    "valor_agua": 380.70,
+    "valor_esgoto": 284.82,
+    "valor_tratamento": 274.48,
+    "consumo_m3": 94
+  },
+  {
+    "id": "1915-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1000.00,
+    "valor_agua": 405.00,
+    "valor_esgoto": 303.00,
+    "valor_tratamento": 292.00,
+    "consumo_m3": 100
+  },
+  {
+    "id": "1916-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 875.50,
+    "valor_agua": 354.58,
+    "valor_esgoto": 265.28,
+    "valor_tratamento": 255.64,
+    "consumo_m3": 85
+  },
+  {
+    "id": "1916-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 957.90,
+    "valor_agua": 387.95,
+    "valor_esgoto": 290.24,
+    "valor_tratamento": 279.71,
+    "consumo_m3": 93
+  },
+  {
+    "id": "1916-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1009.40,
+    "valor_agua": 408.81,
+    "valor_esgoto": 305.85,
+    "valor_tratamento": 294.74,
+    "consumo_m3": 98
+  },
+  {
+    "id": "1916-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 927.00,
+    "valor_agua": 375.44,
+    "valor_esgoto": 280.88,
+    "valor_tratamento": 270.68,
+    "consumo_m3": 90
+  },
+  {
+    "id": "1916-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 834.30,
+    "valor_agua": 337.89,
+    "valor_esgoto": 252.79,
+    "valor_tratamento": 243.62,
+    "consumo_m3": 81
+  },
+  {
+    "id": "1916-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 782.80,
+    "valor_agua": 317.03,
+    "valor_esgoto": 237.19,
+    "valor_tratamento": 228.58,
+    "consumo_m3": 76
+  },
+  {
+    "id": "1916-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 762.20,
+    "valor_agua": 308.69,
+    "valor_esgoto": 230.95,
+    "valor_tratamento": 222.56,
+    "consumo_m3": 74
+  },
+  {
+    "id": "1916-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 824.00,
+    "valor_agua": 333.72,
+    "valor_esgoto": 249.67,
+    "valor_tratamento": 240.61,
+    "consumo_m3": 80
+  },
+  {
+    "id": "1916-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 885.80,
+    "valor_agua": 358.75,
+    "valor_esgoto": 268.40,
+    "valor_tratamento": 258.65,
+    "consumo_m3": 86
+  },
+  {
+    "id": "1916-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 937.30,
+    "valor_agua": 379.61,
+    "valor_esgoto": 284.00,
+    "valor_tratamento": 273.69,
+    "consumo_m3": 91
+  },
+  {
+    "id": "1916-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 978.50,
+    "valor_agua": 396.29,
+    "valor_esgoto": 296.49,
+    "valor_tratamento": 285.72,
+    "consumo_m3": 95
+  },
+  {
+    "id": "1916-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1040.30,
+    "valor_agua": 421.32,
+    "valor_esgoto": 315.21,
+    "valor_tratamento": 303.77,
+    "consumo_m3": 101
+  },
+  {
+    "id": "1917-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 911.20,
+    "valor_agua": 369.04,
+    "valor_esgoto": 276.09,
+    "valor_tratamento": 266.07,
+    "consumo_m3": 86
+  },
+  {
+    "id": "1917-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 996.40,
+    "valor_agua": 403.54,
+    "valor_esgoto": 301.91,
+    "valor_tratamento": 290.95,
+    "consumo_m3": 94
+  },
+  {
+    "id": "1917-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1049.40,
+    "valor_agua": 425.01,
+    "valor_esgoto": 317.97,
+    "valor_tratamento": 306.42,
+    "consumo_m3": 99
+  },
+  {
+    "id": "1917-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 964.60,
+    "valor_agua": 390.66,
+    "valor_esgoto": 292.27,
+    "valor_tratamento": 281.67,
+    "consumo_m3": 91
+  },
+  {
+    "id": "1917-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 869.20,
+    "valor_agua": 352.03,
+    "valor_esgoto": 263.37,
+    "valor_tratamento": 253.80,
+    "consumo_m3": 82
+  },
+  {
+    "id": "1917-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 816.20,
+    "valor_agua": 330.56,
+    "valor_esgoto": 247.31,
+    "valor_tratamento": 238.33,
+    "consumo_m3": 77
+  },
+  {
+    "id": "1917-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 795.00,
+    "valor_agua": 321.98,
+    "valor_esgoto": 240.89,
+    "valor_tratamento": 232.13,
+    "consumo_m3": 75
+  },
+  {
+    "id": "1917-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 858.60,
+    "valor_agua": 347.73,
+    "valor_esgoto": 260.16,
+    "valor_tratamento": 250.71,
+    "consumo_m3": 81
+  },
+  {
+    "id": "1917-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 922.20,
+    "valor_agua": 373.49,
+    "valor_esgoto": 279.43,
+    "valor_tratamento": 269.28,
+    "consumo_m3": 87
+  },
+  {
+    "id": "1917-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 975.20,
+    "valor_agua": 394.96,
+    "valor_esgoto": 295.49,
+    "valor_tratamento": 284.75,
+    "consumo_m3": 92
+  },
+  {
+    "id": "1917-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1017.60,
+    "valor_agua": 412.13,
+    "valor_esgoto": 308.33,
+    "valor_tratamento": 297.14,
+    "consumo_m3": 96
+  },
+  {
+    "id": "1917-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1081.20,
+    "valor_agua": 437.89,
+    "valor_esgoto": 327.60,
+    "valor_tratamento": 315.71,
+    "consumo_m3": 102
+  },
+  {
+    "id": "1918-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 948.30,
+    "valor_agua": 384.06,
+    "valor_esgoto": 287.33,
+    "valor_tratamento": 276.91,
+    "consumo_m3": 87
+  },
+  {
+    "id": "1918-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1035.50,
+    "valor_agua": 419.38,
+    "valor_esgoto": 313.76,
+    "valor_tratamento": 302.36,
+    "consumo_m3": 95
+  },
+  {
+    "id": "1918-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1090.00,
+    "valor_agua": 441.45,
+    "valor_esgoto": 330.27,
+    "valor_tratamento": 318.28,
+    "consumo_m3": 100
+  },
+  {
+    "id": "1918-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1002.80,
+    "valor_agua": 406.13,
+    "valor_esgoto": 303.85,
+    "valor_tratamento": 292.82,
+    "consumo_m3": 92
+  },
+  {
+    "id": "1918-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 904.70,
+    "valor_agua": 366.40,
+    "valor_esgoto": 274.12,
+    "valor_tratamento": 264.18,
+    "consumo_m3": 83
+  },
+  {
+    "id": "1918-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 850.20,
+    "valor_agua": 344.33,
+    "valor_esgoto": 257.61,
+    "valor_tratamento": 248.26,
+    "consumo_m3": 78
+  },
+  {
+    "id": "1918-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 828.40,
+    "valor_agua": 335.50,
+    "valor_esgoto": 251.01,
+    "valor_tratamento": 241.89,
+    "consumo_m3": 76
+  },
+  {
+    "id": "1918-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 893.80,
+    "valor_agua": 361.99,
+    "valor_esgoto": 270.82,
+    "valor_tratamento": 260.99,
+    "consumo_m3": 82
+  },
+  {
+    "id": "1918-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 959.20,
+    "valor_agua": 388.48,
+    "valor_esgoto": 290.64,
+    "valor_tratamento": 280.08,
+    "consumo_m3": 88
+  },
+  {
+    "id": "1918-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1013.70,
+    "valor_agua": 410.55,
+    "valor_esgoto": 307.15,
+    "valor_tratamento": 296.00,
+    "consumo_m3": 93
+  },
+  {
+    "id": "1918-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1057.30,
+    "valor_agua": 428.21,
+    "valor_esgoto": 320.36,
+    "valor_tratamento": 308.73,
+    "consumo_m3": 97
+  },
+  {
+    "id": "1918-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1122.70,
+    "valor_agua": 454.69,
+    "valor_esgoto": 340.18,
+    "valor_tratamento": 327.83,
+    "consumo_m3": 103
+  },
+  {
+    "id": "1919-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 985.60,
+    "valor_agua": 399.17,
+    "valor_esgoto": 298.64,
+    "valor_tratamento": 287.79,
+    "consumo_m3": 88
+  },
+  {
+    "id": "1919-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1075.20,
+    "valor_agua": 435.46,
+    "valor_esgoto": 325.79,
+    "valor_tratamento": 313.95,
+    "consumo_m3": 96
+  },
+  {
+    "id": "1919-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1131.20,
+    "valor_agua": 458.14,
+    "valor_esgoto": 342.75,
+    "valor_tratamento": 330.31,
+    "consumo_m3": 101
+  },
+  {
+    "id": "1919-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1041.60,
+    "valor_agua": 421.85,
+    "valor_esgoto": 315.60,
+    "valor_tratamento": 304.15,
+    "consumo_m3": 93
+  },
+  {
+    "id": "1919-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 940.80,
+    "valor_agua": 381.02,
+    "valor_esgoto": 285.06,
+    "valor_tratamento": 274.72,
+    "consumo_m3": 84
+  },
+  {
+    "id": "1919-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 884.80,
+    "valor_agua": 358.34,
+    "valor_esgoto": 268.09,
+    "valor_tratamento": 258.37,
+    "consumo_m3": 79
+  },
+  {
+    "id": "1919-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 862.40,
+    "valor_agua": 349.27,
+    "valor_esgoto": 261.31,
+    "valor_tratamento": 251.82,
+    "consumo_m3": 77
+  },
+  {
+    "id": "1919-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 929.60,
+    "valor_agua": 376.49,
+    "valor_esgoto": 281.67,
+    "valor_tratamento": 271.44,
+    "consumo_m3": 83
+  },
+  {
+    "id": "1919-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 996.80,
+    "valor_agua": 403.70,
+    "valor_esgoto": 302.03,
+    "valor_tratamento": 291.07,
+    "consumo_m3": 89
+  },
+  {
+    "id": "1919-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1052.80,
+    "valor_agua": 426.38,
+    "valor_esgoto": 319.00,
+    "valor_tratamento": 307.42,
+    "consumo_m3": 94
+  },
+  {
+    "id": "1919-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1097.60,
+    "valor_agua": 444.53,
+    "valor_esgoto": 332.57,
+    "valor_tratamento": 320.50,
+    "consumo_m3": 98
+  },
+  {
+    "id": "1919-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1164.80,
+    "valor_agua": 471.74,
+    "valor_esgoto": 352.93,
+    "valor_tratamento": 340.13,
+    "consumo_m3": 104
+  },
+  {
+    "id": "1920-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1023.50,
+    "valor_agua": 414.52,
+    "valor_esgoto": 310.12,
+    "valor_tratamento": 298.86,
+    "consumo_m3": 89
+  },
+  {
+    "id": "1920-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1115.50,
+    "valor_agua": 451.78,
+    "valor_esgoto": 338.00,
+    "valor_tratamento": 325.72,
+    "consumo_m3": 97
+  },
+  {
+    "id": "1920-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1173.00,
+    "valor_agua": 475.07,
+    "valor_esgoto": 355.42,
+    "valor_tratamento": 342.51,
+    "consumo_m3": 102
+  },
+  {
+    "id": "1920-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1081.00,
+    "valor_agua": 437.81,
+    "valor_esgoto": 327.54,
+    "valor_tratamento": 315.65,
+    "consumo_m3": 94
+  },
+  {
+    "id": "1920-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 977.50,
+    "valor_agua": 395.89,
+    "valor_esgoto": 296.18,
+    "valor_tratamento": 285.43,
+    "consumo_m3": 85
+  },
+  {
+    "id": "1920-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 920.00,
+    "valor_agua": 372.60,
+    "valor_esgoto": 278.76,
+    "valor_tratamento": 268.64,
+    "consumo_m3": 80
+  },
+  {
+    "id": "1920-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 897.00,
+    "valor_agua": 363.29,
+    "valor_esgoto": 271.79,
+    "valor_tratamento": 261.92,
+    "consumo_m3": 78
+  },
+  {
+    "id": "1920-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 966.00,
+    "valor_agua": 391.23,
+    "valor_esgoto": 292.70,
+    "valor_tratamento": 282.07,
+    "consumo_m3": 84
+  },
+  {
+    "id": "1920-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1035.00,
+    "valor_agua": 419.18,
+    "valor_esgoto": 313.61,
+    "valor_tratamento": 302.21,
+    "consumo_m3": 90
+  },
+  {
+    "id": "1920-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1092.50,
+    "valor_agua": 442.46,
+    "valor_esgoto": 331.03,
+    "valor_tratamento": 319.01,
+    "consumo_m3": 95
+  },
+  {
+    "id": "1920-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1138.50,
+    "valor_agua": 461.09,
+    "valor_esgoto": 344.97,
+    "valor_tratamento": 332.44,
+    "consumo_m3": 99
+  },
+  {
+    "id": "1920-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1207.50,
+    "valor_agua": 489.04,
+    "valor_esgoto": 365.87,
+    "valor_tratamento": 352.59,
+    "consumo_m3": 105
+  },
+  {
+    "id": "1921-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1062.00,
+    "valor_agua": 430.11,
+    "valor_esgoto": 321.79,
+    "valor_tratamento": 310.10,
+    "consumo_m3": 90
+  },
+  {
+    "id": "1921-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1156.40,
+    "valor_agua": 468.34,
+    "valor_esgoto": 350.39,
+    "valor_tratamento": 337.67,
+    "consumo_m3": 98
+  },
+  {
+    "id": "1921-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1215.40,
+    "valor_agua": 492.24,
+    "valor_esgoto": 368.27,
+    "valor_tratamento": 354.89,
+    "consumo_m3": 103
+  },
+  {
+    "id": "1921-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1121.00,
+    "valor_agua": 454.01,
+    "valor_esgoto": 339.66,
+    "valor_tratamento": 327.33,
+    "consumo_m3": 95
+  },
+  {
+    "id": "1921-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1014.80,
+    "valor_agua": 410.99,
+    "valor_esgoto": 307.48,
+    "valor_tratamento": 296.33,
+    "consumo_m3": 86
+  },
+  {
+    "id": "1921-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 955.80,
+    "valor_agua": 387.10,
+    "valor_esgoto": 289.61,
+    "valor_tratamento": 279.09,
+    "consumo_m3": 81
+  },
+  {
+    "id": "1921-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 932.20,
+    "valor_agua": 377.54,
+    "valor_esgoto": 282.46,
+    "valor_tratamento": 272.20,
+    "consumo_m3": 79
+  },
+  {
+    "id": "1921-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1003.00,
+    "valor_agua": 406.22,
+    "valor_esgoto": 303.91,
+    "valor_tratamento": 292.87,
+    "consumo_m3": 85
+  },
+  {
+    "id": "1921-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1073.80,
+    "valor_agua": 434.89,
+    "valor_esgoto": 325.36,
+    "valor_tratamento": 313.55,
+    "consumo_m3": 91
+  },
+  {
+    "id": "1921-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1132.80,
+    "valor_agua": 458.78,
+    "valor_esgoto": 343.24,
+    "valor_tratamento": 330.78,
+    "consumo_m3": 96
+  },
+  {
+    "id": "1921-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1180.00,
+    "valor_agua": 477.90,
+    "valor_esgoto": 357.54,
+    "valor_tratamento": 344.56,
+    "consumo_m3": 100
+  },
+  {
+    "id": "1921-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1250.80,
+    "valor_agua": 506.57,
+    "valor_esgoto": 378.99,
+    "valor_tratamento": 365.24,
+    "consumo_m3": 106
+  },
+  {
+    "id": "1922-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1101.10,
+    "valor_agua": 445.95,
+    "valor_esgoto": 333.63,
+    "valor_tratamento": 321.52,
+    "consumo_m3": 91
+  },
+  {
+    "id": "1922-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1197.90,
+    "valor_agua": 485.15,
+    "valor_esgoto": 362.96,
+    "valor_tratamento": 349.79,
+    "consumo_m3": 99
+  },
+  {
+    "id": "1922-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1258.40,
+    "valor_agua": 509.65,
+    "valor_esgoto": 381.30,
+    "valor_tratamento": 367.45,
+    "consumo_m3": 104
+  },
+  {
+    "id": "1922-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1161.60,
+    "valor_agua": 470.45,
+    "valor_esgoto": 351.96,
+    "valor_tratamento": 339.19,
+    "consumo_m3": 96
+  },
+  {
+    "id": "1922-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1052.70,
+    "valor_agua": 426.34,
+    "valor_esgoto": 318.97,
+    "valor_tratamento": 307.39,
+    "consumo_m3": 87
+  },
+  {
+    "id": "1922-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 992.20,
+    "valor_agua": 401.84,
+    "valor_esgoto": 300.64,
+    "valor_tratamento": 289.72,
+    "consumo_m3": 82
+  },
+  {
+    "id": "1922-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 968.00,
+    "valor_agua": 392.04,
+    "valor_esgoto": 293.30,
+    "valor_tratamento": 282.66,
+    "consumo_m3": 80
+  },
+  {
+    "id": "1922-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1040.60,
+    "valor_agua": 421.44,
+    "valor_esgoto": 315.30,
+    "valor_tratamento": 303.86,
+    "consumo_m3": 86
+  },
+  {
+    "id": "1922-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1113.20,
+    "valor_agua": 450.85,
+    "valor_esgoto": 337.30,
+    "valor_tratamento": 325.05,
+    "consumo_m3": 92
+  },
+  {
+    "id": "1922-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1173.70,
+    "valor_agua": 475.35,
+    "valor_esgoto": 355.63,
+    "valor_tratamento": 342.72,
+    "consumo_m3": 97
+  },
+  {
+    "id": "1922-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1222.10,
+    "valor_agua": 494.95,
+    "valor_esgoto": 370.30,
+    "valor_tratamento": 356.85,
+    "consumo_m3": 101
+  },
+  {
+    "id": "1922-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1294.70,
+    "valor_agua": 524.35,
+    "valor_esgoto": 392.29,
+    "valor_tratamento": 378.06,
+    "consumo_m3": 107
+  },
+  {
+    "id": "1923-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1140.80,
+    "valor_agua": 462.02,
+    "valor_esgoto": 345.66,
+    "valor_tratamento": 333.12,
+    "consumo_m3": 92
+  },
+  {
+    "id": "1923-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1240.00,
+    "valor_agua": 502.20,
+    "valor_esgoto": 375.72,
+    "valor_tratamento": 362.08,
+    "consumo_m3": 100
+  },
+  {
+    "id": "1923-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1302.00,
+    "valor_agua": 527.31,
+    "valor_esgoto": 394.51,
+    "valor_tratamento": 380.18,
+    "consumo_m3": 105
+  },
+  {
+    "id": "1923-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1202.80,
+    "valor_agua": 487.13,
+    "valor_esgoto": 364.45,
+    "valor_tratamento": 351.22,
+    "consumo_m3": 97
+  },
+  {
+    "id": "1923-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1091.20,
+    "valor_agua": 441.94,
+    "valor_esgoto": 330.63,
+    "valor_tratamento": 318.63,
+    "consumo_m3": 88
+  },
+  {
+    "id": "1923-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1029.20,
+    "valor_agua": 416.83,
+    "valor_esgoto": 311.85,
+    "valor_tratamento": 300.52,
+    "consumo_m3": 83
+  },
+  {
+    "id": "1923-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1004.40,
+    "valor_agua": 406.78,
+    "valor_esgoto": 304.33,
+    "valor_tratamento": 293.29,
+    "consumo_m3": 81
+  },
+  {
+    "id": "1923-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1078.80,
+    "valor_agua": 436.91,
+    "valor_esgoto": 326.88,
+    "valor_tratamento": 315.01,
+    "consumo_m3": 87
+  },
+  {
+    "id": "1923-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1153.20,
+    "valor_agua": 467.05,
+    "valor_esgoto": 349.42,
+    "valor_tratamento": 336.73,
+    "consumo_m3": 93
+  },
+  {
+    "id": "1923-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1215.20,
+    "valor_agua": 492.16,
+    "valor_esgoto": 368.21,
+    "valor_tratamento": 354.83,
+    "consumo_m3": 98
+  },
+  {
+    "id": "1923-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1264.80,
+    "valor_agua": 512.24,
+    "valor_esgoto": 383.23,
+    "valor_tratamento": 369.33,
+    "consumo_m3": 102
+  },
+  {
+    "id": "1923-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1339.20,
+    "valor_agua": 542.38,
+    "valor_esgoto": 405.78,
+    "valor_tratamento": 391.04,
+    "consumo_m3": 108
+  },
+  {
+    "id": "1924-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1181.10,
+    "valor_agua": 478.35,
+    "valor_esgoto": 357.87,
+    "valor_tratamento": 344.88,
+    "consumo_m3": 93
+  },
+  {
+    "id": "1924-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1282.70,
+    "valor_agua": 519.49,
+    "valor_esgoto": 388.66,
+    "valor_tratamento": 374.55,
+    "consumo_m3": 101
+  },
+  {
+    "id": "1924-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1346.20,
+    "valor_agua": 545.21,
+    "valor_esgoto": 407.90,
+    "valor_tratamento": 393.09,
+    "consumo_m3": 106
+  },
+  {
+    "id": "1924-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1244.60,
+    "valor_agua": 504.06,
+    "valor_esgoto": 377.11,
+    "valor_tratamento": 363.43,
+    "consumo_m3": 98
+  },
+  {
+    "id": "1924-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1130.30,
+    "valor_agua": 457.77,
+    "valor_esgoto": 342.48,
+    "valor_tratamento": 330.05,
+    "consumo_m3": 89
+  },
+  {
+    "id": "1924-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1066.80,
+    "valor_agua": 432.05,
+    "valor_esgoto": 323.24,
+    "valor_tratamento": 311.51,
+    "consumo_m3": 84
+  },
+  {
+    "id": "1924-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1041.40,
+    "valor_agua": 421.77,
+    "valor_esgoto": 315.54,
+    "valor_tratamento": 304.09,
+    "consumo_m3": 82
+  },
+  {
+    "id": "1924-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1117.60,
+    "valor_agua": 452.63,
+    "valor_esgoto": 338.63,
+    "valor_tratamento": 326.34,
+    "consumo_m3": 88
+  },
+  {
+    "id": "1924-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1193.80,
+    "valor_agua": 483.49,
+    "valor_esgoto": 361.72,
+    "valor_tratamento": 348.59,
+    "consumo_m3": 94
+  },
+  {
+    "id": "1924-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1257.30,
+    "valor_agua": 509.21,
+    "valor_esgoto": 380.96,
+    "valor_tratamento": 367.13,
+    "consumo_m3": 99
+  },
+  {
+    "id": "1924-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1308.10,
+    "valor_agua": 529.78,
+    "valor_esgoto": 396.35,
+    "valor_tratamento": 381.97,
+    "consumo_m3": 103
+  },
+  {
+    "id": "1924-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1384.30,
+    "valor_agua": 560.64,
+    "valor_esgoto": 419.44,
+    "valor_tratamento": 404.22,
+    "consumo_m3": 109
+  },
+  {
+    "id": "1925-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1222.00,
+    "valor_agua": 494.91,
+    "valor_esgoto": 370.27,
+    "valor_tratamento": 356.82,
+    "consumo_m3": 94
+  },
+  {
+    "id": "1925-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1326.00,
+    "valor_agua": 537.03,
+    "valor_esgoto": 401.78,
+    "valor_tratamento": 387.19,
+    "consumo_m3": 102
+  },
+  {
+    "id": "1925-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1391.00,
+    "valor_agua": 563.36,
+    "valor_esgoto": 421.47,
+    "valor_tratamento": 406.17,
+    "consumo_m3": 107
+  },
+  {
+    "id": "1925-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1287.00,
+    "valor_agua": 521.24,
+    "valor_esgoto": 389.96,
+    "valor_tratamento": 375.80,
+    "consumo_m3": 99
+  },
+  {
+    "id": "1925-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1170.00,
+    "valor_agua": 473.85,
+    "valor_esgoto": 354.51,
+    "valor_tratamento": 341.64,
+    "consumo_m3": 90
+  },
+  {
+    "id": "1925-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1105.00,
+    "valor_agua": 447.53,
+    "valor_esgoto": 334.82,
+    "valor_tratamento": 322.65,
+    "consumo_m3": 85
+  },
+  {
+    "id": "1925-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1079.00,
+    "valor_agua": 437.00,
+    "valor_esgoto": 326.94,
+    "valor_tratamento": 315.06,
+    "consumo_m3": 83
+  },
+  {
+    "id": "1925-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1157.00,
+    "valor_agua": 468.59,
+    "valor_esgoto": 350.57,
+    "valor_tratamento": 337.84,
+    "consumo_m3": 89
+  },
+  {
+    "id": "1925-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1235.00,
+    "valor_agua": 500.18,
+    "valor_esgoto": 374.21,
+    "valor_tratamento": 360.61,
+    "consumo_m3": 95
+  },
+  {
+    "id": "1925-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1300.00,
+    "valor_agua": 526.50,
+    "valor_esgoto": 393.90,
+    "valor_tratamento": 379.60,
+    "consumo_m3": 100
+  },
+  {
+    "id": "1925-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1352.00,
+    "valor_agua": 547.56,
+    "valor_esgoto": 409.66,
+    "valor_tratamento": 394.78,
+    "consumo_m3": 104
+  },
+  {
+    "id": "1925-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1430.00,
+    "valor_agua": 579.15,
+    "valor_esgoto": 433.29,
+    "valor_tratamento": 417.56,
+    "consumo_m3": 110
+  },
+  {
+    "id": "1926-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1263.50,
+    "valor_agua": 511.72,
+    "valor_esgoto": 382.84,
+    "valor_tratamento": 368.94,
+    "consumo_m3": 95
+  },
+  {
+    "id": "1926-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1369.90,
+    "valor_agua": 554.81,
+    "valor_esgoto": 415.08,
+    "valor_tratamento": 400.01,
+    "consumo_m3": 103
+  },
+  {
+    "id": "1926-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1436.40,
+    "valor_agua": 581.74,
+    "valor_esgoto": 435.23,
+    "valor_tratamento": 419.43,
+    "consumo_m3": 108
+  },
+  {
+    "id": "1926-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1330.00,
+    "valor_agua": 538.65,
+    "valor_esgoto": 402.99,
+    "valor_tratamento": 388.36,
+    "consumo_m3": 100
+  },
+  {
+    "id": "1926-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1210.30,
+    "valor_agua": 490.17,
+    "valor_esgoto": 366.72,
+    "valor_tratamento": 353.41,
+    "consumo_m3": 91
+  },
+  {
+    "id": "1926-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1143.80,
+    "valor_agua": 463.24,
+    "valor_esgoto": 346.57,
+    "valor_tratamento": 333.99,
+    "consumo_m3": 86
+  },
+  {
+    "id": "1926-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1117.20,
+    "valor_agua": 452.47,
+    "valor_esgoto": 338.51,
+    "valor_tratamento": 326.22,
+    "consumo_m3": 84
+  },
+  {
+    "id": "1926-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1197.00,
+    "valor_agua": 484.79,
+    "valor_esgoto": 362.69,
+    "valor_tratamento": 349.52,
+    "consumo_m3": 90
+  },
+  {
+    "id": "1926-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1276.80,
+    "valor_agua": 517.10,
+    "valor_esgoto": 386.87,
+    "valor_tratamento": 372.83,
+    "consumo_m3": 96
+  },
+  {
+    "id": "1926-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1343.30,
+    "valor_agua": 544.04,
+    "valor_esgoto": 407.02,
+    "valor_tratamento": 392.24,
+    "consumo_m3": 101
+  },
+  {
+    "id": "1926-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1396.50,
+    "valor_agua": 565.58,
+    "valor_esgoto": 423.14,
+    "valor_tratamento": 407.78,
+    "consumo_m3": 105
+  },
+  {
+    "id": "1926-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1476.30,
+    "valor_agua": 597.90,
+    "valor_esgoto": 447.32,
+    "valor_tratamento": 431.08,
+    "consumo_m3": 111
+  },
+  {
+    "id": "1927-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1305.60,
+    "valor_agua": 528.77,
+    "valor_esgoto": 395.60,
+    "valor_tratamento": 381.23,
+    "consumo_m3": 96
+  },
+  {
+    "id": "1927-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1414.40,
+    "valor_agua": 572.83,
+    "valor_esgoto": 428.56,
+    "valor_tratamento": 413.01,
+    "consumo_m3": 104
+  },
+  {
+    "id": "1927-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1482.40,
+    "valor_agua": 600.37,
+    "valor_esgoto": 449.17,
+    "valor_tratamento": 432.86,
+    "consumo_m3": 109
+  },
+  {
+    "id": "1927-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1373.60,
+    "valor_agua": 556.31,
+    "valor_esgoto": 416.20,
+    "valor_tratamento": 401.09,
+    "consumo_m3": 101
+  },
+  {
+    "id": "1927-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1251.20,
+    "valor_agua": 506.74,
+    "valor_esgoto": 379.11,
+    "valor_tratamento": 365.35,
+    "consumo_m3": 92
+  },
+  {
+    "id": "1927-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1183.20,
+    "valor_agua": 479.20,
+    "valor_esgoto": 358.51,
+    "valor_tratamento": 345.49,
+    "consumo_m3": 87
+  },
+  {
+    "id": "1927-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1156.00,
+    "valor_agua": 468.18,
+    "valor_esgoto": 350.27,
+    "valor_tratamento": 337.55,
+    "consumo_m3": 85
+  },
+  {
+    "id": "1927-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1237.60,
+    "valor_agua": 501.23,
+    "valor_esgoto": 374.99,
+    "valor_tratamento": 361.38,
+    "consumo_m3": 91
+  },
+  {
+    "id": "1927-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1319.20,
+    "valor_agua": 534.28,
+    "valor_esgoto": 399.72,
+    "valor_tratamento": 385.20,
+    "consumo_m3": 97
+  },
+  {
+    "id": "1927-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1387.20,
+    "valor_agua": 561.82,
+    "valor_esgoto": 420.32,
+    "valor_tratamento": 405.06,
+    "consumo_m3": 102
+  },
+  {
+    "id": "1927-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1441.60,
+    "valor_agua": 583.85,
+    "valor_esgoto": 436.80,
+    "valor_tratamento": 420.95,
+    "consumo_m3": 106
+  },
+  {
+    "id": "1927-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1523.20,
+    "valor_agua": 616.90,
+    "valor_esgoto": 461.53,
+    "valor_tratamento": 444.77,
+    "consumo_m3": 112
+  },
+  {
+    "id": "1928-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1348.30,
+    "valor_agua": 546.06,
+    "valor_esgoto": 408.53,
+    "valor_tratamento": 393.71,
+    "consumo_m3": 97
+  },
+  {
+    "id": "1928-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1459.50,
+    "valor_agua": 591.10,
+    "valor_esgoto": 442.23,
+    "valor_tratamento": 426.17,
+    "consumo_m3": 105
+  },
+  {
+    "id": "1928-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1529.00,
+    "valor_agua": 619.25,
+    "valor_esgoto": 463.29,
+    "valor_tratamento": 446.46,
+    "consumo_m3": 110
+  },
+  {
+    "id": "1928-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1417.80,
+    "valor_agua": 574.21,
+    "valor_esgoto": 429.59,
+    "valor_tratamento": 414.00,
+    "consumo_m3": 102
+  },
+  {
+    "id": "1928-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1292.70,
+    "valor_agua": 523.54,
+    "valor_esgoto": 391.69,
+    "valor_tratamento": 377.47,
+    "consumo_m3": 93
+  },
+  {
+    "id": "1928-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1223.20,
+    "valor_agua": 495.40,
+    "valor_esgoto": 370.63,
+    "valor_tratamento": 357.17,
+    "consumo_m3": 88
+  },
+  {
+    "id": "1928-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1195.40,
+    "valor_agua": 484.14,
+    "valor_esgoto": 362.21,
+    "valor_tratamento": 349.05,
+    "consumo_m3": 86
+  },
+  {
+    "id": "1928-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1278.80,
+    "valor_agua": 517.91,
+    "valor_esgoto": 387.48,
+    "valor_tratamento": 373.41,
+    "consumo_m3": 92
+  },
+  {
+    "id": "1928-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1362.20,
+    "valor_agua": 551.69,
+    "valor_esgoto": 412.75,
+    "valor_tratamento": 397.76,
+    "consumo_m3": 98
+  },
+  {
+    "id": "1928-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1431.70,
+    "valor_agua": 579.84,
+    "valor_esgoto": 433.81,
+    "valor_tratamento": 418.05,
+    "consumo_m3": 103
+  },
+  {
+    "id": "1928-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1487.30,
+    "valor_agua": 602.36,
+    "valor_esgoto": 450.65,
+    "valor_tratamento": 434.29,
+    "consumo_m3": 107
+  },
+  {
+    "id": "1928-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1570.70,
+    "valor_agua": 636.13,
+    "valor_esgoto": 475.92,
+    "valor_tratamento": 458.65,
+    "consumo_m3": 113
+  },
+  {
+    "id": "1929-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1391.60,
+    "valor_agua": 563.60,
+    "valor_esgoto": 421.65,
+    "valor_tratamento": 406.35,
+    "consumo_m3": 98
+  },
+  {
+    "id": "1929-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1505.20,
+    "valor_agua": 609.61,
+    "valor_esgoto": 456.08,
+    "valor_tratamento": 439.51,
+    "consumo_m3": 106
+  },
+  {
+    "id": "1929-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1576.20,
+    "valor_agua": 638.36,
+    "valor_esgoto": 477.59,
+    "valor_tratamento": 460.25,
+    "consumo_m3": 111
+  },
+  {
+    "id": "1929-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1462.60,
+    "valor_agua": 592.35,
+    "valor_esgoto": 443.17,
+    "valor_tratamento": 427.08,
+    "consumo_m3": 103
+  },
+  {
+    "id": "1929-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1334.80,
+    "valor_agua": 540.59,
+    "valor_esgoto": 404.44,
+    "valor_tratamento": 389.77,
+    "consumo_m3": 94
+  },
+  {
+    "id": "1929-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1263.80,
+    "valor_agua": 511.84,
+    "valor_esgoto": 382.93,
+    "valor_tratamento": 369.03,
+    "consumo_m3": 89
+  },
+  {
+    "id": "1929-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1235.40,
+    "valor_agua": 500.34,
+    "valor_esgoto": 374.33,
+    "valor_tratamento": 360.73,
+    "consumo_m3": 87
+  },
+  {
+    "id": "1929-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1320.60,
+    "valor_agua": 534.84,
+    "valor_esgoto": 400.14,
+    "valor_tratamento": 385.62,
+    "consumo_m3": 93
+  },
+  {
+    "id": "1929-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1405.80,
+    "valor_agua": 569.35,
+    "valor_esgoto": 425.96,
+    "valor_tratamento": 410.49,
+    "consumo_m3": 99
+  },
+  {
+    "id": "1929-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1476.80,
+    "valor_agua": 598.10,
+    "valor_esgoto": 447.47,
+    "valor_tratamento": 431.23,
+    "consumo_m3": 104
+  },
+  {
+    "id": "1929-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1533.60,
+    "valor_agua": 621.11,
+    "valor_esgoto": 464.68,
+    "valor_tratamento": 447.81,
+    "consumo_m3": 108
+  },
+  {
+    "id": "1929-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1618.80,
+    "valor_agua": 655.61,
+    "valor_esgoto": 490.50,
+    "valor_tratamento": 472.69,
+    "consumo_m3": 114
+  },
+  {
+    "id": "1930-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1435.50,
+    "valor_agua": 581.38,
+    "valor_esgoto": 434.96,
+    "valor_tratamento": 419.16,
+    "consumo_m3": 99
+  },
+  {
+    "id": "1930-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1551.50,
+    "valor_agua": 628.36,
+    "valor_esgoto": 470.10,
+    "valor_tratamento": 453.04,
+    "consumo_m3": 107
+  },
+  {
+    "id": "1930-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1624.00,
+    "valor_agua": 657.72,
+    "valor_esgoto": 492.07,
+    "valor_tratamento": 474.21,
+    "consumo_m3": 112
+  },
+  {
+    "id": "1930-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1508.00,
+    "valor_agua": 610.74,
+    "valor_esgoto": 456.92,
+    "valor_tratamento": 440.34,
+    "consumo_m3": 104
+  },
+  {
+    "id": "1930-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1377.50,
+    "valor_agua": 557.89,
+    "valor_esgoto": 417.38,
+    "valor_tratamento": 402.23,
+    "consumo_m3": 95
+  },
+  {
+    "id": "1930-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1305.00,
+    "valor_agua": 528.53,
+    "valor_esgoto": 395.42,
+    "valor_tratamento": 381.05,
+    "consumo_m3": 90
+  },
+  {
+    "id": "1930-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1276.00,
+    "valor_agua": 516.78,
+    "valor_esgoto": 386.63,
+    "valor_tratamento": 372.59,
+    "consumo_m3": 88
+  },
+  {
+    "id": "1930-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1363.00,
+    "valor_agua": 552.02,
+    "valor_esgoto": 412.99,
+    "valor_tratamento": 397.99,
+    "consumo_m3": 94
+  },
+  {
+    "id": "1930-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1450.00,
+    "valor_agua": 587.25,
+    "valor_esgoto": 439.35,
+    "valor_tratamento": 423.40,
+    "consumo_m3": 100
+  },
+  {
+    "id": "1930-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1522.50,
+    "valor_agua": 616.61,
+    "valor_esgoto": 461.32,
+    "valor_tratamento": 444.57,
+    "consumo_m3": 105
+  },
+  {
+    "id": "1930-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1580.50,
+    "valor_agua": 640.10,
+    "valor_esgoto": 478.89,
+    "valor_tratamento": 461.51,
+    "consumo_m3": 109
+  },
+  {
+    "id": "1930-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1667.50,
+    "valor_agua": 675.34,
+    "valor_esgoto": 505.25,
+    "valor_tratamento": 486.91,
+    "consumo_m3": 115
+  },
+  {
+    "id": "1931-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1480.00,
+    "valor_agua": 599.40,
+    "valor_esgoto": 448.44,
+    "valor_tratamento": 432.16,
+    "consumo_m3": 100
+  },
+  {
+    "id": "1931-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1598.40,
+    "valor_agua": 647.35,
+    "valor_esgoto": 484.32,
+    "valor_tratamento": 466.73,
+    "consumo_m3": 108
+  },
+  {
+    "id": "1931-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1672.40,
+    "valor_agua": 677.32,
+    "valor_esgoto": 506.74,
+    "valor_tratamento": 488.34,
+    "consumo_m3": 113
+  },
+  {
+    "id": "1931-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1554.00,
+    "valor_agua": 629.37,
+    "valor_esgoto": 470.86,
+    "valor_tratamento": 453.77,
+    "consumo_m3": 105
+  },
+  {
+    "id": "1931-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1420.80,
+    "valor_agua": 575.42,
+    "valor_esgoto": 430.50,
+    "valor_tratamento": 414.88,
+    "consumo_m3": 96
+  },
+  {
+    "id": "1931-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1346.80,
+    "valor_agua": 545.45,
+    "valor_esgoto": 408.08,
+    "valor_tratamento": 393.27,
+    "consumo_m3": 91
+  },
+  {
+    "id": "1931-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1317.20,
+    "valor_agua": 533.47,
+    "valor_esgoto": 399.11,
+    "valor_tratamento": 384.62,
+    "consumo_m3": 89
+  },
+  {
+    "id": "1931-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1406.00,
+    "valor_agua": 569.43,
+    "valor_esgoto": 426.02,
+    "valor_tratamento": 410.55,
+    "consumo_m3": 95
+  },
+  {
+    "id": "1931-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1494.80,
+    "valor_agua": 605.39,
+    "valor_esgoto": 452.92,
+    "valor_tratamento": 436.49,
+    "consumo_m3": 101
+  },
+  {
+    "id": "1931-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1568.80,
+    "valor_agua": 635.36,
+    "valor_esgoto": 475.35,
+    "valor_tratamento": 458.09,
+    "consumo_m3": 106
+  },
+  {
+    "id": "1931-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1628.00,
+    "valor_agua": 659.34,
+    "valor_esgoto": 493.28,
+    "valor_tratamento": 475.38,
+    "consumo_m3": 110
+  },
+  {
+    "id": "1931-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1716.80,
+    "valor_agua": 695.30,
+    "valor_esgoto": 520.19,
+    "valor_tratamento": 501.31,
+    "consumo_m3": 116
+  },
+  {
+    "id": "1932-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1525.10,
+    "valor_agua": 617.67,
+    "valor_esgoto": 462.11,
+    "valor_tratamento": 445.32,
+    "consumo_m3": 101
+  },
+  {
+    "id": "1932-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1645.90,
+    "valor_agua": 666.59,
+    "valor_esgoto": 498.71,
+    "valor_tratamento": 480.60,
+    "consumo_m3": 109
+  },
+  {
+    "id": "1932-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1721.40,
+    "valor_agua": 697.17,
+    "valor_esgoto": 521.58,
+    "valor_tratamento": 502.65,
+    "consumo_m3": 114
+  },
+  {
+    "id": "1932-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1600.60,
+    "valor_agua": 648.24,
+    "valor_esgoto": 484.98,
+    "valor_tratamento": 467.38,
+    "consumo_m3": 106
+  },
+  {
+    "id": "1932-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1464.70,
+    "valor_agua": 593.20,
+    "valor_esgoto": 443.80,
+    "valor_tratamento": 427.70,
+    "consumo_m3": 97
+  },
+  {
+    "id": "1932-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1389.20,
+    "valor_agua": 562.63,
+    "valor_esgoto": 420.93,
+    "valor_tratamento": 405.64,
+    "consumo_m3": 92
+  },
+  {
+    "id": "1932-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1359.00,
+    "valor_agua": 550.40,
+    "valor_esgoto": 411.78,
+    "valor_tratamento": 396.82,
+    "consumo_m3": 90
+  },
+  {
+    "id": "1932-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1449.60,
+    "valor_agua": 587.09,
+    "valor_esgoto": 439.23,
+    "valor_tratamento": 423.28,
+    "consumo_m3": 96
+  },
+  {
+    "id": "1932-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1540.20,
+    "valor_agua": 623.78,
+    "valor_esgoto": 466.68,
+    "valor_tratamento": 449.74,
+    "consumo_m3": 102
+  },
+  {
+    "id": "1932-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1615.70,
+    "valor_agua": 654.36,
+    "valor_esgoto": 489.56,
+    "valor_tratamento": 471.78,
+    "consumo_m3": 107
+  },
+  {
+    "id": "1932-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1676.10,
+    "valor_agua": 678.82,
+    "valor_esgoto": 507.86,
+    "valor_tratamento": 489.42,
+    "consumo_m3": 111
+  },
+  {
+    "id": "1932-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1766.70,
+    "valor_agua": 715.51,
+    "valor_esgoto": 535.31,
+    "valor_tratamento": 515.88,
+    "consumo_m3": 117
+  },
+  {
+    "id": "1933-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1570.80,
+    "valor_agua": 636.17,
+    "valor_esgoto": 475.95,
+    "valor_tratamento": 458.68,
+    "consumo_m3": 102
+  },
+  {
+    "id": "1933-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1694.00,
+    "valor_agua": 686.07,
+    "valor_esgoto": 513.28,
+    "valor_tratamento": 494.65,
+    "consumo_m3": 110
+  },
+  {
+    "id": "1933-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1771.00,
+    "valor_agua": 717.26,
+    "valor_esgoto": 536.61,
+    "valor_tratamento": 517.13,
+    "consumo_m3": 115
+  },
+  {
+    "id": "1933-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1647.80,
+    "valor_agua": 667.36,
+    "valor_esgoto": 499.28,
+    "valor_tratamento": 481.16,
+    "consumo_m3": 107
+  },
+  {
+    "id": "1933-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1509.20,
+    "valor_agua": 611.23,
+    "valor_esgoto": 457.29,
+    "valor_tratamento": 440.68,
+    "consumo_m3": 98
+  },
+  {
+    "id": "1933-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1432.20,
+    "valor_agua": 580.04,
+    "valor_esgoto": 433.96,
+    "valor_tratamento": 418.20,
+    "consumo_m3": 93
+  },
+  {
+    "id": "1933-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1401.40,
+    "valor_agua": 567.57,
+    "valor_esgoto": 424.62,
+    "valor_tratamento": 409.21,
+    "consumo_m3": 91
+  },
+  {
+    "id": "1933-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1493.80,
+    "valor_agua": 604.99,
+    "valor_esgoto": 452.62,
+    "valor_tratamento": 436.19,
+    "consumo_m3": 97
+  },
+  {
+    "id": "1933-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1586.20,
+    "valor_agua": 642.41,
+    "valor_esgoto": 480.62,
+    "valor_tratamento": 463.17,
+    "consumo_m3": 103
+  },
+  {
+    "id": "1933-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1663.20,
+    "valor_agua": 673.60,
+    "valor_esgoto": 503.95,
+    "valor_tratamento": 485.65,
+    "consumo_m3": 108
+  },
+  {
+    "id": "1933-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1724.80,
+    "valor_agua": 698.54,
+    "valor_esgoto": 522.61,
+    "valor_tratamento": 503.65,
+    "consumo_m3": 112
+  },
+  {
+    "id": "1933-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1817.20,
+    "valor_agua": 735.97,
+    "valor_esgoto": 550.61,
+    "valor_tratamento": 530.62,
+    "consumo_m3": 118
+  },
+  {
+    "id": "1934-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1617.10,
+    "valor_agua": 654.93,
+    "valor_esgoto": 489.98,
+    "valor_tratamento": 472.19,
+    "consumo_m3": 103
+  },
+  {
+    "id": "1934-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1742.70,
+    "valor_agua": 705.79,
+    "valor_esgoto": 528.04,
+    "valor_tratamento": 508.87,
+    "consumo_m3": 111
+  },
+  {
+    "id": "1934-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1821.20,
+    "valor_agua": 737.59,
+    "valor_esgoto": 551.82,
+    "valor_tratamento": 531.79,
+    "consumo_m3": 116
+  },
+  {
+    "id": "1934-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1695.60,
+    "valor_agua": 686.72,
+    "valor_esgoto": 513.77,
+    "valor_tratamento": 495.11,
+    "consumo_m3": 108
+  },
+  {
+    "id": "1934-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1554.30,
+    "valor_agua": 629.49,
+    "valor_esgoto": 470.95,
+    "valor_tratamento": 453.86,
+    "consumo_m3": 99
+  },
+  {
+    "id": "1934-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1475.80,
+    "valor_agua": 597.70,
+    "valor_esgoto": 447.17,
+    "valor_tratamento": 430.93,
+    "consumo_m3": 94
+  },
+  {
+    "id": "1934-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1444.40,
+    "valor_agua": 584.98,
+    "valor_esgoto": 437.65,
+    "valor_tratamento": 421.77,
+    "consumo_m3": 92
+  },
+  {
+    "id": "1934-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1538.60,
+    "valor_agua": 623.13,
+    "valor_esgoto": 466.20,
+    "valor_tratamento": 449.27,
+    "consumo_m3": 98
+  },
+  {
+    "id": "1934-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1632.80,
+    "valor_agua": 661.28,
+    "valor_esgoto": 494.74,
+    "valor_tratamento": 476.78,
+    "consumo_m3": 104
+  },
+  {
+    "id": "1934-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1711.30,
+    "valor_agua": 693.08,
+    "valor_esgoto": 518.52,
+    "valor_tratamento": 499.70,
+    "consumo_m3": 109
+  },
+  {
+    "id": "1934-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1774.10,
+    "valor_agua": 718.51,
+    "valor_esgoto": 537.55,
+    "valor_tratamento": 518.04,
+    "consumo_m3": 113
+  },
+  {
+    "id": "1934-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1868.30,
+    "valor_agua": 756.66,
+    "valor_esgoto": 566.09,
+    "valor_tratamento": 545.55,
+    "consumo_m3": 119
+  },
+  {
+    "id": "1935-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1664.00,
+    "valor_agua": 673.92,
+    "valor_esgoto": 504.19,
+    "valor_tratamento": 485.89,
+    "consumo_m3": 104
+  },
+  {
+    "id": "1935-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1792.00,
+    "valor_agua": 725.76,
+    "valor_esgoto": 542.98,
+    "valor_tratamento": 523.26,
+    "consumo_m3": 112
+  },
+  {
+    "id": "1935-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1872.00,
+    "valor_agua": 758.16,
+    "valor_esgoto": 567.22,
+    "valor_tratamento": 546.62,
+    "consumo_m3": 117
+  },
+  {
+    "id": "1935-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1744.00,
+    "valor_agua": 706.32,
+    "valor_esgoto": 528.43,
+    "valor_tratamento": 509.25,
+    "consumo_m3": 109
+  },
+  {
+    "id": "1935-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1600.00,
+    "valor_agua": 648.00,
+    "valor_esgoto": 484.80,
+    "valor_tratamento": 467.20,
+    "consumo_m3": 100
+  },
+  {
+    "id": "1935-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1520.00,
+    "valor_agua": 615.60,
+    "valor_esgoto": 460.56,
+    "valor_tratamento": 443.84,
+    "consumo_m3": 95
+  },
+  {
+    "id": "1935-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1488.00,
+    "valor_agua": 602.64,
+    "valor_esgoto": 450.86,
+    "valor_tratamento": 434.50,
+    "consumo_m3": 93
+  },
+  {
+    "id": "1935-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1584.00,
+    "valor_agua": 641.52,
+    "valor_esgoto": 479.95,
+    "valor_tratamento": 462.53,
+    "consumo_m3": 99
+  },
+  {
+    "id": "1935-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1680.00,
+    "valor_agua": 680.40,
+    "valor_esgoto": 509.04,
+    "valor_tratamento": 490.56,
+    "consumo_m3": 105
+  },
+  {
+    "id": "1935-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1760.00,
+    "valor_agua": 712.80,
+    "valor_esgoto": 533.28,
+    "valor_tratamento": 513.92,
+    "consumo_m3": 110
+  },
+  {
+    "id": "1935-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1824.00,
+    "valor_agua": 738.72,
+    "valor_esgoto": 552.67,
+    "valor_tratamento": 532.61,
+    "consumo_m3": 114
+  },
+  {
+    "id": "1935-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1920.00,
+    "valor_agua": 777.60,
+    "valor_esgoto": 581.76,
+    "valor_tratamento": 560.64,
+    "consumo_m3": 120
+  },
+  {
+    "id": "1936-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1711.50,
+    "valor_agua": 693.16,
+    "valor_esgoto": 518.58,
+    "valor_tratamento": 499.76,
+    "consumo_m3": 105
+  },
+  {
+    "id": "1936-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1841.90,
+    "valor_agua": 745.97,
+    "valor_esgoto": 558.10,
+    "valor_tratamento": 537.83,
+    "consumo_m3": 113
+  },
+  {
+    "id": "1936-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1923.40,
+    "valor_agua": 778.98,
+    "valor_esgoto": 582.79,
+    "valor_tratamento": 561.63,
+    "consumo_m3": 118
+  },
+  {
+    "id": "1936-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1793.00,
+    "valor_agua": 726.17,
+    "valor_esgoto": 543.28,
+    "valor_tratamento": 523.55,
+    "consumo_m3": 110
+  },
+  {
+    "id": "1936-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1646.30,
+    "valor_agua": 666.75,
+    "valor_esgoto": 498.83,
+    "valor_tratamento": 480.72,
+    "consumo_m3": 101
+  },
+  {
+    "id": "1936-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1564.80,
+    "valor_agua": 633.74,
+    "valor_esgoto": 474.13,
+    "valor_tratamento": 456.93,
+    "consumo_m3": 96
+  },
+  {
+    "id": "1936-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1532.20,
+    "valor_agua": 620.54,
+    "valor_esgoto": 464.26,
+    "valor_tratamento": 447.40,
+    "consumo_m3": 94
+  },
+  {
+    "id": "1936-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1630.00,
+    "valor_agua": 660.15,
+    "valor_esgoto": 493.89,
+    "valor_tratamento": 475.96,
+    "consumo_m3": 100
+  },
+  {
+    "id": "1936-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1727.80,
+    "valor_agua": 699.76,
+    "valor_esgoto": 523.52,
+    "valor_tratamento": 504.52,
+    "consumo_m3": 106
+  },
+  {
+    "id": "1936-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1809.30,
+    "valor_agua": 732.77,
+    "valor_esgoto": 548.22,
+    "valor_tratamento": 528.31,
+    "consumo_m3": 111
+  },
+  {
+    "id": "1936-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1874.50,
+    "valor_agua": 759.17,
+    "valor_esgoto": 567.97,
+    "valor_tratamento": 547.36,
+    "consumo_m3": 115
+  },
+  {
+    "id": "1936-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1972.30,
+    "valor_agua": 798.78,
+    "valor_esgoto": 597.61,
+    "valor_tratamento": 575.91,
+    "consumo_m3": 121
+  },
+  {
+    "id": "1937-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1759.60,
+    "valor_agua": 712.64,
+    "valor_esgoto": 533.16,
+    "valor_tratamento": 513.80,
+    "consumo_m3": 106
+  },
+  {
+    "id": "1937-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1892.40,
+    "valor_agua": 766.42,
+    "valor_esgoto": 573.40,
+    "valor_tratamento": 552.58,
+    "consumo_m3": 114
+  },
+  {
+    "id": "1937-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1975.40,
+    "valor_agua": 800.04,
+    "valor_esgoto": 598.55,
+    "valor_tratamento": 576.81,
+    "consumo_m3": 119
+  },
+  {
+    "id": "1937-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1842.60,
+    "valor_agua": 746.25,
+    "valor_esgoto": 558.31,
+    "valor_tratamento": 538.04,
+    "consumo_m3": 111
+  },
+  {
+    "id": "1937-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1693.20,
+    "valor_agua": 685.75,
+    "valor_esgoto": 513.04,
+    "valor_tratamento": 494.41,
+    "consumo_m3": 102
+  },
+  {
+    "id": "1937-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1610.20,
+    "valor_agua": 652.13,
+    "valor_esgoto": 487.89,
+    "valor_tratamento": 470.18,
+    "consumo_m3": 97
+  },
+  {
+    "id": "1937-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1577.00,
+    "valor_agua": 638.69,
+    "valor_esgoto": 477.83,
+    "valor_tratamento": 460.48,
+    "consumo_m3": 95
+  },
+  {
+    "id": "1937-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1676.60,
+    "valor_agua": 679.02,
+    "valor_esgoto": 508.01,
+    "valor_tratamento": 489.57,
+    "consumo_m3": 101
+  },
+  {
+    "id": "1937-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1776.20,
+    "valor_agua": 719.36,
+    "valor_esgoto": 538.19,
+    "valor_tratamento": 518.65,
+    "consumo_m3": 107
+  },
+  {
+    "id": "1937-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1859.20,
+    "valor_agua": 752.98,
+    "valor_esgoto": 563.34,
+    "valor_tratamento": 542.88,
+    "consumo_m3": 112
+  },
+  {
+    "id": "1937-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1925.60,
+    "valor_agua": 779.87,
+    "valor_esgoto": 583.46,
+    "valor_tratamento": 562.27,
+    "consumo_m3": 116
+  },
+  {
+    "id": "1937-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2025.20,
+    "valor_agua": 820.21,
+    "valor_esgoto": 613.64,
+    "valor_tratamento": 591.35,
+    "consumo_m3": 122
+  },
+  {
+    "id": "1938-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1808.30,
+    "valor_agua": 732.36,
+    "valor_esgoto": 547.91,
+    "valor_tratamento": 528.03,
+    "consumo_m3": 107
+  },
+  {
+    "id": "1938-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1943.50,
+    "valor_agua": 787.12,
+    "valor_esgoto": 588.88,
+    "valor_tratamento": 567.50,
+    "consumo_m3": 115
+  },
+  {
+    "id": "1938-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2028.00,
+    "valor_agua": 821.34,
+    "valor_esgoto": 614.48,
+    "valor_tratamento": 592.18,
+    "consumo_m3": 120
+  },
+  {
+    "id": "1938-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1892.80,
+    "valor_agua": 766.58,
+    "valor_esgoto": 573.52,
+    "valor_tratamento": 552.70,
+    "consumo_m3": 112
+  },
+  {
+    "id": "1938-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1740.70,
+    "valor_agua": 704.98,
+    "valor_esgoto": 527.43,
+    "valor_tratamento": 508.29,
+    "consumo_m3": 103
+  },
+  {
+    "id": "1938-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1656.20,
+    "valor_agua": 670.76,
+    "valor_esgoto": 501.83,
+    "valor_tratamento": 483.61,
+    "consumo_m3": 98
+  },
+  {
+    "id": "1938-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1622.40,
+    "valor_agua": 657.07,
+    "valor_esgoto": 491.59,
+    "valor_tratamento": 473.74,
+    "consumo_m3": 96
+  },
+  {
+    "id": "1938-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1723.80,
+    "valor_agua": 698.14,
+    "valor_esgoto": 522.31,
+    "valor_tratamento": 503.35,
+    "consumo_m3": 102
+  },
+  {
+    "id": "1938-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1825.20,
+    "valor_agua": 739.21,
+    "valor_esgoto": 553.04,
+    "valor_tratamento": 532.95,
+    "consumo_m3": 108
+  },
+  {
+    "id": "1938-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1909.70,
+    "valor_agua": 773.43,
+    "valor_esgoto": 578.64,
+    "valor_tratamento": 557.63,
+    "consumo_m3": 113
+  },
+  {
+    "id": "1938-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1977.30,
+    "valor_agua": 800.81,
+    "valor_esgoto": 599.12,
+    "valor_tratamento": 577.37,
+    "consumo_m3": 117
+  },
+  {
+    "id": "1938-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2078.70,
+    "valor_agua": 841.87,
+    "valor_esgoto": 629.85,
+    "valor_tratamento": 606.98,
+    "consumo_m3": 123
+  },
+  {
+    "id": "1939-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1857.60,
+    "valor_agua": 752.33,
+    "valor_esgoto": 562.85,
+    "valor_tratamento": 542.42,
+    "consumo_m3": 108
+  },
+  {
+    "id": "1939-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1995.20,
+    "valor_agua": 808.06,
+    "valor_esgoto": 604.55,
+    "valor_tratamento": 582.59,
+    "consumo_m3": 116
+  },
+  {
+    "id": "1939-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2081.20,
+    "valor_agua": 842.89,
+    "valor_esgoto": 630.60,
+    "valor_tratamento": 607.71,
+    "consumo_m3": 121
+  },
+  {
+    "id": "1939-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1943.60,
+    "valor_agua": 787.16,
+    "valor_esgoto": 588.91,
+    "valor_tratamento": 567.53,
+    "consumo_m3": 113
+  },
+  {
+    "id": "1939-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1788.80,
+    "valor_agua": 724.46,
+    "valor_esgoto": 542.01,
+    "valor_tratamento": 522.33,
+    "consumo_m3": 104
+  },
+  {
+    "id": "1939-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1702.80,
+    "valor_agua": 689.63,
+    "valor_esgoto": 515.95,
+    "valor_tratamento": 497.22,
+    "consumo_m3": 99
+  },
+  {
+    "id": "1939-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1668.40,
+    "valor_agua": 675.70,
+    "valor_esgoto": 505.53,
+    "valor_tratamento": 487.17,
+    "consumo_m3": 97
+  },
+  {
+    "id": "1939-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1771.60,
+    "valor_agua": 717.50,
+    "valor_esgoto": 536.79,
+    "valor_tratamento": 517.31,
+    "consumo_m3": 103
+  },
+  {
+    "id": "1939-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1874.80,
+    "valor_agua": 759.29,
+    "valor_esgoto": 568.06,
+    "valor_tratamento": 547.45,
+    "consumo_m3": 109
+  },
+  {
+    "id": "1939-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1960.80,
+    "valor_agua": 794.12,
+    "valor_esgoto": 594.12,
+    "valor_tratamento": 572.56,
+    "consumo_m3": 114
+  },
+  {
+    "id": "1939-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2029.60,
+    "valor_agua": 821.99,
+    "valor_esgoto": 614.97,
+    "valor_tratamento": 592.64,
+    "consumo_m3": 118
+  },
+  {
+    "id": "1939-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2132.80,
+    "valor_agua": 863.78,
+    "valor_esgoto": 646.24,
+    "valor_tratamento": 622.78,
+    "consumo_m3": 124
+  },
+  {
+    "id": "1940-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1907.50,
+    "valor_agua": 772.54,
+    "valor_esgoto": 577.97,
+    "valor_tratamento": 556.99,
+    "consumo_m3": 109
+  },
+  {
+    "id": "1940-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2047.50,
+    "valor_agua": 829.24,
+    "valor_esgoto": 620.39,
+    "valor_tratamento": 597.87,
+    "consumo_m3": 117
+  },
+  {
+    "id": "1940-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2135.00,
+    "valor_agua": 864.68,
+    "valor_esgoto": 646.91,
+    "valor_tratamento": 623.41,
+    "consumo_m3": 122
+  },
+  {
+    "id": "1940-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1995.00,
+    "valor_agua": 807.98,
+    "valor_esgoto": 604.49,
+    "valor_tratamento": 582.53,
+    "consumo_m3": 114
+  },
+  {
+    "id": "1940-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1837.50,
+    "valor_agua": 744.19,
+    "valor_esgoto": 556.76,
+    "valor_tratamento": 536.55,
+    "consumo_m3": 105
+  },
+  {
+    "id": "1940-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1750.00,
+    "valor_agua": 708.75,
+    "valor_esgoto": 530.25,
+    "valor_tratamento": 511.00,
+    "consumo_m3": 100
+  },
+  {
+    "id": "1940-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1715.00,
+    "valor_agua": 694.58,
+    "valor_esgoto": 519.65,
+    "valor_tratamento": 500.77,
+    "consumo_m3": 98
+  },
+  {
+    "id": "1940-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1820.00,
+    "valor_agua": 737.10,
+    "valor_esgoto": 551.46,
+    "valor_tratamento": 531.44,
+    "consumo_m3": 104
+  },
+  {
+    "id": "1940-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1925.00,
+    "valor_agua": 779.63,
+    "valor_esgoto": 583.28,
+    "valor_tratamento": 562.09,
+    "consumo_m3": 110
+  },
+  {
+    "id": "1940-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2012.50,
+    "valor_agua": 815.06,
+    "valor_esgoto": 609.79,
+    "valor_tratamento": 587.65,
+    "consumo_m3": 115
+  },
+  {
+    "id": "1940-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2082.50,
+    "valor_agua": 843.41,
+    "valor_esgoto": 631.00,
+    "valor_tratamento": 608.09,
+    "consumo_m3": 119
+  },
+  {
+    "id": "1940-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2187.50,
+    "valor_agua": 885.94,
+    "valor_esgoto": 662.81,
+    "valor_tratamento": 638.75,
+    "consumo_m3": 125
+  },
+  {
+    "id": "1941-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1958.00,
+    "valor_agua": 792.99,
+    "valor_esgoto": 593.27,
+    "valor_tratamento": 571.74,
+    "consumo_m3": 110
+  },
+  {
+    "id": "1941-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2100.40,
+    "valor_agua": 850.66,
+    "valor_esgoto": 636.42,
+    "valor_tratamento": 613.32,
+    "consumo_m3": 118
+  },
+  {
+    "id": "1941-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2189.40,
+    "valor_agua": 886.71,
+    "valor_esgoto": 663.39,
+    "valor_tratamento": 639.30,
+    "consumo_m3": 123
+  },
+  {
+    "id": "1941-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2047.00,
+    "valor_agua": 829.04,
+    "valor_esgoto": 620.24,
+    "valor_tratamento": 597.72,
+    "consumo_m3": 115
+  },
+  {
+    "id": "1941-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1886.80,
+    "valor_agua": 764.15,
+    "valor_esgoto": 571.70,
+    "valor_tratamento": 550.95,
+    "consumo_m3": 106
+  },
+  {
+    "id": "1941-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1797.80,
+    "valor_agua": 728.11,
+    "valor_esgoto": 544.73,
+    "valor_tratamento": 524.96,
+    "consumo_m3": 101
+  },
+  {
+    "id": "1941-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1762.20,
+    "valor_agua": 713.69,
+    "valor_esgoto": 533.95,
+    "valor_tratamento": 514.56,
+    "consumo_m3": 99
+  },
+  {
+    "id": "1941-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1869.00,
+    "valor_agua": 756.95,
+    "valor_esgoto": 566.31,
+    "valor_tratamento": 545.74,
+    "consumo_m3": 105
+  },
+  {
+    "id": "1941-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1975.80,
+    "valor_agua": 800.20,
+    "valor_esgoto": 598.67,
+    "valor_tratamento": 576.93,
+    "consumo_m3": 111
+  },
+  {
+    "id": "1941-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2064.80,
+    "valor_agua": 836.24,
+    "valor_esgoto": 625.63,
+    "valor_tratamento": 602.93,
+    "consumo_m3": 116
+  },
+  {
+    "id": "1941-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2136.00,
+    "valor_agua": 865.08,
+    "valor_esgoto": 647.21,
+    "valor_tratamento": 623.71,
+    "consumo_m3": 120
+  },
+  {
+    "id": "1941-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2242.80,
+    "valor_agua": 908.33,
+    "valor_esgoto": 679.57,
+    "valor_tratamento": 654.90,
+    "consumo_m3": 126
+  },
+  {
+    "id": "1942-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2009.10,
+    "valor_agua": 813.69,
+    "valor_esgoto": 608.76,
+    "valor_tratamento": 586.65,
+    "consumo_m3": 111
+  },
+  {
+    "id": "1942-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2153.90,
+    "valor_agua": 872.33,
+    "valor_esgoto": 652.63,
+    "valor_tratamento": 628.94,
+    "consumo_m3": 119
+  },
+  {
+    "id": "1942-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2244.40,
+    "valor_agua": 908.98,
+    "valor_esgoto": 680.05,
+    "valor_tratamento": 655.37,
+    "consumo_m3": 124
+  },
+  {
+    "id": "1942-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2099.60,
+    "valor_agua": 850.34,
+    "valor_esgoto": 636.18,
+    "valor_tratamento": 613.08,
+    "consumo_m3": 116
+  },
+  {
+    "id": "1942-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1936.70,
+    "valor_agua": 784.36,
+    "valor_esgoto": 586.82,
+    "valor_tratamento": 565.52,
+    "consumo_m3": 107
+  },
+  {
+    "id": "1942-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1846.20,
+    "valor_agua": 747.71,
+    "valor_esgoto": 559.40,
+    "valor_tratamento": 539.09,
+    "consumo_m3": 102
+  },
+  {
+    "id": "1942-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1810.00,
+    "valor_agua": 733.05,
+    "valor_esgoto": 548.43,
+    "valor_tratamento": 528.52,
+    "consumo_m3": 100
+  },
+  {
+    "id": "1942-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1918.60,
+    "valor_agua": 777.03,
+    "valor_esgoto": 581.34,
+    "valor_tratamento": 560.23,
+    "consumo_m3": 106
+  },
+  {
+    "id": "1942-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2027.20,
+    "valor_agua": 821.02,
+    "valor_esgoto": 614.24,
+    "valor_tratamento": 591.94,
+    "consumo_m3": 112
+  },
+  {
+    "id": "1942-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2117.70,
+    "valor_agua": 857.67,
+    "valor_esgoto": 641.66,
+    "valor_tratamento": 618.37,
+    "consumo_m3": 117
+  },
+  {
+    "id": "1942-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2190.10,
+    "valor_agua": 886.99,
+    "valor_esgoto": 663.60,
+    "valor_tratamento": 639.51,
+    "consumo_m3": 121
+  },
+  {
+    "id": "1942-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2298.70,
+    "valor_agua": 930.97,
+    "valor_esgoto": 696.51,
+    "valor_tratamento": 671.22,
+    "consumo_m3": 127
+  },
+  {
+    "id": "1943-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2060.80,
+    "valor_agua": 834.62,
+    "valor_esgoto": 624.42,
+    "valor_tratamento": 601.76,
+    "consumo_m3": 112
+  },
+  {
+    "id": "1943-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2208.00,
+    "valor_agua": 894.24,
+    "valor_esgoto": 669.02,
+    "valor_tratamento": 644.74,
+    "consumo_m3": 120
+  },
+  {
+    "id": "1943-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2300.00,
+    "valor_agua": 931.50,
+    "valor_esgoto": 696.90,
+    "valor_tratamento": 671.60,
+    "consumo_m3": 125
+  },
+  {
+    "id": "1943-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2152.80,
+    "valor_agua": 871.88,
+    "valor_esgoto": 652.30,
+    "valor_tratamento": 628.62,
+    "consumo_m3": 117
+  },
+  {
+    "id": "1943-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1987.20,
+    "valor_agua": 804.82,
+    "valor_esgoto": 602.12,
+    "valor_tratamento": 580.26,
+    "consumo_m3": 108
+  },
+  {
+    "id": "1943-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1895.20,
+    "valor_agua": 767.56,
+    "valor_esgoto": 574.25,
+    "valor_tratamento": 553.39,
+    "consumo_m3": 103
+  },
+  {
+    "id": "1943-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1858.40,
+    "valor_agua": 752.65,
+    "valor_esgoto": 563.10,
+    "valor_tratamento": 542.65,
+    "consumo_m3": 101
+  },
+  {
+    "id": "1943-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1968.80,
+    "valor_agua": 797.36,
+    "valor_esgoto": 596.55,
+    "valor_tratamento": 574.89,
+    "consumo_m3": 107
+  },
+  {
+    "id": "1943-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2079.20,
+    "valor_agua": 842.08,
+    "valor_esgoto": 630.00,
+    "valor_tratamento": 607.12,
+    "consumo_m3": 113
+  },
+  {
+    "id": "1943-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2171.20,
+    "valor_agua": 879.34,
+    "valor_esgoto": 657.87,
+    "valor_tratamento": 633.99,
+    "consumo_m3": 118
+  },
+  {
+    "id": "1943-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2244.80,
+    "valor_agua": 909.14,
+    "valor_esgoto": 680.17,
+    "valor_tratamento": 655.49,
+    "consumo_m3": 122
+  },
+  {
+    "id": "1943-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2355.20,
+    "valor_agua": 953.86,
+    "valor_esgoto": 713.63,
+    "valor_tratamento": 687.71,
+    "consumo_m3": 128
+  },
+  {
+    "id": "1944-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2113.10,
+    "valor_agua": 855.81,
+    "valor_esgoto": 640.27,
+    "valor_tratamento": 617.02,
+    "consumo_m3": 113
+  },
+  {
+    "id": "1944-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2262.70,
+    "valor_agua": 916.39,
+    "valor_esgoto": 685.60,
+    "valor_tratamento": 660.71,
+    "consumo_m3": 121
+  },
+  {
+    "id": "1944-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2356.20,
+    "valor_agua": 954.26,
+    "valor_esgoto": 713.93,
+    "valor_tratamento": 688.01,
+    "consumo_m3": 126
+  },
+  {
+    "id": "1944-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2206.60,
+    "valor_agua": 893.67,
+    "valor_esgoto": 668.60,
+    "valor_tratamento": 644.33,
+    "consumo_m3": 118
+  },
+  {
+    "id": "1944-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2038.30,
+    "valor_agua": 825.51,
+    "valor_esgoto": 617.60,
+    "valor_tratamento": 595.19,
+    "consumo_m3": 109
+  },
+  {
+    "id": "1944-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1944.80,
+    "valor_agua": 787.64,
+    "valor_esgoto": 589.27,
+    "valor_tratamento": 567.89,
+    "consumo_m3": 104
+  },
+  {
+    "id": "1944-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1907.40,
+    "valor_agua": 772.50,
+    "valor_esgoto": 577.94,
+    "valor_tratamento": 556.96,
+    "consumo_m3": 102
+  },
+  {
+    "id": "1944-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2019.60,
+    "valor_agua": 817.94,
+    "valor_esgoto": 611.94,
+    "valor_tratamento": 589.72,
+    "consumo_m3": 108
+  },
+  {
+    "id": "1944-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2131.80,
+    "valor_agua": 863.38,
+    "valor_esgoto": 645.94,
+    "valor_tratamento": 622.48,
+    "consumo_m3": 114
+  },
+  {
+    "id": "1944-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2225.30,
+    "valor_agua": 901.25,
+    "valor_esgoto": 674.27,
+    "valor_tratamento": 649.78,
+    "consumo_m3": 119
+  },
+  {
+    "id": "1944-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2300.10,
+    "valor_agua": 931.54,
+    "valor_esgoto": 696.93,
+    "valor_tratamento": 671.63,
+    "consumo_m3": 123
+  },
+  {
+    "id": "1944-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2412.30,
+    "valor_agua": 976.98,
+    "valor_esgoto": 730.93,
+    "valor_tratamento": 704.39,
+    "consumo_m3": 129
+  },
+  {
+    "id": "1945-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2166.00,
+    "valor_agua": 877.23,
+    "valor_esgoto": 656.30,
+    "valor_tratamento": 632.47,
+    "consumo_m3": 114
+  },
+  {
+    "id": "1945-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2318.00,
+    "valor_agua": 938.79,
+    "valor_esgoto": 702.35,
+    "valor_tratamento": 676.86,
+    "consumo_m3": 122
+  },
+  {
+    "id": "1945-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2413.00,
+    "valor_agua": 977.27,
+    "valor_esgoto": 731.14,
+    "valor_tratamento": 704.59,
+    "consumo_m3": 127
+  },
+  {
+    "id": "1945-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2261.00,
+    "valor_agua": 915.71,
+    "valor_esgoto": 685.08,
+    "valor_tratamento": 660.21,
+    "consumo_m3": 119
+  },
+  {
+    "id": "1945-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2090.00,
+    "valor_agua": 846.45,
+    "valor_esgoto": 633.27,
+    "valor_tratamento": 610.28,
+    "consumo_m3": 110
+  },
+  {
+    "id": "1945-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1995.00,
+    "valor_agua": 807.98,
+    "valor_esgoto": 604.49,
+    "valor_tratamento": 582.53,
+    "consumo_m3": 105
+  },
+  {
+    "id": "1945-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 1957.00,
+    "valor_agua": 792.59,
+    "valor_esgoto": 592.97,
+    "valor_tratamento": 571.44,
+    "consumo_m3": 103
+  },
+  {
+    "id": "1945-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2071.00,
+    "valor_agua": 838.76,
+    "valor_esgoto": 627.51,
+    "valor_tratamento": 604.73,
+    "consumo_m3": 109
+  },
+  {
+    "id": "1945-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2185.00,
+    "valor_agua": 884.93,
+    "valor_esgoto": 662.06,
+    "valor_tratamento": 638.01,
+    "consumo_m3": 115
+  },
+  {
+    "id": "1945-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2280.00,
+    "valor_agua": 923.40,
+    "valor_esgoto": 690.84,
+    "valor_tratamento": 665.76,
+    "consumo_m3": 120
+  },
+  {
+    "id": "1945-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2356.00,
+    "valor_agua": 954.18,
+    "valor_esgoto": 713.87,
+    "valor_tratamento": 687.95,
+    "consumo_m3": 124
+  },
+  {
+    "id": "1945-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2470.00,
+    "valor_agua": 1000.35,
+    "valor_esgoto": 748.41,
+    "valor_tratamento": 721.24,
+    "consumo_m3": 130
+  },
+  {
+    "id": "1946-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2219.50,
+    "valor_agua": 898.90,
+    "valor_esgoto": 672.51,
+    "valor_tratamento": 648.09,
+    "consumo_m3": 115
+  },
+  {
+    "id": "1946-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2373.90,
+    "valor_agua": 961.43,
+    "valor_esgoto": 719.29,
+    "valor_tratamento": 693.18,
+    "consumo_m3": 123
+  },
+  {
+    "id": "1946-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2470.40,
+    "valor_agua": 1000.51,
+    "valor_esgoto": 748.53,
+    "valor_tratamento": 721.36,
+    "consumo_m3": 128
+  },
+  {
+    "id": "1946-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2316.00,
+    "valor_agua": 937.98,
+    "valor_esgoto": 701.75,
+    "valor_tratamento": 676.27,
+    "consumo_m3": 120
+  },
+  {
+    "id": "1946-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2142.30,
+    "valor_agua": 867.63,
+    "valor_esgoto": 649.12,
+    "valor_tratamento": 625.55,
+    "consumo_m3": 111
+  },
+  {
+    "id": "1946-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2045.80,
+    "valor_agua": 828.55,
+    "valor_esgoto": 619.88,
+    "valor_tratamento": 597.37,
+    "consumo_m3": 106
+  },
+  {
+    "id": "1946-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2007.20,
+    "valor_agua": 812.92,
+    "valor_esgoto": 608.18,
+    "valor_tratamento": 586.10,
+    "consumo_m3": 104
+  },
+  {
+    "id": "1946-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2123.00,
+    "valor_agua": 859.82,
+    "valor_esgoto": 643.27,
+    "valor_tratamento": 619.91,
+    "consumo_m3": 110
+  },
+  {
+    "id": "1946-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2238.80,
+    "valor_agua": 906.71,
+    "valor_esgoto": 678.36,
+    "valor_tratamento": 653.73,
+    "consumo_m3": 116
+  },
+  {
+    "id": "1946-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2335.30,
+    "valor_agua": 945.80,
+    "valor_esgoto": 707.60,
+    "valor_tratamento": 681.90,
+    "consumo_m3": 121
+  },
+  {
+    "id": "1946-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2412.50,
+    "valor_agua": 977.06,
+    "valor_esgoto": 730.99,
+    "valor_tratamento": 704.45,
+    "consumo_m3": 125
+  },
+  {
+    "id": "1946-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2528.30,
+    "valor_agua": 1023.96,
+    "valor_esgoto": 766.07,
+    "valor_tratamento": 738.27,
+    "consumo_m3": 131
+  },
+  {
+    "id": "1947-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2273.60,
+    "valor_agua": 920.81,
+    "valor_esgoto": 688.90,
+    "valor_tratamento": 663.89,
+    "consumo_m3": 116
+  },
+  {
+    "id": "1947-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2430.40,
+    "valor_agua": 984.31,
+    "valor_esgoto": 736.41,
+    "valor_tratamento": 709.68,
+    "consumo_m3": 124
+  },
+  {
+    "id": "1947-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2528.40,
+    "valor_agua": 1024.00,
+    "valor_esgoto": 766.11,
+    "valor_tratamento": 738.29,
+    "consumo_m3": 129
+  },
+  {
+    "id": "1947-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2371.60,
+    "valor_agua": 960.50,
+    "valor_esgoto": 718.59,
+    "valor_tratamento": 692.51,
+    "consumo_m3": 121
+  },
+  {
+    "id": "1947-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2195.20,
+    "valor_agua": 889.06,
+    "valor_esgoto": 665.15,
+    "valor_tratamento": 640.99,
+    "consumo_m3": 112
+  },
+  {
+    "id": "1947-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2097.20,
+    "valor_agua": 849.37,
+    "valor_esgoto": 635.45,
+    "valor_tratamento": 612.38,
+    "consumo_m3": 107
+  },
+  {
+    "id": "1947-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2058.00,
+    "valor_agua": 833.49,
+    "valor_esgoto": 623.57,
+    "valor_tratamento": 600.94,
+    "consumo_m3": 105
+  },
+  {
+    "id": "1947-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2175.60,
+    "valor_agua": 881.12,
+    "valor_esgoto": 659.21,
+    "valor_tratamento": 635.27,
+    "consumo_m3": 111
+  },
+  {
+    "id": "1947-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2293.20,
+    "valor_agua": 928.75,
+    "valor_esgoto": 694.84,
+    "valor_tratamento": 669.61,
+    "consumo_m3": 117
+  },
+  {
+    "id": "1947-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2391.20,
+    "valor_agua": 968.44,
+    "valor_esgoto": 724.53,
+    "valor_tratamento": 698.23,
+    "consumo_m3": 122
+  },
+  {
+    "id": "1947-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2469.60,
+    "valor_agua": 1000.19,
+    "valor_esgoto": 748.29,
+    "valor_tratamento": 721.12,
+    "consumo_m3": 126
+  },
+  {
+    "id": "1947-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2587.20,
+    "valor_agua": 1047.82,
+    "valor_esgoto": 783.92,
+    "valor_tratamento": 755.46,
+    "consumo_m3": 132
+  },
+  {
+    "id": "1948-01",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2328.30,
+    "valor_agua": 942.96,
+    "valor_esgoto": 705.47,
+    "valor_tratamento": 679.87,
+    "consumo_m3": 117
+  },
+  {
+    "id": "1948-02",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2487.50,
+    "valor_agua": 1007.44,
+    "valor_esgoto": 753.71,
+    "valor_tratamento": 726.35,
+    "consumo_m3": 125
+  },
+  {
+    "id": "1948-03",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2587.00,
+    "valor_agua": 1047.74,
+    "valor_esgoto": 783.86,
+    "valor_tratamento": 755.40,
+    "consumo_m3": 130
+  },
+  {
+    "id": "1948-04",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2427.80,
+    "valor_agua": 983.26,
+    "valor_esgoto": 735.62,
+    "valor_tratamento": 708.92,
+    "consumo_m3": 122
+  },
+  {
+    "id": "1948-05",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2248.70,
+    "valor_agua": 910.72,
+    "valor_esgoto": 681.36,
+    "valor_tratamento": 656.62,
+    "consumo_m3": 113
+  },
+  {
+    "id": "1948-06",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2149.20,
+    "valor_agua": 870.43,
+    "valor_esgoto": 651.21,
+    "valor_tratamento": 627.56,
+    "consumo_m3": 108
+  },
+  {
+    "id": "1948-07",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2109.40,
+    "valor_agua": 854.31,
+    "valor_esgoto": 639.15,
+    "valor_tratamento": 615.94,
+    "consumo_m3": 106
+  },
+  {
+    "id": "1948-08",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2228.80,
+    "valor_agua": 902.66,
+    "valor_esgoto": 675.33,
+    "valor_tratamento": 650.81,
+    "consumo_m3": 112
+  },
+  {
+    "id": "1948-09",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2348.20,
+    "valor_agua": 951.02,
+    "valor_esgoto": 711.50,
+    "valor_tratamento": 685.68,
+    "consumo_m3": 118
+  },
+  {
+    "id": "1948-10",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2447.70,
+    "valor_agua": 991.32,
+    "valor_esgoto": 741.65,
+    "valor_tratamento": 714.73,
+    "consumo_m3": 123
+  },
+  {
+    "id": "1948-11",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2527.30,
+    "valor_agua": 1023.56,
+    "valor_esgoto": 765.77,
+    "valor_tratamento": 737.97,
+    "consumo_m3": 127
+  },
+  {
+    "id": "1948-12",
+    "unidade_consumidora": 14079,
+    "categoria": "COMERCIAL",
+    "valor_total": 2646.70,
+    "valor_agua": 1071.91,
+    "valor_esgoto": 801.95,
+    "valor_tratamento": 772.84,
+    "consumo_m3": 133
+  },
+  {
     "id": "1999-01",
     "unidade_consumidora": 14079,
     "categoria": "COMERCIAL",
