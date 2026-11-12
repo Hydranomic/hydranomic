@@ -12999,7 +12999,7 @@
     "valor_tratamento": 3723.00,
     "consumo_m3": 255
   },
-  {
+    {
     "id": "2024-01",
     "unidade_consumidora": 14079,
     "categoria": "COMERCIAL",
@@ -13239,6 +13239,7 @@
     "valor_tratamento": 6031.00,
     "consumo_m3": 370
   },
+  
   {
     "id": "2026-01",
     "unidade_consumidora": 14079,
