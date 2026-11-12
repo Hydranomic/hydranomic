@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" width="100%" role="img" aria-label="Hydranomic - Monitoramento inteligente de consumo de água">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#205988"/>
+      <stop offset="100%" stop-color="#0f3556"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#43BC8B" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#CFE1F4" stop-opacity="0.15"/>
+    </linearGradient>
+    <clipPath id="round"><rect width="1000" height="300" rx="24"/></clipPath>
+  </defs>
+  <g clip-path="url(#round)">
+    <rect width="1000" height="300" fill="url(#bg)"/>
+
+    <!-- ondas animadas -->
+    <path fill="url(#wave)" d="M0 230 Q125 190 250 230 T500 230 T750 230 T1000 230 T1250 230 T1500 230 V300 H0Z">
+      <animateTransform attributeName="transform" type="translate" from="0 0" to="-500 0" dur="9s" repeatCount="indefinite"/>
+    </path>
+    <path fill="#CFE1F4" fill-opacity="0.18" d="M0 250 Q125 215 250 250 T500 250 T750 250 T1000 250 T1250 250 T1500 250 V300 H0Z">
+      <animateTransform attributeName="transform" type="translate" from="-500 0" to="0 0" dur="6s" repeatCount="indefinite"/>
+    </path>
+
+    <!-- bolhas -->
+    <g fill="#CFE1F4" fill-opacity="0.5">
+      <circle cx="820" cy="290" r="6"><animate attributeName="cy" values="290;40" dur="7s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0" dur="7s" repeatCount="indefinite"/></circle>
+      <circle cx="880" cy="290" r="4"><animate attributeName="cy" values="290;60" dur="5s" begin="1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0" dur="5s" begin="1s" repeatCount="indefinite"/></circle>
+      <circle cx="940" cy="290" r="8"><animate attributeName="cy" values="290;30" dur="8s" begin="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0" dur="8s" begin="2s" repeatCount="indefinite"/></circle>
+      <circle cx="700" cy="290" r="5"><animate attributeName="cy" values="290;50" dur="6s" begin="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0" dur="6s" begin="3s" repeatCount="indefinite"/></circle>
+    </g>
+
+    <!-- ícone: hidrômetro + gota -->
+    <g transform="translate(150 140)" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round">
+      <circle r="70" opacity="0.95"/>
+      <circle r="88" stroke-width="3" stroke-dasharray="40 20" opacity="0.6">
+        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="14s" repeatCount="indefinite"/>
+      </circle>
+      <line x1="-70" y1="0" x2="-90" y2="0"/>
+      <line x1="70" y1="0" x2="90" y2="0"/>
+      <!-- ponteiro -->
+      <line x1="0" y1="10" x2="34" y2="-26" stroke="#FFE57C" stroke-width="5">
+        <animateTransform attributeName="transform" type="rotate" values="-25 0 10;25 0 10;-25 0 10" dur="5s" repeatCount="indefinite"/>
+      </line>
+      <!-- gota -->
+      <path d="M0 18 C-16 40 -14 56 0 56 C14 56 16 40 0 18Z" fill="#43BC8B" stroke="#ffffff" stroke-width="3">
+        <animate attributeName="opacity" values="1;0.65;1" dur="2.5s" repeatCount="indefinite"/>
+      </path>
+    </g>
+
+    <!-- textos -->
+    <text x="290" y="145" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="78" font-weight="800" fill="#ffffff" letter-spacing="2">HYDRANOMIC
+      <animate attributeName="opacity" values="0;1" dur="1.5s" fill="freeze"/>
+    </text>
+    <text x="294" y="190" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="24" fill="#CFE1F4">Monitoramento inteligente e previsão de consumo de água
+      <animate attributeName="opacity" values="0;1" dur="2.5s" fill="freeze"/>
+    </text>
+    <text x="294" y="225" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" fill="#43BC8B" letter-spacing="3">IoT  •  MACHINE LEARNING  •  WEGNOLOGY
+      <animate attributeName="opacity" values="0;1" dur="3.5s" fill="freeze"/>
+    </text>
+  </g>
+</svg>
+
