@@ -18,7 +18,7 @@ def obter_diretorio_input() -> Path:
         return raiz / "workflows"
     if (raiz / "hydranomic" / "workflows").is_dir():
         return raiz / "hydranomic" / "workflows"
-    return Path.cwd()
+    return Path.cwd()   
 
 def obter_diretorio_output() -> Path:
     if "OUTPUT_DIR" in os.environ:
