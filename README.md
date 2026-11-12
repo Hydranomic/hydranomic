@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="hydranomic/assets/readme/banner.svg" alt="Hydranomic" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:205988,100:43BC8B&height=240&section=header&text=HYDRANOMIC&fontSize=70&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Monitoramento%20inteligente%20e%20previs%C3%A3o%20de%20consumo%20de%20%C3%A1gua&descSize=20&descAlignY=58" alt="Hydranomic" width="100%"/>
 
 <a href="https://github.com/ankitjha/readme-typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=22&duration=3000&pause=1000&color=205988&center=true&vCenter=true&width=700&lines=Do+pulso+do+hidr%C3%B4metro+%C3%A0+decis%C3%A3o+inteligente;Previs%C3%A3o+de+consumo+com+Random+Forest;Metas+de+sustentabilidade+h%C3%ADdrica;Menos+desperd%C3%ADcio.+Mais+informa%C3%A7%C3%A3o." alt="Typing SVG"/></a>
 
