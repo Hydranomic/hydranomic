@@ -205,7 +205,7 @@
                 <i class="bi bi-list"></i>
             </button>
             <img src="https://raw.githubusercontent.com/Hydranomic/hydranomic/main/experience/assets/logo_hydranomic.png.png" alt="Logo Hydranomic" class="logo-img">
-            <a href="http://hydranomic.kadly.com.br/homepage" class="logo">
+            <a href="/homepage" class="logo">
                 <span class="hydra">HYDRA</span><span class="nomic">NOMIC</span>
             </a>
         </div>
@@ -262,7 +262,7 @@
                 </div>
                 <div class="acoes">
                     <hr class="linha-acoes">
-                    <button type="button" onclick="window.location.href='http://hydranomic.kadly.com.br/configuracoes'">
+                    <button type="button" onclick="window.location.href='/configuracoes'">
                         <i class="bi bi-gear"></i> Configurações
                     </button>
                     <button type="button" class="sair" id="btn-sair-conta" onclick="realizarLogout(event)">
@@ -282,10 +282,10 @@
             </button>
         </div>
         <nav class="sidebar-menu">
-            <a href="http://hydranomic.kadly.com.br/homepage">Página inicial</a>
-            <a href="http://hydranomic.kadly.com.br/definicoes" id="link-definicoes" style="display: none;">Definições</a>
-            <a href="http://hydranomic.kadly.com.br/metas">Metas de consumo / financeiro</a>
-            <a href="http://hydranomic.kadly.com.br/relatorio">Relatório de consumo</a>
+            <a href="/homepage">Página inicial</a>
+            <a href="/definicoes" id="link-definicoes" style="display: none;">Definições</a>
+            <a href="/metas">Metas de consumo / financeiro</a>
+            <a href="/relatorio">Relatório de consumo</a>
         </nav>
         <button class="sidebar-sair" id="btn-sair-sidebar" type="button" onclick="realizarLogout(event)">
             Sair
@@ -304,7 +304,7 @@
                 <h3>Vazão atual da água</h3>
             </div>
             <h1>-- m³/h</h1>
-            <button-ver-detalhes onclick="window.location.href='http://hydranomic.kadly.com.br/relatorio'">Ver detalhes</button-ver-detalhes>
+            <button-ver-detalhes onclick="window.location.href='/relatorio'">Ver detalhes</button-ver-detalhes>
         </section>
         <!-- STATUS DO SISTEMA -->
         <section class="area-status">
@@ -321,7 +321,7 @@
                     </div>
                 </div>
             </div>
-            <button-ver-detalhes onclick="window.location.href='http://hydranomic.kadly.com.br/relatorio'">Ver detalhes</button-ver-detalhes>
+            <button-ver-detalhes onclick="window.location.href='/relatorio'">Ver detalhes</button-ver-detalhes>
         </section>
         <!-- CONSUMO DE ÁGUA -->
         <section class="area-consumo-agua">
@@ -378,7 +378,7 @@
                     </div>
                 </div>
             </div>
-            <button-ver-relatorio onclick="window.location.href='http://hydranomic.kadly.com.br/metas'">
+            <button-ver-relatorio onclick="window.location.href='/metas'">
                 Ver relatório financeiro
             </button-ver-relatorio>
         </section>
@@ -442,17 +442,19 @@
         async function carregarDadosDoNotebook() {
             renderizarGrafico(null, null);
             const timestamp = Date.now();
+            const URL_CONFIG   = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/config.json';
             const URL_GRAFICO  = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/grafico_anual.json';
             const URL_PREVISAO = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/previsao_ml.json';
             const URL_META     = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/progresso_meta.json';
             const URL_CONSUMO  = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/consumo_mes.json';
             const URL_SUMARIO  = 'https://files.wnology.io/6a7df1ea72e58afcb00daed0/sumario_execucao.json';
             const buscarJson = (url, nome) =>
-                fetch(`${url}?_t=${timestamp}`)
+                fetch(`${url}?_t=${timestamp}`, { cache: "no-store" })
                     .then(r => r.ok ? r.json() : null)
-                    .catch(e => { console.warn(e.message); return null; });
+                    .catch(e => { console.warn(`[WEGnology Files] ${nome}:`, e.message); return null; });
             try {
-                const [resGrafico, resPrevisao, resMeta, resConsumo, resSumario] = await Promise.all([
+                const [resConfig, resGrafico, resPrevisao, resMeta, resConsumo, resSumario] = await Promise.all([
+                    buscarJson(URL_CONFIG, 'config.json'),
                     buscarJson(URL_GRAFICO, 'grafico_anual.json'),
                     buscarJson(URL_PREVISAO, 'previsao_ml.json'),
                     buscarJson(URL_META, 'progresso_meta.json'),
@@ -473,27 +475,49 @@
                 if (elPrevisao && faturaEstimada != null) {
                     elPrevisao.textContent = 'R$ ' + Number(faturaEstimada).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 }
-                // Valores de Consumo e Metas
-                const consumoTotalM3 = resConsumo?.consumo_acumulado_mes_m3 ?? resMeta?.consumo_atual_m3 ?? resSumario?.consumo_mes_acumulado_m3 ?? null;
-                const tarifaBase = Number(resPrevisao?.tarifa_m3 ?? 59.6);
+                // Valores de Consumo e Gastos Atuais
+                const tarifaBase = Number(resPrevisao?.tarifa_m3 ?? resMeta?.tarifa_m3 ?? 59.6);
+                const consumoTotalM3 = resMeta?.consumo_atual_m3 ?? resConsumo?.consumo_acumulado_mes_m3 ?? resSumario?.consumo_mes_acumulado_m3 ?? null;
+                const gastoTotalReais = resMeta?.gasto_atual_reais ?? (consumoTotalM3 != null ? Number(consumoTotalM3) * tarifaBase : null);
+
                 const elGastoMes = document.getElementById('meta-gasto-atual');
-                if (elGastoMes && consumoTotalM3 != null) {
-                    elGastoMes.textContent = 'R$ ' + (Number(consumoTotalM3) * tarifaBase).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                if (elGastoMes && gastoTotalReais != null) {
+                    elGastoMes.textContent = 'R$ ' + Number(gastoTotalReais).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 }
                 const elConsumoTotal = document.getElementById('meta-consumo-atual');
                 if (elConsumoTotal && consumoTotalM3 != null) {
                     elConsumoTotal.textContent = Number(consumoTotalM3).toFixed(2) + ' m³';
                 }
-                // Metas Alvo
-                const metaM3 = resMeta?.meta_consumo_m3 ?? resMeta?.meta_mensal_m3 ?? resSumario?.meta_consumo_m3 ?? null;
-                const metaReais = resMeta?.meta_gasto_reais ?? resMeta?.meta_mensal_reais ?? (metaM3 != null ? metaM3 * tarifaBase : null);
+                // Metas Alvo (Consumo e Gasto Máximo)
+                const metaM3 = resMeta?.limite_m3
+                    ?? resMeta?.metas_ativas_por_tipo?.['consumo-mensal']?.valor
+                    ?? resConfig?.meta_ativa?.valor
+                    ?? resConfig?.metas_ativas_por_tipo?.['consumo-mensal']?.valor
+                    ?? resMeta?.meta_consumo_m3
+                    ?? resSumario?.meta_consumo_m3
+                    ?? null;
+
+                const metaReais = resMeta?.metas_ativas_por_tipo?.['gasto-maximo-mensal']?.valor
+                    ?? resConfig?.metas_ativas_por_tipo?.['gasto-maximo-mensal']?.valor
+                    ?? resMeta?.meta_gasto_reais
+                    ?? resMeta?.meta_mensal_reais
+                    ?? (metaM3 != null && Number(metaM3) > 0 ? Number(metaM3) * tarifaBase : null);
+
                 const elMetaGastoAlvo = document.getElementById('meta-gasto-alvo');
-                if (elMetaGastoAlvo && metaReais != null) {
-                    elMetaGastoAlvo.textContent = 'R$ ' + Number(metaReais).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                if (elMetaGastoAlvo) {
+                    if (metaReais != null && Number(metaReais) > 0) {
+                        elMetaGastoAlvo.textContent = 'R$ ' + Number(metaReais).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    } else {
+                        elMetaGastoAlvo.textContent = 'Sem meta';
+                    }
                 }
                 const elMetaConsumoAlvo = document.getElementById('meta-consumo-alvo');
-                if (elMetaConsumoAlvo && metaM3 != null) {
-                    elMetaConsumoAlvo.textContent = Number(metaM3).toFixed(2) + ' m³';
+                if (elMetaConsumoAlvo) {
+                    if (metaM3 != null && Number(metaM3) > 0) {
+                        elMetaConsumoAlvo.textContent = Number(metaM3).toFixed(2) + ' m³';
+                    } else {
+                        elMetaConsumoAlvo.textContent = 'Sem meta';
+                    }
                 }
                 // Atualização do Status do Sistema
                 const status = String(resMeta?.situacao ?? resSumario?.meta_status ?? "NORMAL").toUpperCase();
@@ -746,7 +770,7 @@
             dominios.forEach(dom => {
                 document.cookie = "authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; max-age=0; path=/" + dom + ";";
             });
-            window.location.replace("http://hydranomic.kadly.com.br/login?_r=" + Date.now());
+            window.location.replace("/login?_r=" + Date.now());
         }
         // =========================================================================
         // 2. CONTROLES DA NAVBAR E SIDEBAR
