@@ -22,39 +22,58 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict
 
-# Permite execução tanto local quanto dentro do container WEGnology
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-try:
-    from wegnology_adapter import (
-        obter_diretorio_input,
-        obter_diretorio_output,
-        carregar_json,
-        salvar_json,
-    )
-except ImportError:
-    def obter_diretorio_output() -> Path:
-        p = Path(os.environ.get("OUTPUT_DIR", "./outputs"))
-        p.mkdir(parents=True, exist_ok=True)
-        return p
+# Permite execução tanto local quanto dentro do container WEGnology sem depender de __file__
+if "__file__" in globals():
+    diretorio_base = Path(__file__).resolve().parent
+else:
+    diretorio_base = Path.cwd()
+sys.path.insert(0, str(diretorio_base))
 
-    def obter_diretorio_input() -> Path:
-        p = Path(os.environ.get("INPUT_DIR", "./inputs"))
-        return p
 
-    def carregar_json(nome: str, padrao: Any = None) -> Any:
-        for d in [obter_diretorio_input(), Path.cwd()]:
-            c = d / nome
-            if c.exists() and c.stat().st_size > 0:
+def obter_diretorio_output() -> Path:
+    env_dir = os.environ.get("OUTPUT_DIR")
+    if env_dir:
+        p = Path(env_dir)
+    elif Path("/outputs").exists():
+        p = Path("/outputs")
+    else:
+        p = Path("./outputs")
+    p.mkdir(parents=True, exist_ok=True)
+    return p
+
+
+def obter_diretorio_input() -> Path:
+    env_dir = os.environ.get("INPUT_DIR")
+    if env_dir:
+        return Path(env_dir)
+    elif Path("/inputs").exists():
+        return Path("/inputs")
+    return Path("./inputs")
+
+
+def carregar_json(nome: str, padrao: Any = None) -> Any:
+    candidatos = [
+        obter_diretorio_input() / nome,
+        Path("/inputs") / nome if Path("/inputs").exists() else None,
+        Path.cwd() / nome,
+        obter_diretorio_output() / nome,
+    ]
+    for c in candidatos:
+        if c and c.exists() and c.stat().st_size > 0:
+            try:
                 with open(c, "r", encoding="utf-8") as f:
                     return json.load(f)
-        return padrao
+            except Exception:
+                pass
+    return padrao
 
-    def salvar_json(nome: str, dados: Any) -> Path:
-        c = obter_diretorio_output() / nome
-        c.parent.mkdir(parents=True, exist_ok=True)
-        with open(c, "w", encoding="utf-8") as f:
-            json.dump(dados, f, indent=2, ensure_ascii=False)
-        return c
+
+def salvar_json(nome: str, dados: Any) -> Path:
+    c = obter_diretorio_output() / nome
+    c.parent.mkdir(parents=True, exist_ok=True)
+    with open(c, "w", encoding="utf-8") as f:
+        json.dump(dados, f, indent=2, ensure_ascii=False)
+    return c
 
 
 def executar_reset() -> Dict[str, Any]:
