@@ -413,18 +413,39 @@ def avaliar_progresso_meta(consumo_atual_m3: Optional[float] = None, salvar: boo
     else:
         gasto_atual_reais = round(consumo_val * tarifa_m3, 2)
 
-    # Economia atual em R$
-    economia_atual_reais = 0.0
+    # Economia atual em R$ (avaliação inteligente multivariável)
+    candidatos_economia = []
+
+    # 1. Economia em relação ao teto de gasto máximo estipulado
+    meta_gasto = config.get("metas_ativas_por_tipo", {}).get("gasto-maximo-mensal")
+    if meta_gasto and meta_gasto.get("valor"):
+        lim_g = float(meta_gasto["valor"])
+        if lim_g > gasto_atual_reais:
+            candidatos_economia.append(round(lim_g - gasto_atual_reais, 2))
+
+    # 2. Economia em relação à meta de consumo em m³ convertida para valor financeiro
+    meta_cons = config.get("meta_ativa") or config.get("metas_ativas_por_tipo", {}).get("consumo-mensal")
+    if meta_cons and meta_cons.get("valor"):
+        lim_c = float(meta_cons["valor"])
+        if lim_c > consumo_val:
+            candidatos_economia.append(round((lim_c - consumo_val) * tarifa_m3, 2))
+
+    # 3. Economia em relação à fatura do mês anterior
     if len(dados_contas) >= 2:
         penult_conta = dados_contas[-2]
         valor_penult = float(penult_conta.get("valor_total") or (float(penult_conta.get("consumo_m3", 0.0)) * tarifa_m3))
-        economia_atual_reais = max(0.0, round(valor_penult - gasto_atual_reais, 2))
-    elif consumo_val > 0:
-        meta_cons = config.get("meta_ativa") or config.get("metas_ativas_por_tipo", {}).get("consumo-mensal")
-        if meta_cons and meta_cons.get("valor"):
-            lim_c = float(meta_cons["valor"])
-            if lim_c > consumo_val:
-                economia_atual_reais = round((lim_c - consumo_val) * tarifa_m3, 2)
+        if valor_penult > gasto_atual_reais:
+            candidatos_economia.append(round(valor_penult - gasto_atual_reais, 2))
+
+    # 4. Economia em relação à média histórica das faturas anteriores
+    if len(dados_contas) >= 3:
+        valores_hist = [float(c.get("valor_total") or (float(c.get("consumo_m3", 0.0)) * tarifa_m3)) for c in dados_contas[:-1]]
+        if valores_hist:
+            media_hist = sum(valores_hist) / len(valores_hist)
+            if media_hist > gasto_atual_reais:
+                candidatos_economia.append(round(media_hist - gasto_atual_reais, 2))
+
+    economia_atual_reais = max(candidatos_economia) if candidatos_economia else 0.0
 
     # Avalia e enriquece CADA meta ativa por tipo com porcentagem atingida e valor atual
     metas_avaliadas = {}

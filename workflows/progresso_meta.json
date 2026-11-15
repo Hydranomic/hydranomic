@@ -45,6 +45,22 @@
       "porcentagem": 0.0,
       "percentual_atingido": 0.0,
       "saldo_restante_reais": 500.0
+    },
+    "gasto-maximo-mensal": {
+      "tipo": "gasto-maximo-mensal",
+      "unidade": "R$",
+      "nome": "Teto Financeiro",
+      "valor": 2000.0,
+      "valor_litros": null,
+      "periodo": "2026-11",
+      "mes_referencia": "2026-11",
+      "data_criacao": "2026-11-14",
+      "descricao": "",
+      "status": "ativa",
+      "valor_atual": 21815.09,
+      "porcentagem": 1090.75,
+      "percentual_atingido": 1090.75,
+      "saldo_restante_reais": -19815.09
     }
   },
   "alertas_ativos": [
@@ -54,7 +70,7 @@
       "severidade": "perigo",
       "titulo": "Meta Ultrapassada!",
       "mensagem": "O consumo de 268.40 m³ ultrapassou a meta de 18.00 m³ (1491.1% atingido).",
-      "timestamp": "2026-11-14T23:00:00.914033"
+      "timestamp": "2026-11-14T23:20:56.240539"
     }
   ],
   "notificacoes": {
