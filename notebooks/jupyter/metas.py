@@ -4,8 +4,13 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, Optional, List
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from wegnology_adapter import carregar_json, salvar_json, carregar_contexto
+if "__file__" in globals():
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+try:
+    from wegnology_adapter import carregar_json, salvar_json, carregar_contexto
+except ImportError:
+    pass
 
 NOME_ARQUIVO_CONFIG = "config.json"
 NOME_ARQUIVO_PROGRESSO = "progresso_meta.json"
@@ -232,6 +237,30 @@ def extrair_contexto_unificado(ctx: Any) -> Dict[str, Any]:
     return res
 
 
+def carregar_json_com_fallback_remoto(nome_arquivo: str, padrao: Any = None) -> Any:
+    """
+    Tenta carregar o arquivo JSON localmente (via Input Files da WEGnology).
+    Se não for encontrado, faz fallback para download da URL pública oficial da WEGnology.
+    """
+    try:
+        dados = carregar_json(nome_arquivo, padrao=None)
+        if dados is not None:
+            return dados
+    except Exception:
+        pass
+
+    url = f"https://files.wnology.io/6a7df1ea72e58afcb00daed0/{nome_arquivo}"
+    try:
+        import urllib.request
+        with urllib.request.urlopen(url, timeout=5) as resp:
+            if resp.status == 200:
+                import json
+                return json.loads(resp.read().decode("utf-8"))
+    except Exception:
+        pass
+    return padrao
+
+
 def avaliar_progresso_meta(consumo_atual_m3: Optional[float] = None, salvar: bool = True) -> Dict[str, Any]:
     config = carregar_config()
 
@@ -345,11 +374,11 @@ def avaliar_progresso_meta(consumo_atual_m3: Optional[float] = None, salvar: boo
     # Se o consumo não for informado, tenta ler consumo_mes.json ou conta.json
     if consumo_atual_m3 is None:
         try:
-            consumo_mes = carregar_json("consumo_mes.json", padrao={})
+            consumo_mes = carregar_json_com_fallback_remoto("consumo_mes.json", padrao={})
             consumo_atual_m3 = float(consumo_mes.get("consumo_acumulado_mes_m3", 0.0))
         except Exception:
             try:
-                dados_conta = carregar_json("conta.json", padrao=[])
+                dados_conta = carregar_json_com_fallback_remoto("conta.json", padrao=[])
                 if isinstance(dados_conta, list) and len(dados_conta) > 0:
                     consumo_atual_m3 = float(dados_conta[-1].get("consumo_m3", 0.0))
                 else:
@@ -362,7 +391,7 @@ def avaliar_progresso_meta(consumo_atual_m3: Optional[float] = None, salvar: boo
     # Carrega tarifa e faturas para avaliação de metas financeiras
     tarifa_m3 = 59.60
     try:
-        prev_ml = carregar_json("previsao_ml.json", padrao={})
+        prev_ml = carregar_json_com_fallback_remoto("previsao_ml.json", padrao={})
         if prev_ml and "tarifa_m3" in prev_ml and float(prev_ml["tarifa_m3"]) > 0:
             tarifa_m3 = float(prev_ml["tarifa_m3"])
     except Exception:
@@ -370,7 +399,7 @@ def avaliar_progresso_meta(consumo_atual_m3: Optional[float] = None, salvar: boo
 
     dados_contas = []
     try:
-        dados_contas = carregar_json("conta.json", padrao=[])
+        dados_contas = carregar_json_com_fallback_remoto("conta.json", padrao=[])
         if not isinstance(dados_contas, list):
             dados_contas = []
     except Exception:
