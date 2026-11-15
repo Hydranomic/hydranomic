@@ -1731,7 +1731,7 @@
         <div class="logo-area">
             <button class="menu" id="abrirSidebar" type="button" aria-label="Abrir menu lateral" aria-expanded="false"><i class="bi bi-list"></i></button>
             <img src="https://raw.githubusercontent.com/Hydranomic/hydranomic/main/experience/assets/logo_hydranomic.png.png" alt="Logo Hydranomic" class="logo-img">
-            <a href="http://hydranomic.kadly.com.br/homepage" class="logo"><span class="hydra">HYDRA</span><span class="nomic">NOMIC</span></a>
+            <a href="/homepage" class="logo"><span class="hydra">HYDRA</span><span class="nomic">NOMIC</span></a>
         </div>
         <div class="perfil">
             <button class="perfil-botao" id="abrirPerfil" type="button" aria-expanded="false" aria-controls="perfilCard" aria-label="Abrir perfil do usuário">
@@ -1751,7 +1751,7 @@
                 </div>
                 <div class="acoes">
                     <hr class="linha-acoes">
-                    <button type="button" onclick="window.location.href='http://hydranomic.kadly.com.br/configuracoes'"><i class="bi bi-gear"></i>Configurações</button>
+                    <button type="button" onclick="window.location.href='/configuracoes'"><i class="bi bi-gear"></i>Configurações</button>
                     <button type="button" class="sair" id="btn-sair-conta" onclick="realizarLogout(event)"><i class="bi bi-box-arrow-right"></i>Sair da conta</button>
                 </div>
             </div>
@@ -1789,10 +1789,10 @@
             <button class="sidebar-fechar" id="fecharSidebar" type="button" aria-label="Fechar menu lateral"><i class="bi bi-x-lg"></i></button>
         </div>
         <nav class="sidebar-menu">
-            <a href="http://hydranomic.kadly.com.br/homepage">Página inicial</a>
-            <a href="http://hydranomic.kadly.com.br/definicoes" id="link-definicoes">Definições</a>
-            <a href="http://hydranomic.kadly.com.br/metas">Metas de consumo / financeiro</a>
-            <a href="http://hydranomic.kadly.com.br/relatorio">Relatório de consumo</a>
+            <a href="/homepage">Página inicial</a>
+            <a href="/definicoes" id="link-definicoes">Definições</a>
+            <a href="/metas">Metas de consumo / financeiro</a>
+            <a href="/relatorio">Relatório de consumo</a>
         </nav>
         <button class="sidebar-sair" type="button" onclick="realizarLogout(event)">Sair</button>
     </aside>
@@ -1915,7 +1915,7 @@
                     <p>Gerado em 08/08/2026</p>
                 </div>
             </div>
-            <button-ver-relatorio onclick="window.location.href='http://hydranomic.kadly.com.br/relatorio'">Ver todos os relatórios</button-ver-relatorio>
+            <button-ver-relatorio onclick="window.location.href='/relatorio'">Ver todos os relatórios</button-ver-relatorio>
         </section>
 
         <!-- Modais da Aplicação -->
@@ -2072,7 +2072,7 @@
             ["", "; domain=" + window.location.hostname, "; domain=.kadly.com.br", "; domain=hydranomic.kadly.com.br"].forEach(d => {
                 document.cookie = "authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; max-age=0; path=/" + d + ";";
             });
-            window.location.replace("http://hydranomic.kadly.com.br/login?logout=1&_t=" + Date.now());
+            window.location.replace("/login?logout=1&_t=" + Date.now());
         }
 
         window.addEventListener("pageshow", e => {
@@ -2556,7 +2556,7 @@
            5. GESTÃO DE USUÁRIOS E EQUIPE
            ========================================== */
         const STORAGE_KEY_USUARIOS = "hydranomic_usuarios_equipe";
-        const WEGNOLOGY_API_USUARIOS = "http://hydranomic.kadly.com.br/api/usuarios";
+        const WEGNOLOGY_API_USUARIOS = "/api/usuarios";
 
         function normalizarUsuarioWegnology(u) {
             if (!u || !u.email) return null;
@@ -2717,7 +2717,7 @@
 
             const emailSessao = (sessao.email || "").trim().toLowerCase();
             if (!wegId && !wegEmail && !emailSessao) {
-                return window.location.replace("http://hydranomic.kadly.com.br/login?_t=" + Date.now());
+                return window.location.replace("/login?_t=" + Date.now());
             }
 
             const mesmo = !wegEmail || (emailSessao && emailSessao === wegEmail);
@@ -2771,7 +2771,7 @@
 
                 if (el("link-definicoes")) el("link-definicoes").style.display = adm ? "" : "none";
                 if (aposSync && !adm && window.location.pathname.includes("/definicoes")) {
-                    window.location.replace("http://hydranomic.kadly.com.br/homepage");
+                    window.location.replace("/homepage");
                 }
             }
 
@@ -2784,6 +2784,7 @@
            7. MÓDULO DE DEFINIÇÃO E SINCRONIZAÇÃO DE METAS
            ========================================== */
         const WEGNOLOGY_FILES_URL = "https://files.wnology.io/6a7df1ea72e58afcb00daed0";
+        const URL_JSON_METAS = WEGNOLOGY_FILES_URL + "/progresso_meta.json";
 
         try { localStorage.removeItem("hydranomic_metas_definidas"); } catch {}
         window.hydranomicMetasAtivas = { ativas: {}, por_mes: {}, ultimo_mes_atualizado: "" };
@@ -2869,12 +2870,14 @@
             }
 
             const ind = { consumoAtualM3: 0, gastoAtualReais: 0, economiaAtualReais: 0, tarifaBase: 59.6 };
+            let dadosProgressoMetaAtual = null;
 
-            function atualizarCard(idV, idP, idR, idPc, valTxt, perTxt, pct) {
+            function atualizarCard(idV, idP, idR, idPc, valTxt, perTxt, pctVisual, pctTexto) {
+                const textoPct = (pctTexto !== undefined ? pctTexto : pctVisual) + "%";
                 if (el(idV)) el(idV).textContent = valTxt;
                 if (el(idP)) el(idP).textContent = perTxt;
-                if (el(idPc)) el(idPc).textContent = pct + "%";
-                if (el(idR)) el(idR).style.background = `conic-gradient(#205988 ${pct}%, #e2e8f0 0)`;
+                if (el(idPc)) el(idPc).textContent = textoPct;
+                if (el(idR)) el(idR).style.background = `conic-gradient(#205988 ${pctVisual}%, #e2e8f0 0)`;
             }
 
             function renderizarCardMetasDefinicoes(est) {
@@ -2883,94 +2886,128 @@
                 // Economia
                 const eco = at["economia-mensal"];
                 if (eco && Number(eco.valor) > 0) {
-                    const v = Number(eco.valor), p = ind.economiaAtualReais > 0 ? Math.min(100, Math.max(0, Math.round(ind.economiaAtualReais / v * 100))) : (eco.porcentagem != null ? Math.min(100, Math.round(Number(eco.porcentagem))) : 0);
-                    atualizarCard("meta-economia-valor", "meta-economia-periodo", "meta-economia-rosca", "meta-economia-porcentagem", "R$ " + v.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }), fmtCurto(eco.periodo || eco.mes_referencia) || "Meta ativa", p);
+                    const v = Number(eco.valor);
+                    const p = eco.porcentagem != null ? Math.min(100, Math.round(Number(eco.porcentagem))) : (ind.economiaAtualReais > 0 ? Math.min(100, Math.max(0, Math.round(ind.economiaAtualReais / v * 100))) : 0);
+                    atualizarCard("meta-economia-valor", "meta-economia-periodo", "meta-economia-rosca", "meta-economia-porcentagem", "R$ " + v.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }), fmtCurto(eco.periodo || eco.mes_referencia) || "Meta ativa", p, p);
                 } else {
-                    atualizarCard("meta-economia-valor", "meta-economia-periodo", "meta-economia-rosca", "meta-economia-porcentagem", "Sem meta", "Não definida", 0);
+                    atualizarCard("meta-economia-valor", "meta-economia-periodo", "meta-economia-rosca", "meta-economia-porcentagem", "Sem meta", "Não definida", 0, 0);
                 }
 
                 // Gasto Máximo
                 const gas = at["gasto-maximo-mensal"];
                 if (gas && Number(gas.valor) > 0) {
-                    const v = Number(gas.valor), p = ind.gastoAtualReais > 0 ? Math.min(100, Math.max(0, Math.round(ind.gastoAtualReais / v * 100))) : 0;
-                    atualizarCard("meta-gasto-valor", "meta-gasto-periodo", "meta-gasto-rosca", "meta-gasto-porcentagem", "R$ " + v.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }), fmtCurto(gas.periodo || gas.mes_referencia) || "Meta ativa", p);
+                    const v = Number(gas.valor);
+                    const p = gas.porcentagem != null ? Math.min(100, Math.round(Number(gas.porcentagem))) : (ind.gastoAtualReais > 0 ? Math.min(100, Math.max(0, Math.round(ind.gastoAtualReais / v * 100))) : 0);
+                    atualizarCard("meta-gasto-valor", "meta-gasto-periodo", "meta-gasto-rosca", "meta-gasto-porcentagem", "R$ " + v.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }), fmtCurto(gas.periodo || gas.mes_referencia) || "Meta ativa", p, p);
                 } else {
-                    atualizarCard("meta-gasto-valor", "meta-gasto-periodo", "meta-gasto-rosca", "meta-gasto-porcentagem", "Sem meta", "Não definida", 0);
+                    atualizarCard("meta-gasto-valor", "meta-gasto-periodo", "meta-gasto-rosca", "meta-gasto-porcentagem", "Sem meta", "Não definida", 0, 0);
                 }
 
-                // Consumo
+                // Consumo (integra dados calculados pelo notebook metas via progresso_meta.json)
                 const con = at["consumo-mensal"];
                 if (con && (Number(con.valor_litros) > 0 || Number(con.valor) > 0)) {
-                    const b = Number(con.valor_litros || con.valor), lit = b > 500 ? Math.round(b) : Math.round(b * 1000), m3 = lit / 1000, p = (ind.consumoAtualM3 > 0 && m3 > 0) ? Math.min(100, Math.max(0, Math.round(ind.consumoAtualM3 / m3 * 100))) : 0;
-                    atualizarCard("meta-consumo-definicoes-valor", "meta-consumo-definicoes-periodo", "meta-consumo-definicoes-rosca", "meta-consumo-definicoes-porcentagem", lit.toLocaleString("pt-BR") + " L", fmtCurto(con.periodo || con.mes_referencia) || "Meta ativa", p);
+                    const b = Number(con.valor_litros || con.valor);
+                    const lit = b > 500 ? Math.round(b) : Math.round(b * 1000);
+                    const m3 = lit / 1000;
+
+                    let pCalculado = 0;
+                    if (con.porcentagem != null && !isNaN(con.porcentagem)) {
+                        pCalculado = Math.round(Number(con.porcentagem));
+                    } else if (dadosProgressoMetaAtual?.percentual_atingido != null && !isNaN(dadosProgressoMetaAtual.percentual_atingido)) {
+                        pCalculado = Math.round(Number(dadosProgressoMetaAtual.percentual_atingido));
+                    } else if (ind.consumoAtualM3 > 0 && m3 > 0) {
+                        pCalculado = Math.round((ind.consumoAtualM3 / m3) * 100);
+                    }
+
+                    const pVisual = Math.min(100, Math.max(0, pCalculado));
+                    atualizarCard(
+                        "meta-consumo-definicoes-valor",
+                        "meta-consumo-definicoes-periodo",
+                        "meta-consumo-definicoes-rosca",
+                        "meta-consumo-definicoes-porcentagem",
+                        lit.toLocaleString("pt-BR") + " L",
+                        fmtCurto(con.periodo || con.mes_referencia) || "Meta ativa",
+                        pVisual,
+                        pCalculado
+                    );
                 } else {
-                    atualizarCard("meta-consumo-definicoes-valor", "meta-consumo-definicoes-periodo", "meta-consumo-definicoes-rosca", "meta-consumo-definicoes-porcentagem", "Sem meta", "Não definida", 0);
+                    atualizarCard("meta-consumo-definicoes-valor", "meta-consumo-definicoes-periodo", "meta-consumo-definicoes-rosca", "meta-consumo-definicoes-porcentagem", "Sem meta", "Não definida", 0, 0);
                 }
             }
 
             async function sincronizarMetasComWegnology() {
                 const est = obterMetasSalvas();
                 renderizarCardMetasDefinicoes(est);
-                const ts = Date.now(), ler = a => fetch(WEGNOLOGY_FILES_URL + "/" + a + "?_t=" + ts, { cache: "no-store" }).then(r => r.ok ? r.json() : null).catch(() => null);
+
+                const ts = Date.now();
+                let resProg = null;
+
+                // Consulta exclusivamente o JSON que retorna o valor da meta instanciada pelo notebook
+                try {
+                    const r = await fetch(URL_JSON_METAS + "?_t=" + ts, { cache: "no-store" });
+                    if (r.ok) resProg = await r.json();
+                } catch (_) {}
+
+                if (!resProg) {
+                    try {
+                        const rLoc = await fetch("../workflows/progresso_meta.json?_t=" + ts, { cache: "no-store" });
+                        if (rLoc.ok) resProg = await rLoc.json();
+                    } catch (_) {}
+                }
+
+                if (!resProg) return;
+                dadosProgressoMetaAtual = resProg;
 
                 try {
-                    const [resConfig, resProg, resCons, resContas, resPrev] = await Promise.all(["config.json","progresso_meta.json","consumo_mes.json","conta.json","previsao_ml.json"].map(ler));
-                    const tSalva = parseFloat(localStorage.getItem("hydranomic_tarifa_valor")), tarifa = (!isNaN(tSalva) && tSalva > 0) ? tSalva : Number(resPrev?.tarifa_m3 ?? 59.6);
-                    ind.tarifaBase = tarifa;
+                    if (resProg.consumo_atual_m3 != null) {
+                        ind.consumoAtualM3 = Number(resProg.consumo_atual_m3);
+                    }
+                    if (resProg.gasto_atual_reais != null) {
+                        ind.gastoAtualReais = Number(resProg.gasto_atual_reais);
+                    }
+                    if (resProg.economia_atual_reais != null) {
+                        ind.economiaAtualReais = Number(resProg.economia_atual_reais);
+                    }
+                    if (resProg.tarifa_m3 != null) {
+                        ind.tarifaBase = Number(resProg.tarifa_m3);
+                    }
 
-                    if (resCons?.consumo_acumulado_mes_m3 != null) ind.consumoAtualM3 = Number(resCons.consumo_acumulado_mes_m3);
-                    else if (resProg?.consumo_atual_m3 != null) ind.consumoAtualM3 = Number(resProg.consumo_atual_m3);
+                    // 1. Incorpora metas ativas por tipo retornadas pelo notebook metas
+                    if (resProg.metas_ativas_por_tipo && typeof resProg.metas_ativas_por_tipo === "object") {
+                        Object.keys(resProg.metas_ativas_por_tipo).forEach(t => {
+                            if (resProg.metas_ativas_por_tipo[t]) {
+                                est.ativas[t] = Object.assign({}, est.ativas[t] || {}, resProg.metas_ativas_por_tipo[t]);
+                            }
+                        });
+                    }
 
-                    const lc = Array.isArray(resContas) ? resContas : [];
-                    if (lc.length) {
-                        const u = lc[lc.length - 1];
-                        ind.gastoAtualReais = u.valor_total != null ? Number(u.valor_total) : ind.consumoAtualM3 * tarifa;
-                        if (lc.length > 1) {
-                            const p = lc[lc.length - 2];
-                            ind.economiaAtualReais = Math.max(0, Number(p.valor_total || (Number(p.consumo_m3 || 0) * tarifa)) - ind.gastoAtualReais);
+                    // 2. Incorpora dados da meta ativa física de consumo avaliada pelo notebook
+                    if (resProg.meta_ativa === true || resProg.limite_m3 != null) {
+                        const limM3 = Number(resProg.limite_m3 || resProg.valor || 0);
+                        const lit = limM3 > 500 ? Math.round(limM3) : Math.round(limM3 * 1000);
+                        const tipo = resProg.tipo || "consumo-mensal";
+                        const ref = String(resProg.mes_referencia || resProg.periodo || "").slice(0, 7);
+
+                        est.ativas[tipo] = Object.assign({}, est.ativas[tipo] || {}, {
+                            tipo: tipo,
+                            unidade: "L",
+                            nome: resProg.meta_nome || "Meta de Consumo",
+                            valor: limM3,
+                            valor_litros: lit,
+                            periodo: resProg.periodo || ref,
+                            mes_referencia: ref,
+                            porcentagem: resProg.percentual_atingido != null ? Number(resProg.percentual_atingido) : undefined
+                        });
+
+                        if (ref) {
+                            est.por_mes[ref] = est.por_mes[ref] || {};
+                            est.por_mes[ref][tipo] = est.ativas[tipo];
                         }
-                    } else {
-                        ind.gastoAtualReais = ind.consumoAtualM3 * tarifa;
                     }
 
-                    if (resConfig?.metas_por_mes && typeof resConfig.metas_por_mes === "object") {
-                        Object.keys(resConfig.metas_por_mes).forEach(k => {
-                            const it = resConfig.metas_por_mes[k];
-                            if (!it || typeof it !== "object") return;
-                            est.por_mes[k] = est.por_mes[k] || {};
-                            if (it.por_tipo && typeof it.por_tipo === "object") {
-                                Object.keys(it.por_tipo).forEach(t => { if (!est.por_mes[k][t]) est.por_mes[k][t] = it.por_tipo[t]; });
-                            }
-                            if (it.valor != null) {
-                                const ti = (it.tipo === "gasto-maximo-mensal" || it.tipo === "economia-mensal") ? it.tipo : "consumo-mensal", vn = Number(it.valor);
-                                if (!est.por_mes[k][ti]) {
-                                    est.por_mes[k][ti] = {
-                                        tipo: ti, unidade: ti === "consumo-mensal" ? "L" : "R$", nome: it.nome || "Meta Mensal",
-                                        valor: vn, valor_litros: ti === "consumo-mensal" ? (vn > 500 ? vn : vn * 1000) : undefined,
-                                        periodo: k, mes_referencia: k
-                                    };
-                                }
-                            }
-                        });
-                    }
-
-                    if (resConfig?.metas_ativas_por_tipo && typeof resConfig.metas_ativas_por_tipo === "object") {
-                        Object.keys(resConfig.metas_ativas_por_tipo).forEach(t => {
-                            if (!est.ativas[t]) est.ativas[t] = resConfig.metas_ativas_por_tipo[t];
-                        });
-                    }
-
-                    if (resConfig?.meta_ativa && resConfig.meta_ativa.valor != null) {
-                        const ma = resConfig.meta_ativa, tMa = (ma.tipo === "gasto-maximo-mensal" || ma.tipo === "economia-mensal") ? ma.tipo : "consumo-mensal", vn = Number(ma.valor), mr = String(ma.mes_referencia || ma.periodo || "").slice(0, 7);
-                        const obj = {
-                            tipo: tMa, unidade: tMa === "consumo-mensal" ? "L" : "R$", nome: ma.nome || "Meta Ativa",
-                            valor: vn, valor_litros: tMa === "consumo-mensal" ? (ma.valor_litros != null ? Number(ma.valor_litros) : (vn > 500 ? vn : vn * 1000)) : undefined,
-                            periodo: mr || ma.periodo || "", mes_referencia: mr
-                        };
-                        if (!est.ativas[tMa]) est.ativas[tMa] = obj;
-                        if (mr && (!est.por_mes[mr] || !est.por_mes[mr][tMa])) (est.por_mes[mr] = est.por_mes[mr] || {})[tMa] = obj;
-                    }
-
+                    // 3. Se houver metas financeiras ativas registradas
+                    const tSalva = parseFloat(localStorage.getItem("hydranomic_tarifa_valor"));
+                    const tarifa = (!isNaN(tSalva) && tSalva > 0) ? tSalva : ind.tarifaBase;
                     if (!est.ativas["gasto-maximo-mensal"] && est.ativas["consumo-mensal"]) {
                         const mc = est.ativas["consumo-mensal"], m3 = mc.valor_litros ? mc.valor_litros / 1000 : mc.valor;
                         if (m3 > 0) {
@@ -2984,7 +3021,9 @@
 
                     salvarVariavelMetas(est);
                     renderizarCardMetasDefinicoes(est);
-                } catch {}
+                } catch (e) {
+                    console.warn("Aviso ao processar meta instanciada:", e);
+                }
             }
 
             sincronizarMetasComWegnology();
@@ -3017,13 +3056,28 @@
                 btn.textContent = "Gravando...";
 
                 let resp = null;
+                const urlMetas = "/definicoes";
+
                 try {
-                    resp = await fetch("http://hydranomic.kadly.com.br/definicoes", {
-                        method: "POST", headers: { "Content-Type": "application/json" }, credentials: "include", body: JSON.stringify(payload)
+                    resp = await fetch(urlMetas, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        credentials: "include",
+                        body: JSON.stringify(payload)
                     });
-                } catch {
-                    alert("Erro de conexão ao tentar se comunicar com o servidor WEGnology.");
-                    return;
+                } catch (erroFetch) {
+                    console.error("Falha ao contatar endpoint de metas em " + urlMetas + ":", erroFetch);
+                    try {
+                        resp = await fetch("https://hydranomic.kadly.com.br/definicoes", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            credentials: "include",
+                            body: JSON.stringify(payload)
+                        });
+                    } catch (_) {
+                        alert("Erro de conexão ao tentar se comunicar com o servidor WEGnology.\n\nVerifique se o endpoint /definicoes (POST) está configurado e habilitado no Workflow da WEGnology.");
+                        return;
+                    }
                 } finally {
                     btn.disabled = false;
                     btn.textContent = txtOrig;
@@ -3036,9 +3090,19 @@
                     return alert("A WEGnology recusou a requisição com Erro HTTP " + resp.status + " (Bad Request).\n\nA meta NÃO foi salva no servidor.\nVerifique o nó Validate Payload ou Administradores no Workflow da WEGnology.\n\nDetalhes do servidor: " + (err || "Nenhuma mensagem retornada"));
                 }
 
+                // Calcula porcentagem estimada inicial para exibição instantânea no card
+                if (ehCons) {
+                    payload.porcentagem = (ind.consumoAtualM3 > 0 && payload.valor > 0) ? Math.round((ind.consumoAtualM3 / payload.valor) * 100) : 0;
+                } else if (tipo === "gasto-maximo-mensal") {
+                    payload.porcentagem = (ind.gastoAtualReais > 0 && payload.valor > 0) ? Math.round((ind.gastoAtualReais / payload.valor) * 100) : 0;
+                } else if (tipo === "economia-mensal") {
+                    payload.porcentagem = (ind.economiaAtualReais > 0 && payload.valor > 0) ? Math.round((ind.economiaAtualReais / payload.valor) * 100) : 0;
+                }
+
                 renderizarCardMetasDefinicoes(registrarMetaNaVariavel(payload));
                 alert("Meta cadastrada com sucesso! Os indicadores da plataforma foram atualizados.");
                 cNome.value = ""; cValor.value = ""; cPeriodo.value = ""; if (cDesc) cDesc.value = ""; modal.style.display = "none";
+                setTimeout(() => { sincronizarMetasComWegnology(); }, 1500);
             });
         })();
     </script>

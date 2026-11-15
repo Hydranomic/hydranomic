@@ -196,18 +196,50 @@ def confirmar_exclusao_meta(salvar: bool = True) -> Dict[str, Any]:
     return config
 
 
+def extrair_contexto_unificado(ctx: Any) -> Dict[str, Any]:
+    if not isinstance(ctx, dict):
+        return {}
+    res = dict(ctx)
+    if "data" in res and isinstance(res["data"], dict):
+        for k, v in res["data"].items():
+            if k not in res:
+                res[k] = v
+        if "body" in res["data"] and isinstance(res["data"]["body"], dict):
+            for k, v in res["data"]["body"].items():
+                if k not in res:
+                    res[k] = v
+    if "body" in res and isinstance(res["body"], dict):
+        for k, v in res["body"].items():
+            if k not in res:
+                res[k] = v
+    mapeamentos = {
+        "tipo-meta": "tipo",
+        "tipo_meta": "tipo",
+        "nome-meta": "nome",
+        "nome_meta": "nome",
+        "valor-meta": "valor",
+        "valor_meta": "valor",
+        "periodo-meta": "periodo",
+        "periodo_meta": "periodo",
+        "mes-referencia": "mes_referencia",
+        "mes_referencia": "mes_referencia",
+        "descricao-meta": "descricao",
+        "descricao_meta": "descricao"
+    }
+    for chave_origem, chave_destino in mapeamentos.items():
+        if chave_origem in res and chave_destino not in res:
+            res[chave_destino] = res[chave_origem]
+    return res
+
+
 def avaliar_progresso_meta(consumo_atual_m3: Optional[float] = None, salvar: bool = True) -> Dict[str, Any]:
     config = carregar_config()
 
     # Processa se o contexto recebido contiver acao de notificacoes ou metas
     try:
-        ctx = carregar_contexto() if "carregar_contexto" in globals() else {}
-        if isinstance(ctx, dict):
-            if "body" in ctx and isinstance(ctx["body"], dict):
-                for k, v in ctx["body"].items():
-                    if k not in ctx:
-                        ctx[k] = v
-
+        ctx_bruto = carregar_contexto() if "carregar_contexto" in globals() else {}
+        ctx = extrair_contexto_unificado(ctx_bruto)
+        if isinstance(ctx, dict) and ctx:
             # 1. Tratamento de preferências de Notificação
             if ctx.get("acao") == "salvar_notificacoes" or "notificacao_prazos" in ctx or "alerta_status" in ctx or "notificacoes" in ctx:
                 notifs = ctx.get("notificacoes")
@@ -327,7 +359,75 @@ def avaliar_progresso_meta(consumo_atual_m3: Optional[float] = None, salvar: boo
 
     consumo_val = float(consumo_atual_m3 or 0.0)
 
-    # Identifica meta de consumo ativa para avaliação
+    # Carrega tarifa e faturas para avaliação de metas financeiras
+    tarifa_m3 = 59.60
+    try:
+        prev_ml = carregar_json("previsao_ml.json", padrao={})
+        if prev_ml and "tarifa_m3" in prev_ml and float(prev_ml["tarifa_m3"]) > 0:
+            tarifa_m3 = float(prev_ml["tarifa_m3"])
+    except Exception:
+        pass
+
+    dados_contas = []
+    try:
+        dados_contas = carregar_json("conta.json", padrao=[])
+        if not isinstance(dados_contas, list):
+            dados_contas = []
+    except Exception:
+        dados_contas = []
+
+    # Gasto atual em R$
+    gasto_atual_reais = 0.0
+    if dados_contas:
+        ult_conta = dados_contas[-1]
+        gasto_atual_reais = float(ult_conta.get("valor_total") or (float(ult_conta.get("consumo_m3", 0.0)) * tarifa_m3))
+    else:
+        gasto_atual_reais = round(consumo_val * tarifa_m3, 2)
+
+    # Economia atual em R$
+    economia_atual_reais = 0.0
+    if len(dados_contas) >= 2:
+        penult_conta = dados_contas[-2]
+        valor_penult = float(penult_conta.get("valor_total") or (float(penult_conta.get("consumo_m3", 0.0)) * tarifa_m3))
+        economia_atual_reais = max(0.0, round(valor_penult - gasto_atual_reais, 2))
+    elif consumo_val > 0:
+        meta_cons = config.get("meta_ativa") or config.get("metas_ativas_por_tipo", {}).get("consumo-mensal")
+        if meta_cons and meta_cons.get("valor"):
+            lim_c = float(meta_cons["valor"])
+            if lim_c > consumo_val:
+                economia_atual_reais = round((lim_c - consumo_val) * tarifa_m3, 2)
+
+    # Avalia e enriquece CADA meta ativa por tipo com porcentagem atingida e valor atual
+    metas_avaliadas = {}
+    for tipo_k, meta_obj in config.get("metas_ativas_por_tipo", {}).items():
+        if not isinstance(meta_obj, dict):
+            continue
+        m_item = dict(meta_obj)
+        v_meta = float(m_item.get("valor", 0.0) or 0.0)
+
+        if tipo_k in TIPOS_CONSUMO:
+            pct_c = round((consumo_val / v_meta) * 100, 2) if v_meta > 0 else 0.0
+            m_item["valor_atual"] = round(consumo_val * 1000.0, 1)
+            m_item["valor_atual_m3"] = round(consumo_val, 2)
+            m_item["porcentagem"] = pct_c
+            m_item["percentual_atingido"] = pct_c
+            m_item["saldo_restante_m3"] = round(v_meta - consumo_val, 2)
+        elif tipo_k == "gasto-maximo-mensal":
+            pct_g = round((gasto_atual_reais / v_meta) * 100, 2) if v_meta > 0 else 0.0
+            m_item["valor_atual"] = round(gasto_atual_reais, 2)
+            m_item["porcentagem"] = pct_g
+            m_item["percentual_atingido"] = pct_g
+            m_item["saldo_restante_reais"] = round(v_meta - gasto_atual_reais, 2)
+        elif tipo_k == "economia-mensal":
+            pct_e = round((economia_atual_reais / v_meta) * 100, 2) if v_meta > 0 else 0.0
+            m_item["valor_atual"] = round(economia_atual_reais, 2)
+            m_item["porcentagem"] = pct_e
+            m_item["percentual_atingido"] = pct_e
+            m_item["saldo_restante_reais"] = round(max(0.0, v_meta - economia_atual_reais), 2)
+
+        metas_avaliadas[tipo_k] = m_item
+
+    # Identifica meta de consumo ativa para avaliação física
     meta = config.get("meta_ativa")
     if not meta or meta.get("tipo") in TIPOS_FINANCEIROS:
         for tc in TIPOS_CONSUMO:
@@ -348,11 +448,14 @@ def avaliar_progresso_meta(consumo_atual_m3: Optional[float] = None, salvar: boo
     if not meta or meta.get("tipo") in TIPOS_FINANCEIROS:
         situacao = "NORMAL"
         relatorio = {
-            "meta_ativa": False,
+            "meta_ativa": len(metas_avaliadas) > 0,
             "mensagem": "Nenhuma meta de consumo ativa configurada no momento.",
             "consumo_atual_m3": consumo_val,
+            "gasto_atual_reais": gasto_atual_reais,
+            "economia_atual_reais": economia_atual_reais,
+            "tarifa_m3": tarifa_m3,
             "situacao": situacao,
-            "metas_ativas_por_tipo": config.get("metas_ativas_por_tipo", {})
+            "metas_ativas_por_tipo": metas_avaliadas
         }
     else:
         limite = float(meta.get("valor", 1.0))
@@ -371,12 +474,15 @@ def avaliar_progresso_meta(consumo_atual_m3: Optional[float] = None, salvar: boo
             "tipo": meta.get("tipo", "consumo-mensal"),
             "limite_m3": limite,
             "consumo_atual_m3": consumo_val,
+            "gasto_atual_reais": gasto_atual_reais,
+            "economia_atual_reais": economia_atual_reais,
+            "tarifa_m3": tarifa_m3,
             "percentual_atingido": porcentagem,
             "saldo_restante_m3": saldo_restante,
             "situacao": situacao,
             "periodo": meta.get("periodo", ""),
             "mes_referencia": meta.get("mes_referencia", str(meta.get("periodo", ""))[:7]),
-            "metas_ativas_por_tipo": config.get("metas_ativas_por_tipo", {})
+            "metas_ativas_por_tipo": metas_avaliadas
         }
 
         # 1. Alerta de Status da Meta (80% ou Ultrapassada)

@@ -1,16 +1,79 @@
 {
   "meta_ativa": true,
   "meta_nome": "Meta de Consumo",
+  "tipo": "consumo-mensal",
   "limite_m3": 18.0,
-  "consumo_atual_m3": 0.0,
-  "percentual_atingido": 0.0,
-  "saldo_restante_m3": 18.0,
-  "situacao": "NORMAL",
+  "consumo_atual_m3": 268.4,
+  "gasto_atual_reais": 21815.09,
+  "economia_atual_reais": 0.0,
+  "tarifa_m3": 59.6,
+  "percentual_atingido": 1491.11,
+  "saldo_restante_m3": -250.4,
+  "situacao": "ESTOURADA",
   "periodo": "2026-08",
-  "alertas_ativos": [],
+  "mes_referencia": "2026-08",
+  "metas_ativas_por_tipo": {
+    "consumo-mensal": {
+      "tipo": "consumo-mensal",
+      "unidade": "L",
+      "nome": "Meta de Consumo",
+      "valor": 18.0,
+      "valor_litros": 18000,
+      "periodo": "2026-08",
+      "mes_referencia": "2026-08",
+      "data_criacao": "2026-11-05",
+      "descricao": "",
+      "status": "ativa",
+      "valor_atual": 268400.0,
+      "valor_atual_m3": 268.4,
+      "porcentagem": 1491.11,
+      "percentual_atingido": 1491.11,
+      "saldo_restante_m3": -250.4
+    },
+    "economia-mensal": {
+      "tipo": "economia-mensal",
+      "unidade": "R$",
+      "nome": "Economia Mensal",
+      "valor": 500.0,
+      "valor_litros": null,
+      "periodo": "2026-11",
+      "mes_referencia": "2026-11",
+      "data_criacao": "2026-11-14",
+      "descricao": "",
+      "status": "ativa",
+      "valor_atual": 0.0,
+      "porcentagem": 0.0,
+      "percentual_atingido": 0.0,
+      "saldo_restante_reais": 500.0
+    }
+  },
+  "alertas_ativos": [
+    {
+      "id": "meta_estourada",
+      "tipo": "limite_estourado",
+      "severidade": "perigo",
+      "titulo": "Meta Ultrapassada!",
+      "mensagem": "O consumo de 268.40 m³ ultrapassou a meta de 18.00 m³ (1491.1% atingido).",
+      "timestamp": "2026-11-14T22:07:39.572339"
+    }
+  ],
   "notificacoes": {
     "notificacao_prazos": true,
     "alerta_status": true
   },
-  "dias_restantes_mes": 21
+  "notificacoes_config": {
+    "notificacao_prazos": true,
+    "alerta_status": true
+  },
+  "notificacoes_usuarios": {
+    "nicolle": {
+      "notificacao_prazos": true,
+      "alerta_status": true
+    },
+    "gabriela": {
+      "notificacao_prazos": false,
+      "alerta_status": false
+    }
+  },
+  "dias_restantes_mes": 16
 }
