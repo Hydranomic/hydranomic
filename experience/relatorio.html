@@ -1220,16 +1220,11 @@ html, body {
                     onclick="abrirMeses()"
                 >
                     <span class="icone-calendario" aria-hidden="true"></span>
-                    <span id="mesSelecionado">Setembro 2026</span>
+                    <span id="mesSelecionado">Carregando...</span>
                 </button>
 
-                <div class="lista-meses" hidden>
-                    <button type="button" onclick="selecionarMes('Setembro 2026')">
-                        Setembro 2026
-                    </button>
-                    <button type="button" onclick="selecionarMes('Agosto 2026')">
-                        Agosto 2026
-                    </button>
+                <div class="lista-meses" id="listaMesesDropdown" hidden>
+                    <!-- Preenchido dinamicamente via JS com os meses disponíveis -->
                 </div>
             </div>
         </section>
@@ -1245,100 +1240,11 @@ html, body {
                         <th>Variação (%)</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>01/08/2026</td>
-                        <td>14.500</td>
-                        <td>20,00</td>
-                        <td><span class="ponto ponto-verde"></span>Dentro da meta</td>
-                        <td class="variacao-verde">-4,61</td>
-                    </tr>
-                    <tr>
-                        <td>02/08/2026</td>
-                        <td>14.500</td>
-                        <td>20,00</td>
-                        <td><span class="ponto ponto-amarelo"></span>Dentro da meta</td>
-                        <td class="variacao-verde">-4,61</td>
-                    </tr>
-                    <tr>
-                        <td>03/08/2026</td>
-                        <td>14.500</td>
-                        <td>20,00</td>
-                        <td><span class="ponto ponto-verde"></span>Dentro da meta</td>
-                        <td class="variacao-verde">-4,61</td>
-                    </tr>
-                    <tr>
-                        <td>04/08/2026</td>
-                        <td>14.500</td>
-                        <td>20,00</td>
-                        <td><span class="ponto ponto-vermelho"></span>Dentro da meta</td>
-                        <td class="variacao-vermelha">-4,61</td>
-                    </tr>
-                    <tr>
-                        <td>05/08/2026</td>
-                        <td>14.500</td>
-                        <td>20,00</td>
-                        <td><span class="ponto ponto-verde"></span>Dentro da meta</td>
-                        <td class="variacao-verde">-4,61</td>
-                    </tr>
-                    <tr>
-                        <td>06/08/2026</td>
-                        <td>14.500</td>
-                        <td>20,00</td>
-                        <td><span class="ponto ponto-verde"></span>Dentro da meta</td>
-                        <td class="variacao-verde">-4,61</td>
-                    </tr>
-                    <tr>
-                        <td>07/08/2026</td>
-                        <td>14.500</td>
-                        <td>20,00</td>
-                        <td><span class="ponto ponto-vermelho"></span>Dentro da meta</td>
-                        <td class="variacao-vermelha">-4,61</td>
-                    </tr>
-                    <tr>
-                        <td>08/08/2026</td>
-                        <td>14.500</td>
-                        <td>20,00</td>
-                        <td><span class="ponto ponto-verde"></span>Dentro da meta</td>
-                        <td class="variacao-verde">-4,61</td>
-                    </tr>
-                    <tr>
-                        <td>09/08/2026</td>
-                        <td>14.500</td>
-                        <td>20,00</td>
-                        <td><span class="ponto ponto-amarelo"></span>Dentro da meta</td>
-                        <td class="variacao-amarela">-4,61</td>
-                    </tr>
-                    <tr>
-                        <td>10/08/2026</td>
-                        <td>14.500</td>
-                        <td>20,00</td>
-                        <td><span class="ponto ponto-amarelo"></span>Dentro da meta</td>
-                        <td class="variacao-amarela">-4,61</td>
-                    </tr>
-                    <tr>
-                        <td>11/08/2026</td>
-                        <td>14.500</td>
-                        <td>20,00</td>
-                        <td><span class="ponto ponto-verde"></span>Dentro da meta</td>
-                        <td class="variacao-verde">-4,61</td>
-                    </tr>
-                    <tr>
-                        <td>12/08/2026</td>
-                        <td>14.500</td>
-                        <td>20,00</td>
-                        <td><span class="ponto ponto-vermelho"></span>Dentro da meta</td>
-                        <td class="variacao-vermelha">-4,61</td>
-                    </tr>
+                <tbody id="tabela-corpo-relatorio">
+                    <!-- Linhas renderizadas dinamicamente via JavaScript -->
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th>Total do mês</th>
-                        <th>128.000</th>
-                        <th>590,00</th>
-                        <th>Dentro da média</th>
-                        <th>-3,30</th>
-                    </tr>
+                <tfoot id="tabela-rodape-relatorio">
+                    <!-- Total consolidado do mês renderizado dinamicamente -->
                 </tfoot>
             </table>
         </section>
@@ -1443,8 +1349,40 @@ html, body {
             window.print();
         }
 
+        // =========================================================================
+        // INTEGRAÇÃO DINÂMICA DO RELATÓRIO COM WEGNOLOGY FILES
+        // =========================================================================
+        const WEGNOLOGY_FILES_BASE = "https://files.wnology.io/6a7df1ea72e58afcb00daed0";
+        const NOMES_MESES = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+
+        let relatorioEstado = {
+            consumoMes: null,
+            progressoMeta: null,
+            contas: [],
+            config: null,
+            previsao: null,
+            mesSelecionadoId: "",
+            mesSelecionadoRotulo: ""
+        };
+
+        function formatarMesAno(mesId) {
+            if (!mesId || typeof mesId !== "string") return "Mês Atual";
+            const partes = mesId.split("-");
+            if (partes.length >= 2) {
+                const ano = partes[0];
+                const mesNum = parseInt(partes[1], 10);
+                if (mesNum >= 1 && mesNum <= 12) {
+                    return NOMES_MESES[mesNum - 1] + " " + ano;
+                }
+            }
+            return mesId;
+        }
+
         function abrirMeses() {
-            const lista = document.querySelector(".lista-meses");
+            const lista = document.getElementById("listaMesesDropdown") || document.querySelector(".lista-meses");
             const botao = document.querySelector(".acao-mes");
             if (!lista || !botao) return;
             const estaAberta = !lista.hidden;
@@ -1452,14 +1390,392 @@ html, body {
             botao.setAttribute("aria-expanded", String(!estaAberta));
         }
 
-        function selecionarMes(mes) {
-            const el = document.getElementById("mesSelecionado");
-            if (el) el.textContent = mes;
-            const lista = document.querySelector(".lista-meses");
-            if (lista) lista.hidden = true;
+        function fecharMeses() {
+            const lista = document.getElementById("listaMesesDropdown") || document.querySelector(".lista-meses");
             const botao = document.querySelector(".acao-mes");
+            if (lista) lista.hidden = true;
             if (botao) botao.setAttribute("aria-expanded", "false");
         }
+
+        document.addEventListener("click", function (evento) {
+            if (!evento.target.closest(".seletor-mes")) {
+                fecharMeses();
+            }
+        });
+
+        function selecionarMes(idMes, rotulo) {
+            relatorioEstado.mesSelecionadoId = idMes;
+            relatorioEstado.mesSelecionadoRotulo = rotulo || formatarMesAno(idMes);
+
+            const el = document.getElementById("mesSelecionado");
+            if (el) el.textContent = relatorioEstado.mesSelecionadoRotulo;
+
+            fecharMeses();
+            renderizarTabelaRelatorio();
+        }
+
+        function renderizarSeletorMeses() {
+            const listaEl = document.getElementById("listaMesesDropdown") || document.querySelector(".lista-meses");
+            if (!listaEl) return;
+
+            const mapaMeses = new Map();
+
+            // 1. Mês ativo corrente (consumo_mes.json)
+            const idMesAtual = relatorioEstado.consumoMes?.mes_referencia
+                || (new Date().getFullYear() + "-" + String(new Date().getMonth() + 1).padStart(2, "0"));
+            mapaMeses.set(idMesAtual, formatarMesAno(idMesAtual));
+
+            // 2. Meses do histórico de contas (conta.json)
+            if (Array.isArray(relatorioEstado.contas)) {
+                // Ordena do mais recente para o mais antigo
+                const contasOrdenadas = [...relatorioEstado.contas].sort(function (a, b) {
+                    return String(b.id || "").localeCompare(String(a.id || ""));
+                });
+                contasOrdenadas.forEach(function (c) {
+                    const idC = String(c.id || "").trim();
+                    if (idC && idC.indexOf("-") !== -1 && !mapaMeses.has(idC)) {
+                        mapaMeses.set(idC, formatarMesAno(idC));
+                    }
+                });
+            }
+
+            listaEl.innerHTML = "";
+            mapaMeses.forEach(function (rotulo, idM) {
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.textContent = rotulo;
+                btn.onclick = function () {
+                    selecionarMes(idM, rotulo);
+                };
+                listaEl.appendChild(btn);
+            });
+
+            if (!relatorioEstado.mesSelecionadoId) {
+                relatorioEstado.mesSelecionadoId = idMesAtual;
+                relatorioEstado.mesSelecionadoRotulo = mapaMeses.get(idMesAtual) || formatarMesAno(idMesAtual);
+            }
+
+            const elTituloMes = document.getElementById("mesSelecionado");
+            if (elTituloMes) elTituloMes.textContent = relatorioEstado.mesSelecionadoRotulo;
+        }
+
+        function formatarDataIsoParaBR(dataStr, diaNum, mesAnoId) {
+            if (dataStr && typeof dataStr === "string" && dataStr.indexOf("-") !== -1) {
+                const p = dataStr.split("T")[0].split("-");
+                if (p.length === 3) return p[2] + "/" + p[1] + "/" + p[0];
+            }
+            if (mesAnoId && typeof mesAnoId === "string" && mesAnoId.indexOf("-") !== -1) {
+                const p = mesAnoId.split("-");
+                return String(diaNum).padStart(2, "0") + "/" + p[1] + "/" + p[0];
+            }
+            const agora = new Date();
+            return String(diaNum || agora.getDate()).padStart(2, "0") + "/" +
+                String(agora.getMonth() + 1).padStart(2, "0") + "/" + agora.getFullYear();
+        }
+
+        function formatarNumeroBR(valor, casasDecimais) {
+            const num = Number(valor) || 0;
+            return num.toLocaleString("pt-BR", {
+                minimumFractionDigits: casasDecimais !== undefined ? casasDecimais : 2,
+                maximumFractionDigits: casasDecimais !== undefined ? casasDecimais : 2
+            });
+        }
+
+        function obterClasseVariacao(pct) {
+            if (pct <= 0) return "variacao-verde";
+            if (pct <= 10) return "variacao-amarela";
+            return "variacao-vermelha";
+        }
+
+        function formatarVariacao(pct) {
+            const sinal = pct > 0 ? "+" : "";
+            return sinal + formatarNumeroBR(pct, 2);
+        }
+
+        function renderizarTabelaRelatorio() {
+            const tbody = document.getElementById("tabela-corpo-relatorio");
+            const tfoot = document.getElementById("tabela-rodape-relatorio");
+            if (!tbody || !tfoot) return;
+
+            const mesAtivo = relatorioEstado.mesSelecionadoId;
+            const idMesAtual = relatorioEstado.consumoMes?.mes_referencia
+                || (new Date().getFullYear() + "-" + String(new Date().getMonth() + 1).padStart(2, "0"));
+
+            const tarifa = Number(
+                relatorioEstado.previsao?.tarifa_m3 ??
+                relatorioEstado.progressoMeta?.tarifa_m3 ??
+                59.60
+            );
+
+            // Obtém limite da meta mensal em m³
+            const metaMensalM3 = Number(
+                relatorioEstado.progressoMeta?.limite_m3 ??
+                relatorioEstado.config?.meta_ativa?.valor ??
+                0
+            );
+
+            // Quantidade de dias no mês
+            const partesData = mesAtivo.split("-");
+            const anoNum = parseInt(partesData[0], 10) || new Date().getFullYear();
+            const mesNum = parseInt(partesData[1], 10) || (new Date().getMonth() + 1);
+            const diasNoMes = new Date(anoNum, mesNum, 0).getDate();
+            const metaDiariaM3 = metaMensalM3 > 0 ? (metaMensalM3 / diasNoMes) : 0;
+
+            // CASO 1: MÊS CORRENTE COM DADOS DIÁRIOS (consumo_mes.json)
+            if (mesAtivo === idMesAtual && relatorioEstado.consumoMes) {
+                const dias = Array.isArray(relatorioEstado.consumoMes.dias)
+                    ? [...relatorioEstado.consumoMes.dias].sort(function (a, b) {
+                        return parseInt(a.dia || 0, 10) - parseInt(b.dia || 0, 10);
+                    })
+                    : [];
+
+                if (dias.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="5" style="text-align: center; padding: 36px 15px; color: var(--texto-secundario); font-size: 14px;">
+                                Aguardando primeiras medições diárias de ${relatorioEstado.mesSelecionadoRotulo} via telemetria do hidrômetro.
+                            </td>
+                        </tr>
+                    `;
+                    tfoot.innerHTML = `
+                        <tr>
+                            <th>Total do mês</th>
+                            <th>0</th>
+                            <th>0,00</th>
+                            <th>Aguardando dados</th>
+                            <th>0,00</th>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                let htmlLinhas = "";
+                let acumuladoMesLitros = 0;
+                let acumuladoMesCusto = 0;
+
+                // Média diária calculada a partir dos dias já aferidos
+                const somaConsumoM3 = dias.reduce(function (acc, d) {
+                    return acc + (Number(d.consumo_m3) || 0);
+                }, 0);
+                const mediaDiariaConsumidaM3 = somaConsumoM3 / dias.length;
+
+                dias.forEach(function (d, idx) {
+                    const diaNum = parseInt(d.dia || (idx + 1), 10);
+                    const dataFormatada = formatarDataIsoParaBR(d.data, diaNum, mesAtivo);
+                    const consumoM3 = Number(d.consumo_m3 || 0);
+
+                    // Consumo diário em litros
+                    const consumoLitros = Number(d.consumo_litros ?? Math.round(consumoM3 * 1000.0));
+                    acumuladoMesLitros += consumoLitros;
+
+                    // Custo diário em reais
+                    const custoReais = Number(d.custo_reais ?? (consumoM3 * tarifa));
+                    acumuladoMesCusto += custoReais;
+
+                    // 1. Métrica de Variação Diária (DoD: Dia sobre Dia Anterior)
+                    let variacaoPct = 0;
+                    if (d.variacao_diaria_pct !== undefined && d.variacao_diaria_pct !== null) {
+                        variacaoPct = Number(d.variacao_diaria_pct);
+                    } else if (idx > 0) {
+                        const consumoAnteriorM3 = Number(dias[idx - 1].consumo_m3 || 0);
+                        if (consumoAnteriorM3 > 0) {
+                            variacaoPct = ((consumoM3 - consumoAnteriorM3) / consumoAnteriorM3) * 100;
+                        } else {
+                            variacaoPct = 0;
+                        }
+                    } else {
+                        // Dia 1: sem dia anterior no mesmo mês
+                        variacaoPct = 0;
+                    }
+
+                    const classeVariacao = obterClasseVariacao(variacaoPct);
+                    const textoVariacao = formatarVariacao(variacaoPct);
+
+                    // 2. Status diário em relação à Meta Diária / Orçamento
+                    let classePonto = "ponto-verde";
+                    let textoStatus = "Dentro da meta";
+
+                    if (metaDiariaM3 > 0) {
+                        if (consumoM3 <= metaDiariaM3) {
+                            classePonto = "ponto-verde";
+                            textoStatus = "Dentro da meta";
+                        } else if (consumoM3 <= (metaDiariaM3 * 1.15)) {
+                            classePonto = "ponto-amarelo";
+                            textoStatus = "Alerta de consumo";
+                        } else {
+                            classePonto = "ponto-vermelho";
+                            textoStatus = "Acima da meta";
+                        }
+                    } else {
+                        // Sem meta cadastrada: compara com a média aferida
+                        if (consumoM3 <= mediaDiariaConsumidaM3) {
+                            classePonto = "ponto-verde";
+                            textoStatus = "Dentro da média";
+                        } else if (consumoM3 <= (mediaDiariaConsumidaM3 * 1.20)) {
+                            classePonto = "ponto-amarelo";
+                            textoStatus = "Atenção ao consumo";
+                        } else {
+                            classePonto = "ponto-vermelho";
+                            textoStatus = "Acima da média";
+                        }
+                    }
+
+                    htmlLinhas += `
+                        <tr>
+                            <td>${dataFormatada}</td>
+                            <td>${formatarNumeroBR(consumoLitros, 0)}</td>
+                            <td>${formatarNumeroBR(custoReais, 2)}</td>
+                            <td><span class="ponto ${classePonto}"></span>${textoStatus}</td>
+                            <td class="${classeVariacao}">${textoVariacao}</td>
+                        </tr>
+                    `;
+                });
+
+                tbody.innerHTML = htmlLinhas;
+
+                // Cálculo da Variação Mensal frente ao mês anterior em conta.json
+                const idMesAnterior = (function () {
+                    let m = mesNum - 1;
+                    let a = anoNum;
+                    if (m < 1) { m = 12; a -= 1; }
+                    return a + "-" + String(m).padStart(2, "0");
+                })();
+
+                const contaMesAnterior = Array.isArray(relatorioEstado.contas)
+                    ? relatorioEstado.contas.find(function (c) { return String(c.id) === idMesAnterior; })
+                    : null;
+
+                const totalM3Mes = somaConsumoM3;
+                let varMensalPct = 0;
+                let classeVarMensal = "variacao-verde";
+
+                if (contaMesAnterior && Number(contaMesAnterior.consumo_m3) > 0) {
+                    const cAntM3 = Number(contaMesAnterior.consumo_m3);
+                    varMensalPct = ((totalM3Mes - cAntM3) / cAntM3) * 100;
+                    classeVarMensal = obterClasseVariacao(varMensalPct);
+                }
+
+                // Status consolidado do mês
+                let statusConsolidado = "Dentro da meta";
+                if (metaMensalM3 > 0) {
+                    statusConsolidado = totalM3Mes <= metaMensalM3 ? "Dentro da meta" : "Meta ultrapassada";
+                } else {
+                    statusConsolidado = "Dentro da média";
+                }
+
+                tfoot.innerHTML = `
+                    <tr>
+                        <th>Total do mês</th>
+                        <th>${formatarNumeroBR(acumuladoMesLitros, 0)}</th>
+                        <th>${formatarNumeroBR(acumuladoMesCusto, 2)}</th>
+                        <th>${statusConsolidado}</th>
+                        <th class="${classeVarMensal}">${formatarVariacao(varMensalPct)}</th>
+                    </tr>
+                `;
+                return;
+            }
+
+            // CASO 2: MÊS HISTÓRICO ARQUIVADO EM conta.json
+            const faturaHistorica = Array.isArray(relatorioEstado.contas)
+                ? relatorioEstado.contas.find(function (c) { return String(c.id) === mesAtivo; })
+                : null;
+
+            if (faturaHistorica) {
+                const consumoHistM3 = Number(faturaHistorica.consumo_m3 || 0);
+                const valorTotalHist = Number(faturaHistorica.valor_total ?? (consumoHistM3 * tarifa));
+                const consumoHistLitros = Math.round(consumoHistM3 * 1000);
+
+                // Busca o mês imediatamente anterior daquele período histórico
+                const idMesHistAnt = (function () {
+                    let m = mesNum - 1;
+                    let a = anoNum;
+                    if (m < 1) { m = 12; a -= 1; }
+                    return a + "-" + String(m).padStart(2, "0");
+                })();
+
+                const faturaAnterior = relatorioEstado.contas.find(function (c) { return String(c.id) === idMesHistAnt; });
+                let varHistPct = 0;
+                if (faturaAnterior && Number(faturaAnterior.consumo_m3) > 0) {
+                    const cAnt = Number(faturaAnterior.consumo_m3);
+                    varHistPct = ((consumoHistM3 - cAnt) / cAnt) * 100;
+                }
+
+                const classeVarHist = obterClasseVariacao(varHistPct);
+
+                tbody.innerHTML = `
+                    <tr>
+                        <td>01 a ${diasNoMes}/${String(mesNum).padStart(2, "0")}/${anoNum}</td>
+                        <td>${formatarNumeroBR(consumoHistLitros, 0)}</td>
+                        <td>${formatarNumeroBR(valorTotalHist, 2)}</td>
+                        <td><span class="ponto ponto-verde"></span>Fechamento consolidado</td>
+                        <td class="${classeVarHist}">${formatarVariacao(varHistPct)}</td>
+                    </tr>
+                `;
+
+                tfoot.innerHTML = `
+                    <tr>
+                        <th>Total do mês</th>
+                        <th>${formatarNumeroBR(consumoHistLitros, 0)}</th>
+                        <th>${formatarNumeroBR(valorTotalHist, 2)}</th>
+                        <th>Histórico faturado</th>
+                        <th class="${classeVarHist}">${formatarVariacao(varHistPct)}</th>
+                    </tr>
+                `;
+            } else {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 36px 15px; color: var(--texto-secundario); font-size: 14px;">
+                            Nenhum registro encontrado para o período ${relatorioEstado.mesSelecionadoRotulo}.
+                        </td>
+                    </tr>
+                `;
+                tfoot.innerHTML = `
+                    <tr>
+                        <th>Total do mês</th>
+                        <th>0</th>
+                        <th>0,00</th>
+                        <th>Sem registro</th>
+                        <th>0,00</th>
+                    </tr>
+                `;
+            }
+        }
+
+        async function carregarDadosRelatorioDoWegnology() {
+            const timestamp = Date.now();
+            const buscarJson = function (arquivo) {
+                return fetch(`${WEGNOLOGY_FILES_BASE}/${arquivo}?_t=${timestamp}`, { cache: "no-store" })
+                    .then(function (r) { return r.ok ? r.json() : null; })
+                    .catch(function (e) {
+                        console.warn(`[Relatório] Erro ao carregar ${arquivo}:`, e.message);
+                        return null;
+                    });
+            };
+
+            try {
+                const [resConsumoMes, resProgressoMeta, resConta, resConfig, resPrevisao] = await Promise.all([
+                    buscarJson("consumo_mes.json"),
+                    buscarJson("progresso_meta.json"),
+                    buscarJson("conta.json"),
+                    buscarJson("config.json"),
+                    buscarJson("previsao_ml.json")
+                ]);
+
+                relatorioEstado.consumoMes = resConsumoMes;
+                relatorioEstado.progressoMeta = resProgressoMeta;
+                relatorioEstado.contas = Array.isArray(resConta) ? resConta : [];
+                relatorioEstado.config = resConfig;
+                relatorioEstado.previsao = resPrevisao;
+
+                renderizarSeletorMeses();
+                renderizarTabelaRelatorio();
+            } catch (erro) {
+                console.error("[Relatório] Falha na integração de dados:", erro);
+            }
+        }
+
+        // Inicializa o carregamento dos dados do relatório
+        carregarDadosRelatorioDoWegnology();
 
         // =========================================================================
         // GERENCIAMENTO DE USUÁRIOS E GRUPOS (LOCALSTORAGE + INTEGRAÇÃO WEGNOLOGY)
