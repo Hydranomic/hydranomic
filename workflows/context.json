@@ -1,0 +1,8 @@
+{
+  "acao": "definir_meta",
+  "tipo": "gasto-maximo-mensal",
+  "unidade": "R$",
+  "nome": "Teto Financeiro",
+  "valor": 2000.0,
+  "periodo": "2026-11"
+}

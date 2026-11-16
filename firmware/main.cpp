@@ -27,7 +27,8 @@ const char* MQTT_ACCESS_SECRET = "77547f8f4f0d805edeb1982eadf46251d6bf0bf8b565b9
 const char* DEVICE_ID = "6aa2e97be257647a5e068ae4";
 const char* MQTT_TOPIC = "wnology/6aa2e97be257647a5e068ae4/state";
 const int MQTT_PORT = 1883;
-const int PUBLISH_INTERVAL = 300000;
+const int PUBLISH_INTERVAL = 300000; // 5 minutos em milissegundos
+const int INTERVALO_LITROS = 100;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -78,11 +79,19 @@ void loop() {
     Serial.print("Pulso: ");
     Serial.println(count);
 
-    connectWiFi();
-    connectMQTT();
+    // Envia dados se atingir o intervalo de litros estipulado
+    if (count % INTERVALO_LITROS == 0) {
+      publishData();
+      ultimoEnvio = millis();
+    }
+    delay(50); // Debounce basico para o sensor de pulso
+  }
+
+  // 4. Envio periodico para manter telemetria frequente mesmo sem fluxo de pulsos
+  if (millis() - ultimoEnvio >= PUBLISH_INTERVAL) {
+    ultimoEnvio = millis();
+    Serial.println("Realizando envio periodico de dados...");
     publishData();
-    desconnectWifi();
-    desconnectClient();
   }
 
   //Processa o ping do Keepalive (precisa rodar em todo ciclo)
@@ -194,7 +203,8 @@ void publishData() {
 
   String payload;
   serializeJson(doc, payload);
-  payload.toCharArray(attributes, 500);
+  payload.toCharArray(attributes, 200);
+  Serial.print("Enviando payload: ");
   Serial.println(payload);
 
   if (client.connected() && count % 10 == 0) {

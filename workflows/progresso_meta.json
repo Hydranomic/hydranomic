@@ -1,0 +1,36 @@
+{
+  "meta_ativa": false,
+  "meta_nome": null,
+  "tipo": null,
+  "limite_m3": null,
+  "consumo_atual_m3": 0.0,
+  "gasto_atual_reais": 0.0,
+  "economia_atual_reais": 0.0,
+  "tarifa_m3": 59.6,
+  "percentual_atingido": 0.0,
+  "saldo_restante_m3": null,
+  "situacao": "NORMAL",
+  "periodo": "2026-11",
+  "mes_referencia": "2026-11",
+  "metas_ativas_por_tipo": {},
+  "alertas_ativos": [],
+  "notificacoes": {
+    "notificacao_prazos": true,
+    "alerta_status": true
+  },
+  "notificacoes_config": {
+    "notificacao_prazos": true,
+    "alerta_status": true
+  },
+  "notificacoes_usuarios": {
+    "nicolle": {
+      "notificacao_prazos": true,
+      "alerta_status": true
+    },
+    "gabriela": {
+      "notificacao_prazos": false,
+      "alerta_status": false
+    }
+  },
+  "dias_restantes_mes": 16
+}

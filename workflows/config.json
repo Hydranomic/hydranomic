@@ -1,20 +1,20 @@
 {
-  "meta_ativa": {
-    "tipo": "reducao_mensal",
-    "nome": "Meta de Consumo",
-    "valor": 18.0,
-    "periodo": "2026-08",
-    "mes_referencia": "2026-08",
-    "data_criacao": "2026-11-05",
-    "descricao": "",
-    "status": "ativa"
+  "meta_ativa": null,
+  "metas_ativas_por_tipo": {},
+  "metas_por_mes": {},
+  "solicitacao_exclusao": null,
+  "notificacoes": {
+    "notificacao_prazos": true,
+    "alerta_status": true
   },
-  "metas_por_mes": {
-    "2026-08": {
-      "nome": "Meta de Agosto",
-      "valor": 18.0,
-      "periodo": "2026-08"
+  "notificacoes_usuarios": {
+    "nicolle": {
+      "notificacao_prazos": true,
+      "alerta_status": true
+    },
+    "gabriela": {
+      "notificacao_prazos": false,
+      "alerta_status": false
     }
-  },
-  "solicitacao_exclusao": null
+  }
 }

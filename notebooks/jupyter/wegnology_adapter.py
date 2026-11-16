@@ -31,8 +31,10 @@ def obter_diretorio_output() -> Path:
     return caminho
 
 def resolver_caminho_entrada(nome_arquivo: str) -> Path:
+    dir_output = obter_diretorio_output()
     dir_input = obter_diretorio_input()
     candidatos = [
+        dir_output / nome_arquivo,
         dir_input / nome_arquivo,
         obter_caminho_raiz() / "workflows" / nome_arquivo,
         obter_caminho_raiz() / "hydranomic" / "workflows" / nome_arquivo,
