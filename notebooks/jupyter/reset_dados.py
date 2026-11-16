@@ -55,6 +55,10 @@ def carregar_json(nome: str, padrao: Any = None) -> Any:
     candidatos = [
         obter_diretorio_input() / nome,
         Path("/inputs") / nome if Path("/inputs").exists() else None,
+        Path.cwd() / "hydranomic" / "workflows" / nome,
+        Path.cwd() / "workflows" / nome,
+        diretorio_base.parent.parent / "workflows" / nome,
+        diretorio_base.parent / "workflows" / nome,
         Path.cwd() / nome,
         obter_diretorio_output() / nome,
     ]
@@ -144,20 +148,74 @@ def executar_reset() -> Dict[str, Any]:
     }
 
     # -------------------------------------------------------------------------
-    # Grava exclusivamente os 3 arquivos de saída
+    # 5. GRAFICO_ANUAL.JSON (Zera exclusivamente o consumo do mês atual)
+    # -------------------------------------------------------------------------
+    tags_meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+    grafico_padrao = {
+        "ano_referencia": hoje.year,
+        "mes_atual": hoje.month,
+        "unidade_medida": "m³",
+        "meses": [
+            {
+                "mes": m,
+                "rotulo": tags_meses[m - 1],
+                "consumo_m3": 0.0 if m == hoje.month else None
+            }
+            for m in range(1, 13)
+        ]
+    }
+    grafico_existente = carregar_json("grafico_anual.json", padrao=grafico_padrao)
+    if not isinstance(grafico_existente, dict):
+        grafico_existente = grafico_padrao
+
+    grafico_existente["mes_atual"] = hoje.month
+    if "ano_referencia" not in grafico_existente or grafico_existente.get("ano_referencia") is None:
+        grafico_existente["ano_referencia"] = hoje.year
+
+    # Zera estritamente o mês atual, preservando todos os demais meses do ano
+    if "meses" in grafico_existente and isinstance(grafico_existente["meses"], list):
+        for item_mes in grafico_existente["meses"]:
+            if isinstance(item_mes, dict) and item_mes.get("mes") == hoje.month:
+                item_mes["consumo_m3"] = 0.0
+
+    p_graf = salvar_json("grafico_anual.json", grafico_existente)
+
+    # -------------------------------------------------------------------------
+    # 6. CONTA.JSON (Zera o consumo do mês atual se existir, mantendo histórico)
+    # -------------------------------------------------------------------------
+    contas_existentes = carregar_json("conta.json", padrao=[])
+    p_conta = None
+    if isinstance(contas_existentes, list):
+        alterou_conta = False
+        for idx, r in enumerate(contas_existentes):
+            if str(r.get("id")) == mes_atual:
+                contas_existentes[idx]["consumo_m3"] = 0.0
+                if "valor_total" in contas_existentes[idx]:
+                    contas_existentes[idx]["valor_total"] = 0.0
+                alterou_conta = True
+        if alterou_conta:
+            p_conta = salvar_json("conta.json", contas_existentes)
+
+    # -------------------------------------------------------------------------
+    # Grava os arquivos de saída e consolida o resumo
     # -------------------------------------------------------------------------
     p_cfg = salvar_json("config.json", config_limpo)
     p_prog = salvar_json("progresso_meta.json", progresso_limpo)
     p_cons = salvar_json("consumo_mes.json", consumo_limpo)
 
+    arquivos_resetados = [
+        str(p_cfg.name),
+        str(p_prog.name),
+        str(p_cons.name),
+        str(p_graf.name)
+    ]
+    if p_conta:
+        arquivos_resetados.append(str(p_conta.name))
+
     resumo = {
         "status": "sucesso",
         "timestamp": hoje.isoformat(),
-        "arquivos_resetados": [
-            str(p_cfg.name),
-            str(p_prog.name),
-            str(p_cons.name)
-        ],
+        "arquivos_resetados": arquivos_resetados,
         "mes_referencia": mes_atual
     }
 
@@ -168,7 +226,10 @@ def executar_reset() -> Dict[str, Any]:
     print("✓ config.json: Metas zeradas em todos os meses (preferências salvas).")
     print("✓ progresso_meta.json: Situação 'NORMAL', alertas limpos, 0% atingido.")
     print("✓ consumo_mes.json: Consumo acumulado zerado (0.0 m³), vazão zerada.")
-    print("✓ Nenhum outro arquivo foi alterado.")
+    print(f"✓ grafico_anual.json: Consumo do mês atual ({tags_meses[hoje.month - 1]}) zerado (0.0 m³), demais meses preservados.")
+    if p_conta:
+        print(f"✓ conta.json: Registro do mês {mes_atual} zerado, histórico mantido.")
+    print("✓ Nenhum outro dado do histórico anual foi afetado.")
     print("=" * 65)
 
     return resumo
