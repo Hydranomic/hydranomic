@@ -93,11 +93,13 @@ def executar_reset() -> Dict[str, Any]:
     notifs_padrao = {"notificacao_prazos": True, "alerta_status": True}
     notifs_admin = cfg_existente.get("notificacoes", notifs_padrao) if isinstance(cfg_existente.get("notificacoes"), dict) else notifs_padrao
     notifs_usuarios = cfg_existente.get("notificacoes_usuarios", {}) if isinstance(cfg_existente.get("notificacoes_usuarios"), dict) else {}
+    tarifa_existente = float(cfg_existente.get("tarifa_m3", 59.60)) if isinstance(cfg_existente, dict) and cfg_existente.get("tarifa_m3") is not None else 59.60
 
     # -------------------------------------------------------------------------
-    # 2. CONFIG.JSON LIMPO
+    # 2. CONFIG.JSON LIMPO (Preserva tarifa em nuvem e preferências)
     # -------------------------------------------------------------------------
     config_limpo = {
+        "tarifa_m3": tarifa_existente,
         "meta_ativa": None,
         "metas_ativas_por_tipo": {},
         "metas_por_mes": {},
@@ -117,7 +119,7 @@ def executar_reset() -> Dict[str, Any]:
         "consumo_atual_m3": 0.0,
         "gasto_atual_reais": 0.0,
         "economia_atual_reais": 0.0,
-        "tarifa_m3": 59.6,
+        "tarifa_m3": tarifa_existente,
         "percentual_atingido": 0.0,
         "saldo_restante_m3": None,
         "situacao": "NORMAL",
@@ -221,6 +223,35 @@ def executar_reset() -> Dict[str, Any]:
             p_conta = salvar_json("conta.json", contas_existentes)
 
     # -------------------------------------------------------------------------
+    # 7. SUMARIO_EXECUCAO.JSON LIMPO (Zera vazão e consumo mensal na homepage)
+    # -------------------------------------------------------------------------
+    sumario_limpo = {
+        "status": "sucesso",
+        "mes_atual": mes_atual,
+        "consumo_mes_acumulado_m3": 0.0,
+        "previsao_proximo_mes_m3": 0.0,
+        "fatura_estimada_reais": 0.0,
+        "data_treinamento_ml": hoje.isoformat(),
+        "ano_grafico": hoje.year,
+        "meta_status": "NORMAL",
+        "vazao_atual_m3h": 0.0,
+        "alertas_ativos": [],
+        "notificacoes": notifs_admin,
+        "notificacoes_usuarios": notifs_usuarios
+    }
+    p_sum = salvar_json("sumario_execucao.json", sumario_limpo)
+
+    # -------------------------------------------------------------------------
+    # 8. ESTADO_MEDIDOR.JSON LIMPO (Zera pulsos do medidor e vazão)
+    # -------------------------------------------------------------------------
+    estado_medidor_limpo = {
+        "timestamp": hoje.isoformat(),
+        "pulsos_acumulados": 0.0,
+        "vazao_m3h": 0.0
+    }
+    p_med = salvar_json("estado_medidor.json", estado_medidor_limpo)
+
+    # -------------------------------------------------------------------------
     # Grava os arquivos de saída e consolida o resumo
     # -------------------------------------------------------------------------
     p_cfg = salvar_json("config.json", config_limpo)
@@ -231,7 +262,9 @@ def executar_reset() -> Dict[str, Any]:
         str(p_cfg.name),
         str(p_prog.name),
         str(p_cons.name),
-        str(p_graf.name)
+        str(p_graf.name),
+        str(p_sum.name),
+        str(p_med.name)
     ]
     if p_conta:
         arquivos_resetados.append(str(p_conta.name))
@@ -250,6 +283,8 @@ def executar_reset() -> Dict[str, Any]:
     print("✓ config.json: Metas zeradas em todos os meses (preferências salvas).")
     print("✓ progresso_meta.json: Situação 'NORMAL', alertas limpos, 0% atingido.")
     print("✓ consumo_mes.json: Consumo acumulado zerado (0.0 m³), vazão zerada.")
+    print("✓ sumario_execucao.json: Vazão zerada (0.00 m³/h), consumo mensal zerado.")
+    print("✓ estado_medidor.json: Pulsos e medições zerados para nova telemetria.")
     print(f"✓ grafico_anual.json: Consumo do mês atual ({tags_meses[hoje.month - 1]}) zerado (0.0 m³), demais meses preservados.")
     if p_conta:
         print(f"✓ conta.json: Registro do mês {mes_atual} zerado, histórico mantido.")

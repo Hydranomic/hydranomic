@@ -493,8 +493,11 @@
                 }
                 // Vazão Atual
                 const elVazao = document.querySelector('.area-vazao > h1');
-                if (elVazao && resSumario && resSumario.vazao_atual_m3h != null) {
-                    elVazao.textContent = Number(resSumario.vazao_atual_m3h).toFixed(2) + ' m³/h';
+                const vazaoAtual = (resConsumo?.vazao_atual_m3h != null)
+                    ? Number(resConsumo.vazao_atual_m3h)
+                    : (resSumario?.vazao_atual_m3h != null ? Number(resSumario.vazao_atual_m3h) : 0.0);
+                if (elVazao) {
+                    elVazao.textContent = Number(vazaoAtual).toFixed(2) + ' m³/h';
                 }
                 // Previsão Financeira
                 const elPrevisao = document.querySelector('.previsoes-corpo > h1');
@@ -502,10 +505,26 @@
                 if (elPrevisao && faturaEstimada != null) {
                     elPrevisao.textContent = 'R$ ' + Number(faturaEstimada).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 }
-                // Valores de Consumo e Gastos Atuais
-                const tarifaBase = Number(resPrevisao?.tarifa_m3 ?? resMeta?.tarifa_m3 ?? 59.6);
-                const consumoTotalM3 = resMeta?.consumo_atual_m3 ?? resConsumo?.consumo_acumulado_mes_m3 ?? resSumario?.consumo_mes_acumulado_m3 ?? null;
-                const gastoTotalReais = resMeta?.gasto_atual_reais ?? (consumoTotalM3 != null ? Number(consumoTotalM3) * tarifaBase : null);
+                // Valores de Consumo e Gastos Atuais (Calculados com base na tarifa cadastrada)
+                const tarifaSalva = parseFloat(localStorage.getItem("hydranomic_tarifa_valor"));
+                const tarifaBase = Number(
+                    resConfig?.tarifa_m3 ??
+                    resPrevisao?.tarifa_m3 ??
+                    resMeta?.tarifa_m3 ??
+                    ((!isNaN(tarifaSalva) && tarifaSalva > 0) ? tarifaSalva : 59.60)
+                );
+
+                const consumoTotalM3 = (resConsumo?.consumo_acumulado_mes_m3 != null)
+                    ? Number(resConsumo.consumo_acumulado_mes_m3)
+                    : (resMeta?.consumo_atual_m3 != null
+                        ? Number(resMeta.consumo_atual_m3)
+                        : (resSumario?.consumo_mes_acumulado_m3 != null
+                            ? Number(resSumario.consumo_mes_acumulado_m3)
+                            : 0.0));
+
+                const gastoTotalReais = (consumoTotalM3 != null && !isNaN(consumoTotalM3))
+                    ? (Number(consumoTotalM3) * tarifaBase)
+                    : Number(resMeta?.gasto_atual_reais ?? 0.0);
 
                 const elGastoMes = document.getElementById('meta-gasto-atual');
                 if (elGastoMes && gastoTotalReais != null) {

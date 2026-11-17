@@ -1501,10 +1501,12 @@ html, body {
             const idMesAtual = relatorioEstado.consumoMes?.mes_referencia
                 || (new Date().getFullYear() + "-" + String(new Date().getMonth() + 1).padStart(2, "0"));
 
+            const tarifaSalva = parseFloat(localStorage.getItem("hydranomic_tarifa_valor"));
             const tarifa = Number(
+                relatorioEstado.config?.tarifa_m3 ??
                 relatorioEstado.previsao?.tarifa_m3 ??
                 relatorioEstado.progressoMeta?.tarifa_m3 ??
-                59.60
+                ((!isNaN(tarifaSalva) && tarifaSalva > 0) ? tarifaSalva : 59.60)
             );
 
             // Obtém limite da meta mensal em m³

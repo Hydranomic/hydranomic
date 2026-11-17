@@ -1,0 +1,26 @@
+{
+  "status": "sucesso",
+  "mes_atual": "2026-11",
+  "consumo_mes_acumulado_m3": 0.0,
+  "previsao_proximo_mes_m3": 0.0,
+  "fatura_estimada_reais": 0.0,
+  "data_treinamento_ml": "2026-11-16T22:27:26.920113",
+  "ano_grafico": 2026,
+  "meta_status": "NORMAL",
+  "vazao_atual_m3h": 0.0,
+  "alertas_ativos": [],
+  "notificacoes": {
+    "notificacao_prazos": true,
+    "alerta_status": true
+  },
+  "notificacoes_usuarios": {
+    "nicolle": {
+      "notificacao_prazos": true,
+      "alerta_status": true
+    },
+    "gabriela": {
+      "notificacao_prazos": false,
+      "alerta_status": false
+    }
+  }
+}

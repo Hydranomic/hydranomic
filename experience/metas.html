@@ -1774,7 +1774,12 @@ html, body {
         window.hydranomicMetasAtivas = estadoMetasCompartilhado;
 
         const tarifaSalva = parseFloat(localStorage.getItem("hydranomic_tarifa_valor"));
-        const tarifaBase = (!isNaN(tarifaSalva) && tarifaSalva > 0) ? tarifaSalva : Number(resPrevisao?.tarifa_m3 ?? 59.6);
+        const tarifaBase = Number(
+            resConfig?.tarifa_m3 ??
+            resPrevisao?.tarifa_m3 ??
+            resMeta?.tarifa_m3 ??
+            ((!isNaN(tarifaSalva) && tarifaSalva > 0) ? tarifaSalva : 59.60)
+        );
         const listaContas = Array.isArray(resContas) ? resContas : [];
         const metasPorMes = (resConfig && typeof resConfig.metas_por_mes === "object" && resConfig.metas_por_mes) ? resConfig.metas_por_mes : {};
         const metasAtivasConfig = (resConfig && typeof resConfig.metas_ativas_por_tipo === "object" && resConfig.metas_ativas_por_tipo) ? resConfig.metas_ativas_por_tipo : {};
@@ -2139,7 +2144,10 @@ html, body {
             const temConsumo = dadosMes.consumoM3 != null;
             const consumoM3 = temConsumo ? dadosMes.consumoM3 : 0;
             const consumoL = Math.round(consumoM3 * 1000);
-            const gastoAtual = dadosMes.valorContaReais != null ? dadosMes.valorContaReais : (consumoM3 * tarifaBase);
+            const ehMesAtivo = (dadosMes.chave === refConsumoMes || dadosMes.chave === (new Date().getFullYear() + '-' + String(new Date().getMonth() + 1).padStart(2, '0')));
+            const gastoAtual = (!ehMesAtivo && dadosMes.valorContaReais != null && dadosMes.valorContaReais > 0)
+                ? dadosMes.valorContaReais
+                : (consumoM3 * tarifaBase);
 
             if (elConsumoAtual) {
                 elConsumoAtual.textContent = temConsumo
