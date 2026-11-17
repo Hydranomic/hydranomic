@@ -404,7 +404,7 @@
             if (!canvas) return;
             const rotulosPadrao = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
             const rotulosFinais = (Array.isArray(rotulos) && rotulos.length === 12) ? rotulos : rotulosPadrao;
-            const dadosFinais = Array.isArray(valores) ? valores : [435, 515, 560, 475, 590, 625, 680, 620, 570, 520, 490, 430];
+            const dadosFinais = Array.isArray(valores) ? valores : [150, 267, 349, 361, 351, 352, 291, 358, 0, 0, 0, null];
             if (instanciaGraficoConsumo) {
                 instanciaGraficoConsumo.data.labels = rotulosFinais;
                 instanciaGraficoConsumo.data.datasets[0].data = dadosFinais;
@@ -421,8 +421,11 @@
                         borderColor: '#205988',
                         backgroundColor: 'rgba(32, 89, 136, 0.10)',
                         borderWidth: 2,
-                        pointRadius: 3.5,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
                         pointBackgroundColor: '#205988',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 1.5,
                         tension: 0.3,
                         fill: true,
                         spanGaps: true
@@ -433,7 +436,12 @@
                     maintainAspectRatio: false,
                     plugins: { legend: { display: false } },
                     scales: {
-                        y: { beginAtZero: false, ticks: { callback: v => v + ' m³' }, grid: { color: '#f1f5f9' } },
+                        y: {
+                            beginAtZero: true,
+                            min: 0,
+                            ticks: { callback: v => v + ' m³' },
+                            grid: { color: '#f1f5f9' }
+                        },
                         x: { grid: { display: false } }
                     }
                 }
@@ -462,7 +470,26 @@
                     buscarJson(URL_SUMARIO, 'sumario_execucao.json')
                 ]);
                 if (resGrafico && Array.isArray(resGrafico.meses)) {
-                    renderizarGrafico(resGrafico.meses.map(m => m.rotulo || ('Mês ' + m.mes)), resGrafico.meses.map(m => m.consumo_m3));
+                    const rotulos = resGrafico.meses.map(m => m.rotulo || ('Mês ' + m.mes));
+                    const valores = resGrafico.meses.map(m => {
+                        const mesNum = Number(m.mes);
+                        let val = m.consumo_m3;
+                        // Setembro (9) e Outubro (10): sem dados reais medidos.
+                        // Garante o ponto indicativo de consumo em 0 m³ e remove dados simulados.
+                        if (mesNum === 9 || mesNum === 10) {
+                            return 0.0;
+                        }
+                        // Mês atual (Novembro = 11) ou meses anteriores sem dados:
+                        if (mesNum <= 11 && (val === null || val === undefined)) {
+                            return 0.0;
+                        }
+                        // Meses futuros (Dezembro = 12):
+                        if (mesNum > 11 && (val === null || val === undefined)) {
+                            return null;
+                        }
+                        return val !== null ? Number(val) : null;
+                    });
+                    renderizarGrafico(rotulos, valores);
                 }
                 // Vazão Atual
                 const elVazao = document.querySelector('.area-vazao > h1');

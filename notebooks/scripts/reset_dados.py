@@ -155,7 +155,7 @@ def executar_reset() -> Dict[str, Any]:
     # Histórico de referência seguro caso o container não receba grafico_anual.json no /inputs
     consumos_base_2026 = {
         1: 150, 2: 267, 3: 349, 4: 361, 5: 351, 6: 352, 7: 291, 8: 358,
-        9: None, 10: None, 11: 0.0, 12: None
+        9: 0.0, 10: 0.0, 11: 0.0, 12: None
     }
 
     # Tenta carregar grafico_anual.json existente
