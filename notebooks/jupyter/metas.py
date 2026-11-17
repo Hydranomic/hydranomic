@@ -405,13 +405,8 @@ def avaliar_progresso_meta(consumo_atual_m3: Optional[float] = None, salvar: boo
     except Exception:
         dados_contas = []
 
-    # Gasto atual em R$
-    gasto_atual_reais = 0.0
-    if dados_contas:
-        ult_conta = dados_contas[-1]
-        gasto_atual_reais = float(ult_conta.get("valor_total") or (float(ult_conta.get("consumo_m3", 0.0)) * tarifa_m3))
-    else:
-        gasto_atual_reais = round(consumo_val * tarifa_m3, 2)
+    # Gasto atual em R$ (sempre calculado como consumo atual * tarifa)
+    gasto_atual_reais = round(consumo_val * tarifa_m3, 2)
 
     # Economia atual em R$ (avaliação inteligente multivariável)
     candidatos_economia = []
