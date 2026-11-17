@@ -1,6 +1,6 @@
 {
-  "ano_referencia": 2027,
-  "mes_atual": null,
+  "ano_referencia": 2026,
+  "mes_atual": 11,
   "unidade_medida": "m³",
   "meses": [
     {
@@ -56,7 +56,7 @@
     {
       "mes": 11,
       "rotulo": "Nov",
-      "consumo_m3": null
+      "consumo_m3": 0.0
     },
     {
       "mes": 12,
